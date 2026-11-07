@@ -1,0 +1,279 @@
+# ==============================================================================
+# CareerOps Isolated Lane — @devremoto.br (Brasil 100% Remoto · Todas as Stacks)
+# Isolado do pipeline pessoal do Luis: sem travas de stack ou senioridade.
+# ==============================================================================
+title_filter:
+  positive:
+    - Desenvolvedor
+    - Desenvolvedora
+    - Pessoa Desenvolvedora
+    - Engenheiro de Software
+    - Engenheira de Software
+    - Software Engineer
+    - Software Developer
+    - Programador
+    - Programadora
+    - Analista de Sistemas
+    - Full Stack
+    - Full-Stack
+    - Fullstack
+    - Backend
+    - Back-End
+    - Back End
+    - Frontend
+    - Front-End
+    - Front End
+    - Mobile
+    - iOS
+    - Android
+    - Flutter
+    - React Native
+    - Kotlin
+    - Swift
+    - Java
+    - Spring
+    - C#
+    - .NET
+    - DotNet
+    - Python
+    - Django
+    - FastAPI
+    - PHP
+    - Laravel
+    - Ruby
+    - Rails
+    - Golang
+    - Node
+    - Node.js
+    - TypeScript
+    - JavaScript
+    - React
+    - Angular
+    - Vue
+    - QA
+    - Qualidade de Software
+    - Analista de Testes
+    - Automação de Testes
+    - SDET
+    - Dados
+    - Data Engineer
+    - Engenharia de Dados
+    - Engenheiro de Dados
+    - Cientista de Dados
+    - Data Scientist
+    - Data Analyst
+    - Analista de Dados
+    - Analytics Engineer
+    - Business Intelligence
+    - DevOps
+    - SRE
+    - Cloud Engineer
+    - Platform Engineer
+    - Segurança da Informação
+    - AppSec
+    - Cybersecurity
+    - AI Engineer
+    - Machine Learning
+    - Tech Lead
+    - Arquiteto de Software
+    - Solutions Architect
+    - Estágio em Tecnologia
+    - Estágio Desenvolvimento
+  negative:
+    - Híbrido
+    - Hibrido
+    - Híbrida
+    - Hibrida
+    - Presencial
+    - Presenciais
+    - Onsite
+    - On-site
+    - Plantão
+    - Plantao
+    - Motorista
+    - Vendedor de Loja
+    - Auxiliar de Limpeza
+    - Recepcionista
+
+search_queries: []
+
+tracked_companies:
+  - name: Nubank
+    careers_url: https://jobs.ashbyhq.com/nubank
+    provider: ashby
+    enabled: true
+  - name: Stone
+    careers_url: https://job-boards.greenhouse.io/stone
+    api: https://boards-api.greenhouse.io/v1/boards/stone/jobs
+    enabled: true
+  - name: iFood
+    careers_url: https://job-boards.greenhouse.io/ifoodcarreiras
+    api: https://boards-api.greenhouse.io/v1/boards/ifoodcarreiras/jobs
+    enabled: true
+  - name: QuintoAndar
+    careers_url: https://job-boards.greenhouse.io/quintoandar
+    api: https://boards-api.greenhouse.io/v1/boards/quintoandar/jobs
+    enabled: true
+  - name: Wellhub (Gympass)
+    careers_url: https://job-boards.greenhouse.io/gympass
+    api: https://boards-api.greenhouse.io/v1/boards/gympass/jobs
+    enabled: true
+  - name: EBANX
+    careers_url: https://job-boards.greenhouse.io/ebanx
+    api: https://boards-api.greenhouse.io/v1/boards/ebanx/jobs
+    enabled: true
+  - name: VTEX
+    careers_url: https://job-boards.greenhouse.io/vtex
+    api: https://boards-api.greenhouse.io/v1/boards/vtex/jobs
+    enabled: true
+  - name: Wildlife Studios
+    careers_url: https://job-boards.greenhouse.io/wildlifestudios
+    api: https://boards-api.greenhouse.io/v1/boards/wildlifestudios/jobs
+    enabled: true
+  - name: Clara
+    careers_url: https://job-boards.greenhouse.io/clara
+    api: https://boards-api.greenhouse.io/v1/boards/clara/jobs
+    enabled: true
+  - name: Brex
+    careers_url: https://job-boards.greenhouse.io/brex
+    api: https://boards-api.greenhouse.io/v1/boards/brex/jobs
+    enabled: true
+  - name: CI&T
+    careers_url: https://jobs.lever.co/ciandt
+    provider: lever
+    enabled: true
+  - name: Neon
+    careers_url: https://jobs.lever.co/neon
+    provider: lever
+    enabled: true
+  - name: dLocal
+    careers_url: https://jobs.lever.co/dlocal
+    provider: lever
+    enabled: true
+  - name: Yuno
+    careers_url: https://jobs.lever.co/yuno
+    provider: lever
+    enabled: true
+  - name: Loadsmart
+    careers_url: https://jobs.lever.co/loadsmart
+    provider: lever
+    enabled: true
+
+job_boards:
+  - name: Gupy (Brasil 100% Remoto — Todas as Stacks)
+    provider: gupy
+    gupy:
+      keywords:
+        - Desenvolvedor
+        - Pessoa Desenvolvedora
+        - Engenheiro de Software
+        - Desenvolvedor Júnior
+        - Desenvolvedor Java
+        - Desenvolvedor C#
+        - Desenvolvedor Python
+        - Desenvolvedor PHP
+        - Desenvolvedor Mobile
+        - Analista de QA
+        - Engenheiro de Dados
+        - DevOps
+      since_days: 7
+      workplace_types:
+        - remote
+    max_pages: 4
+    enabled: true
+  - name: Remotar (Brasil Remoto)
+    provider: remotar
+    since_days: 14
+    max_pages: 4
+    enabled: true
+  - name: ProgramaThor (Brasil Remoto)
+    provider: programathor
+    max_pages: 3
+    enabled: true
+  - name: GitHub Vagas BR (backend-br & frontendbr)
+    provider: github-vagas
+    since_days: 14
+    enabled: true
+  - name: LinkedIn (Brasil 100% Remoto — Todas as Stacks)
+    provider: linkedin
+    linkedin:
+      keywords:
+        - Desenvolvedor de Software
+        - Engenheiro de Software
+        - Desenvolvedor Java
+        - Desenvolvedor .NET
+        - Desenvolvedor Python
+        - Analista de Testes QA
+        - Engenheiro de Dados
+        - Desenvolvedor Júnior
+      geoId: '106057199'
+      location: Brazil
+      remote_only: true
+      since_days: 7
+    max_pages: 2
+    enabled: true
+  - name: Get on Board (Brasil & LatAm Tech Remote)
+    provider: getonbrd
+    careers_url: https://www.getonbrd.com
+    categories:
+      - programming
+      - sysadmin-devops-qa
+      - machine-learning-ai
+    max_pages: 2
+    enabled: true
+
+location_filter:
+  strict: true
+  always_allow: []
+  allow:
+    - Remoto
+    - 100% Remoto
+    - 100% Remote
+    - Home Office
+    - Brazil - Remote
+    - Remote - Brazil
+    - Remote, Brazil
+    - Remote (Brazil)
+    - Brasil (Remoto)
+    - Remote - Latin America
+    - Remote LATAM
+    - Latin America
+    - Anywhere in Brazil
+    - Todo o Brasil
+  block:
+    - Híbrido
+    - Hibrido
+    - Híbrida
+    - Hibrida
+    - Presencial
+    - Presenciais
+    - Onsite
+    - On-site
+    - Plantão
+    - Plantao
+    - US Only
+    - United States Only
+    - Europe Only
+    - UK Only
+    - Canada Only
+  remote_title_fallback: true
+
+country_eligibility_filter:
+  exclusionary:
+    - must be located in the united states
+    - us-based candidates only
+    - authorized to work in the us without sponsorship
+    - us citizens only
+    - must reside in the us
+    - canada only
+    - uk only
+    - europe only
+    - eu work permit required
+  inclusive:
+    - brazil
+    - brasil
+    - latin america
+    - latam
+    - south america
+    - anywhere
+    - worldwide

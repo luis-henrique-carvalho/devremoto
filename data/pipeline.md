@@ -1,0 +1,118 @@
+# Pipeline — Pending URLs
+
+Paste job URLs below as `- [ ] {url}` then run `/career-ops pipeline`.
+
+## Pending
+
+- [ ] https://job-boards.greenhouse.io/stone/jobs/8079910003 | Stone | \[Plataformas Corporativas\] Sênior Analytics Engineer | Remoto | posted: 2026-11-04
+- [ ] https://job-boards.greenhouse.io/nortal/jobs/5268685007?utm_source=remotar | Nortal | Senior AI Engineer (Full Stack) | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/constructor/3fde04a7-4fbd-43a7-b38d-57507a5227bb/application?utm_source=remotar | Constructor | Senior Machine Learning Engineer: Search Quality | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/constructor/fa54dfad-3420-4d21-971c-87cee04116b0/application?utm_source=remotar | Constructor | Senior Backend Engineer: Offsite Search Optimisation | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/constructor/4e7cfde4-c2ba-4251-b95f-7bcf9793984a/application?utm_source=remotar | Constructor | BackEnd Engineer: Experiments | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/constructor/05f8cdf5-2203-4ec0-877e-2668be462716/application?utm_source=remotar | Constructor | Senior Data Analyst: Multiple Teams | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/customerio/jobs/7776591?utm_source=remotar | Customer.io | Senior Software Engineer, Product/AI | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/customerio/jobs/7778289?utm_source=remotar | Customer.io | Senior Software Engineer, Backend | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.lever.co/oowlish/240424ff-5a04-44df-b9bf-5530bccf7727/apply?utm_source=remotar | Oowlish | Senior Software Engineer (Full Stack / Node.js & React / AI Focus) | Brasília, DF (Remoto) | posted: 2026-11-07
+- [ ] https://jobs.lever.co/oowlish/9c0d5139-e494-41c2-891a-d63102d57a97/apply?utm_source=remotar | Oowlish | Senior React Native Engineer (Expo & TypeScript) | Brasília, DF (Remoto) | posted: 2026-11-07
+- [ ] https://jobs.lever.co/oowlish/cd66a853-ac1b-4740-a6b8-f6d33b13cb3c/apply?utm_source=remotar | Oowlish | Senior Frontend Engineer (React) | Brasília, DF (Remoto) | posted: 2026-11-07
+- [ ] https://jobs.lever.co/oowlish/e7ce2491-2ec1-499e-b7f5-931bcb6f19e2/apply?utm_source=remotar | Oowlish | Full Stack Web Engineer (Python & React) | São Paulo, SP (Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/g2i/71b3c435-3520-4eae-b95a-aca9be76739f/application?utm_source=remotar | G2i | Senior FullStack Developer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/g2i/81872f0a-4551-40c6-896b-4821e41d24f8/application?utm_source=remotar | G2i | DevOps Engineer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/nortal/jobs/5287641007?utm_source=remotar | Nortal | Semi Senior Full Stack PHP Developer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/nortal/jobs/5286444007?utm_source=remotar | Nortal | Senior Python Engineer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/caylent/jobs/6233660004?utm_source=remotar | Caylent | Senior QA Engineer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/caylent/jobs/6232045004?utm_source=remotar | Caylent | Senior Platform Engineer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/customerio/jobs/7956880?utm_source=remotar | Customer.io | Senior Data Scientist | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/constructor/047c4189-1c39-4686-a24c-f506cb9896b7/application?utm_source=remotar | Constructor | Senior Data Scientist | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://jobs.ashbyhq.com/constructor/71cf6e66-d168-4d12-bdfe-87f12c50cb1d/application?utm_source=remotar | Constructor | Senior Analytics Engineer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://job-boards.greenhouse.io/jusbrasil/jobs/6002659004?utm_source=remotar | Jusbrasil | SRE Senior - Plataforma | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://wicomm.vagas.solides.com.br/vaga/949725?origem=remotar | Wicomm | Desenvolvedor Front-end Jr | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://girotech.gupy.io/job/eyJqb2JJZCI6MTI4MDMzMjMsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Giro.Tech | Desenvolvedor Backend Pleno | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://girotech.gupy.io/job/eyJqb2JJZCI6MTI4MDM0MTQsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Giro.Tech | Desenvolvedor de Sustentação e Suporte N2 | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://girotech.gupy.io/job/eyJqb2JJZCI6MTI4MDM1ODgsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Giro.Tech | Desenvolvedor Backend Sênior | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://vemsergrupoolx.gupy.io/job/eyJqb2JJZCI6MTI3OTQ3NTcsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Grupo OLX | Staff Data Engineer | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI3ODQ1NTgsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Quality Digital | Desenvolvedor Sênior Back End .Net Core | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://solutis.inhire.app/vagas/b90859ee-fc09-4e98-b4cf-405935560659/arquitetoa-de-dados-senior-or-remoto | Solutis | Arquiteto(a) de Dados Sênior | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://i4pro.inhire.app/vagas/a897c1e1-3ccb-426d-bfd8-1dd63f8b5c50/analista-de-testes-pleno | i4pro | Analista de Testes Pleno | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://atlantico.inhire.app/vagas/8d4d593b-9779-4506-9bc1-068f9c4160f6/pessoa-cientista-de-dados-especialista-remoto | Atlântico | Pessoa Cientista de Dados - Especialista (Remoto) | Brasil (100% Remoto) | posted: 2026-11-07
+- [ ] https://interop.inhire.app/vagas/2e94b015-7e69-42f4-878a-9dc7383ebd04/especialista-de-seguranca-da-informacao-microsoft-or-hibrido-orbrasiliadf | InterOp | Especialista de Segurança da Informação - Microsoft | Brasília, DF (Remoto) | posted: 2026-11-07
+- [ ] https://lwsa.inhire.app/wake/vagas/2c79f212-8285-4274-8902-fc2cf8e72254/wake-or-analista-de-sistemas-salesforce-adm-e-owner-da-plataforma-iiior-hibrido | LWSA | Analista de Sistemas Salesforce - Adm e Owner da Plataforma III | São Paulo, SP (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33685-desenvolvedor-back-end-senior-ai-engineer | LOLDESIGN Soluções Digitais LTDA | Desenvolvedor Back-End Senior (AI Engineer) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33724-desenvolvedor-a-mobile-flutter-senior | Ubuntu Future Labs | Desenvolvedor(a) Mobile Flutter - Sênior | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33869-desenvolvedor-a-java-full-stack-pleno | LOLDESIGN Soluções Digitais LTDA | Desenvolvedor(a) Java Full Stack Pleno | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33867-desenvolvedor-a-back-end-senior-php-100-remoto-sao-paulo | M-Tech | Desenvolvedor(a) Back-End Sênior PHP / 100% Remoto / São Paulo | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33865-senior-swift-swiftui-developer | Lemon.io | Senior Swift & SwiftUI Developer | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33864-senior-golang-developer | Lemon.io | Senior Golang Developer | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33861-senior-react-full-stack-developer | Lemon.io | Senior React Full-stack Developer | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33854-desenvolvedor-full-stack-pleno | Mídia 3 Tecnologia e Criação | Desenvolvedor Full Stack Pleno | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33847-ai-engineer-pleno | Askable | AI Engineer Pleno | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33831-engenheiro-a-de-cloud-devops-aws | Grupo SOITIC | Engenheiro(a) de Cloud & DevOps — AWS | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33845-engenheiro-a-devops-sre-senior | Viradev | Engenheiro(a) DevOps / SRE Senior | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33843-desenvolvedor-a-full-stack-senior | Galileu Saúde | Desenvolvedor(a) Full Stack Sênior | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33844-arquiteto-de-software-senior | Galileu Saúde | Arquiteto de Software Sênior | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33838-desenvolvedor-a-full-stack-junior-react-e-typescript | Viradev | Desenvolvedor(a) Full Stack Júnior — React e TypeScript | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33837-desenvolvedor-a-full-stack-senior-react-e-java-spring-boot | Viradev | Desenvolvedor(a) Full Stack Sênior — React e Java/Spring Boot | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33839-desenvolvedor-a-full-stack-senior | Concept IaaS | Desenvolvedor(a) Full Stack Sênior | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33840-desenvolvedor-a-full-stack-pleno | Concept IaaS | Desenvolvedor(a) Full Stack Pleno | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33850-software-developer-full-stack-usd-based-pay | Micro1 | Software Developer Full Stack (USD-based pay) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33855-developer-back-end-usd-based-pay | Micro1 | Developer Back-End (USD-based pay) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33851-senior-mobile-developer-usd-based-pay | Micro1 | Senior Mobile Developer (USD-based pay) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33857-software-engineer-usd-based-pay | Micro1 | Software Engineer (USD-based pay) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33749-full-stack-engineer-node-js-react-js-aws-usd-based-pay | STRIDER | Full-stack Engineer Node.js + React.js + AWS (USD-based pay) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33858-software-engineer-data-platforms-usd-based-pay | Micro1 | Software Engineer - Data Platforms (USD-based pay) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33856-software-engineer-full-stack-usd-based-pay | Micro1 | Software Engineer Full Stack (USD-based pay) | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://programathor.com.br/jobs/33169-desenvolvedor-a-node-js-php-laravel-vue-js | Advance Telecom | Desenvolvedor(a) •Node JS •PHP •Laravel •Vue JS | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://girotech.gupy.io/job/eyJqb2JJZCI6MTI4MDM1ODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | GIRO.TECH - Tecnologia para originação e distribuição de crédito. | Desenvolvedor Backend Sênior | Remoto | posted: 2026-11-06
+- [ ] https://girotech.gupy.io/job/eyJqb2JJZCI6MTI4MDM0MTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | GIRO.TECH - Tecnologia para originação e distribuição de crédito. | Desenvolvedor de Sustentação e Suporte N2 | Remoto | posted: 2026-11-06
+- [ ] https://girotech.gupy.io/job/eyJqb2JJZCI6MTI4MDMzMjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | GIRO.TECH - Tecnologia para originação e distribuição de crédito. | Desenvolvedor Backend Pleno | Remoto | posted: 2026-11-06
+- [ ] https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4NTA0MjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | VENHA SER #SANGUELARANJA 🧡🚀 | DESENVOLVEDOR FRONT-END REACT | Remoto | posted: 2026-11-06
+- [ ] https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MzYxOTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Stefanini Group | DESENVOLVEDOR MOBILE SR | Remoto | posted: 2026-11-06
+- [ ] https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI3MzQyNzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Stefanini Group | DESENVOLVEDOR FULL STACK PL | Remoto | posted: 2026-11-06
+- [ ] https://globalhitss.gupy.io/job/eyJqb2JJZCI6MTI3MDA2OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Hitss Brasil | 22430-Desenvolvedor(a) FullStack PHP | Remoto | posted: 2026-11-06
+- [ ] https://vemprabip.gupy.io/job/eyJqb2JJZCI6MTI4NDQ4OTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | BIP Brasil | Desenvolvedor Full Stack - Pleno | Remoto | posted: 2026-11-05
+- [ ] https://vemprabip.gupy.io/job/eyJqb2JJZCI6MTI4NDQ4NDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | BIP Brasil | Desenvolvedor Full Stack - Junior | Remoto | posted: 2026-11-05
+- [ ] https://vemprabip.gupy.io/job/eyJqb2JJZCI6MTI4NDQ3ODAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | BIP Brasil | Pessoa Desenvolvedora de IA/RPA - Junior | Remoto | posted: 2026-11-05
+- [ ] https://vemprabip.gupy.io/job/eyJqb2JJZCI6MTI4NDQ2NjEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | BIP Brasil | Pessoa Desenvolvedora de IA/RPA - Pleno | Remoto | posted: 2026-11-05
+- [ ] https://vempralibbs.gupy.io/job/eyJqb2JJZCI6MTI4NDM1NzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Libbs Farmacêutica | Desenvolvedor de Automação e IA Jr I Exclusiva para Pessoas com Deficiência (PcD) | Remoto | posted: 2026-11-05
+- [ ] https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4MzQwNDQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | VENHA SER #SANGUELARANJA 🧡🚀 | Desenvolvedor(a) Back end Java Sênior | Remoto | posted: 2026-11-04
+- [ ] https://b2egroup.gupy.io/job/eyJqb2JJZCI6MTI3OTY2NDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | B2e Group | PESSOA DESENVOLVEDORA FULL STACK .NET SÊNIOR | Remoto | posted: 2026-11-04
+- [ ] https://shift.gupy.io/job/eyJqb2JJZCI6MTI2MDI1NTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Shift | Desenvolvedor Web Fullstack Pleno | Remoto | posted: 2026-11-04
+- [ ] https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MzU3NDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Stefanini Group | Analista Desenvolvedor de Sistemas | Remoto | posted: 2026-11-04
+- [ ] https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MzUzODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Stefanini Group | DESENVOLVEDOR FULL STACK SR | Remoto | posted: 2026-11-04
+- [ ] https://gruposysmap.gupy.io/job/eyJqb2JJZCI6MTI4MzExNjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Grupo SysMap | Desenvolvedor(a) Front-end Angular SR | Remoto | posted: 2026-11-04
+- [ ] https://gruposysmap.gupy.io/job/eyJqb2JJZCI6MTI4MzExMzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Grupo SysMap | Desenvolvedor .NET SR | Remoto | posted: 2026-11-04
+- [ ] https://domo.gupy.io/job/eyJqb2JJZCI6MTI4MzM4NDQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | domoinovacao | Desenvolvedor Backend Sênior | Remoto | posted: 2026-11-04
+- [ ] https://montreal.gupy.io/job/eyJqb2JJZCI6MTI4MzA1ODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Montreal / Tecnologia e Inovação | Desenvolvedor de Software Sênior - Delphi | Remoto | posted: 2026-11-04
+- [ ] https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MjU1MzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Stefanini Group | Desenvolvedor Full Stack (Node.js + React) Sr | Remoto | posted: 2026-11-03
+- [ ] https://keepsimple.gupy.io/job/eyJqb2JJZCI6MTI4MjU0MTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Keep Simple | Desenvolvedor Backend Java Sênior (4825) | Remoto | posted: 2026-11-03
+- [ ] https://vemprabip.gupy.io/job/eyJqb2JJZCI6MTI3OTkzODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | BIP Brasil | Pessoa Desenvolvedora Full-stack React / .NET — Sênior | Remoto | posted: 2026-11-03
+- [ ] https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI3NTc0NDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Grupo Boticário | Pessoa Desenvolvedora BackEnd C# Especialista I (Tech Demanda e Operações) | Remoto | posted: 2026-11-03
+- [ ] https://domo.gupy.io/job/eyJqb2JJZCI6MTI4MjQ5NzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | domoinovacao | Desenvolvedor Full Stack Sênior | Remoto | posted: 2026-11-03
+- [ ] https://vtal.gupy.io/job/eyJqb2JJZCI6MTI3OTYwMzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | V.tal / o futuro passa por aqui | Desenvolvedor Pleno | Remoto | posted: 2026-11-03
+- [ ] https://werecruiter.gupy.io/job/eyJqb2JJZCI6MTI4MjQ1NTUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Recrutamento para área de tecnologia com Fit Cultural e Aderência Técnica. | Desenvolvedor(a) Oracle PL/SQL | Remoto | posted: 2026-11-03
+- [ ] https://vemsergrupoolx.gupy.io/job/eyJqb2JJZCI6MTI3MzY3OTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Grupo OLX | Pessoa Desenvolvedora de Software Backend Pleno | Remoto | posted: 2026-11-03
+- [ ] https://pagseguro.gupy.io/job/eyJqb2JJZCI6MTI3Mzg0MjEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | PagBank | Engenheiro Software Pl. (Java) | Remoto | posted: 2026-11-03
+- [ ] https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI4MDMxOTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Quality Digital | ANALISTA DE QUALIDADE DE SOFTWARE (QA) SÊNIOR | Remoto | posted: 2026-11-04
+- [ ] https://ativagr.gupy.io/job/eyJqb2JJZCI6MTI4MjUxNzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Ativa GR | Analista de Qualidade (QA/Tester) Júnior | Remoto | posted: 2026-11-03
+- [ ] https://cortex.gupy.io/job/eyJqb2JJZCI6MTI4MjcwMzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Cortex | Engenheiro de Dados Senior | Remoto | posted: 2026-11-06
+- [ ] https://gruposysmap.gupy.io/job/eyJqb2JJZCI6MTI4MzY2MjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Grupo SysMap | Engenheiro de Dados SR (Integração SAP) | Remoto | posted: 2026-11-05
+- [ ] https://gruposysmap.gupy.io/job/eyJqb2JJZCI6MTI4MjgwMzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Grupo SysMap | Engenheiro de Dados SR | Remoto | posted: 2026-11-03
+- [ ] https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MjA0MDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Stefanini Group | Engenheiro de Dados Sênior — Foco em Governança, Catálogo & FinOps Operacional (GCP) | Remoto | posted: 2026-10-31
+- [ ] https://vempralanlink.gupy.io/job/eyJqb2JJZCI6MTI4NDIzNzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Lanlink Informática | Analista de Sistemas de Automação DevOps - Sênior | Remoto | posted: 2026-11-05
+- [ ] https://valid.gupy.io/job/eyJqb2JJZCI6MTI3MTQ2MDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Valid | ANALISTA DEVOPS SÊNIOR | Remoto | posted: 2026-11-05
+- [ ] https://br.linkedin.com/jobs/view/engenheiro-de-software-golang-trabalho-remoto-ref%23308234-at-bairesdev-4487022352 | BairesDev | Engenheiro de Software Golang - Trabalho Remoto / REF#308234 | Curitiba e Região | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/engenheiro-de-software-net-core-trabalho-remoto-ref%23307937-at-bairesdev-4487021602 | BairesDev | Engenheiro de Software .NET Core - Trabalho Remoto / REF#307937 | Curitiba, PR | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/engenheiro-de-software-net-core-trabalho-remoto-ref%23307938-at-bairesdev-4487016535 | BairesDev | Engenheiro de Software .NET Core - Trabalho Remoto / REF#307938 | Curitiba e Região | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/senior-full-stack-developer-con-experiencia-en-node-js-y-react-js-%E2%80%93-remoto-latam-at-coderio-4486630601 | Coderio | Senior Full-Stack Developer con experiencia en Node.js y React.js – Remoto (LATAM) | São Paulo, SP | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/desenvolvedor-java-backend-trabalho-remoto-ref%23307294-at-bairesdev-4487030187 | BairesDev | Desenvolvedor Java Backend - Trabalho Remoto / REF#307294 | Curitiba e Região | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/desenvolvedor-net-core-trabalho-remoto-ref%23307655-at-bairesdev-4487026413 | BairesDev | Desenvolvedor .NET Core - Trabalho Remoto / REF#307655 | Recife e Região | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/desenvolvedor-net-core-trabalho-remoto-ref%23307653-at-bairesdev-4487024218 | BairesDev | Desenvolvedor .NET Core - Trabalho Remoto / REF#307653 | Florianópolis, SC | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/software-developer-specialist-net-remoto-at-localiza-co-4484669983 | Localiza&Co | SOFTWARE DEVELOPER SPECIALIST - .NET (REMOTO) | Brasil | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/desenvolvedor-python-s%C3%AAnior-trabalho-remoto-ref%23307828-at-bairesdev-4487017519 | BairesDev | Desenvolvedor Python Sênior - Trabalho Remoto / REF#307828 | Rio de Janeiro e Região | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/testador-de-software-qa-p-%2B-d-trabalho-remoto-ref%23307387-at-bairesdev-4487015844 | BairesDev | Testador de Software (QA) / P + D - Trabalho Remoto / REF#307387 | Curitiba, PR | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/testador-de-software-qa-p-%2B-d-trabalho-remoto-ref%23307388-at-bairesdev-4487012530 | BairesDev | Testador de Software (QA) / P + D - Trabalho Remoto / REF#307388 | Curitiba e Região | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/qa-testing-automation-pleno-senior-com-ingl%C3%AAs-remoto-at-capco-4477834819 | Capco | QA Testing & Automation Pleno/Senior - COM INGLÊS - Remoto | São Paulo, SP | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/desenvolvedor-de-software-junior-trabalho-remoto-ref%23307842-at-bairesdev-4487013532 | BairesDev | Desenvolvedor de Software Junior - Trabalho Remoto / REF#307842 | Rio de Janeiro e Região | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/desenvolvedor-de-software-junior-trabalho-remoto-ref%23307843-at-bairesdev-4487013533 | BairesDev | Desenvolvedor de Software Junior - Trabalho Remoto / REF#307843 | São Paulo, SP | posted: 2026-11-07
+
+## Processed

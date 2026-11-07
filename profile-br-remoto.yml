@@ -1,0 +1,9 @@
+# Isolated profile for @devremoto.br — no years_of_experience cap, Brazil eligibility enabled.
+candidate:
+  full_name: "Radar @devremoto.br"
+  title: "Curadoria de Vagas Tech 100% Remotas no Brasil"
+
+location:
+  country: "Brazil"
+  timezone: "BRT (UTC-3)"
+  authorized_in: ["Brazil"]

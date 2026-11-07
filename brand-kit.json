@@ -1,0 +1,36 @@
+{
+  "id": "openai-emerald-noir",
+  "name": "OpenAI Emerald Noir (Classic ChatGPT Dark UI)",
+  "brandName": "dev.remoto",
+  "handle": "@devremoto.br",
+  "ctaKeyword": "REMOTO",
+  "bioLinkLabel": "link fixo na bio @devremoto.br",
+  "dimensions": {
+    "width": 1080,
+    "height": 1350,
+    "aspectRatio": "4:5"
+  },
+  "typography": {
+    "display": "Inter",
+    "mono": "JetBrains Mono",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+  },
+  "tokens": {
+    "bgCanvas": "#0D0D0F",
+    "bgCard": "rgba(28, 29, 34, 0.88)",
+    "bgCardInner": "#16171B",
+    "bgComposer": "#212228",
+    "borderSubtle": "rgba(255, 255, 255, 0.09)",
+    "borderGlow": "rgba(16, 163, 127, 0.42)",
+    "textPrimary": "#F9FAFB",
+    "textSecondary": "#A1A1AA",
+    "textMuted": "#71717A",
+    "accentMain": "#10A37F",
+    "accentBright": "#34D399",
+    "syntaxCyan": "#38BDF8",
+    "syntaxViolet": "#C084FC",
+    "syntaxAmber": "#FBBF24",
+    "sendBtnBg": "#FFFFFF",
+    "sendBtnFg": "#0D0D0F"
+  }
+}

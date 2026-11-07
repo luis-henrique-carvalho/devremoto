@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <radialGradient id="aura2" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#10A37F" stop-opacity="0.36"/>
+      <stop offset="68%" stop-color="#0D0D0F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="em2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10A37F"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <filter id="glow2" filterUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+      <feGaussianBlur stdDeviation="24" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="#0D0D0F"/>
+  <rect width="1080" height="1080" fill="url(#aura2)"/>
+  <circle cx="540" cy="540" r="446" fill="none" stroke="#34D399" stroke-opacity="0.28" stroke-width="4"/>
+
+  <!-- Left Curly Brace { -->
+  <path d="M 416 320 C 356 320 344 352 344 408 L 344 476 C 344 518 312 540 274 540 C 312 540 344 562 344 604 L 344 672 C 344 728 356 760 416 760"
+        fill="none" stroke="#F9FAFB" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right Curly Brace } -->
+  <path d="M 664 320 C 724 320 736 352 736 408 L 736 476 C 736 518 768 540 806 540 C 768 540 736 562 736 604 L 736 672 C 736 728 724 760 664 760"
+        fill="none" stroke="#F9FAFB" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Center Glowing OpenAI Emerald Radar Core -->
+  <circle cx="540" cy="540" r="78" fill="url(#em2)" filter="url(#glow2)"/>
+  <circle cx="540" cy="540" r="134" fill="none" stroke="#34D399" stroke-opacity="0.42" stroke-width="8"/>
+  <circle cx="540" cy="540" r="188" fill="none" stroke="#38BDF8" stroke-opacity="0.22" stroke-width="4" stroke-dasharray="16 18"/>
+</svg>
