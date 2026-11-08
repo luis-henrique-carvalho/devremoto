@@ -22,13 +22,16 @@ Nosso objetivo é conectar desenvolvedores a vagas legítimas sem pegadinhas de 
    - Em 1080×1920, os painéis centrais (`.stage`) devem ocupar ~900px de largura e ter altura proporcional (500px a 650px).
    - Proibido deixar telas ou cenas finais de CTA com caixas soltas e espaço escuro vazio.
    - **Cena de CTA Obrigatória**: Deve exibir o benefício concreto (ex: mockup do Instagram Direct ou inbox recebendo os links com o botão de ação pulsante).
-2. **Diversidade de Elementos por Cena**:
+2. **Diversidade de Elementos por Cena e Dinâmica Visual**:
    - Cada cena deve apresentar um componente de UI rico e diferenciado:
      - Mockup de browser com barra de URL e dots de navegação.
-     - Terminal monospace com citação direta de fundadores ou código.
+     - Terminal monospace com citação direta de fundadores ou código com cursor piscante (`.cursor-blink`).
+     - Árvore de arquivos com status do Git (`[M] MODIFIED`, `[+] NEW`) e ícones autênticos.
+     - Editor de código com syntax highlighting multicolorido e marcadores de diff.
      - Badges de tecnologias e cards de métricas (tempo de contratação, remuneração em moeda forte).
-     - Carimbos angulados de status (ex: "0% CHANCE", "PRÉ-APROVADO").
+     - Carimbos angulados de status (ex: "0% EFICIÊNCIA", "0% CHANCE", "PRÉ-APROVADO") com leve *camera shake* no impacto.
      - Mockup de Direct Message / notificação com os links para fechamento de CTA.
+   - **Câmera 3D Cinematográfica**: Usar rig de câmera com perspectiva (`perspective: 1200px`) com micro-movimentos contínuos, *rush warp* nas acelerações e *macro zoom* nos detalhes. O HUD (header fixo e pílula de legenda) deve permanecer ancorado em 2D fora da câmera.
 3. **Padrão Oficial de Legendas / Rodapé**:
    - Container fixado em `top: 1420px; height: 130px;` com pílula flutuante `.subtitle-pill`:
      - `border-radius: 999px;`
@@ -41,6 +44,17 @@ Nosso objetivo é conectar desenvolvedores a vagas legítimas sem pegadinhas de 
    - Narração de voz neural com ganho `data-volume="1.15"`.
    - SFX pontuais entre `0.30` e `0.40`.
    - Loudness final auditado entre **-15.0 e -16.0 LUFS** com True Peak máximo de **-1.0 dBFS** via `tools/short_qa.py`.
+5. **Diretrizes de Motion Design e VFX Cinematográfico (Anti-Vídeo Chapado)**:
+   - **Câmera 3D com Perspectiva Contínua**: O container `.camera-viewport` deve ter `perspective: 1200px` com câmera em movimento contínuo (órbita sutil ou travelling).
+   - **Transições com Causa (Transitions with a Cause)**: Proibido crossfade genérico entre telas. Use *Zoom Through* (a câmera mergulha no cursor do prompt para abrir o próximo cenário) ou *Whip Snap* direcional.
+   - **Tipografia Cinética com Scramble Text**: Hooks de abertura devem usar decodificação de caracteres aleatórios nos primeiros 0.7s para reforçar a atmosfera hacker/tech.
+   - **Impactos com Aberração Cromática**: Carimbos de alerta ou rejeição devem disparar um glitch RGB temporário (separação vermelha e ciano) com camera shake.
+   - **Feedback Físico de Comandos**: Execuções de terminal ou botões importantes devem emitir uma onda de choque radial (*Shockwave Ring*).
+   - **Isolamento do HUD 2D**: O cabeçalho de marca e a pílula de legendas ficam fixos no `#root` fora do container 3D, blindados contra distorções e cortes de safe zone.
+6. **Invariante de Variedade Criativa e Memória Anti-Repetição**:
+   - Antes de planejar qualquer novo vídeo, o agente deve consultar os últimos 3 itens de [`data/content-history.json`](file:///home/luis/repositories/canais/devremoto/data/content-history.json) e a **Matriz Combinatória de 400 Combos** em [`devremoto-video-hyperframes/SKILL.md`](file:///home/luis/repositories/canais/.agents/skills/devremoto-video-hyperframes/SKILL.md).
+   - É expressamente proibido repetir o mesmo tipo de gancho, transição ou layout do vídeo imediatamente anterior.
+   - O agente deve pesquisar e utilizar componentes modulares do catálogo nativo sempre que necessário via `npx hyperframes catalog <termo>` (ex: `before-after-wipe`, `animated-bar-chart`, `browser-device-stage`).
 
 ## 3. Grade Editorial Diária e Arquitetura de Postagens
 

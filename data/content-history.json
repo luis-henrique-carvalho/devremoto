@@ -14,20 +14,24 @@
       "format": "video",
       "headline": "3 Plataformas Secretas para Vagas na Gringa",
       "keyword": "LISTA",
+      "vfx": ["camera-orbit", "stamp-shake", "browser-mockup"],
+      "layout": "browser-mockup",
       "posted_at": "2026-11-08T19:09:44.000Z",
       "postizScheduleIso": "2026-11-09T18:00:00.000Z",
       "postId": "cmw87ia060006qj9p1um1wxo0",
       "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/08/c290f4da898d104d3fcb52ee1f0c10e785.mp4"
     },
     {
-      "id": "terminal-rust-v1",
+      "id": "terminal-rust-v2",
       "format": "video",
-      "headline": "Seu Terminal Está Lento: 3 Ferramentas em Rust",
+      "headline": "Seu Terminal Está Muito Lento: 3 Ferramentas em Rust",
       "keyword": "TERMINAL",
-      "posted_at": "2026-11-08T19:32:18.000Z",
+      "vfx": ["scramble-text", "zoom-through", "shockwave", "chromatic-glitch", "terminal-tree"],
+      "layout": "terminal",
+      "posted_at": "2026-11-08T21:44:23.000Z",
       "postizScheduleIso": "2026-11-10T18:00:00.000Z",
-      "postId": "cmw88bb150007qj9pt016l3mf",
-      "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/08/d9f104afb7a1fd3ee244eb839eca2d1c0.mp4"
+      "postId": "cmw8d15vb0009qj9p9bm7rl72",
+      "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/08/4e528fe3c6b672e273c033898371b6e10.mp4"
     }
   ]
 }
