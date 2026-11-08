@@ -1,6 +1,6 @@
 # DevRemoto: Diretrizes do Agente Antigravity
 
-Bem-vindo ao ecossistema do **DevRemoto** (`@devremoto.br` / `devremoto.com.br`).
+Bem-vindo ao ecossistema do **DevRemoto** (`@devremoto.br` / `devremoto.luis-carvalho.online`).
 
 ## 1. Missão do Projeto
 O DevRemoto é um canal de mídia e curadoria de vagas de tecnologia **100% remotas no Brasil e LatAm para brasileiros**.
@@ -197,7 +197,7 @@ O agente deve acionar as seguintes skills especializadas conforme a necessidade 
 - Toda postagem de carrossel ou reel com curadoria de vagas deve conter o CTA:
   > *"Comente **REMOTO** aqui nos comentários para receber a lista oficial com todos os links direto na sua DM..."*
 - O **OpenReply** (MCP `openreply`) captura os comentários em tempo real via Meta Graph API:
-  - Dispara a mensagem privada no Direct com o botão rastreado `Acessar Vagas` (`https://devremoto.com.br`).
+  - Dispara a mensagem privada no Direct com o botão rastreado `Acessar Vagas` (`https://devremoto.luis-carvalho.online/vagas`).
   - Publica uma resposta pública rotativa no post (ex: *"Acabei de te mandar o link direto no inbox! Dá uma conferida lá 🚀"*), dobrando o sinal de engajamento no algoritmo do Instagram.
 - Para gerenciar campanhas via Antigravity:
   - Listar campanhas: `call_mcp_tool(ServerName="openreply", ToolName="list_campaigns")`

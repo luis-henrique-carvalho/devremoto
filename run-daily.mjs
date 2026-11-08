@@ -172,6 +172,14 @@ async function main() {
   fs.writeFileSync(linksPath, linksHtml, 'utf8');
   fs.writeFileSync(latestLinksPath, linksHtml, 'utf8');
 
+  // Automatic sync to devremoto-web hub
+  const webHubVagasDir = '/home/luis/repositories/devremoto-web/content/vagas';
+  if (fs.existsSync(webHubVagasDir)) {
+    const webHubJsonPath = path.join(webHubVagasDir, `${opts.dateSlug}.json`);
+    fs.writeFileSync(webHubJsonPath, `${JSON.stringify(edition, null, 2)}\n`, 'utf8');
+    process.stdout.write(`[devremoto-web] Synced edition to ${webHubJsonPath}\n`);
+  }
+
   const replayScriptPath = writePostizReplayScript({
     editionDir,
     slidePaths,
