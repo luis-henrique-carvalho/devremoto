@@ -1,0 +1,33 @@
+{
+  "history": [
+    {
+      "id": "terminal-tools-v1",
+      "format": "carousel",
+      "headline": "4 Ferramentas Modernas para seu Terminal",
+      "keyword": "TERMINAL",
+      "posted_at": "2026-11-08T18:57:23.223Z",
+      "postizScheduleIso": "2026-11-08T21:30:00.000Z",
+      "postId": "cmw872e370005qj9paluqn1qt"
+    },
+    {
+      "id": "plataformas-gringa-v1",
+      "format": "video",
+      "headline": "3 Plataformas Secretas para Vagas na Gringa",
+      "keyword": "LISTA",
+      "posted_at": "2026-11-08T19:09:44.000Z",
+      "postizScheduleIso": "2026-11-09T18:00:00.000Z",
+      "postId": "cmw87ia060006qj9p1um1wxo0",
+      "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/08/c290f4da898d104d3fcb52ee1f0c10e785.mp4"
+    },
+    {
+      "id": "terminal-rust-v1",
+      "format": "video",
+      "headline": "Seu Terminal Está Lento: 3 Ferramentas em Rust",
+      "keyword": "TERMINAL",
+      "posted_at": "2026-11-08T19:32:18.000Z",
+      "postizScheduleIso": "2026-11-10T18:00:00.000Z",
+      "postId": "cmw88bb150007qj9pt016l3mf",
+      "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/08/d9f104afb7a1fd3ee244eb839eca2d1c0.mp4"
+    }
+  ]
+}

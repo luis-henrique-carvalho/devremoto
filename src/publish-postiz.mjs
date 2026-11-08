@@ -224,3 +224,97 @@ export function publishCarouselToPostiz({
     response: parseJsonFromStdout(createRes.stdout) || (createRes.stdout || '').trim(),
   };
 }
+
+export function publishVideoToPostiz({
+  videoPath,
+  caption,
+  scheduleIso,
+  mode = 'schedule',
+  integrationId,
+  envOverrides = {},
+  spawnFn = spawnSync,
+}) {
+  const childEnv = { ...process.env, ...envOverrides };
+  const postizBin = childEnv.POSTIZ_BIN || 'postiz';
+
+  const authRes = spawnFn(postizBin, ['auth:status'], { encoding: 'utf8', env: childEnv, timeout: 30_000 });
+  if (authRes.status !== 0) {
+    return {
+      published: false,
+      reason: 'not_authenticated',
+      message: `Postiz auth check failed: ${(authRes.stderr || authRes.stdout || '').trim()}`,
+    };
+  }
+
+  let resolvedIgId = integrationId || childEnv.POSTIZ_INSTAGRAM_ID;
+  if (!resolvedIgId) {
+    const listRes = spawnFn(postizBin, ['integrations:list'], { encoding: 'utf8', env: childEnv, timeout: 30_000 });
+    if (listRes.status === 0) {
+      resolvedIgId = resolveInstagramIntegrationId(listRes.stdout);
+    }
+  }
+
+  if (!resolvedIgId) {
+    return {
+      published: false,
+      reason: 'missing_instagram_integration',
+      message: 'Authenticated in Postiz, but no Instagram integration was found.',
+    };
+  }
+
+  // Upload video file
+  console.log(`[Postiz] Fazendo upload do vídeo: ${path.basename(videoPath)}...`);
+  const upRes = spawnFn(postizBin, ['upload', videoPath], { encoding: 'utf8', env: childEnv, timeout: 120_000 });
+  if (upRes.status !== 0) {
+    return {
+      published: false,
+      reason: 'upload_failed',
+      message: `Failed uploading ${path.basename(videoPath)}: ${(upRes.stderr || upRes.stdout || '').trim()}`,
+    };
+  }
+
+  const upJson = parseJsonFromStdout(upRes.stdout);
+  if (!upJson?.path) {
+    return {
+      published: false,
+      reason: 'upload_parse_failed',
+      message: `Postiz upload did not return a .path for ${path.basename(videoPath)}.`,
+    };
+  }
+
+  const normalizedMode = mode === 'schedule' ? 'schedule' : 'draft';
+  const createArgs = [
+    'posts:create',
+    '-c',
+    caption,
+    '-s',
+    scheduleIso || nextMorningBrtIso(),
+    '-t',
+    normalizedMode,
+    '--settings',
+    JSON.stringify({ post_type: 'post' }),
+    '-m',
+    upJson.path,
+    '-i',
+    resolvedIgId,
+  ];
+
+  console.log(`[Postiz] Criando post de vídeo (${normalizedMode})...`);
+  const createRes = spawnFn(postizBin, createArgs, { encoding: 'utf8', env: childEnv, timeout: 45_000 });
+  if (createRes.status !== 0) {
+    return {
+      published: false,
+      reason: 'create_failed',
+      message: `Postiz posts:create failed: ${(createRes.stderr || createRes.stdout || '').trim()}`,
+    };
+  }
+
+  return {
+    published: true,
+    mode: normalizedMode,
+    integrationId: resolvedIgId,
+    scheduleIso,
+    videoUrl: upJson.path,
+    response: parseJsonFromStdout(createRes.stdout) || (createRes.stdout || '').trim(),
+  };
+}

@@ -1,0 +1,285 @@
+{
+  "catalog": [
+    {
+      "id": "terminal-tools-v1",
+      "format": "carousel",
+      "pillar": "tools",
+      "headline": "4 Ferramentas Modernas para seu Terminal",
+      "kicker": "produtividade // terminal",
+      "stake": "Comandos clássicos do Unix têm 40 anos. Estas 4 ferramentas deixam seu shell 10x mais rápido e visual.",
+      "keyword": "TERMINAL",
+      "caption": "4 ferramentas que transformam seu terminal.\n\nSe você ainda usa apenas os comandos padrão do Unix criados nos anos 1980, seu workflow está lento. Ferramentas modernas escritas em Rust e Go adicionam syntax highlighting, navegação inteligente por histórico e painéis visuais interativos direto no shell.\n\nArraste para o lado para ver cada ferramenta com exemplos de uso e salve este post para consultar quando for configurar seu ambiente dev.\n\nQual dessas ferramentas você já usa na sua máquina?\n\nComente \"TERMINAL\" nos comentários que te envio a lista completa com todos os repositórios oficiais e comandos no direct!\n\n#terminal #desenvolvedor #produtividade",
+      "items": [
+        {
+          "name": "zoxide",
+          "tag": "Rust · Navegação Instantânea",
+          "desc": "Esqueça o 'cd' repetitivo. O zoxide memoriza seus diretórios frequentes e pula direto para qualquer pasta digitando apenas uma letra.",
+          "install": "brew install zoxide",
+          "example": "$ z devremoto  # Pula direto para a pasta"
+        },
+        {
+          "name": "eza",
+          "tag": "Rust · Substituto moderno do ls",
+          "desc": "Substitui o 'ls' trazendo ícones automáticos de arquivos, cores vivas de permissões, status do Git e visualização de árvore embutida.",
+          "install": "brew install eza",
+          "example": "$ eza -la --icons --git  # Lista com status git"
+        },
+        {
+          "name": "bat",
+          "tag": "Rust · Substituto moderno do cat",
+          "desc": "Lê código no terminal com syntax highlighting colorido, numeração de linhas, suporte nativo a git diff e paginação automática.",
+          "install": "brew install bat",
+          "example": "$ bat index.ts  # Visualização de IDE no terminal"
+        },
+        {
+          "name": "lazygit",
+          "tag": "Go · Painel visual para Git",
+          "desc": "Interface interativa completa para Git dentro do terminal. Faça commits parciais, resolva conflitos de merge e veja branches sem usar mouse.",
+          "install": "brew install lazygit",
+          "example": "$ lazygit  # Dashboard interativo no shell"
+        }
+      ],
+      "status": "posted"
+    },
+    {
+      "id": "git-disasters-v1",
+      "format": "carousel",
+      "pillar": "cheatsheet",
+      "headline": "4 Comandos Git para Salvar o Dia",
+      "kicker": "git // controle de versão",
+      "stake": "Fez besteira no código e não sabe como voltar? Estes 4 comandos consertam 90% dos erros clássicos antes do tech lead descobrir.",
+      "keyword": "GIT",
+      "items": [
+        {
+          "name": "git reflog",
+          "tag": "O botão de desfazer definitivo",
+          "desc": "O Git nunca apaga nada de verdade por 30 dias. O reflog lista o histórico de todos os lugares por onde o HEAD passou, mesmo após rebase ou reset.",
+          "install": "Comando nativo do Git",
+          "example": "$ git reflog \n$ git reset --hard HEAD@{2}"
+        },
+        {
+          "name": "git commit --amend",
+          "tag": "Corrigir o último commit",
+          "desc": "Esqueceu um arquivo ou digitou a mensagem do commit com erro de digitação? Adicione os arquivos e use o amend para não poluir a timeline.",
+          "install": "Comando nativo do Git",
+          "example": "$ git add . \n$ git commit --amend --no-edit"
+        },
+        {
+          "name": "git cherry-pick",
+          "tag": "Hotfix cirúrgico",
+          "desc": "Precisa puxar apenas um commit específico da branch de desenvolvimento para produção sem trazer o resto do código instável.",
+          "install": "Comando nativo do Git",
+          "example": "$ git cherry-pick <hash-do-commit>"
+        },
+        {
+          "name": "git restore",
+          "tag": "Descartar mudanças no arquivo",
+          "desc": "Substitui o antigo e confuso 'git checkout -- arquivo'. Descarta todas as alterações não salvas no arquivo e volta ao estado do último commit.",
+          "install": "Comando nativo do Git",
+          "example": "$ git restore caminho/do/arquivo.ts"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ai-local-tools-v1",
+      "format": "carousel",
+      "pillar": "ai",
+      "headline": "Rode Modelos de IA no seu PC",
+      "kicker": "ia // open source",
+      "stake": "Você não precisa pagar US$ 20 por mês para ter assistentes inteligentes. Estas ferramentas rodam modelos avançados localmente no seu notebook sem enviar dados para a nuvem.",
+      "keyword": "IALOCAL",
+      "items": [
+        {
+          "name": "Ollama",
+          "tag": "Go/C++ · Container de LLMs",
+          "desc": "Roda Llama 3, DeepSeek e Mistral com 1 comando no terminal. Expõe uma API compatível com OpenAI na porta 11434 localmente.",
+          "install": "curl -fsSL https://ollama.com/install.sh | sh",
+          "example": "$ ollama run deepseek-r1"
+        },
+        {
+          "name": "Open-WebUI",
+          "tag": "Python/Svelte · Interface ChatGPT",
+          "desc": "Interface web completa que conecta no seu Ollama local. Suporta histórico de conversas, envio de documentos (RAG local) e múltiplos modelos.",
+          "install": "docker run -d -p 3000:8080 open-webui",
+          "example": "Acesse http://localhost:3000"
+        },
+        {
+          "name": "Continue.dev",
+          "tag": "Extensão VS Code / JetBrains",
+          "desc": "O melhor copiloto de código open-source. Conecta direto no Ollama local para autocompletar código e responder dúvidas no editor sem gastar 1 centavo.",
+          "install": "Instale pela aba de extensões do VS Code",
+          "example": "Atalho: Ctrl+I / Cmd+I no código"
+        },
+        {
+          "name": "Whisper.cpp",
+          "tag": "C++ · Transcrição de Áudio Offline",
+          "desc": "Transcreve qualquer arquivo de áudio ou reunião em texto com altíssima precisão em português rodando na CPU/GPU do seu próprio computador.",
+          "install": "brew install whisper-cpp",
+          "example": "$ whisper-cpp -m base.bin -f reuniao.mp3"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rust-terminal-v2",
+      "format": "carousel",
+      "pillar": "tools",
+      "headline": "4 Substitutos Modernos de Comandos Antigos",
+      "kicker": "produtividade // rust tools",
+      "stake": "Os comandos clássicos do Unix têm mais de 40 anos. Estas ferramentas reescritas em Rust são 10x mais rápidas e com syntax highlighting nativo.",
+      "keyword": "RUST",
+      "items": [
+        {
+          "name": "ripgrep (rg)",
+          "tag": "Rust · Substituto do grep",
+          "desc": "Busca texto dentro de milhares de arquivos de código em milissegundos, ignorando automaticamente o .gitignore e arquivos ocultos.",
+          "install": "brew install ripgrep",
+          "example": "$ rg \"auth_token\" ./src  # Busca instantânea com cores"
+        },
+        {
+          "name": "fd",
+          "tag": "Rust · Substituto do find",
+          "desc": "Encontra arquivos e diretórios de forma intuitiva sem a sintaxe complexa do find clássico, com suporte a regex por padrão.",
+          "install": "brew install fd",
+          "example": "$ fd -e ts \"controller\"  # Acha todos os controllers .ts"
+        },
+        {
+          "name": "duf",
+          "tag": "Go · Substituto do df",
+          "desc": "Visualizador de espaço em disco limpo, colorido e com tabelas organizadas por partição, dispositivo e pontos de montagem.",
+          "install": "brew install duf",
+          "example": "$ duf  # Tabela visual limpa do uso de disco"
+        },
+        {
+          "name": "dust",
+          "tag": "Rust · Substituto do du",
+          "desc": "Mostra visualmente quais pastas estão comendo o armazenamento do seu computador em um gráfico de barras no próprio terminal.",
+          "install": "brew install dust",
+          "example": "$ dust  # Gráfico de barras com as maiores pastas"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "docker-terminal-v1",
+      "format": "carousel",
+      "pillar": "tools",
+      "headline": "Chega de Sofrer com Comandos de Docker",
+      "kicker": "containers // terminal",
+      "stake": "Cansado de digitar docker ps, docker logs e docker rm manualmente? Estas 4 ferramentas colocam uma interface visual completa no seu shell.",
+      "keyword": "DOCKER",
+      "items": [
+        {
+          "name": "lazydocker",
+          "tag": "Go · TUI para Docker",
+          "desc": "Dashboard visual completo para seus containers. Veja consumo de RAM/CPU, reinicie serviços e inspecione logs com as setas do teclado.",
+          "install": "brew install jesseduffield/lazydocker/lazydocker",
+          "example": "$ lazydocker  # Abre o painel visual no terminal"
+        },
+        {
+          "name": "dive",
+          "tag": "Go · Otimizador de Imagens",
+          "desc": "Analisa cada camada da sua imagem Docker para descobrir arquivos inúteis e desperdício de espaço, reduzindo o tamanho em até 70%.",
+          "install": "brew install dive",
+          "example": "$ dive minha-api:latest  # Análise camada por camada"
+        },
+        {
+          "name": "ctop",
+          "tag": "Go · Monitor de Containers",
+          "desc": "Um comando top em tempo real exclusivo para containers Docker. Veja métricas de rede, memória e processamento instantaneamente.",
+          "install": "brew install ctop",
+          "example": "$ ctop  # Monitor em tempo real de todos os containers"
+        },
+        {
+          "name": "oxker",
+          "tag": "Rust · TUI Minimalista",
+          "desc": "Cliente Docker em Rust ultra leve e focado em velocidade para pausar, reiniciar e deletar containers sem consumo de memória.",
+          "install": "brew install oxker",
+          "example": "$ oxker  # TUI ultrarrápida em Rust"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "api-testing-terminal-v1",
+      "format": "carousel",
+      "pillar": "tools",
+      "headline": "4 Ferramentas para Testar APIs no Terminal",
+      "kicker": "apis // produtividade",
+      "stake": "Você não precisa abrir o Postman ou Insomnia toda vez que quiser testar um endpoint rápido. Estas ferramentas rodam direto do seu terminal.",
+      "keyword": "APIS",
+      "items": [
+        {
+          "name": "httpie",
+          "tag": "Python · Substituto do cURL",
+          "desc": "Faz requisições HTTP com sintaxe natural, JSON colorido formatado automaticamente e autenticação simples sem flags confusas.",
+          "install": "brew install httpie",
+          "example": "$ http GET api.devremoto.com.br/vagas  # JSON formatado"
+        },
+        {
+          "name": "curlie",
+          "tag": "Go · Poder do curl + beleza do httpie",
+          "desc": "Combina a interface intuitiva do HTTPie com toda a velocidade, compatibilidade de flags e suporte a proxies do cURL nativo.",
+          "install": "brew install curlie",
+          "example": "$ curlie post api.exemplo.com name=\"Dev\""
+        },
+        {
+          "name": "bruno",
+          "tag": "Open Source · Git-Friendly API Client",
+          "desc": "Alternativa open source ao Postman que salva suas coleções em arquivos de texto direto no repositório Git, sem login ou cloud obrigatória.",
+          "install": "brew install bruno",
+          "example": "$ bru run  # Roda suas coleções de teste via CLI"
+        },
+        {
+          "name": "doggo",
+          "tag": "Go · Substituto do dig",
+          "desc": "Cliente DNS moderno com suporte a DoH, saída em tabela colorida ou JSON e resolução de domínios muito mais clara que o dig.",
+          "install": "brew install mr-karan/doggo/doggo",
+          "example": "$ doggo devremoto.com.br  # Resolução DNS colorida"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "database-terminal-v1",
+      "format": "carousel",
+      "pillar": "tools",
+      "headline": "4 Ferramentas de Banco de Dados no Terminal",
+      "kicker": "bancos de dados // sql",
+      "stake": "Abandone clientes pesados que travam sua máquina para consultas simples. Estas interfaces para terminal têm autocomplete e tabelas perfeitas.",
+      "keyword": "SQL",
+      "items": [
+        {
+          "name": "harlequin",
+          "tag": "Python · IDE SQL no Terminal",
+          "desc": "Uma IDE completa para bancos de dados dentro do shell. Suporta Postgres, MySQL, SQLite e DuckDB com visualização de tabelas e histórico.",
+          "install": "pipx install harlequin",
+          "example": "$ harlequin  # Abre o editor SQL interativo"
+        },
+        {
+          "name": "pgcli",
+          "tag": "Python · Postgres com Autocomplete",
+          "desc": "Cliente oficial para PostgreSQL com auto-complete inteligente conforme você digita SQL e syntax highlighting nos resultados.",
+          "install": "brew install pgcli",
+          "example": "$ pgcli -h localhost -U postgres  # Autocomplete nativo"
+        },
+        {
+          "name": "usql",
+          "tag": "Go · Cliente Universal",
+          "desc": "Um único comando para conectar no PostgreSQL, MySQL, SQLite, Oracle, ClickHouse e Redis com a mesma sintaxe rápida.",
+          "install": "brew install xo/xo/usql",
+          "example": "$ usql postgres://user:pass@localhost/db"
+        },
+        {
+          "name": "litecli",
+          "tag": "Python · SQLite com Superpoderes",
+          "desc": "Auto-complete e formatação elegante para arquivos .sqlite locais sem precisar instalar extensões pesadas no VS Code.",
+          "install": "brew install litecli",
+          "example": "$ litecli database.sqlite"
+        }
+      ],
+      "status": "pending"
+    }
+  ]
+}

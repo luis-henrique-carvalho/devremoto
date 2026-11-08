@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Radar das Stacks - DevRemoto (Volume de Contratações)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-canvas: #060807;
+        --accent-emerald: #10A37F;
+        --accent-bright: #34D399;
+        --accent-cyan: #38BDF8;
+        --accent-gold: #FCD34D;
+        --text-primary: #F9FAFB;
+        --text-secondary: #9CA3AF;
+        --font-sans: 'Inter', -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg-canvas);
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        width: 1080px;
+        height: 1920px;
+        position: relative;
+        overflow: hidden;
+        background: #060807;
+      }
+
+      /* CRT Scanline & Grain Texture */
+      .scanlines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 4px);
+        pointer-events: none;
+        z-index: 500;
+        opacity: 0.35;
+      }
+
+      /* 3D Moving Perspective Cyber Grid */
+      .cyber-grid-plane {
+        position: absolute;
+        bottom: -220px;
+        left: -50%;
+        width: 200%;
+        height: 900px;
+        background-image: 
+          linear-gradient(rgba(16, 163, 127, 0.22) 2px, transparent 2px),
+          linear-gradient(90deg, rgba(16, 163, 127, 0.22) 2px, transparent 2px);
+        background-size: 80px 80px;
+        transform: perspective(600px) rotateX(74deg);
+        mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 80%);
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .grid-horizon {
+        position: absolute;
+        bottom: 480px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, rgba(52, 211, 153, 0.3) 30%, rgba(52, 211, 153, 0.8) 50%, rgba(52, 211, 153, 0.3) 70%, transparent 100%);
+        box-shadow: 0 0 24px rgba(52, 211, 153, 0.6);
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      /* Dynamic Ambient Glow Orbs */
+      .glow-orb-1 {
+        position: absolute;
+        top: 80px;
+        right: -120px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(16, 163, 127, 0.25) 0%, transparent 70%);
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .glow-orb-2 {
+        position: absolute;
+        bottom: 250px;
+        left: -140px;
+        width: 550px;
+        height: 550px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, transparent 70%);
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* 3D Camera Container */
+      .camera-viewport {
+        position: absolute;
+        inset: 0;
+        perspective: 1100px;
+        perspective-origin: 50% 45%;
+        overflow: hidden;
+      }
+
+      .camera-rig {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+      }
+
+      /* Fixed Header */
+      .brand-header {
+        position: absolute;
+        top: 100px;
+        left: 60px;
+        right: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        transform: translateZ(40px);
+      }
+
+      .brand-badge {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(10, 14, 12, 0.85);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        padding: 12px 24px;
+        border-radius: 999px;
+        backdrop-filter: blur(16px);
+      }
+
+      .brand-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--accent-bright);
+        box-shadow: 0 0 12px var(--accent-bright);
+      }
+
+      .brand-name {
+        font-family: var(--font-mono);
+        font-size: 32px;
+        font-weight: 700;
+        color: #FFFFFF;
+        letter-spacing: -0.02em;
+      }
+
+      .meta-tag {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        background: rgba(18, 22, 26, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 12px 24px;
+        border-radius: 999px;
+        backdrop-filter: blur(16px);
+      }
+
+      /* Stage */
+      .stage {
+        position: absolute;
+        top: 220px;
+        left: 60px;
+        right: 60px;
+        bottom: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-style: preserve-3d;
+      }
+
+      /* Shared Dynamic Scene Box */
+      .scene-box {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+      }
+
+      /* Common Rank Pill */
+      .rank-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 28px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .rank-pill.emerald {
+        background: rgba(16, 163, 127, 0.18);
+        border: 1.5px solid rgba(52, 211, 153, 0.6);
+        color: var(--accent-bright);
+      }
+
+      .rank-pill.cyan {
+        background: rgba(56, 189, 248, 0.18);
+        border: 1.5px solid rgba(56, 189, 248, 0.6);
+        color: var(--accent-cyan);
+      }
+
+      .rank-pill.gold {
+        background: rgba(252, 211, 77, 0.18);
+        border: 1.5px solid rgba(252, 211, 77, 0.7);
+        color: var(--accent-gold);
+        box-shadow: 0 0 35px rgba(252, 211, 77, 0.4);
+      }
+
+      .hero-title {
+        font-size: 82px;
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        text-align: center;
+        margin-bottom: 36px;
+      }
+
+      .hero-title .highlight {
+        background: linear-gradient(135deg, #34D399 0%, #10A37F 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-title .gold-highlight {
+        background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Floating Chips Cloud */
+      .chips-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        max-width: 860px;
+        margin-top: 36px;
+      }
+
+      .floating-chip {
+        font-family: var(--font-mono);
+        font-size: 30px;
+        font-weight: 700;
+        padding: 14px 26px;
+        background: rgba(18, 24, 22, 0.85);
+        border: 1.5px solid rgba(52, 211, 153, 0.35);
+        border-radius: 16px;
+        color: #F3F4F6;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+      }
+
+      /* ===================================================
+         SCENE 1: RADAR SCANNER
+      =================================================== */
+      .radar-wrapper {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .radar-circle {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 2px solid rgba(16, 163, 127, 0.3);
+      }
+
+      .radar-circle.inner-1 {
+        inset: 80px;
+        border: 1.5px dashed rgba(52, 211, 153, 0.45);
+      }
+
+      .radar-circle.inner-2 {
+        inset: 160px;
+        border: 1px solid rgba(16, 163, 127, 0.25);
+      }
+
+      .radar-crosshair-h {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(52, 211, 153, 0.3);
+      }
+
+      .radar-crosshair-v {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(52, 211, 153, 0.3);
+      }
+
+      .radar-sweep {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(52, 211, 153, 0.08) 310deg, rgba(52, 211, 153, 0.48) 360deg);
+      }
+
+      .radar-blip {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--accent-bright);
+        box-shadow: 0 0 16px var(--accent-bright);
+      }
+
+      .blip-1 { top: 180px; left: 310px; }
+      .blip-2 { top: 260px; left: 340px; }
+      .blip-3 { top: 220px; left: 240px; }
+      .blip-4 { top: 340px; left: 190px; }
+      .blip-5 { top: 130px; left: 210px; }
+
+      .radar-center-data {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        padding: 16px 28px;
+        pointer-events: none;
+      }
+
+      .radar-count {
+        font-family: var(--font-mono);
+        font-size: 80px;
+        font-weight: 900;
+        color: var(--accent-bright);
+        text-shadow: 0 0 30px rgba(52, 211, 153, 0.9);
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .radar-count-label {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 700;
+        color: #FFFFFF;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        text-shadow: 0 0 14px rgba(0, 0, 0, 0.8);
+      }
+
+      /* ===================================================
+         SCENE 2: RANK #3 PYTHON (18% DAS VAGAS)
+      =================================================== */
+      .chart-container {
+        width: 100%;
+        max-width: 920px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .metric-bar-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .metric-bar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .metric-bar-track {
+        height: 48px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .metric-bar-fill {
+        height: 100%;
+        border-radius: 12px;
+        width: 0%;
+      }
+
+      .metric-bar-fill.normal {
+        background: linear-gradient(90deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.35) 100%);
+      }
+
+      .metric-bar-fill.highlight-cyan {
+        background: linear-gradient(90deg, #0284C7 0%, #38BDF8 100%);
+        box-shadow: 0 0 28px rgba(56, 189, 248, 0.8);
+      }
+
+      .metric-bar-fill.highlight-emerald {
+        background: linear-gradient(90deg, #10A37F 0%, #34D399 100%);
+        box-shadow: 0 0 28px rgba(52, 211, 153, 0.8);
+      }
+
+      .metric-share-tag {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 8px;
+        background: var(--accent-cyan);
+        color: #060807;
+        font-weight: 900;
+        font-size: 28px;
+        margin-left: 12px;
+      }
+
+      /* ===================================================
+         SCENE 3: RANK #2 JAVA & SPRING (25% DAS VAGAS)
+      =================================================== */
+      .java-market-wrapper {
+        width: 100%;
+        max-width: 920px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .java-hero-stat {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+      }
+
+      .java-big-number {
+        font-family: var(--font-mono);
+        font-size: 110px;
+        font-weight: 900;
+        line-height: 1;
+        color: var(--accent-emerald);
+        text-shadow: 0 0 35px rgba(16, 163, 127, 0.6);
+      }
+
+      .java-label-col {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .java-stat-title {
+        font-size: 34px;
+        font-weight: 800;
+        color: #FFFFFF;
+      }
+
+      .java-stat-sub {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        color: var(--text-secondary);
+      }
+
+      .fintech-tag-row {
+        width: 100%;
+        background: rgba(16, 163, 127, 0.12);
+        border: 1.5px solid rgba(52, 211, 153, 0.4);
+        padding: 16px 24px;
+        border-radius: 16px;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        color: var(--accent-bright);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      /* ===================================================
+         SCENE 4: CLIMAX #1 NODE & TS (42% CAMPEÃO ABSOLUTO)
+      =================================================== */
+      .node-champion-wrapper {
+        width: 100%;
+        max-width: 940px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .node-hero-stat {
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+      }
+
+      .node-big-percent {
+        font-family: var(--font-mono);
+        font-size: 140px;
+        font-weight: 900;
+        line-height: 1;
+        background: linear-gradient(135deg, #FFFFFF 20%, #34D399 70%, #10A37F 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 45px rgba(52, 211, 153, 0.7);
+      }
+
+      .node-stat-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .node-stat-headline {
+        font-size: 38px;
+        font-weight: 900;
+        color: #FFFFFF;
+      }
+
+      .node-stat-sub {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        color: var(--accent-bright);
+      }
+
+      .terminal-stream-box {
+        width: 100%;
+        background: rgba(10, 14, 18, 0.92);
+        border: 1.5px solid rgba(52, 211, 153, 0.5);
+        padding: 18px 26px;
+        border-radius: 16px;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        color: var(--accent-bright);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+      }
+
+      /* ===================================================
+         SCENE 5: CTA CONVERSION (OPEN & CINEMATIC)
+      =================================================== */
+      .cta-stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        max-width: 900px;
+      }
+
+      .cta-icon-glow {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(52, 211, 153, 0.25) 0%, transparent 70%);
+        border: 2px solid rgba(52, 211, 153, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 50px rgba(16, 163, 127, 0.5);
+      }
+
+      .cta-headline {
+        font-size: 68px;
+        font-weight: 900;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: #FFFFFF;
+      }
+
+      .cta-headline .highlight {
+        background: linear-gradient(135deg, #34D399 0%, #10A37F 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .cta-desc {
+        font-size: 30px;
+        color: var(--text-secondary);
+        line-height: 1.45;
+        max-width: 800px;
+      }
+
+      .cta-action-button {
+        background: linear-gradient(135deg, #34D399 0%, #10A37F 100%);
+        color: #060807;
+        font-family: var(--font-mono);
+        font-size: 38px;
+        font-weight: 900;
+        padding: 26px 64px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 20px;
+        box-shadow: 0 20px 50px rgba(52, 211, 153, 0.55);
+      }
+
+      /* Subtitle Rail */
+      .subtitle-rail-wrapper {
+        position: absolute;
+        top: 1420px;
+        left: 60px;
+        right: 60px;
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        pointer-events: none;
+      }
+
+      .subtitle-pill {
+        background: rgba(10, 12, 14, 0.95);
+        border: 1.5px solid rgba(52, 211, 153, 0.6);
+        padding: 20px 44px;
+        border-radius: 999px;
+        font-size: 32px;
+        font-weight: 800;
+        color: #FFFFFF;
+        text-align: center;
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 30px rgba(16, 163, 127, 0.3);
+        letter-spacing: -0.01em;
+        backdrop-filter: blur(14px);
+      }
+
+      .subtitle-pill span {
+        color: var(--accent-bright);
+        text-shadow: 0 0 16px rgba(52, 211, 153, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="30.77"
+      data-width="1080"
+      data-height="1920"
+      data-fps="30"
+    >
+      <!-- Audio Tracks -->
+      <audio id="voiceover" src="audio.mp3" class="clip" data-start="0" data-duration="30.77" data-track-index="0" data-volume="1.0"></audio>
+      <audio id="bgm" src="assets/bgm.mp3" class="clip" data-start="0" data-duration="30.77" data-track-index="1" data-volume="0.13" data-fade-in="0.6" data-fade-out="1.2"></audio>
+      
+      <!-- SFX Hits -->
+      <audio id="sfx-whoosh-1" src="assets/whoosh.mp3" class="clip" data-start="0.1" data-duration="0.57" data-track-index="2" data-volume="0.45"></audio>
+      <audio id="sfx-pop-1" src="assets/pop.mp3" class="clip" data-start="0.8" data-duration="0.72" data-track-index="3" data-volume="0.40"></audio>
+
+      <audio id="sfx-whoosh-2" src="assets/whoosh.mp3" class="clip" data-start="7.0" data-duration="0.57" data-track-index="2" data-volume="0.45"></audio>
+      <audio id="sfx-pop-2" src="assets/pop.mp3" class="clip" data-start="7.6" data-duration="0.72" data-track-index="3" data-volume="0.40"></audio>
+
+      <audio id="sfx-whoosh-3" src="assets/whoosh.mp3" class="clip" data-start="13.0" data-duration="0.57" data-track-index="2" data-volume="0.45"></audio>
+      <audio id="sfx-pop-3" src="assets/pop.mp3" class="clip" data-start="13.6" data-duration="0.72" data-track-index="3" data-volume="0.40"></audio>
+
+      <audio id="sfx-riser" src="assets/riser.mp3" class="clip" data-start="16.8" data-duration="2.0" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="sfx-impact" src="assets/impact.mp3" class="clip" data-start="19.0" data-duration="2.11" data-track-index="5" data-volume="0.75"></audio>
+
+      <audio id="sfx-whoosh-4" src="assets/whoosh.mp3" class="clip" data-start="26.5" data-duration="0.57" data-track-index="2" data-volume="0.45"></audio>
+      <audio id="sfx-pop-4" src="assets/pop.mp3" class="clip" data-start="27.0" data-duration="0.72" data-track-index="3" data-volume="0.40"></audio>
+
+      <!-- Atmosphere -->
+      <div class="scanlines"></div>
+      <div id="grid-plane" class="cyber-grid-plane"></div>
+      <div class="grid-horizon"></div>
+      <div id="orb-1" class="glow-orb-1"></div>
+      <div id="orb-2" class="glow-orb-2"></div>
+
+      <!-- 3D Camera Rig Viewport -->
+      <div class="camera-viewport" data-layout-allow-overflow="true">
+        <div id="camera" class="camera-rig">
+          <!-- Fixed Brand Header -->
+          <div class="brand-header">
+            <div class="brand-badge">
+              <div class="brand-dot"></div>
+              <span class="brand-name">dev.remoto</span>
+            </div>
+            <div class="meta-tag">RADAR BRASIL · 100% REMOTO</div>
+          </div>
+
+          <!-- Main Stage -->
+          <div class="stage">
+            <!-- Scene 1: Hook Radar (0s - 7.0s) -->
+            <div id="scene-hook" class="clip scene-box" data-start="0" data-duration="7.0" data-track-index="6">
+              <div class="rank-pill emerald">
+                <span>Relatório de Contratação Tech</span>
+              </div>
+              <h1 class="hero-title">
+                Quem está contratando <span class="highlight">mais hoje?</span>
+              </h1>
+              <div class="radar-wrapper">
+                <div class="radar-circle"></div>
+                <div class="radar-circle inner-1"></div>
+                <div class="radar-circle inner-2"></div>
+                <div class="radar-crosshair-h"></div>
+                <div class="radar-crosshair-v"></div>
+                <div id="radar-sweep" class="radar-sweep"></div>
+                <div class="radar-blip blip-1"></div>
+                <div class="radar-blip blip-2"></div>
+                <div class="radar-blip blip-3"></div>
+                <div class="radar-blip blip-4"></div>
+                <div class="radar-blip blip-5"></div>
+                <div class="radar-center-data">
+                  <div id="radar-counter" class="radar-count">+500</div>
+                  <div class="radar-count-label">Vagas Remotas Analisadas</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scene 2: Rank #3 Python & Dados (7.0s - 13.0s) -->
+            <div id="scene-python" class="clip scene-box" data-start="7.0" data-duration="6.0" data-track-index="6">
+              <div class="rank-pill cyan">
+                <span>#3 · 18% das Vagas Remotas</span>
+              </div>
+              <h2 class="hero-title">
+                Python & <span class="highlight">Dados</span>
+              </h2>
+              
+              <div class="chart-container">
+                <div class="metric-bar-row">
+                  <div class="metric-bar-header">
+                    <span>Mobile (iOS / Android)</span>
+                    <span>12%</span>
+                  </div>
+                  <div class="metric-bar-track">
+                    <div id="bar-mobile" class="metric-bar-fill normal"></div>
+                  </div>
+                </div>
+
+                <div class="metric-bar-row">
+                  <div class="metric-bar-header" style="color: var(--accent-cyan);">
+                    <span>Python & IA <span class="metric-share-tag">CRESCENDO</span></span>
+                    <span style="font-size: 34px; font-weight: 900;">18%</span>
+                  </div>
+                  <div class="metric-bar-track" style="height: 54px; border-color: rgba(56, 189, 248, 0.5);">
+                    <div id="bar-python" class="metric-bar-fill highlight-cyan"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chips-cloud">
+                <span class="floating-chip">FastAPI</span>
+                <span class="floating-chip">LangChain</span>
+                <span class="floating-chip">Pandas</span>
+                <span class="floating-chip">Data Engineering</span>
+              </div>
+            </div>
+
+            <!-- Scene 3: Rank #2 Java & Spring (13.0s - 19.0s) -->
+            <div id="scene-java" class="clip scene-box" data-start="13.0" data-duration="6.0" data-track-index="6">
+              <div class="rank-pill emerald">
+                <span>#2 · 25% das Vagas Remotas</span>
+              </div>
+              <h2 class="hero-title">
+                Java & <span class="highlight">Spring Boot</span>
+              </h2>
+
+              <div class="java-market-wrapper">
+                <div class="java-hero-stat">
+                  <div class="java-big-number">25%</div>
+                  <div class="java-label-col">
+                    <div class="java-stat-title">Forte Presença Nacional</div>
+                    <div class="java-stat-sub">1 em cada 4 vagas corporativas</div>
+                  </div>
+                </div>
+
+                <div class="fintech-tag-row">
+                  <span style="color: var(--accent-bright); font-weight: 900;">★</span>
+                  <span>Dominante em Bancos, Fintechs & Grandes Empresas</span>
+                </div>
+              </div>
+
+              <div class="chips-cloud">
+                <span class="floating-chip">Spring Boot</span>
+                <span class="floating-chip">Kafka</span>
+                <span class="floating-chip">Microservices</span>
+                <span class="floating-chip">AWS Cloud</span>
+              </div>
+            </div>
+
+            <!-- Scene 4: Climax Rank #1 Node & TypeScript (19.0s - 26.5s) -->
+            <div id="scene-node" class="clip scene-box" data-start="19.0" data-duration="7.5" data-track-index="6">
+              <div class="rank-pill gold">
+                <span>★ #1 Campeão Absoluto em Vagas ★</span>
+              </div>
+              <h2 class="hero-title">
+                Node.js & <span class="gold-highlight">TypeScript</span>
+              </h2>
+
+              <div class="node-champion-wrapper">
+                <div class="node-hero-stat">
+                  <div id="node-big" class="node-big-percent">42%</div>
+                  <div class="node-stat-info">
+                    <div class="node-stat-headline">Líder Isolado</div>
+                    <div class="node-stat-sub">de todas as contratações no país</div>
+                  </div>
+                </div>
+
+                <div class="metric-bar-track" style="height: 52px; width: 100%; border-color: rgba(252, 211, 77, 0.6);">
+                  <div id="bar-node-champion" class="metric-bar-fill highlight-emerald"></div>
+                </div>
+
+                <div class="terminal-stream-box">
+                  <span style="color: var(--accent-gold); font-weight: 900;" data-layout-ignore="true">&gt;</span>
+                  <span data-layout-ignore="true">GET /vagas?stack=typescript 200 OK (218 ativas)</span>
+                </div>
+              </div>
+
+              <div class="chips-cloud">
+                <span class="floating-chip" style="border-color: rgba(252, 211, 77, 0.5);">NestJS</span>
+                <span class="floating-chip" style="border-color: rgba(252, 211, 77, 0.5);">Next.js</span>
+                <span class="floating-chip" style="border-color: rgba(252, 211, 77, 0.5);">Prisma</span>
+                <span class="floating-chip" style="border-color: rgba(252, 211, 77, 0.5);">APIs Web</span>
+              </div>
+            </div>
+
+            <!-- Scene 5: CTA (26.5s - 30.77s) -->
+            <div id="scene-cta" class="clip scene-box" data-start="26.5" data-duration="4.27" data-track-index="6">
+              <div class="cta-stage">
+                <div class="cta-icon-glow">
+                  <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                  </svg>
+                </div>
+                <h2 class="cta-headline">
+                  Quer essas vagas <span class="highlight">direto da fonte?</span>
+                </h2>
+                <p class="cta-desc">Sem pegadinhas de híbrido disfarçado. Links diretos e gratuitos no nosso feed diário.</p>
+                <div class="cta-action-button">
+                  <span>Siga @devremoto.br</span>
+                  <span>↗</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Subtitle Rail -->
+          <div class="subtitle-rail-wrapper">
+            <div id="sub-1" class="clip subtitle-pill" data-start="0" data-duration="7.0" data-track-index="7">
+              Analisamos <span>+500 vagas remotas</span> no Brasil...
+            </div>
+            <div id="sub-2" class="clip subtitle-pill" data-start="7.0" data-duration="6.0" data-track-index="7">
+              3º lugar: <span>Python e Dados</span> (18% das vagas)
+            </div>
+            <div id="sub-3" class="clip subtitle-pill" data-start="13.0" data-duration="6.0" data-track-index="7">
+              2º lugar: <span>Java e Spring</span> (25% das vagas)
+            </div>
+            <div id="sub-4" class="clip subtitle-pill" data-start="19.0" data-duration="7.5" data-track-index="7">
+              1º lugar absoluto: <span>Node & TS</span> (42% do mercado!)
+            </div>
+            <div id="sub-5" class="clip subtitle-pill" data-start="26.5" data-duration="4.27" data-track-index="7">
+              Links diretos na bio · <span>Siga o DevRemoto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Ambient Motion: Moving 3D Grid & Floating Orbs
+      tl.to("#grid-plane", { backgroundPosition: "0px 480px", duration: 30.77, ease: "none" }, 0);
+      tl.to("#orb-1", { y: 150, x: -80, duration: 15, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+      tl.to("#orb-2", { y: -130, x: 70, duration: 15, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+
+      // Radar Sweep Rotation (Scene 1)
+      tl.to("#radar-sweep", { rotate: 1080, duration: 7.0, ease: "none" }, 0);
+
+      // Radar Blips Pulse
+      tl.fromTo(".radar-blip", 
+        { scale: 0, opacity: 0 }, 
+        { scale: 1, opacity: 1, stagger: 0.15, duration: 0.4, ease: "back.out(2)" }, 
+        0.5
+      );
+
+      // ==========================================
+      // SCENE 1: HOOK (0s - 7.0s)
+      // ==========================================
+      tl.fromTo("#camera", 
+        { scale: 0.92, rotateX: 4, z: -100 }, 
+        { scale: 1.0, rotateX: 0, z: 0, duration: 1.2, ease: "power3.out" }, 
+        0.1
+      );
+
+      tl.fromTo("#scene-hook .hero-title", 
+        { y: 30, opacity: 0, filter: "blur(6px)" }, 
+        { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 
+        0.2
+      );
+
+      tl.fromTo("#scene-hook .radar-wrapper", 
+        { scale: 0.82, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.4)" }, 
+        0.4
+      );
+
+      // ==========================================
+      // SCENE 2: RANK #3 PYTHON & DADOS (7.0s - 13.0s)
+      // ==========================================
+      tl.fromTo("#camera", 
+        { rotateY: 5, z: -50 }, 
+        { rotateY: 0, z: 0, duration: 0.8, ease: "power3.out", immediateRender: false }, 
+        7.0
+      );
+      tl.to("#camera", { scale: 1.03, duration: 4.8, ease: "sine.inOut" }, 7.6);
+
+      tl.fromTo("#scene-python .rank-pill", 
+        { scale: 0.8, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 
+        7.1
+      );
+
+      tl.fromTo("#scene-python .hero-title", 
+        { y: 24, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        7.2
+      );
+
+      // Dynamic Bar Chart Growth
+      tl.fromTo("#bar-mobile", { width: "0%" }, { width: "35%", duration: 0.7, ease: "power3.out" }, 7.4);
+      tl.fromTo("#bar-python", { width: "0%" }, { width: "55%", duration: 0.9, ease: "power3.out" }, 7.6);
+
+      tl.fromTo("#scene-python .floating-chip", 
+        { y: 20, opacity: 0, scale: 0.9 }, 
+        { y: 0, opacity: 1, scale: 1, stagger: 0.06, duration: 0.4, ease: "back.out(1.4)" }, 
+        8.0
+      );
+
+      // ==========================================
+      // SCENE 3: RANK #2 JAVA & SPRING (13.0s - 19.0s)
+      // ==========================================
+      tl.fromTo("#camera", 
+        { rotateY: -5, z: -50 }, 
+        { rotateY: 0, z: 0, duration: 0.8, ease: "power3.out", immediateRender: false }, 
+        13.0
+      );
+      tl.to("#camera", { scale: 1.03, duration: 4.8, ease: "sine.inOut" }, 13.6);
+
+      tl.fromTo("#scene-java .rank-pill", 
+        { scale: 0.8, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 
+        13.1
+      );
+
+      tl.fromTo("#scene-java .hero-title", 
+        { y: 24, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        13.2
+      );
+
+      tl.fromTo("#scene-java .java-big-number", 
+        { scale: 0.75, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.6)" }, 
+        13.4
+      );
+
+      tl.fromTo("#scene-java .fintech-tag-row", 
+        { y: 15, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 
+        13.7
+      );
+
+      tl.fromTo("#scene-java .floating-chip", 
+        { y: 20, opacity: 0, scale: 0.9 }, 
+        { y: 0, opacity: 1, scale: 1, stagger: 0.06, duration: 0.4, ease: "back.out(1.4)" }, 
+        14.0
+      );
+
+      // ==========================================
+      // SCENE 4: CLIMAX RANK #1 NODE & TS (19.0s - 26.5s)
+      // ==========================================
+      tl.fromTo("#camera", 
+        { scale: 1.15, rotateX: -3, z: 90 }, 
+        { scale: 1.02, rotateX: 0, z: 0, duration: 0.7, ease: "elastic.out(1, 0.45)", immediateRender: false }, 
+        19.0
+      );
+
+      // Screen-shake on heavy bass impact
+      tl.to("#camera", { x: -14, y: 8, duration: 0.035, repeat: 4, yoyo: true }, 19.02);
+      tl.to("#camera", { x: 0, y: 0, duration: 0.1 }, 19.2);
+
+      tl.fromTo("#scene-node .rank-pill", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2.0)" }, 
+        19.05
+      );
+
+      tl.fromTo("#scene-node .hero-title", 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        19.2
+      );
+
+      tl.fromTo("#node-big", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.8)" }, 
+        19.4
+      );
+
+      tl.fromTo("#bar-node-champion", { width: "0%" }, { width: "95%", duration: 0.9, ease: "power3.out" }, 19.7);
+
+      tl.fromTo("#scene-node .terminal-stream-box", 
+        { y: 18, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 
+        20.0
+      );
+
+      tl.fromTo("#scene-node .floating-chip", 
+        { y: 20, opacity: 0, scale: 0.9 }, 
+        { y: 0, opacity: 1, scale: 1, stagger: 0.06, duration: 0.4, ease: "back.out(1.4)" }, 
+        20.3
+      );
+
+      // ==========================================
+      // SCENE 5: CTA CONVERSION (26.5s - 30.77s)
+      // ==========================================
+      tl.fromTo("#camera", 
+        { scale: 1.06, rotateX: 2.0 }, 
+        { scale: 1.0, rotateX: 0, duration: 0.75, ease: "power3.out", immediateRender: false }, 
+        26.5
+      );
+
+      tl.fromTo(".cta-icon-glow", 
+        { scale: 0.5, rotate: -45, opacity: 0 }, 
+        { scale: 1, rotate: 0, opacity: 1, duration: 0.6, ease: "back.out(2.0)" }, 
+        26.6
+      );
+
+      tl.fromTo(".cta-headline", 
+        { y: 24, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        26.8
+      );
+
+      tl.fromTo(".cta-desc", 
+        { y: 16, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 
+        27.0
+      );
+
+      tl.fromTo(".cta-action-button", 
+        { scale: 0.8, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 
+        27.2
+      );
+
+      tl.to(".cta-action-button", { scale: 1.05, duration: 0.7, yoyo: true, repeat: 3, ease: "sine.inOut" }, 27.8);
+
+      // ==========================================
+      // SUBTITLE RAIL POPS
+      // ==========================================
+      tl.fromTo("#sub-1", { y: 24, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.5)" }, 0.2);
+      tl.fromTo("#sub-2", { y: 24, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.5)" }, 7.1);
+      tl.fromTo("#sub-3", { y: 24, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.5)" }, 13.1);
+      tl.fromTo("#sub-4", { y: 24, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.5)" }, 19.1);
+      tl.fromTo("#sub-5", { y: 24, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.5)" }, 26.6);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>3 Plataformas Secretas para Vagas na Gringa - DevRemoto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-canvas: #060807;
+        --accent-emerald: #10A37F;
+        --accent-bright: #34D399;
+        --accent-cyan: #38BDF8;
+        --accent-gold: #FCD34D;
+        --accent-crimson: #EF4444;
+        --text-primary: #F9FAFB;
+        --text-secondary: #9CA3AF;
+        --font-sans: 'Inter', -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg-canvas);
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        width: 1080px;
+        height: 1920px;
+        position: relative;
+        overflow: hidden;
+        background: #060807;
+      }
+
+      /* Scanlines & Subtle CRT Grain */
+      .scanlines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(0deg, rgba(0,0,0,0.14) 0px, rgba(0,0,0,0.14) 2px, transparent 2px, transparent 4px);
+        pointer-events: none;
+        z-index: 500;
+        opacity: 0.3;
+      }
+
+      /* Moving 3D Cyber Perspective Grid */
+      .cyber-grid-plane {
+        position: absolute;
+        bottom: -220px;
+        left: -50%;
+        width: 200%;
+        height: 900px;
+        background-image: 
+          linear-gradient(rgba(16, 163, 127, 0.22) 2px, transparent 2px),
+          linear-gradient(90deg, rgba(16, 163, 127, 0.22) 2px, transparent 2px);
+        background-size: 80px 80px;
+        transform: perspective(600px) rotateX(74deg);
+        mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 80%);
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .grid-horizon {
+        position: absolute;
+        bottom: 480px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, rgba(52, 211, 153, 0.3) 25%, rgba(52, 211, 153, 0.8) 50%, rgba(52, 211, 153, 0.3) 75%, transparent 100%);
+        box-shadow: 0 0 24px rgba(52, 211, 153, 0.6);
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      /* Ambient Glow Orbs */
+      .glow-orb-1 {
+        position: absolute;
+        top: 80px;
+        right: -120px;
+        width: 650px;
+        height: 650px;
+        background: radial-gradient(circle, rgba(16, 163, 127, 0.25) 0%, transparent 70%);
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .glow-orb-2 {
+        position: absolute;
+        bottom: 250px;
+        left: -140px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, transparent 70%);
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* 3D Camera Rig */
+      .camera-viewport {
+        position: absolute;
+        inset: 0;
+        perspective: 1100px;
+        perspective-origin: 50% 45%;
+        overflow: hidden;
+      }
+
+      .camera-rig {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+      }
+
+      /* Fixed Brand Header */
+      .brand-header {
+        position: absolute;
+        top: 90px;
+        left: 60px;
+        right: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+      }
+
+      .brand-badge {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(10, 14, 12, 0.9);
+        border: 1.5px solid rgba(52, 211, 153, 0.45);
+        padding: 12px 26px;
+        border-radius: 999px;
+        backdrop-filter: blur(16px);
+      }
+
+      .brand-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--accent-bright);
+        box-shadow: 0 0 12px var(--accent-bright);
+      }
+
+      .brand-name {
+        font-family: var(--font-mono);
+        font-size: 32px;
+        font-weight: 700;
+        color: #FFFFFF;
+        letter-spacing: -0.02em;
+      }
+
+      .meta-tag {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        background: rgba(18, 24, 22, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 12px 24px;
+        border-radius: 999px;
+        backdrop-filter: blur(16px);
+      }
+
+      /* Main Stage (Balanced Vertically) */
+      .stage {
+        position: absolute;
+        top: 220px;
+        left: 60px;
+        right: 60px;
+        bottom: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-style: preserve-3d;
+      }
+
+      .scene-box {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+      }
+
+      /* Category Pills (Emerald Noir) */
+      .rank-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 28px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .rank-pill.emerald {
+        background: rgba(16, 163, 127, 0.18);
+        border: 1.5px solid rgba(52, 211, 153, 0.6);
+        color: var(--accent-bright);
+      }
+
+      .rank-pill.crimson {
+        background: rgba(239, 68, 68, 0.16);
+        border: 1.5px solid rgba(239, 68, 68, 0.6);
+        color: #F87171;
+      }
+
+      .hero-title {
+        font-size: 80px;
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .hero-title .highlight {
+        background: linear-gradient(135deg, #34D399 0%, #10A37F 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-title .highlight-red {
+        color: #F87171;
+        text-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+      }
+
+      /* Unified Emerald Glass Panels */
+      .emerald-panel {
+        width: 100%;
+        max-width: 900px;
+        background: rgba(12, 17, 15, 0.92);
+        border: 1.5px solid rgba(52, 211, 153, 0.35);
+        border-radius: 28px;
+        padding: 36px 40px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(16, 163, 127, 0.2);
+        backdrop-filter: blur(16px);
+      }
+
+      /* Chips Row */
+      .chips-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        max-width: 860px;
+        margin-top: 28px;
+      }
+
+      .floating-chip {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 700;
+        padding: 14px 26px;
+        background: rgba(18, 24, 22, 0.85);
+        border: 1.5px solid rgba(52, 211, 153, 0.35);
+        border-radius: 16px;
+        color: #F3F4F6;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      .floating-chip.accent {
+        border-color: rgba(52, 211, 153, 0.6);
+        color: var(--accent-bright);
+        background: rgba(16, 163, 127, 0.15);
+      }
+
+      /* Scene 1: LinkedIn Concorrência Brutal */
+      .li-alert-box {
+        background: rgba(239, 68, 68, 0.12);
+        border: 1.5px solid rgba(239, 68, 68, 0.4);
+        border-radius: 20px;
+        padding: 24px 32px;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .li-number-giant {
+        font-family: var(--font-mono);
+        font-size: 100px;
+        font-weight: 900;
+        color: #EF4444;
+        line-height: 1;
+        text-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+      }
+
+      .stamp-rejected {
+        border: 3.5px solid #EF4444;
+        padding: 12px 24px;
+        border-radius: 14px;
+        font-family: var(--font-mono);
+        font-size: 32px;
+        font-weight: 900;
+        color: #EF4444;
+        transform: rotate(-8deg);
+        background: rgba(10, 10, 10, 0.85);
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+      }
+
+      /* Scene 2: Wellfound Browser Window */
+      .browser-bar {
+        background: rgba(20, 28, 25, 0.95);
+        padding: 16px 20px;
+        border-radius: 18px 18px 0 0;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        border-bottom: 1.5px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .browser-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+      }
+
+      .browser-url-pill {
+        flex: 1;
+        background: rgba(10, 14, 12, 0.8);
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        border-radius: 999px;
+        padding: 8px 20px;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--accent-bright);
+      }
+
+      .salary-hero-box {
+        background: linear-gradient(135deg, rgba(16, 163, 127, 0.22) 0%, rgba(52, 211, 153, 0.1) 100%);
+        border: 2px solid rgba(52, 211, 153, 0.6);
+        border-radius: 20px;
+        padding: 24px;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .salary-number {
+        font-family: var(--font-mono);
+        font-size: 74px;
+        font-weight: 900;
+        color: #34D399;
+        text-shadow: 0 0 30px rgba(52, 211, 153, 0.7);
+        line-height: 1.1;
+      }
+
+      /* Scene 3: Hacker News Terminal */
+      .hn-terminal-body {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        line-height: 1.6;
+        color: #E5E7EB;
+        padding: 24px;
+        background: rgba(8, 12, 10, 0.85);
+        border-radius: 16px;
+        border: 1px solid rgba(52, 211, 153, 0.25);
+      }
+
+      .hn-direct-pill {
+        display: inline-block;
+        background: rgba(16, 163, 127, 0.25);
+        border: 1.5px solid rgba(52, 211, 153, 0.6);
+        color: var(--accent-bright);
+        padding: 8px 18px;
+        border-radius: 10px;
+        font-weight: 800;
+        margin-top: 14px;
+      }
+
+      /* Scene 4: Arc.dev Dashboard */
+      .arc-metrics-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .arc-metric-card {
+        background: rgba(18, 24, 22, 0.8);
+        border: 1.5px solid rgba(52, 211, 153, 0.35);
+        border-radius: 18px;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .arc-metric-val {
+        font-family: var(--font-mono);
+        font-size: 48px;
+        font-weight: 900;
+        color: var(--accent-bright);
+      }
+
+      .arc-metric-lbl {
+        font-size: 28px;
+        color: var(--text-secondary);
+        margin-top: 6px;
+      }
+
+      /* Scene 5: DevRemoto Direct Message Mockup */
+      .dm-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 18px;
+      }
+
+      .dm-user {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .dm-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-weight: 900;
+        font-size: 24px;
+        color: #060807;
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+      }
+
+      .dm-name {
+        font-size: 28px;
+        font-weight: 800;
+        color: #FFFFFF;
+      }
+
+      .dm-badge {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent-bright);
+        background: rgba(16, 163, 127, 0.15);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        padding: 8px 18px;
+        border-radius: 999px;
+      }
+
+      .dm-bubble {
+        background: rgba(12, 18, 15, 0.9);
+        border: 1.5px solid rgba(52, 211, 153, 0.3);
+        border-radius: 20px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .dm-bubble-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #E5E7EB;
+        line-height: 1.35;
+      }
+
+      .dm-link-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(20, 28, 24, 0.95);
+        border: 1px solid rgba(52, 211, 153, 0.25);
+        border-radius: 12px;
+        padding: 12px 18px;
+      }
+
+      .dm-link-icon {
+        font-size: 28px;
+      }
+
+      .dm-link-name {
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--accent-bright);
+      }
+
+      .dm-link-desc {
+        font-size: 28px;
+        color: var(--text-secondary);
+        margin-left: auto;
+      }
+
+      .dm-cta-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .dm-cta-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #34D399 0%, #10A37F 100%);
+        color: #060807;
+        font-family: var(--font-mono);
+        font-size: 38px;
+        font-weight: 900;
+        padding: 20px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        box-shadow: 0 16px 40px rgba(52, 211, 153, 0.5);
+        letter-spacing: -0.01em;
+      }
+
+      .dm-cta-sub {
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      /* ===================================================
+         OFFICIAL SUBTITLE RAIL (SAFE ZONE 1420px)
+         =================================================== */
+      .subtitle-rail-wrapper {
+        position: absolute;
+        top: 1420px;
+        left: 60px;
+        right: 60px;
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        pointer-events: none;
+      }
+
+      .subtitle-pill {
+        background: rgba(10, 14, 12, 0.95);
+        border: 1.5px solid rgba(52, 211, 153, 0.6);
+        padding: 20px 48px;
+        border-radius: 999px;
+        font-family: var(--font-sans);
+        font-size: 32px;
+        font-weight: 800;
+        color: #FFFFFF;
+        text-align: center;
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 30px rgba(16, 163, 127, 0.3);
+        letter-spacing: -0.01em;
+        backdrop-filter: blur(14px);
+      }
+
+      .subtitle-pill span {
+        color: var(--accent-bright);
+        text-shadow: 0 0 16px rgba(52, 211, 153, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="33.42"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- Background Cyber Atmosphere -->
+      <div class="scanlines"></div>
+      <div class="glow-orb-1" id="orb-1"></div>
+      <div class="glow-orb-2" id="orb-2"></div>
+      <div class="cyber-grid-plane" id="grid-plane"></div>
+      <div class="grid-horizon"></div>
+
+      <!-- 3D Camera Rig -->
+      <div class="camera-viewport">
+        <div class="camera-rig" id="camera">
+
+          <!-- Fixed Brand Header -->
+          <header class="brand-header">
+            <div class="brand-badge">
+              <span class="brand-dot"></span>
+              <span class="brand-name">dev.remoto</span>
+            </div>
+            <div class="meta-tag">RADAR GRINGA · 100% REMOTO</div>
+          </header>
+
+          <!-- Main Stage (5 High-Tier Balanced Scenes) -->
+          <main class="stage">
+
+            <!-- SCENE 1: LINKEDIN ALERT (0.0s - 7.0s) -->
+            <div class="scene-box clip" id="scene-1" data-start="0" data-duration="7.0">
+              <div class="rank-pill crimson">⚠️ CONCORRÊNCIA BRUTAL</div>
+              <h1 class="hero-title">
+                PARE DE BUSCAR NO <br />
+                <span class="highlight-red">LINKEDIN</span>
+              </h1>
+              <div class="emerald-panel" style="border-color: rgba(239, 68, 68, 0.5);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 30px; font-weight: 700; color: #FFFFFF;">Senior Software Engineer (Remote)</span>
+                  <div class="stamp-rejected" id="stamp-rej">0% CHANCE</div>
+                </div>
+                <div class="li-alert-box">
+                  <div>
+                    <div style="font-size: 28px; color: #FCA5A5;">Candidatos aplicados:</div>
+                    <div style="font-size: 28px; color: var(--text-secondary);">Média de descarte: 98% por robô</div>
+                  </div>
+                  <div class="li-number-giant">500+</div>
+                </div>
+                <div class="chips-cloud" style="margin-top: 12px;">
+                  <span class="floating-chip">Filtro de ATS</span>
+                  <span class="floating-chip">Sem Resposta</span>
+                  <span class="floating-chip">Perda de Tempo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 2: WELLFOUND (7.0s - 13.5s) -->
+            <div class="scene-box clip" id="scene-2" data-start="7.0" data-duration="6.5">
+              <div class="rank-pill emerald">★ PLATAFORMA 01 / 03</div>
+              <h1 class="hero-title">
+                <span class="highlight">Wellfound</span>
+              </h1>
+              <div class="emerald-panel" style="padding: 0; overflow: hidden;">
+                <div class="browser-bar">
+                  <span class="browser-dot" style="background: #EF4444;"></span>
+                  <span class="browser-dot" style="background: #F59E0B;"></span>
+                  <span class="browser-dot" style="background: #10B981;"></span>
+                  <div class="browser-url-pill">🔒 wellfound.com/jobs/remote</div>
+                </div>
+                <div style="padding: 36px 40px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-size: 32px; font-weight: 800; color: #FFFFFF;">Startups Americanas (Seed a Series B)</div>
+                    <span class="floating-chip accent" style="padding: 8px 18px; margin: 0; font-size: 28px;">100% REMOTO</span>
+                  </div>
+                  <div class="salary-hero-box">
+                    <div class="salary-number">$110k – $150k / ano</div>
+                    <div style="font-size: 30px; font-weight: 700; color: var(--accent-bright); margin-top: 6px;">
+                      ~R$ 68.000 / mês em moeda forte
+                    </div>
+                  </div>
+                  <div class="chips-cloud" style="margin-top: 12px;">
+                    <span class="floating-chip">Salários Abertos</span>
+                    <span class="floating-chip">Equity / Bônus</span>
+                    <span class="floating-chip">Fale com Founders</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 3: HACKER NEWS (13.5s - 22.0s) -->
+            <div class="scene-box clip" id="scene-3" data-start="13.5" data-duration="8.5">
+              <div class="rank-pill emerald">★ PLATAFORMA 02 / 03</div>
+              <h1 class="hero-title">
+                <span class="highlight">Hacker News</span>
+              </h1>
+              <div class="emerald-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                  <span style="font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--accent-bright);">
+                    > Ask HN: Who is hiring?
+                  </span>
+                  <span style="font-size: 28px; color: var(--text-secondary);">Thread Mensal</span>
+                </div>
+                <div class="hn-terminal-body" id="hn-comment">
+                  "PostTech / Supabase Ecosystem is hiring! <br />
+                  Looking for 2 Senior Backend Devs (Go / Python). <br />
+                  100% Remote Worldwide. <br />
+                  <span style="color: var(--accent-bright); font-weight: 800;">Email directly: cto@startup.com</span> <br />
+                  We reply in 24 hours. NO RECRUITERS."
+                  <div class="hn-direct-pill">✓ CONTATO DIRETO COM O CTO</div>
+                </div>
+                <div class="chips-cloud" style="margin-top: 20px;">
+                  <span class="floating-chip">Sem Triagem de RH</span>
+                  <span class="floating-chip">Zero Burocracia</span>
+                  <span class="floating-chip">Resposta Rápida</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 4: ARC.DEV (22.0s - 27.5s) -->
+            <div class="scene-box clip" id="scene-4" data-start="22.0" data-duration="5.5">
+              <div class="rank-pill emerald">★ PLATAFORMA 03 / 03</div>
+              <h1 class="hero-title">
+                <span class="highlight">Arc.dev</span>
+              </h1>
+              <div class="emerald-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 32px; font-weight: 800; color: #FFFFFF;">Fast-Track para Engenheiros</span>
+                  <span class="floating-chip accent" style="padding: 8px 18px; margin: 0; font-size: 28px;">PRÉ-APROVADO</span>
+                </div>
+                <div class="chips-cloud" style="margin: 20px 0; justify-content: flex-start;">
+                  <span class="floating-chip">React / Next.js</span>
+                  <span class="floating-chip">Node / TS</span>
+                  <span class="floating-chip">Python / AI</span>
+                  <span class="floating-chip">Golang</span>
+                </div>
+                <div class="arc-metrics-grid">
+                  <div class="arc-metric-card">
+                    <div class="arc-metric-val">14 dias</div>
+                    <div class="arc-metric-lbl">Média de contratação</div>
+                  </div>
+                  <div class="arc-metric-card">
+                    <div class="arc-metric-val">USD / EUR</div>
+                    <div class="arc-metric-lbl">100% Moeda Forte</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 5: DEVREMOTO DIRECT CTA (27.5s - 33.42s) -->
+            <div class="scene-box clip" id="scene-5" data-start="27.5" data-duration="5.92">
+              <div class="rank-pill emerald">⚡ ACESSO IMEDIATO · DIRECT</div>
+              <h1 class="hero-title">
+                Quer a <span class="highlight">Lista Completa?</span>
+              </h1>
+              <div class="emerald-panel">
+                <div class="dm-header">
+                  <div class="dm-user">
+                    <div class="dm-avatar" data-layout-ignore="true">DR</div>
+                    <div>
+                      <div class="dm-name">dev.remoto</div>
+                      <div style="font-size: 28px; color: var(--text-secondary);" data-layout-ignore="true">Canal Oficial</div>
+                    </div>
+                  </div>
+                  <div class="dm-badge">⚡ Resposta Automática</div>
+                </div>
+
+                <div class="dm-bubble">
+                  <div class="dm-bubble-title">
+                    Aqui estão os links diretos das 3 plataformas sem concorrência:
+                  </div>
+                  <div class="dm-link-item" id="dm-link-1">
+                    <span class="dm-link-icon">🔗</span>
+                    <span class="dm-link-name">Wellfound</span>
+                    <span class="dm-link-desc">Startups $110k+</span>
+                  </div>
+                  <div class="dm-link-item" id="dm-link-2">
+                    <span class="dm-link-icon">🔗</span>
+                    <span class="dm-link-name">Hacker News</span>
+                    <span class="dm-link-desc">Direto com CTO</span>
+                  </div>
+                  <div class="dm-link-item" id="dm-link-3">
+                    <span class="dm-link-icon">🔗</span>
+                    <span class="dm-link-name">Arc.dev</span>
+                    <span class="dm-link-desc">100% Moeda Forte</span>
+                  </div>
+                </div>
+
+                <div class="dm-cta-container">
+                  <div class="dm-cta-btn" id="dm-cta-pulse">
+                    <span>Comente "LISTA"</span>
+                    <span>💬</span>
+                  </div>
+                  <div class="dm-cta-sub">Te envio os links no direct agora mesmo!</div>
+                </div>
+              </div>
+            </div>
+
+          </main>
+
+          <!-- Official Subtitle Rail (Safe Zone Top: 1420px) -->
+          <footer class="subtitle-rail-wrapper">
+            <div id="sub-1" class="clip subtitle-pill" data-start="0.0" data-duration="7.0">
+              Pare de disputar vaga na gringa no <span>LinkedIn</span>...
+            </div>
+            <div id="sub-2" class="clip subtitle-pill" data-start="7.0" data-duration="6.5">
+              1. <span>Wellfound:</span> Startups com salários abertos em dólar
+            </div>
+            <div id="sub-3" class="clip subtitle-pill" data-start="13.5" data-duration="8.5">
+              2. <span>Hacker News:</span> Fale direto com os <span>fundadores</span>!
+            </div>
+            <div id="sub-4" class="clip subtitle-pill" data-start="22.0" data-duration="5.5">
+              3. <span>Arc.dev:</span> Vagas remotas em <span>moeda forte</span>
+            </div>
+            <div id="sub-5" class="clip subtitle-pill" data-start="27.5" data-duration="5.92">
+              Comente <span>LISTA</span> para receber os links no direct!
+            </div>
+          </footer>
+
+        </div>
+      </div>
+
+      <!-- Audio Tracks with Balanced Levels -->
+      <audio id="voice-narration" src="audio.mp3" class="clip" data-start="0" data-duration="33.42" data-track-index="0" data-volume="1.15"></audio>
+      <audio id="bgm-loop" src="assets/bgm.mp3" class="clip" data-start="0" data-duration="32.03" data-track-index="1" data-volume="0.10" data-fade-in="0.8" data-fade-out="1.5"></audio>
+      <audio id="sfx-whoosh-1" src="assets/whoosh.mp3" class="clip" data-start="0.05" data-duration="0.57" data-track-index="2" data-volume="0.35"></audio>
+      <audio id="sfx-impact-rej" src="assets/impact.mp3" class="clip" data-start="1.8" data-duration="1.5" data-track-index="3" data-volume="0.40"></audio>
+      <audio id="sfx-whoosh-2" src="assets/whoosh.mp3" class="clip" data-start="7.0" data-duration="0.57" data-track-index="4" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-3" src="assets/whoosh.mp3" class="clip" data-start="13.5" data-duration="0.57" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-ui-click" src="assets/click.mp3" class="clip" data-start="15.2" data-duration="0.3" data-track-index="6" data-volume="0.30"></audio>
+      <audio id="sfx-whoosh-4" src="assets/whoosh.mp3" class="clip" data-start="22.0" data-duration="0.57" data-track-index="7" data-volume="0.35"></audio>
+      <audio id="sfx-pop-cta" src="assets/pop.mp3" class="clip" data-start="27.6" data-duration="0.72" data-track-index="8" data-volume="0.35"></audio>
+    </div>
+
+    <!-- GSAP Master Animation Pipeline -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Ambient Motion: Moving 3D Grid & Floating Orbs
+      tl.to("#grid-plane", { backgroundPosition: "0px 480px", duration: 33.42, ease: "none" }, 0);
+      tl.to("#orb-1", { y: 120, x: -60, duration: 16, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+      tl.to("#orb-2", { y: -100, x: 50, duration: 16, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+
+      // Camera Continuous Subtle 3D Orbit
+      tl.to("#camera", {
+        rotateY: 2.0,
+        rotateX: -1.0,
+        duration: 8,
+        repeat: 4,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 0);
+
+      // ==========================================
+      // CENA 1: LINKEDIN ALERT (0.0s - 7.0s)
+      // ==========================================
+      tl.fromTo("#scene-1 .rank-pill", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, 
+        0.05
+      );
+      tl.fromTo("#scene-1 .hero-title", 
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        0.15
+      );
+      tl.fromTo("#scene-1 .emerald-panel", 
+        { scale: 0.88, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.6)" }, 
+        0.3
+      );
+      tl.fromTo("#stamp-rej", 
+        { scale: 3.0, opacity: 0, rotate: -30 }, 
+        { scale: 1.0, opacity: 1, rotate: -8, duration: 0.35, ease: "power4.in" }, 
+        1.8
+      );
+      tl.to("#scene-1 .emerald-panel", { x: -8, duration: 0.04, repeat: 3, yoyo: true }, 1.85);
+
+      // ==========================================
+      // CENA 2: WELLFOUND (7.0s - 13.5s)
+      // ==========================================
+      tl.fromTo("#scene-2 .rank-pill", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, 
+        7.05
+      );
+      tl.fromTo("#scene-2 .hero-title", 
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        7.15
+      );
+      tl.fromTo("#scene-2 .emerald-panel", 
+        { y: 40, scale: 0.9, opacity: 0 }, 
+        { y: 0, scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }, 
+        7.3
+      );
+      tl.fromTo(".salary-number", 
+        { scale: 0.8, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.5, ease: "elastic.out(1, 0.5)" }, 
+        8.2
+      );
+
+      // ==========================================
+      // CENA 3: HACKER NEWS (13.5s - 22.0s)
+      // ==========================================
+      tl.fromTo("#scene-3 .rank-pill", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, 
+        13.55
+      );
+      tl.fromTo("#scene-3 .hero-title", 
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        13.65
+      );
+      tl.fromTo("#scene-3 .emerald-panel", 
+        { y: 45, scale: 0.9, opacity: 0 }, 
+        { y: 0, scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }, 
+        13.8
+      );
+      tl.fromTo("#hn-comment", 
+        { opacity: 0.4, x: -10 }, 
+        { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 
+        14.8
+      );
+
+      // ==========================================
+      // CENA 4: ARC.DEV RADAR (22.0s - 27.5s)
+      // ==========================================
+      tl.fromTo("#scene-4 .rank-pill", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, 
+        22.05
+      );
+      tl.fromTo("#scene-4 .hero-title", 
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        22.15
+      );
+      tl.fromTo("#scene-4 .emerald-panel", 
+        { scale: 0.88, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }, 
+        22.3
+      );
+
+      // ==========================================
+      // CENA 5: DEVREMOTO DIRECT CTA (27.5s - 33.42s)
+      // ==========================================
+      tl.fromTo("#scene-5 .rank-pill", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.8)" }, 
+        27.52
+      );
+      tl.fromTo("#scene-5 .hero-title", 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        27.56
+      );
+      tl.fromTo("#scene-5 .emerald-panel", 
+        { y: 25, scale: 0.95, opacity: 0 }, 
+        { y: 0, scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 
+        27.62
+      );
+      tl.fromTo("#dm-link-1", 
+        { x: -16, opacity: 0 }, 
+        { x: 0, opacity: 1, duration: 0.2, ease: "power2.out" }, 
+        27.68
+      );
+      tl.fromTo("#dm-link-2", 
+        { x: -16, opacity: 0 }, 
+        { x: 0, opacity: 1, duration: 0.2, ease: "power2.out" }, 
+        27.74
+      );
+      tl.fromTo("#dm-link-3", 
+        { x: -16, opacity: 0 }, 
+        { x: 0, opacity: 1, duration: 0.2, ease: "power2.out" }, 
+        27.80
+      );
+      tl.fromTo("#dm-cta-pulse", 
+        { scale: 0.9, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.8)" }, 
+        27.85
+      );
+      tl.to("#dm-cta-pulse", { scale: 1.04, duration: 0.65, yoyo: true, repeat: 4, ease: "sine.inOut" }, 28.2);
+
+      // ==========================================
+      // SUBTITLE RAIL POPS
+      // ==========================================
+      tl.fromTo("#sub-1", { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" }, 0.1);
+      tl.fromTo("#sub-2", { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" }, 7.05);
+      tl.fromTo("#sub-3", { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" }, 13.55);
+      tl.fromTo("#sub-4", { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" }, 22.05);
+      tl.fromTo("#sub-5", { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" }, 27.55);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

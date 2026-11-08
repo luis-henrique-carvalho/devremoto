@@ -1,0 +1,337 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 6,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "composition_file_too_large",
+        "severity": "warning",
+        "message": "This HTML composition file has 417 lines. Smaller sub-compositions are easier to read, iterate on, and diff.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/home/luis/repositories/canais/devremoto/videos/plataformas-gringa/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Split coherent scenes or layers into separate .html files under compositions/, then mount them from the parent with data-composition-src so each file stays small enough to inspect, revise, and validate independently."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene-1\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene-1",
+        "dataAttributes": {},
+        "sourceFile": "/home/luis/repositories/canais/devremoto/videos/plataformas-gringa/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene-1\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene-2\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene-2",
+        "dataAttributes": {},
+        "sourceFile": "/home/luis/repositories/canais/devremoto/videos/plataformas-gringa/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene-2\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene-3\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene-3",
+        "dataAttributes": {},
+        "sourceFile": "/home/luis/repositories/canais/devremoto/videos/plataformas-gringa/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene-3\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene-4\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene-4",
+        "dataAttributes": {},
+        "sourceFile": "/home/luis/repositories/canais/devremoto/videos/plataformas-gringa/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene-4\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene-5\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene-5",
+        "dataAttributes": {},
+        "sourceFile": "/home/luis/repositories/canais/devremoto/videos/plataformas-gringa/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene-5\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 1,
+    "findings": [
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 1.857,
+        "selector": "#camera",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -2.16,
+          "top": -3.48,
+          "right": 1079.88,
+          "bottom": 1920.25,
+          "width": 1082.04,
+          "height": 1923.73
+        },
+        "containerSelector": "div.camera-viewport",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 2.16,
+          "top": 3.48
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -2.16,
+          "y": -3.48,
+          "width": 1082.04,
+          "height": 1923.73
+        },
+        "firstSeen": 1.857,
+        "lastSeen": 27.85,
+        "occurrences": 7,
+        "heldMs": 0,
+        "times": [
+          1.857,
+          5.57,
+          9.283,
+          12.997,
+          20.423,
+          24.137,
+          27.85
+        ]
+      }
+    ],
+    "duration": 33.42,
+    "samples": [
+      1.857,
+      5.57,
+      9.283,
+      12.997,
+      16.71,
+      20.423,
+      24.137,
+      27.85,
+      31.563
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 1,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      1.857,
+      9.283,
+      16.71,
+      24.137,
+      31.563
+    ],
+    "checked": 81,
+    "passed": 81
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "line_unread",
+        "severity": "warning",
+        "message": "\"\"PostTech / Supabase Ecosystem is hiring! Looking for 2 S...\" (33 words) is on screen 7.16 s (±0.01 s), under its 7.80 s floor: hold it about 0.5 s + 0.3 s a word (10.40 s here) before it leaves or changes; see references/motion.md.",
+        "text": "\"PostTech / Supabase Ecosystem is hiring! Looking for 2 Senior Backend Devs (Go / Python). 100% Remote Worldwide. Email directly: cto@startup.com We reply in 24 hours. NO RECRUITERS.\" ✓ CONTATO DIRETO COM O CTO",
+        "selector": "#hn-comment",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 147.55,
+          "y": 756.62,
+          "width": 689.04,
+          "height": 328.98000000000013
+        },
+        "time": 14.839,
+        "words": 33,
+        "seconds": 7.163,
+        "floorSeconds": 7.8,
+        "measured": [
+          {
+            "time": 14.465,
+            "opacity": 0.4,
+            "heightPx": 329
+          },
+          {
+            "time": 14.59,
+            "opacity": 0.4,
+            "heightPx": 329
+          },
+          {
+            "time": 14.715,
+            "opacity": 0.4,
+            "heightPx": 329
+          },
+          {
+            "time": 14.839,
+            "opacity": 0.51,
+            "heightPx": 329
+          },
+          {
+            "time": 14.964,
+            "opacity": 0.76,
+            "heightPx": 329
+          },
+          {
+            "time": 15.089,
+            "opacity": 0.94,
+            "heightPx": 329
+          },
+          {
+            "time": 15.214,
+            "opacity": 1,
+            "heightPx": 329
+          },
+          {
+            "time": 21.573,
+            "opacity": 1,
+            "heightPx": 332
+          },
+          {
+            "time": 21.698,
+            "opacity": 1,
+            "heightPx": 332
+          },
+          {
+            "time": 21.823,
+            "opacity": 1,
+            "heightPx": 332
+          },
+          {
+            "time": 21.947,
+            "opacity": 1,
+            "heightPx": 332
+          },
+          {
+            "time": 22.072,
+            "opacity": null,
+            "heightPx": null
+          },
+          {
+            "time": 22.197,
+            "opacity": null,
+            "heightPx": null
+          },
+          {
+            "time": 22.322,
+            "opacity": null,
+            "heightPx": null
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 268
+  },
+  "audio": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

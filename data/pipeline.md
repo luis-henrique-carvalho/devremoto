@@ -115,4 +115,9 @@ Paste job URLs below as `- [ ] {url}` then run `/career-ops pipeline`.
 - [ ] https://br.linkedin.com/jobs/view/desenvolvedor-de-software-junior-trabalho-remoto-ref%23307842-at-bairesdev-4487013532 | BairesDev | Desenvolvedor de Software Junior - Trabalho Remoto / REF#307842 | Rio de Janeiro e Região | posted: 2026-11-07
 - [ ] https://br.linkedin.com/jobs/view/desenvolvedor-de-software-junior-trabalho-remoto-ref%23307843-at-bairesdev-4487013533 | BairesDev | Desenvolvedor de Software Junior - Trabalho Remoto / REF#307843 | São Paulo, SP | posted: 2026-11-07
 
+- [ ] https://github.com/backend-br/vagas/issues/12493 | GitHub Community | \[Remoto\] Desenvolvedor(a) Back-end Júnior - Python / AI Coding & Agentic AI - MKdigital | Brasil (Remoto) | posted: 2026-11-07
+- [ ] https://apply.workable.com/azumo/j/63033CEE6D/apply?utm_source=remotar | Azumo | QA Manual Engineer | São Paulo, SP (Remoto) | posted: 2026-11-07
+- [ ] https://br.linkedin.com/jobs/view/golang-developer-remote-latin-america-at-bluelight-4486622653 | Bluelight | Golang Developer - Remote, Latin America | Manaus, AM | posted: 2026-11-08
+- [ ] https://br.linkedin.com/jobs/view/data-engineer-remote-latin-america-at-bluelight-4486643187 | Bluelight | Data Engineer - Remote, Latin America | Fortaleza, CE | posted: 2026-11-08
+
 ## Processed
