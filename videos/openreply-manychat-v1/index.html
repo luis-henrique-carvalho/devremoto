@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>OpenReply: Automação de Directs & Instagram - DevRemoto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+
+    :root {
+      --bg-canvas: #060807;
+      --accent-emerald: #10A37F;
+      --accent-bright: #34D399;
+      --accent-cyan: #38BDF8;
+      --accent-gold: #FCD34D;
+      --accent-crimson: #EF4444;
+      --text-primary: #F9FAFB;
+      --text-secondary: #9CA3AF;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: var(--bg-canvas);
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #root {
+      width: 1080px;
+      height: 1920px;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 30%, #0d1a15 0%, #060807 70%);
+    }
+
+    .grid-plane {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(16, 163, 127, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 163, 127, 0.08) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .glow-orb-top {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(16, 163, 127, 0.22) 0%, transparent 70%);
+      filter: blur(120px);
+      pointer-events: none;
+    }
+
+    /* Safe Zone Superior (0 a 140px) */
+    .header-fixed {
+      position: absolute;
+      top: 60px;
+      left: 60px;
+      right: 60px;
+      height: 62px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(10, 15, 13, 0.85);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+    }
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 12px var(--accent-bright);
+    }
+    .tag-pill {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-bright);
+      background: rgba(16, 24, 20, 0.85);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      padding: 10px 22px;
+      border-radius: 999px;
+      letter-spacing: 1px;
+    }
+
+    .camera-viewport {
+      position: absolute;
+      inset: 0;
+      perspective: 1200px;
+      perspective-origin: 50% 45%;
+      overflow: hidden;
+    }
+    .camera-rig {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    /* Palco Central (top: 220px, height: 1380px) */
+    .stage {
+      position: absolute;
+      top: 220px;
+      left: 60px;
+      right: 60px;
+      height: 1380px;
+    }
+
+    .scene-clip {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      padding: 10px 0;
+      transform-style: preserve-3d;
+    }
+
+    .scene-title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .command-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(16, 163, 127, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      padding: 10px 26px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      box-shadow: 0 0 25px rgba(16, 163, 127, 0.2);
+    }
+
+    .hero-title {
+      font-size: 54px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      color: #FFFFFF;
+    }
+    .hero-title span {
+      color: var(--accent-bright);
+    }
+
+    .emerald-card {
+      width: 960px;
+      background: rgba(8, 14, 12, 0.85);
+      border: 1px solid rgba(16, 163, 127, 0.24);
+      border-radius: 28px;
+      padding: 34px 38px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.8), 0 0 50px -10px rgba(16, 163, 127, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .table-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .table-row:last-child {
+      border-bottom: none;
+    }
+    .row-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .badge-status {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 999px;
+    }
+    .badge-auto {
+      background: var(--accent-bright);
+      color: #060807;
+      box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+    }
+
+    .job-card {
+      width: 100%;
+      background: rgba(14, 20, 17, 0.98);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 20px;
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Live Pipeline Flow */
+    .live-flow-wrapper {
+      width: 960px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .flow-step {
+      width: 100%;
+      background: rgba(14, 20, 17, 0.95);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .flow-step.active-flow {
+      border-color: var(--accent-bright);
+      background: rgba(16, 163, 127, 0.12);
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.25);
+    }
+    .flow-step.success-flow {
+      border-color: #60A5FA;
+      background: rgba(59, 130, 246, 0.12);
+    }
+    .flow-icon {
+      font-size: 32px;
+    }
+    .flow-content {
+      text-align: left;
+      flex: 1;
+      margin-left: 18px;
+    }
+    .flow-label {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      color: var(--text-secondary);
+    }
+    .flow-val {
+      font-size: 26px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .flow-time {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent-bright);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+    .flow-arrow {
+      font-size: 20px;
+      color: var(--accent-bright);
+    }
+
+    /* CTA Stickers & Simulated Comment Field */
+    .cta-sticker-top {
+      background: #000000;
+      border: 2px solid #FFFFFF;
+      color: #FFFFFF;
+      font-size: 46px;
+      font-weight: 900;
+      padding: 16px 50px;
+      border-radius: 24px;
+      transform: rotate(-3deg);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+    .cta-sticker-bottom {
+      background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+      color: #060807;
+      font-size: 58px;
+      font-weight: 900;
+      padding: 18px 60px;
+      border-radius: 24px;
+      transform: rotate(2deg);
+      margin-top: -15px;
+      box-shadow: 0 15px 40px rgba(52, 211, 153, 0.5);
+    }
+
+    .ig-comment-simulator {
+      width: 960px;
+      background: rgba(18, 24, 21, 0.98);
+      border: 1.5px solid rgba(52, 211, 153, 0.4);
+      border-radius: 999px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    }
+    .ig-user-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #060807;
+      font-size: 20px;
+    }
+    .ig-input-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-family: var(--font-sans);
+    }
+    .ig-typed-text {
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .ig-cursor {
+      font-weight: 700;
+      color: var(--accent-bright);
+      margin-left: 2px;
+      animation: cursorBlink 0.7s infinite;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .ig-send-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .ig-send-btn.active {
+      color: var(--accent-bright);
+    }
+
+    /* Safe Zone Inferior de Legendas (1620px a 1740px) */
+    .subtitle-rail-wrapper {
+      position: absolute;
+      top: 1640px;
+      left: 60px;
+      right: 60px;
+      height: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+    .subtitle-pill {
+      background: rgba(10, 14, 12, 0.95);
+      border: 1.5px solid rgba(52, 211, 153, 0.6);
+      border-radius: 999px;
+      padding: 16px 44px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px rgba(52, 211, 153, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      max-width: 960px;
+      min-height: 80px;
+    }
+    .sub-word {
+      font-size: 32px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      color: #E5E7EB;
+    }
+    .sub-word.active-badge {
+      background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+      color: #060807;
+      font-weight: 900;
+      padding: 4px 18px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.7);
+      transform: scale(1.08);
+    }
+  
+
+    .phone-frame {
+      width: 720px;
+      height: 980px;
+      background: #090E0C;
+      border: 3px solid rgba(52, 211, 153, 0.4);
+      border-radius: 48px;
+      padding: 24px;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9), 0 0 50px rgba(16, 163, 127, 0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 180px;
+      height: 28px;
+      background: #000000;
+      border-radius: 20px;
+      margin: 0 auto 16px auto;
+    }
+    .phone-notification {
+      background: rgba(22, 32, 27, 0.96);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: 20px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+    .notif-icon {
+      font-size: 32px;
+    }
+    .notif-body {
+      flex: 1;
+    }
+    .notif-header {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .notif-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .phone-chat-screen {
+      flex: 1;
+      background: rgba(14, 20, 17, 0.8);
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .chat-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      color: #060807;
+      font-weight: 900;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chat-info {
+      flex: 1;
+      text-align: left;
+    }
+    .chat-name {
+      font-size: 24px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+    .chat-status {
+      font-size: 18px;
+      color: var(--accent-bright);
+    }
+    .chat-badge {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--accent-bright);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .chat-messages {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 24px;
+    }
+    .msg-bubble {
+      max-width: 85%;
+      border-radius: 20px;
+      padding: 16px 22px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .msg-user {
+      align-self: flex-end;
+      background: var(--accent-emerald);
+      color: #060807;
+      font-weight: 800;
+      border-bottom-right-radius: 4px;
+      font-size: 24px;
+    }
+    .msg-bot {
+      align-self: flex-start;
+      background: rgba(25, 36, 30, 0.95);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      color: #FFFFFF;
+      border-bottom-left-radius: 4px;
+      text-align: left;
+    }
+    .bot-badge {
+      font-family: var(--font-mono);
+      font-size: 17px;
+      color: var(--accent-bright);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .chat-link-btn {
+      margin-top: 14px;
+      background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+      color: #060807;
+      font-weight: 800;
+      font-size: 20px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+    }
+  
+    </style>
+  </head>
+  <body>
+    <div id="root" class="clip" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="24.0">
+      <div class="grid-plane"></div>
+      <div class="glow-orb-top"></div>
+
+      <!-- Áudio Principal da Voz e Trilha BGM -->
+      <audio id="voice" src="audio.mp3" data-start="0" data-duration="23.07" data-volume="1.15"></audio>
+      <audio id="bgm" src="assets/bgm.mp3" data-start="0" data-duration="24.0" data-volume="0.09"></audio>
+      
+      <!-- SFX Sincronizados 1:1 com os Eventos Visuais -->
+      <audio id="sfx-whoosh-1" src="assets/whoosh.mp3" data-start="0.05" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-impact-2" src="assets/impact.mp3" data-start="2.02" data-duration="2.11" data-volume="0.42"></audio>
+      <audio id="sfx-whoosh-3" src="assets/whoosh.mp3" data-start="2.18" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-whoosh-4" src="assets/whoosh.mp3" data-start="2.53" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-5" src="assets/pop.mp3" data-start="3.18" data-duration="0.72" data-volume="0.35"></audio>
+      <audio id="sfx-pop-6" src="assets/pop.mp3" data-start="4.18" data-duration="0.72" data-volume="0.25"></audio>
+      <audio id="sfx-pop-7" src="assets/pop.mp3" data-start="5.08" data-duration="0.72" data-volume="0.30"></audio>
+      <audio id="sfx-click-8" src="assets/click.mp3" data-start="5.98" data-duration="0.36" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-9" src="assets/whoosh.mp3" data-start="8.47" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-whoosh-10" src="assets/whoosh.mp3" data-start="8.82" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-11" src="assets/pop.mp3" data-start="9.47" data-duration="0.72" data-volume="0.22"></audio>
+      <audio id="sfx-pop-12" src="assets/pop.mp3" data-start="10.72" data-duration="0.72" data-volume="0.22"></audio>
+      <audio id="sfx-pop-13" src="assets/pop.mp3" data-start="11.97" data-duration="0.72" data-volume="0.22"></audio>
+      <audio id="sfx-pop-14" src="assets/pop.mp3" data-start="13.23" data-duration="0.72" data-volume="0.22"></audio>
+      <audio id="sfx-whoosh-15" src="assets/whoosh.mp3" data-start="14.68" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-whoosh-16" src="assets/whoosh.mp3" data-start="15.03" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-17" src="assets/pop.mp3" data-start="15.38" data-duration="0.72" data-volume="0.25"></audio>
+      <audio id="sfx-pop-18" src="assets/pop.mp3" data-start="16.08" data-duration="0.72" data-volume="0.25"></audio>
+      <audio id="sfx-pop-19" src="assets/pop.mp3" data-start="16.78" data-duration="0.72" data-volume="0.25"></audio>
+      <audio id="sfx-whoosh-20" src="assets/whoosh.mp3" data-start="17.57" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-whoosh-21" src="assets/whoosh.mp3" data-start="17.92" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-22" src="assets/pop.mp3" data-start="18.47" data-duration="0.72" data-volume="0.35"></audio>
+      <audio id="sfx-click-23" src="assets/click.mp3" data-start="19.67" data-duration="0.36" data-volume="0.38"></audio>
+      <audio id="sfx-pop-24" src="assets/pop.mp3" data-start="19.97" data-duration="0.72" data-volume="0.30"></audio>
+
+      <header class="header-fixed" data-layout-ignore>
+        <div class="brand-badge" data-layout-ignore>
+          <div class="brand-dot"></div>
+          <span data-layout-ignore>dev.remoto</span>
+        </div>
+        <div class="tag-pill" data-layout-ignore>Trending GitHub · 100% Grátis</div>
+      </header>
+
+      <div class="camera-viewport">
+        <div id="camera" class="camera-rig" data-layout-allow-overflow>
+          <main class="stage">
+
+    <section id="scene-1" class="scene-clip clip" data-start="0" data-duration="2.53">
+      <div class="scene-title-group">
+        <div class="command-pill" data-layout-ignore>⚠ ADEUS MENSALIDADE // R$ 800/MÊS</div>
+        <h1 class="hero-title">Pare de Pagar o <span>ManyChat</span></h1>
+        <p style="font-size: 26px; color: var(--text-secondary);">Cobrança por cada seguidor que entra na sua lista...</p>
+      </div>
+
+      <div class="emerald-card" style="border-color: rgba(239, 68, 68, 0.45);">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 28px; padding-bottom: 18px; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);" data-layout-ignore>
+          <span><span style="color: #EF4444;">$</span> ManyChat: R$ 800/mês</span>
+          <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>Assinatura Cara</span>
+        </div>
+        <div id="cost-row-2" class="table-row">
+          <span class="row-title">Cobrança por Seguidor</span>
+          <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>Cobrança em dólar por limite de uso</span>
+        </div>
+        <div id="cost-row-3" class="table-row">
+          <span class="row-title">Limite de Mensagens</span>
+          <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>Bloqueia no limite</span>
+        </div>
+        <div id="cost-row-4" class="table-row">
+          <span class="row-title">Alternativa Aberta</span>
+          <span class="badge-status" style="background: rgba(52, 211, 153, 0.2); color: var(--accent-bright);" data-layout-ignore>100% Grátis e Ilimitado</span>
+        </div>
+      </div>
+
+      <div id="cost-stamp" style="background: #000000; border: 2px solid #EF4444; color: #EF4444; font-family: var(--font-mono); font-size: 28px; font-weight: 900; padding: 12px 36px; border-radius: 18px; transform: rotate(-2deg); box-shadow: 0 10px 30px rgba(0,0,0,0.8);" data-layout-ignore>
+        ASSINATURA ABUSIVA 💸
+      </div>
+    </section>
+  
+
+    <section id="scene-2" class="scene-clip clip" data-start="2.53" data-duration="6.29">
+      <div class="scene-title-group">
+        <div class="command-pill" data-layout-ignore>📱 AUTOMAÇÃO OFICIAL // INSTAGRAM</div>
+        <h1 class="hero-title">Conheça a <span>Alternativa Grátis</span></h1>
+        <p style="font-size: 26px; color: var(--text-secondary);">⚡ Automação de Directs oficial sem pagar mensalidade</p>
+      </div>
+
+      <!-- Smartphone Mockup Stage -->
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+
+        <!-- Push Notification Banner -->
+        <div class="phone-notification" id="phone-push-toast">
+          <div class="notif-icon">💬</div>
+          <div class="notif-body">
+            <div class="notif-header">
+              <span class="notif-app">Instagram</span>
+              <span class="notif-time">Agora</span>
+            </div>
+            <div class="notif-text">Novo comentário no seu post: "REPLY"</div>
+          </div>
+        </div>
+
+        <!-- Direct Message Chat Mockup -->
+        <div class="phone-chat-screen">
+          <div class="chat-header">
+            <div class="chat-avatar">DR</div>
+            <div class="chat-info">
+              <div class="chat-name">devremoto.br</div>
+              <div class="chat-status">Online agora</div>
+            </div>
+            <div class="chat-badge">Oficial ✓</div>
+          </div>
+
+          <div class="chat-messages">
+            <!-- User trigger message -->
+            <div class="msg-bubble msg-user" id="chat-msg-user">
+              <span>REPLY</span>
+            </div>
+
+            <!-- Bot Instant Reply -->
+            <div class="msg-bubble msg-bot" id="chat-msg-bot">
+              <div class="bot-badge">⚡ Resposta Automática (1s)</div>
+              <p>Oi! Aqui está o link que você pediu com a ferramenta 100% gratuita.</p>
+              <div class="chat-link-btn" id="chat-action-btn">
+                <span>Acessar Ferramenta 🚀</span>
+                <span style="font-size: 22px;">↗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+
+    <section id="scene-3" class="scene-clip clip" data-start="8.82" data-duration="6.21">
+      <div class="scene-title-group">
+        <div class="command-pill" data-layout-ignore>⚡ 4 RECURSOS // ZERO MENSALIDADE</div>
+        <h1 class="hero-title">4 Superpoderes ➔ <span>No Automático</span></h1>
+        <p style="font-size: 26px; color: var(--text-secondary);">respostas inteligentes 24 horas por dia</p>
+      </div>
+
+      <div class="emerald-card" style="padding: 18px 28px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;" data-layout-ignore>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-bright); box-shadow: 0 0 10px var(--accent-bright);"></div>
+            <span style="font-family: var(--font-mono); font-size: 22px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">MODO AUTOMÁTICO</span>
+          </div>
+          <span class="badge-status" style="background: rgba(52, 211, 153, 0.15); color: var(--accent-bright); font-size: 20px;">Ativo 24h</span>
+        </div>
+        <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 24px; font-weight: 600; color: #FFFFFF;">Modo Automático Ativado</span>
+          <span style="font-family: var(--font-mono); font-size: 22px; color: var(--accent-bright); font-weight: 700;">100% Grátis</span>
+        </div>
+      </div>
+
+      <div style="width: 960px; display: flex; flex-direction: column; gap: 14px;">
+        
+    <div id="feat-card-3-1" class="job-card" style="margin: 0; border-color: rgba(52, 211, 153, 0.4);" data-layout-ignore>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="font-size: 32px;">⚡</span>
+        <span style="font-size: 28px; font-weight: 700;">Comentou no post, direct chega em 3 segundos</span>
+      </div>
+      <span class="badge-status badge-auto" style="background: var(--accent-bright);" data-layout-ignore>01/04</span>
+    </div>
+  
+
+    <div id="feat-card-3-2" class="job-card" style="margin: 0; border-color: rgba(52, 211, 153, 0.4);" data-layout-ignore>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="font-size: 32px;">📱</span>
+        <span style="font-size: 28px; font-weight: 700;">Responde Stories e Directs no automático</span>
+      </div>
+      <span class="badge-status badge-auto" style="background: #60A5FA;" data-layout-ignore>02/04</span>
+    </div>
+  
+
+    <div id="feat-card-3-3" class="job-card" style="margin: 0; border-color: rgba(52, 211, 153, 0.4);" data-layout-ignore>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="font-size: 32px;">🔒</span>
+        <span style="font-size: 28px; font-weight: 700;">Trava de Seguidor: só entrega para quem te segue</span>
+      </div>
+      <span class="badge-status badge-auto" style="background: var(--accent-gold);" data-layout-ignore>03/04</span>
+    </div>
+  
+
+    <div id="feat-card-3-4" class="job-card" style="margin: 0; border-color: rgba(52, 211, 153, 0.4);" data-layout-ignore>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="font-size: 32px;">🚀</span>
+        <span style="font-size: 28px; font-weight: 700;">Mensagens e contatos ilimitados sem custo extra</span>
+      </div>
+      <span class="badge-status badge-auto" style="background: #34D399;" data-layout-ignore>04/04</span>
+    </div>
+  
+      </div>
+    </section>
+  
+
+    <section id="scene-4" class="scene-clip clip" data-start="15.030000000000001" data-duration="2.89">
+      <div class="scene-title-group">
+        <div class="command-pill" data-layout-ignore>🔒 PROVA REAL AO VIVO</div>
+        <h1 class="hero-title">Quer ver a <span>Mágica ao Vivo?</span></h1>
+        <p style="font-size: 26px; color: var(--text-secondary);">teste agora mesmo no seu direct</p>
+      </div>
+
+      <div class="live-flow-wrapper">
+        
+    <div class="flow-step " id="flow-step-4-1">
+      <div class="flow-icon">💬</div>
+      <div class="flow-content">
+        <div class="flow-label">Comentário no Post</div>
+        <div class="flow-val">Alguém comentou "REPLY"</div>
+      </div>
+      <div class="flow-time">0.1s</div>
+    </div>
+    <div class="flow-arrow" id="flow-arrow-4-1">▼</div>
+  
+
+    <div class="flow-step active-flow" id="flow-step-4-2">
+      <div class="flow-icon">⚡</div>
+      <div class="flow-content">
+        <div class="flow-label">Robô em Tempo Real</div>
+        <div class="flow-val">Prepara a mensagem instantânea</div>
+      </div>
+      <div class="flow-time">0.8s</div>
+    </div>
+    <div class="flow-arrow" id="flow-arrow-4-2">▼</div>
+  
+
+    <div class="flow-step success-flow" id="flow-step-4-3">
+      <div class="flow-icon">📩</div>
+      <div class="flow-content">
+        <div class="flow-label">Direct Entregue</div>
+        <div class="flow-val">Link exclusivo entregue no direct</div>
+      </div>
+      <div class="flow-time">2.1s</div>
+    </div>
+    
+  
+      </div>
+
+      <div class="emerald-card" style="padding: 20px 32px;">
+        
+    <div id="flow-spec-4-1" class="table-row">
+      <span class="row-title">Velocidade</span>
+      <span style="font-family: var(--font-mono); font-size: 26px; color: #60A5FA; font-weight: 800;">Menos de 3 segundos</span>
+    </div>
+  
+
+    <div id="flow-spec-4-2" class="table-row">
+      <span class="row-title">Mensalidade</span>
+      <span style="font-family: var(--font-mono); font-size: 26px; color: var(--accent-bright); font-weight: 800;">R$ 0,00 (Zero cobranças)</span>
+    </div>
+  
+
+    <div id="flow-spec-4-3" class="table-row">
+      <span class="row-title">Segurança</span>
+      <span style="font-family: var(--font-mono); font-size: 26px; color: #FCD34D; font-weight: 800;">100% Oficial do Instagram</span>
+    </div>
+  
+      </div>
+    </section>
+  
+
+    <section id="scene-5" class="scene-clip clip" data-start="17.92" data-duration="5.65">
+      <div class="scene-title-group" style="align-items: center;">
+        <div class="cta-sticker-top">💬 COMENTA</div>
+        <div class="cta-sticker-bottom">▶ REPLY</div>
+      </div>
+
+      <!-- Instagram Comment Simulator Bar -->
+      <div class="ig-comment-simulator" id="ig-comment-bar-5">
+        <div class="ig-user-avatar">DR</div>
+        <div class="ig-input-field">
+          <span class="ig-typed-text" id="typewriter-text-5"></span>
+          <span class="ig-cursor">|</span>
+        </div>
+        <button class="ig-send-btn" id="ig-send-btn-5">Publicar</button>
+      </div>
+
+      <div class="emerald-card" style="margin-top: 10px;">
+        <div class="job-card" style="margin: 0 0 16px 0; background: #000000; border-color: rgba(52, 211, 153, 0.5);" data-layout-ignore>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-emerald); display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: var(--font-mono); font-size: 26px; color: #060807;" data-layout-ignore>DR</div>
+            <span style="font-size: 30px; font-weight: 700; color: #FFFFFF;">REPLY ✓</span>
+          </div>
+          <span style="font-size: 30px; color: var(--accent-bright);">✈</span>
+        </div>
+
+        <div class="job-card" style="margin: 0; background: rgba(52, 211, 153, 0.08); border-color: var(--accent-bright);" data-layout-ignore>
+          <div>
+            <div style="font-size: 26px; color: var(--accent-bright); font-family: var(--font-mono);">Nova mensagem • direct</div>
+            <div style="font-size: 28px; font-weight: 700; margin-top: 6px;">Ferramenta Gratuita + Passo a Passo</div>
+          </div>
+          <span style="font-size: 32px;">⭐</span>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px; font-family: var(--font-mono); font-size: 22px; color: var(--text-secondary);" data-layout-ignore>
+          • @devremoto
+        </div>
+      </div>
+    </section>
+  
+          </main>
+        </div>
+      </div>
+
+      <!-- Dynamic Subtitles -->
+      <footer class="subtitle-rail-wrapper">
+        <div id="sub-pill" class="subtitle-pill">
+          <span id="sub-content">
+            <span class="sub-word active-badge">OPENREPLY</span>
+          </span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      function setSubText(html) {
+        const el = document.getElementById('sub-content');
+        if (el) el.innerHTML = html;
+      }
+
+      // Câmera 3D Cinematic Rig com micro-movimentos contínuos
+      tl.fromTo("#camera", { z: 40, rotateX: 3 }, { z: 0, rotateX: 0, duration: 1.0, ease: "power2.out" }, 0.0);
+      tl.to("#camera", { z: 25, rotateY: -2, duration: 1.2, ease: "sine.inOut" }, 5.5);
+      tl.to("#camera", { z: 15, rotateX: -2, rotateY: 1, duration: 1.2, ease: "sine.inOut" }, 12.8);
+      tl.to("#camera", { z: 30, rotateX: 2, rotateY: 0, duration: 1.0, ease: "sine.inOut" }, 21.0);
+      tl.to("#camera", { z: 45, rotateX: 0, rotateY: 0, duration: 1.2, ease: "back.out(1.5)" }, 25.4);
+
+      // Tweens das Cenas Modulares
+
+    // Cena 1: Hook David vs Goliath
+    tl.fromTo("#scene-1 .command-pill", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 0.05);
+    tl.fromTo("#scene-1 .hero-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.15);
+    tl.fromTo("#scene-1 .emerald-card", { y: 35, rotateX: 10, opacity: 0 }, { y: 0, rotateX: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 0.25);
+    tl.fromTo("#cost-row-2", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 0.56);
+    tl.fromTo("#cost-row-3", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 1.06);
+    tl.fromTo("#cost-row-4", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 1.57);
+    tl.fromTo("#cost-stamp", { scale: 2.4, opacity: 0, rotate: -25 }, { scale: 1, opacity: 1, rotate: -2, duration: 0.45, ease: "elastic.out(1.2, 0.4)" }, 1.97);
+    tl.to("#scene-1", { y: -80, scale: 0.94, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 2.18);
+  
+
+    // Cena 2: Mobile Device Demo
+    tl.fromTo("#scene-2", { y: 80, scale: 0.9, opacity: 0, filter: "blur(8px)" }, { y: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, 2.53);
+    tl.fromTo(".phone-frame", { y: 50, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, 2.6799999999999997);
+    tl.fromTo("#phone-push-toast", { y: -40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.8)" }, 3.13);
+    tl.fromTo("#chat-msg-user", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 4.13);
+    tl.fromTo("#chat-msg-bot", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 5.029999999999999);
+    tl.fromTo("#chat-action-btn", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "elastic.out(1.2, 0.5)" }, 5.93);
+    tl.to("#scene-2", { x: -90, scale: 0.93, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 8.47);
+  
+
+    // Cena 3: Feature Matrix Cards
+    tl.fromTo("#scene-3", { x: 90, scale: 0.93, opacity: 0, filter: "blur(8px)" }, { x: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, 8.82);
+    tl.fromTo("#feat-card-3-1", { x: -35, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 9.42);
+    tl.fromTo("#feat-card-3-2", { x: -35, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 10.67);
+    tl.fromTo("#feat-card-3-3", { x: -35, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 11.93);
+    tl.fromTo("#feat-card-3-4", { x: -35, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 13.18);
+    tl.to("#scene-3", { scale: 0.88, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 14.680000000000001);
+  
+
+    // Cena 4: Live Pipeline Flow
+    tl.fromTo("#scene-4", { y: 70, scale: 0.9, opacity: 0, filter: "blur(8px)" }, { y: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, 15.030000000000001);
+    tl.fromTo("#flow-step-4-1", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 15.33);
+    tl.fromTo("#flow-arrow-4-1", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 15.68);
+    tl.fromTo("#flow-step-4-2", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 16.03);
+    tl.fromTo("#flow-arrow-4-2", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 16.38);
+    tl.fromTo("#flow-step-4-3", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 16.73);
+    tl.to("#scene-4", { y: -60, scale: 0.94, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 17.57);
+  
+
+    // Cena 5: Interactive CTA
+    tl.fromTo("#scene-5 .cta-sticker-top", { y: -80, scale: 0.5, rotate: -20, opacity: 0 }, { y: 0, scale: 1, rotate: -3, opacity: 1, duration: 0.4, ease: "back.out(2)" }, 18.270000000000003);
+    tl.fromTo("#scene-5 .cta-sticker-bottom", { y: -60, scale: 0.5, rotate: 20, opacity: 0 }, { y: 0, scale: 1, rotate: 2, opacity: 1, duration: 0.45, ease: "elastic.out(1.2, 0.4)" }, 18.42);
+    tl.fromTo("#ig-comment-bar-5", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 18.62);
+
+    // Simulador de Digitação do Comentário
+    tl.call(() => {
+      const textEl = document.getElementById('typewriter-text-5');
+      if (textEl) textEl.textContent = "REPLY";
+    }, null, 19.020000000000003);
+
+    // Clique no botão Publicar
+    tl.call(() => {
+      const btn = document.getElementById('ig-send-btn-5');
+      if (btn) btn.classList.add('active');
+    }, null, 19.62);
+
+    tl.fromTo("#scene-5 .emerald-card", { y: 50, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 19.92);
+    tl.fromTo("#scene-5 .cta-sticker-bottom", { scale: 1 }, { scale: 1.05, duration: 0.4, repeat: 4, yoyo: true, ease: "sine.inOut" }, 20.42);
+  
+
+      // Legendas Sincronizadas
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PARE</span> <span class="sub-word">DE</span> <span class="sub-word">PAGAR</span>`); }, null, 0.1);
+      tl.call(() => { setSubText(`<span class="sub-word">PARE</span> <span class="sub-word active-badge">DE</span> <span class="sub-word">PAGAR</span>`); }, null, 0.33);
+      tl.call(() => { setSubText(`<span class="sub-word">PARE</span> <span class="sub-word">DE</span> <span class="sub-word active-badge">PAGAR</span>`); }, null, 0.44);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">OITOCENTOS</span> <span class="sub-word">REAIS</span> <span class="sub-word">NO</span>`); }, null, 0.75);
+      tl.call(() => { setSubText(`<span class="sub-word">OITOCENTOS</span> <span class="sub-word active-badge">REAIS</span> <span class="sub-word">NO</span>`); }, null, 1.38);
+      tl.call(() => { setSubText(`<span class="sub-word">OITOCENTOS</span> <span class="sub-word">REAIS</span> <span class="sub-word active-badge">NO</span>`); }, null, 1.74);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">MANYCHAT</span>`); }, null, 1.82);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ELES</span> <span class="sub-word">CLONARAM</span> <span class="sub-word">A</span>`); }, null, 3.31);
+      tl.call(() => { setSubText(`<span class="sub-word">ELES</span> <span class="sub-word active-badge">CLONARAM</span> <span class="sub-word">A</span>`); }, null, 3.55);
+      tl.call(() => { setSubText(`<span class="sub-word">ELES</span> <span class="sub-word">CLONARAM</span> <span class="sub-word active-badge">A</span>`); }, null, 4.01);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">FERRAMENTA</span> <span class="sub-word">INTEIRA</span> <span class="sub-word">DE</span>`); }, null, 4.06);
+      tl.call(() => { setSubText(`<span class="sub-word">FERRAMENTA</span> <span class="sub-word active-badge">INTEIRA</span> <span class="sub-word">DE</span>`); }, null, 4.53);
+      tl.call(() => { setSubText(`<span class="sub-word">FERRAMENTA</span> <span class="sub-word">INTEIRA</span> <span class="sub-word active-badge">DE</span>`); }, null, 4.86);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">GRAÇA</span> <span class="sub-word">E</span> <span class="sub-word">VOCÊ</span>`); }, null, 4.95);
+      tl.call(() => { setSubText(`<span class="sub-word">GRAÇA</span> <span class="sub-word active-badge">E</span> <span class="sub-word">VOCÊ</span>`); }, null, 5.34);
+      tl.call(() => { setSubText(`<span class="sub-word">GRAÇA</span> <span class="sub-word">E</span> <span class="sub-word active-badge">VOCÊ</span>`); }, null, 5.39);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">AUTOMATIZA</span> <span class="sub-word">COMENTÁRIOS</span> <span class="sub-word">E</span>`); }, null, 5.61);
+      tl.call(() => { setSubText(`<span class="sub-word">AUTOMATIZA</span> <span class="sub-word active-badge">COMENTÁRIOS</span> <span class="sub-word">E</span>`); }, null, 6.13);
+      tl.call(() => { setSubText(`<span class="sub-word">AUTOMATIZA</span> <span class="sub-word">COMENTÁRIOS</span> <span class="sub-word active-badge">E</span>`); }, null, 6.66);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DIRECTS</span> <span class="sub-word">NO</span> <span class="sub-word">INSTAGRAM</span>`); }, null, 6.76);
+      tl.call(() => { setSubText(`<span class="sub-word">DIRECTS</span> <span class="sub-word active-badge">NO</span> <span class="sub-word">INSTAGRAM</span>`); }, null, 7.15);
+      tl.call(() => { setSubText(`<span class="sub-word">DIRECTS</span> <span class="sub-word">NO</span> <span class="sub-word active-badge">INSTAGRAM</span>`); }, null, 7.23);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEM</span> <span class="sub-word">GASTAR</span> <span class="sub-word">UM</span>`); }, null, 7.67);
+      tl.call(() => { setSubText(`<span class="sub-word">SEM</span> <span class="sub-word active-badge">GASTAR</span> <span class="sub-word">UM</span>`); }, null, 7.86);
+      tl.call(() => { setSubText(`<span class="sub-word">SEM</span> <span class="sub-word">GASTAR</span> <span class="sub-word active-badge">UM</span>`); }, null, 8.22);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CENTAVO</span>`); }, null, 8.3);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">ROBÔ</span> <span class="sub-word">RESPONDE</span>`); }, null, 9.6);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">ROBÔ</span> <span class="sub-word">RESPONDE</span>`); }, null, 9.72);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word">ROBÔ</span> <span class="sub-word active-badge">RESPONDE</span>`); }, null, 10);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">EM</span> <span class="sub-word">3 SEGUNDOS</span> <span class="sub-word">ATENDE</span>`); }, null, 10.47);
+      tl.call(() => { setSubText(`<span class="sub-word">EM</span> <span class="sub-word active-badge">3 SEGUNDOS</span> <span class="sub-word">ATENDE</span>`); }, null, 10.56);
+      tl.call(() => { setSubText(`<span class="sub-word">EM</span> <span class="sub-word">3 SEGUNDOS</span> <span class="sub-word active-badge">ATENDE</span>`); }, null, 11.43);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">STORIES</span> <span class="sub-word">24 HORAS</span> <span class="sub-word">E</span>`); }, null, 11.74);
+      tl.call(() => { setSubText(`<span class="sub-word">STORIES</span> <span class="sub-word active-badge">24 HORAS</span> <span class="sub-word">E</span>`); }, null, 12.16);
+      tl.call(() => { setSubText(`<span class="sub-word">STORIES</span> <span class="sub-word">24 HORAS</span> <span class="sub-word active-badge">E</span>`); }, null, 12.97);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SÓ</span> <span class="sub-word">ENTREGA</span> <span class="sub-word">O</span>`); }, null, 13.09);
+      tl.call(() => { setSubText(`<span class="sub-word">SÓ</span> <span class="sub-word active-badge">ENTREGA</span> <span class="sub-word">O</span>`); }, null, 13.28);
+      tl.call(() => { setSubText(`<span class="sub-word">SÓ</span> <span class="sub-word">ENTREGA</span> <span class="sub-word active-badge">O</span>`); }, null, 13.63);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">LINK</span> <span class="sub-word">PARA</span> <span class="sub-word">QUEM</span>`); }, null, 13.66);
+      tl.call(() => { setSubText(`<span class="sub-word">LINK</span> <span class="sub-word active-badge">PARA</span> <span class="sub-word">QUEM</span>`); }, null, 13.99);
+      tl.call(() => { setSubText(`<span class="sub-word">LINK</span> <span class="sub-word">PARA</span> <span class="sub-word active-badge">QUEM</span>`); }, null, 14.17);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEGUE</span> <span class="sub-word">VOCÊ</span>`); }, null, 14.35);
+      tl.call(() => { setSubText(`<span class="sub-word">SEGUE</span> <span class="sub-word active-badge">VOCÊ</span>`); }, null, 14.68);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">QUER</span> <span class="sub-word">VER</span> <span class="sub-word">ESSA</span>`); }, null, 15.82);
+      tl.call(() => { setSubText(`<span class="sub-word">QUER</span> <span class="sub-word active-badge">VER</span> <span class="sub-word">ESSA</span>`); }, null, 16.06);
+      tl.call(() => { setSubText(`<span class="sub-word">QUER</span> <span class="sub-word">VER</span> <span class="sub-word active-badge">ESSA</span>`); }, null, 16.27);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">AUTOMAÇÃO</span> <span class="sub-word">FUNCIONANDO</span> <span class="sub-word">AO</span>`); }, null, 16.44);
+      tl.call(() => { setSubText(`<span class="sub-word">AUTOMAÇÃO</span> <span class="sub-word active-badge">FUNCIONANDO</span> <span class="sub-word">AO</span>`); }, null, 16.97);
+      tl.call(() => { setSubText(`<span class="sub-word">AUTOMAÇÃO</span> <span class="sub-word">FUNCIONANDO</span> <span class="sub-word active-badge">AO</span>`); }, null, 17.48);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VIVO</span>`); }, null, 17.6);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">COMENTA</span> <span class="sub-word">REPLY</span> <span class="sub-word">AQUI</span>`); }, null, 18.7);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTA</span> <span class="sub-word active-badge">REPLY</span> <span class="sub-word">AQUI</span>`); }, null, 19.14);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTA</span> <span class="sub-word">REPLY</span> <span class="sub-word active-badge">AQUI</span>`); }, null, 19.45);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">EMBAIXO</span> <span class="sub-word">QUE</span> <span class="sub-word">EU</span>`); }, null, 19.66);
+      tl.call(() => { setSubText(`<span class="sub-word">EMBAIXO</span> <span class="sub-word active-badge">QUE</span> <span class="sub-word">EU</span>`); }, null, 20.15);
+      tl.call(() => { setSubText(`<span class="sub-word">EMBAIXO</span> <span class="sub-word">QUE</span> <span class="sub-word active-badge">EU</span>`); }, null, 20.23);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TE</span> <span class="sub-word">MANDO</span> <span class="sub-word">A</span>`); }, null, 20.3);
+      tl.call(() => { setSubText(`<span class="sub-word">TE</span> <span class="sub-word active-badge">MANDO</span> <span class="sub-word">A</span>`); }, null, 20.41);
+      tl.call(() => { setSubText(`<span class="sub-word">TE</span> <span class="sub-word">MANDO</span> <span class="sub-word active-badge">A</span>`); }, null, 20.63);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">FERRAMENTA</span> <span class="sub-word">NO</span> <span class="sub-word">DIRECT</span>`); }, null, 20.67);
+      tl.call(() => { setSubText(`<span class="sub-word">FERRAMENTA</span> <span class="sub-word active-badge">NO</span> <span class="sub-word">DIRECT</span>`); }, null, 21.22);
+      tl.call(() => { setSubText(`<span class="sub-word">FERRAMENTA</span> <span class="sub-word">NO</span> <span class="sub-word active-badge">DIRECT</span>`); }, null, 21.31);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">AGORA</span> <span class="sub-word">MESMO</span> <span class="sub-word">SEM</span>`); }, null, 21.68);
+      tl.call(() => { setSubText(`<span class="sub-word">AGORA</span> <span class="sub-word active-badge">MESMO</span> <span class="sub-word">SEM</span>`); }, null, 21.95);
+      tl.call(() => { setSubText(`<span class="sub-word">AGORA</span> <span class="sub-word">MESMO</span> <span class="sub-word active-badge">SEM</span>`); }, null, 22.5);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">PAGAR</span> <span class="sub-word">NADA</span>`); }, null, 22.67);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">PAGAR</span> <span class="sub-word">NADA</span>`); }, null, 22.91);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">PAGAR</span> <span class="sub-word active-badge">NADA</span>`); }, null, 23.24);
+      tl.call(() => { setSubText(""); }, null, 2.43);
+      tl.call(() => { setSubText(""); }, null, 8.72);
+      tl.call(() => { setSubText(""); }, null, 14.93);
+      tl.call(() => { setSubText(""); }, null, 17.82);
+      tl.call(() => { setSubText(""); }, null, 23.47);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

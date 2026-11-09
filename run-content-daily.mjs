@@ -13,6 +13,7 @@ import {
   publishCarouselToPostiz,
   publishVideoToPostiz,
 } from './src/publish-postiz.mjs';
+import { findNextAvailableSlot } from './src/slot-arbiter.mjs';
 import { execSync } from 'node:child_process';
 
 const ROOT_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -32,12 +33,18 @@ function getTodaySlug() {
 }
 
 function nextEveningBrtIso(now = new Date()) {
-  // Schedule for 18:30 BRT (21:30 UTC)
-  const candidate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 21, 30, 0));
-  if (candidate.getTime() <= now.getTime() + 15 * 60_000) {
-    candidate.setUTCDate(candidate.getUTCDate() + 1);
+  try {
+    const slot = findNextAvailableSlot('content', now);
+    console.log(`[SlotArbiter] Próximo slot de conteúdo alocado: ${slot.slotBrt} (${slot.scheduleIso})`);
+    return slot.scheduleIso;
+  } catch (err) {
+    console.warn('[SlotArbiter] Fallback para cálculo local:', err.message);
+    const candidate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 21, 30, 0));
+    if (candidate.getTime() <= now.getTime() + 15 * 60_000) {
+      candidate.setUTCDate(candidate.getUTCDate() + 1);
+    }
+    return candidate.toISOString();
   }
-  return candidate.toISOString();
 }
 
 function parseCliArgs(argv) {
@@ -189,6 +196,10 @@ async function main() {
         videoUrl: result.videoUrl || null,
       });
       fs.writeFileSync(HISTORY_PATH, JSON.stringify(historyData, null, 2), 'utf8');
+
+      try {
+        execSync(`node "${path.join(ROOT_DIR, 'sync-dashboard.mjs')}"`, { stdio: 'ignore' });
+      } catch {}
     } else {
       console.error(`[Content Engine] Falha no agendamento:`, result.message);
     }

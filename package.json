@@ -1,0 +1,16 @@
+{
+  "name": "devremoto",
+  "version": "1.0.0",
+  "description": "Canal DevRemoto (@devremoto.br) — Curadoria tech, carrosséis e vídeos HyperFrames",
+  "type": "module",
+  "scripts": {
+    "status": "node sync-dashboard.mjs",
+    "slots": "node src/slot-arbiter.mjs",
+    "sync": "node sync-dashboard.mjs",
+    "run:vagas": "node run-daily.mjs",
+    "run:content": "node run-content-daily.mjs",
+    "run:video": "node run-video-daily.mjs"
+  },
+  "author": "DevRemoto Team",
+  "license": "UNLICENSED"
+}

@@ -372,6 +372,10 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
   // ==========================================
   // SLIDE 1: CAPA
   // ==========================================
+  const isCheatsheet = content.pillar === 'cheatsheet';
+  const termTitle = content.terminalTitle || (isCheatsheet ? 'git-emergency.sh' : 'quick-tools.sh');
+  const termComment = content.terminalComment || (isCheatsheet ? '# 4 comandos essenciais no terminal:' : '# 4 ferramentas modernas prontas para instalar:');
+
   slides.push({
     fileName: 'slide-01-cover.png',
     innerHtml: `
@@ -388,11 +392,11 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
             <span class="dot dot-red"></span>
             <span class="dot dot-yellow"></span>
             <span class="dot dot-green"></span>
-            <span class="terminal-title">quick-tools.sh</span>
+            <span class="terminal-title">${escapeHtml(termTitle)}</span>
           </div>
           <div class="terminal-body">
-            <span class="comment"># 4 ferramentas modernas prontas para instalar:</span><br/>
-            ${items.slice(0, 3).map((it) => `<span class="cmd">$</span> ${escapeHtml(it.install)}<br/>`).join('')}
+            <span class="comment">${escapeHtml(termComment)}</span><br/>
+            ${items.slice(0, 3).map((it) => `<span class="cmd">$</span> ${escapeHtml(it.recapCmd || it.install)}<br/>`).join('')}
           </div>
         </div>
       </div>
@@ -405,6 +409,15 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
   // ==========================================
   items.slice(0, 4).forEach((item, idx) => {
     const slideIndex = idx + 2;
+    const itemTermTitle = item.terminalTitle || (isCheatsheet ? 'sintaxe & uso' : 'instalação & uso');
+    const itemInstallLabel = item.installLabel || (isCheatsheet ? '# Como invocar:' : '# Instalação:');
+    const itemKickerType = content.itemKicker || (isCheatsheet ? 'comando' : 'ferramenta');
+    const formattedExample = String(item.example || '')
+      .split('\n')
+      .map((line) => escapeHtml(line.trim()))
+      .filter(Boolean)
+      .join('<br/>');
+
     slides.push({
       fileName: `slide-0${slideIndex}-item.png`,
       innerHtml: `
@@ -412,7 +425,7 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
         <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 30px 0;">
           <div class="kicker">
             <span class="kicker-dot"></span>
-            <span>ferramenta #${idx + 1} de ${items.length}</span>
+            <span>${escapeHtml(itemKickerType)} #${idx + 1} de ${items.length}</span>
           </div>
           <div class="item-card">
             <div class="item-header">
@@ -425,13 +438,13 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
                 <span class="dot dot-red"></span>
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
-                <span class="terminal-title">instalação & uso</span>
+                <span class="terminal-title">${escapeHtml(itemTermTitle)}</span>
               </div>
               <div class="terminal-body">
-                <span class="comment"># Instalação:</span><br/>
+                <span class="comment">${escapeHtml(itemInstallLabel)}</span><br/>
                 <span class="cmd">$</span> ${escapeHtml(item.install)}<br/><br/>
-                <span class="comment"># Exemplo prático:</span><br/>
-                <span style="color: #34D399;">${escapeHtml(item.example)}</span>
+                <span class="comment">${escapeHtml(item.exampleLabel || '# Exemplo prático:')}</span><br/>
+                <span style="color: #34D399;">${formattedExample}</span>
               </div>
             </div>
           </div>
@@ -444,6 +457,10 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
   // ==========================================
   // SLIDE 6: RECAP / CHEAT-SHEET (SLIDE DO PRINT)
   // ==========================================
+  const recapDesc = content.recapDesc || (isCheatsheet
+    ? 'Tire um print deste slide para consultar os comandos quando precisar consertar erros no Git.'
+    : 'Tire um print deste slide para consultar os comandos quando precisar configurar sua máquina.');
+
   slides.push({
     fileName: 'slide-06-recap.png',
     innerHtml: `
@@ -455,13 +472,13 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
         </div>
         <h1 class="slide-headline" style="font-size: 48px; margin-bottom: 12px;">Tabela Rápida para Salvar</h1>
         <p class="slide-desc" style="font-size: 24px; margin-bottom: 20px;">
-          Tire um print deste slide para consultar os comandos quando precisar configurar sua máquina.
+          ${escapeHtml(recapDesc)}
         </p>
         <div class="recap-grid">
           ${items.slice(0, 4).map((it) => `
             <div class="recap-row">
               <span class="recap-tool">${escapeHtml(it.name)}</span>
-              <span class="recap-cmd">${escapeHtml(it.install)}</span>
+              <span class="recap-cmd">${escapeHtml(it.recapCmd || it.install)}</span>
             </div>
           `).join('')}
         </div>
@@ -474,6 +491,9 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
   // SLIDE 7: CTA COM PALAVRA-CHAVE
   // ==========================================
   const kw = content.keyword || 'TERMINAL';
+  const ctaHeadline = content.ctaHeadline || 'Quer os links e guias completos?';
+  const ctaBubbleHtml = content.ctaBubbleHtml || `Comente <strong style="color: #34D399;">${escapeHtml(kw)}</strong> abaixo que te mando a lista com todos os repositórios oficiais e atalhos de configuração direto no seu direct!`;
+
   slides.push({
     fileName: 'slide-07-cta.png',
     innerHtml: `
@@ -485,10 +505,10 @@ export function buildContentSlideList(content, brandKit, dateStr = '') {
         </div>
         <div class="cta-container">
           <h1 class="slide-headline" style="font-size: 52px; margin-bottom: 14px;">
-            Quer os links e guias completos?
+            ${escapeHtml(ctaHeadline)}
           </h1>
           <div class="cta-dm-bubble">
-            Comente <strong style="color: #34D399;">${escapeHtml(kw)}</strong> abaixo que te mando a lista com todos os repositórios oficiais e atalhos de configuração direto no seu direct!
+            ${ctaBubbleHtml}
           </div>
           <div class="cta-btn">
             <span>Comente "${escapeHtml(kw)}"</span>

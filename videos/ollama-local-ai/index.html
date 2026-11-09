@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Ollama: Superpoder de IA Local - DevRemoto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-canvas: #060807;
+        --accent-emerald: #10A37F;
+        --accent-bright: #34D399;
+        --accent-cyan: #38BDF8;
+        --accent-gold: #FCD34D;
+        --accent-crimson: #EF4444;
+        --text-primary: #F9FAFB;
+        --text-secondary: #9CA3AF;
+        --font-sans: 'Inter', -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg-canvas);
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        width: 1080px;
+        height: 1920px;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 30%, #0d1a15 0%, #060807 70%);
+      }
+
+      .grid-plane {
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(to right, rgba(16, 163, 127, 0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(16, 163, 127, 0.08) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+      }
+
+      .glow-orb-top {
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 900px;
+        height: 700px;
+        background: radial-gradient(circle, rgba(16, 163, 127, 0.22) 0%, transparent 70%);
+        filter: blur(120px);
+        pointer-events: none;
+      }
+
+      .header-fixed {
+        position: absolute;
+        top: 60px;
+        left: 60px;
+        right: 60px;
+        height: 62px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+      }
+      .brand-badge {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(10, 15, 13, 0.85);
+        border: 1px solid rgba(52, 211, 153, 0.35);
+        padding: 10px 24px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 26px;
+        font-weight: 700;
+      }
+      .brand-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent-bright);
+        box-shadow: 0 0 12px var(--accent-bright);
+      }
+      .tag-pill {
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--accent-bright);
+        background: rgba(16, 24, 20, 0.85);
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        padding: 10px 22px;
+        border-radius: 999px;
+        letter-spacing: 1px;
+      }
+
+      .camera-viewport {
+        position: absolute;
+        inset: 0;
+        perspective: 1200px;
+        perspective-origin: 50% 48%;
+        overflow: hidden;
+      }
+      .camera-rig {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+      }
+
+      .stage {
+        position: absolute;
+        top: 220px;
+        left: 60px;
+        right: 60px;
+        height: 1400px;
+      }
+
+      .scene-clip {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+        padding: 10px 0;
+        transform-style: preserve-3d;
+      }
+
+      .scene-title-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .command-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(16, 163, 127, 0.15);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        padding: 10px 26px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent-bright);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        box-shadow: 0 0 25px rgba(16, 163, 127, 0.2);
+      }
+
+      .hero-title {
+        font-size: 54px;
+        font-weight: 900;
+        line-height: 1.15;
+        letter-spacing: -1.5px;
+        color: #FFFFFF;
+      }
+      .hero-title .highlight {
+        color: var(--accent-bright);
+      }
+      .hero-title .highlight-crimson {
+        color: var(--accent-crimson);
+      }
+
+      .blur-word {
+        display: inline-block;
+      }
+
+      .emerald-card {
+        width: 940px;
+        background: rgba(8, 14, 12, 0.88);
+        border: 1px solid rgba(16, 163, 127, 0.28);
+        border-radius: 28px;
+        padding: 32px 38px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.8), 0 0 50px -10px rgba(16, 163, 127, 0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .table-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .table-row:last-child {
+        border-bottom: none;
+      }
+      .row-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .badge-status {
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 700;
+        padding: 6px 18px;
+        border-radius: 999px;
+      }
+      .badge-auto {
+        background: var(--accent-bright);
+        color: #060807;
+        box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+      }
+
+      .job-salary-badge {
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        color: #060807;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 900;
+        padding: 14px 34px;
+        border-radius: 16px;
+        box-shadow: 0 0 25px rgba(52, 211, 153, 0.4);
+      }
+
+      .stamp-rejected {
+        background: #000000;
+        border: 2px solid #EF4444;
+        color: #EF4444;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 900;
+        padding: 12px 36px;
+        border-radius: 18px;
+        transform: rotate(-3deg);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      }
+
+      .terminal-box {
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        border-radius: 18px;
+        padding: 22px 26px;
+        font-family: var(--font-mono);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .terminal-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .terminal-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+      }
+      .cursor-blink {
+        display: inline-block;
+        width: 12px;
+        height: 24px;
+        background: var(--accent-bright);
+        vertical-align: middle;
+        margin-left: 6px;
+      }
+
+      .shockwave {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        border: 3px solid var(--accent-bright);
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .cta-sticker-top {
+        background: #000000;
+        border: 2px solid #FFFFFF;
+        color: #FFFFFF;
+        font-size: 46px;
+        font-weight: 900;
+        padding: 16px 50px;
+        border-radius: 24px;
+        transform: rotate(-3deg);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      }
+      .cta-sticker-bottom {
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        color: #060807;
+        font-size: 58px;
+        font-weight: 900;
+        padding: 18px 60px;
+        border-radius: 24px;
+        transform: rotate(2deg);
+        margin-top: -15px;
+        box-shadow: 0 15px 40px rgba(52, 211, 153, 0.5);
+      }
+
+      .dm-card {
+        background: rgba(14, 20, 17, 0.98);
+        border: 1px solid rgba(52, 211, 153, 0.35);
+        border-radius: 24px;
+        padding: 26px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* Subtitle Pill Safe Zone (top: 1675px, height: 90px) */
+      .subtitle-rail-wrapper {
+        position: absolute;
+        top: 1675px;
+        left: 60px;
+        right: 60px;
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 200;
+        pointer-events: none;
+      }
+      .subtitle-pill {
+        background: rgba(10, 14, 12, 0.95);
+        border: 1.5px solid rgba(52, 211, 153, 0.6);
+        border-radius: 999px;
+        padding: 16px 40px;
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 30px rgba(16, 163, 127, 0.3);
+        backdrop-filter: blur(14px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        max-width: 960px;
+        min-height: 80px;
+      }
+      .sub-word {
+        font-size: 32px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+        color: #D1D5DB;
+        padding: 4px 10px;
+        border-radius: 12px;
+      }
+      .sub-word.active-badge {
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        color: #060807;
+        font-weight: 900;
+        padding: 4px 18px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="clip" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="38.0">
+      <div class="grid-plane"></div>
+      <div id="glow-orb" class="glow-orb-top"></div>
+
+      <!-- Audio Tracks with unique IDs -->
+      <audio id="voice-narration" src="audio.mp3" data-start="0" data-duration="37.70" data-volume="1.15"></audio>
+      <audio id="bgm-loop" src="assets/bgm_loop.mp3" data-start="0" data-duration="38.0" data-volume="0.10" data-fade-in="0.8" data-fade-out="1.5"></audio>
+
+      <!-- SFX Triggers -->
+      <audio id="sfx-whoosh-1" src="assets/whoosh.mp3" data-start="0.05" data-duration="0.57" data-volume="0.30"></audio>
+      <audio id="sfx-impact-1" src="assets/impact.mp3" data-start="3.20" data-duration="2.11" data-volume="0.45"></audio>
+      <audio id="sfx-whoosh-2" src="assets/whoosh.mp3" data-start="5.10" data-duration="0.57" data-volume="0.30"></audio>
+      <audio id="sfx-pop-1" src="assets/pop.mp3" data-start="5.50" data-duration="0.72" data-volume="0.35"></audio>
+      <audio id="sfx-click-1" src="assets/click.mp3" data-start="7.80" data-duration="0.36" data-volume="0.40"></audio>
+      <audio id="sfx-whoosh-3" src="assets/whoosh.mp3" data-start="15.60" data-duration="0.57" data-volume="0.30"></audio>
+      <audio id="sfx-impact-2" src="assets/impact.mp3" data-start="16.00" data-duration="2.11" data-volume="0.40"></audio>
+      <audio id="sfx-whoosh-4" src="assets/whoosh.mp3" data-start="27.50" data-duration="0.57" data-volume="0.30"></audio>
+      <audio id="sfx-pop-2" src="assets/pop.mp3" data-start="27.90" data-duration="0.72" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-5" src="assets/whoosh.mp3" data-start="34.40" data-duration="0.57" data-volume="0.30"></audio>
+      <audio id="sfx-click-2" src="assets/click.mp3" data-start="34.80" data-duration="0.36" data-volume="0.40"></audio>
+
+      <!-- Fixed 2D Brand Header -->
+      <header class="header-fixed" data-layout-ignore>
+        <div class="brand-badge" data-layout-ignore>
+          <div class="brand-dot"></div>
+          <span data-layout-ignore>dev.remoto</span>
+        </div>
+        <div class="tag-pill" data-layout-ignore>GITHUB TRENDING // IA LOCAL</div>
+      </header>
+
+      <!-- 3D Camera Viewport -->
+      <div class="camera-viewport">
+        <div id="camera" class="camera-rig" data-layout-allow-overflow>
+          <main class="stage">
+
+            <!-- SCENE 1: HOOK (0.0s a 5.1s) -->
+            <section id="scene-1" class="scene-clip clip" data-start="0.0" data-duration="5.10">
+              <div class="scene-title-group">
+                <div class="command-pill" data-layout-ignore>⚠ ALERTA DE CUSTO & PRIVACIDADE</div>
+                <h1 class="hero-title word-blur-title">
+                  <span class="blur-word">Pare</span> <span class="blur-word">de</span> 
+                  <span class="blur-word highlight">Enviar</span> <span class="blur-word highlight">seu</span> 
+                  <span class="blur-word highlight-crimson">Código</span> <span class="blur-word">pra</span> 
+                  <span class="blur-word highlight-crimson">Nuvem</span>
+                </h1>
+                <p style="font-size: 28px; color: var(--text-secondary);">você ainda paga assinatura todo mês?</p>
+              </div>
+
+              <div class="emerald-card" style="border-color: rgba(239, 68, 68, 0.45);">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);" data-layout-ignore>
+                  <span><span style="color: #EF4444;">$</span> Fatura OpenAI / Nuvem</span>
+                  <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>$20 a $200 / mês</span>
+                </div>
+                <div id="cost-row-2" class="table-row">
+                  <span class="row-title">Telemetria de Código</span>
+                  <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>Servidores Externos</span>
+                </div>
+                <div id="cost-row-3" class="table-row">
+                  <span class="row-title">Latência & Conexão</span>
+                  <span class="badge-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-secondary);" data-layout-ignore>100% Dependente de Internet</span>
+                </div>
+                <div id="cost-row-4" class="table-row">
+                  <span class="row-title">Segurança de Dados</span>
+                  <span class="badge-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-secondary);" data-layout-ignore>Risco Corporativo</span>
+                </div>
+              </div>
+
+              <div id="cost-stamp" class="stamp-rejected" data-layout-ignore>
+                CUSTO DESNECESSÁRIO 💸
+              </div>
+            </section>
+
+            <!-- SCENE 2: REPO OVERVIEW (5.1s a 15.6s) -->
+            <section id="scene-2" class="scene-clip clip" data-start="5.10" data-duration="10.50">
+              <div class="scene-title-group">
+                <div class="command-pill" data-layout-ignore>★ TRENDING OPEN-SOURCE · 124K STARS</div>
+                <h1 class="hero-title">Conheça o <span class="highlight">Ollama</span></h1>
+                <p style="font-size: 28px; color: var(--text-secondary);">o motor de IA local mais popular do mundo</p>
+              </div>
+
+              <div class="emerald-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span style="font-family: var(--font-mono); font-size: 32px; font-weight: 800; color: #FFFFFF;">
+                    📁 ollama / ollama
+                  </span>
+                  <span style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; font-family: var(--font-mono); font-size: 24px; font-weight: 800; padding: 6px 18px; border-radius: 999px;" data-layout-ignore>
+                    Public MIT
+                  </span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; background: rgba(0, 0, 0, 0.5); border-radius: 18px; padding: 18px 24px;">
+                  <span id="stat-stars" style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: var(--accent-gold);">⭐ 124k Stars</span>
+                  <span id="stat-forks" style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: var(--accent-cyan);">🍴 9.4k Forks</span>
+                  <span id="stat-free" style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: var(--accent-bright);">🚀 100% Free</span>
+                </div>
+              </div>
+
+              <!-- Terminal Command with Shockwave -->
+              <div class="terminal-box" style="width: 940px; position: relative;">
+                <div id="terminal-shockwave" class="shockwave"></div>
+                <div class="terminal-header" data-layout-ignore>
+                  <div class="terminal-dot" style="background: #EF4444;"></div>
+                  <div class="terminal-dot" style="background: #F59E0B;"></div>
+                  <div class="terminal-dot" style="background: #10B981;"></div>
+                  <span style="font-size: 22px; color: var(--text-secondary); margin-left: 10px;" data-layout-ignore>ollama-engine // terminal</span>
+                </div>
+                <div style="font-size: 28px; color: var(--accent-bright);">
+                  $ ollama run deepseek-r1<span class="cursor-blink"></span>
+                </div>
+                <div id="terminal-output" style="font-size: 24px; color: var(--text-secondary); opacity: 0;" data-layout-ignore>
+                  ✓ Model loaded into GPU memory (Metal / CUDA ready)
+                </div>
+              </div>
+
+              <!-- Supported Models Chips -->
+              <div style="display: flex; gap: 14px; width: 940px; justify-content: center;" data-layout-ignore>
+                <span class="badge-status" style="background: rgba(52, 211, 153, 0.2); color: var(--accent-bright); font-size: 24px; padding: 8px 20px;" data-layout-ignore>🧠 DeepSeek-R1</span>
+                <span class="badge-status" style="background: rgba(16, 163, 127, 0.2); color: #34D399; font-size: 24px; padding: 8px 20px;" data-layout-ignore>⚡ Llama 3.3</span>
+                <span class="badge-status" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; font-size: 24px; padding: 8px 20px;" data-layout-ignore>💻 Qwen 2.5 Coder</span>
+              </div>
+            </section>
+
+            <!-- SCENE 3: TECH SPECS & BENCHMARK (15.6s a 27.5s) -->
+            <section id="scene-3" class="scene-clip clip" data-start="15.60" data-duration="11.90">
+              <div class="scene-title-group">
+                <div class="command-pill" data-layout-ignore>⚡ BENCHMARK & HARDWARE ACCEL</div>
+                <h1 class="hero-title">Aceleração GPU ➔ <span class="highlight">38 Tokens/s</span></h1>
+                <p style="font-size: 28px; color: var(--text-secondary);">performance bruta no seu próprio hardware</p>
+              </div>
+
+              <div class="emerald-card">
+                <div id="bench-row-1" class="table-row">
+                  <span class="row-title">Aceleração de Hardware</span>
+                  <span class="badge-status" style="background: rgba(52, 211, 153, 0.2); color: var(--accent-bright);" data-layout-ignore>Apple Metal & NVIDIA CUDA</span>
+                </div>
+                <div id="bench-row-2" class="table-row">
+                  <span class="row-title">Velocidade de Inferência</span>
+                  <span class="badge-status badge-auto" data-layout-ignore>⚡ 38.4 tokens / segundo</span>
+                </div>
+                <div id="bench-row-3" class="table-row">
+                  <span class="row-title">Conexão Necessária</span>
+                  <span class="badge-status" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8;" data-layout-ignore>100% Offline (Modo Avião)</span>
+                </div>
+              </div>
+
+              <!-- Drop-in OpenAI API Card -->
+              <div id="api-card" class="emerald-card" style="padding: 24px 34px; border-color: rgba(52, 211, 153, 0.4);">
+                <div style="display: flex; justify-content: space-between; align-items: center;" data-layout-ignore>
+                  <span style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: #FFFFFF;">
+                    🔌 API Local Compatível com OpenAI
+                  </span>
+                  <span class="badge-status badge-auto" style="font-size: 22px;" data-layout-ignore>DROP-IN</span>
+                </div>
+                <div style="background: rgba(0,0,0,0.6); border-radius: 14px; padding: 14px 20px; font-family: var(--font-mono); font-size: 26px; color: var(--accent-bright); margin-top: 8px;">
+                  http://localhost:11434/v1
+                </div>
+                <div style="font-size: 26px; color: var(--text-secondary); margin-top: 8px;" data-layout-ignore>
+                  Compatível direto com Cursor, VS Code, LangChain e agentes
+                </div>
+              </div>
+            </section>
+
+            <!-- SCENE 4: LOCAL EXECUTION & CUSTO ZERO (27.5s a 34.4s) -->
+            <section id="scene-4" class="scene-clip clip" data-start="27.50" data-duration="6.90">
+              <div class="scene-title-group">
+                <div class="command-pill" data-layout-ignore>🔒 ZERO REAIS · PRIVACIDADE TOTAL</div>
+                <h1 class="hero-title">Zero Reais ➔ <span class="highlight">Privacidade Total</span></h1>
+                <p style="font-size: 28px; color: var(--text-secondary);">seus dados e códigos nunca saem da sua máquina</p>
+              </div>
+
+              <div class="emerald-card">
+                <div id="priv-row-1" class="table-row">
+                  <span class="row-title">Fatura Mensal de API</span>
+                  <span style="font-family: var(--font-mono); font-size: 32px; font-weight: 900; color: var(--accent-bright);" data-layout-ignore>R$ 0,00 PARA SEMPRE</span>
+                </div>
+                <div id="priv-row-2" class="table-row">
+                  <span class="row-title">Risco de Vazamento de Código</span>
+                  <span class="badge-status" style="background: rgba(52, 211, 153, 0.2); color: var(--accent-bright);" data-layout-ignore>0% (Fica no seu HD)</span>
+                </div>
+                <div id="priv-row-3" class="table-row">
+                  <span class="row-title">Telemetria para Terceiros</span>
+                  <span class="badge-status" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8;" data-layout-ignore>Zero Telemetria</span>
+                </div>
+              </div>
+
+              <div id="priv-stamp" class="job-salary-badge" style="font-size: 32px; font-weight: 900; padding: 18px 46px;">
+                100% LOCAL & SEGURO ✓
+              </div>
+            </section>
+
+            <!-- SCENE 5: CTA (34.4s a 38.0s) -->
+            <section id="scene-5" class="scene-clip clip" data-start="34.40" data-duration="3.60">
+              <div class="scene-title-group" style="align-items: center;">
+                <div class="cta-sticker-top">💬 COMENTE NO POST</div>
+                <div class="cta-sticker-bottom">▶ "REPO"</div>
+              </div>
+
+              <!-- Tangible Direct Message Mockup -->
+              <div class="emerald-card" style="margin-top: 8px;">
+                <div class="dm-card" data-layout-ignore>
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                      <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent-emerald); display: flex; align-items: center; justify-content: center; font-weight: 900; font-family: var(--font-mono); font-size: 24px; color: #060807;" data-layout-ignore>DR</div>
+                      <div>
+                        <div style="font-size: 26px; font-weight: 800; color: #FFFFFF;">dev.remoto</div>
+                        <div style="font-size: 22px; color: var(--text-secondary);">Canal Oficial</div>
+                      </div>
+                    </div>
+                    <span class="badge-status badge-auto" style="font-size: 20px; padding: 4px 14px;" data-layout-ignore>⚡ Resposta Automática</span>
+                  </div>
+
+                  <div style="background: rgba(52, 211, 153, 0.08); border-radius: 16px; padding: 18px 22px; border: 1px solid rgba(52, 211, 153, 0.3);">
+                    <div style="font-size: 24px; color: var(--accent-bright); font-weight: 700;">Aqui estão os links do repositório:</div>
+                    <div style="font-size: 26px; font-weight: 800; margin-top: 8px; color: #FFFFFF;">🔗 github.com/ollama/ollama (124k ⭐)</div>
+                    <div style="font-size: 24px; color: var(--text-secondary); margin-top: 4px;">🚀 Guia de instalação dos melhores modelos locais</div>
+                  </div>
+                </div>
+
+                <div id="btn-cta-pulse" class="job-salary-badge" style="text-align: center; font-size: 30px; font-weight: 900; margin-top: 12px; cursor: pointer;">
+                  Comente "REPO" 💬
+                </div>
+              </div>
+            </section>
+
+          </main>
+        </div>
+      </div>
+
+      <!-- Official Subtitle Pill Safe Zone -->
+      <footer class="subtitle-rail-wrapper">
+        <div id="sub-pill" class="subtitle-pill">
+          <span id="sub-content">
+            <span class="sub-word active-badge">OLLAMA</span>
+          </span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- GSAP Master Controller -->
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      function setSubText(html) {
+        const el = document.getElementById('sub-content');
+        if (el) el.innerHTML = html;
+      }
+
+      // Câmera 3D Cinematic Rig
+      tl.fromTo("#camera", { z: 40, rotateX: 3 }, { z: 0, rotateX: 0, duration: 1.0, ease: "power2.out" }, 0.0);
+      tl.to("#camera", { z: 25, rotateY: -2, duration: 1.2, ease: "sine.inOut" }, 5.1);
+      tl.to("#camera", { z: 15, rotateX: -2, rotateY: 1, duration: 1.2, ease: "sine.inOut" }, 15.6);
+      tl.to("#camera", { z: 30, rotateX: 2, rotateY: 0, duration: 1.0, ease: "sine.inOut" }, 27.5);
+      tl.to("#camera", { z: 45, rotateX: 0, rotateY: 0, duration: 1.2, ease: "back.out(1.5)" }, 34.4);
+
+      // Micro-VFX Glow Orb Pulse
+      tl.to("#glow-orb", { scale: 1.3, opacity: 0.8, duration: 0.8, yoyo: true, repeat: 5, ease: "sine.inOut" }, 5.1);
+
+      // SCENE 1: HOOK (0.0s - 5.1s)
+      tl.fromTo("#scene-1 .command-pill", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 0.05);
+      // Kinetic Word Blur-In
+      tl.fromTo(".blur-word", 
+        { opacity: 0, filter: "blur(14px)", scale: 1.15, immediateRender: false }, 
+        { opacity: 1, filter: "blur(0px)", scale: 1, stagger: 0.08, duration: 0.45, ease: "power2.out" }, 
+        0.15
+      );
+      tl.fromTo("#scene-1 .emerald-card", { y: 35, rotateX: 10, opacity: 0 }, { y: 0, rotateX: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 0.30);
+      tl.fromTo("#cost-row-2", { x: -25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power2.out" }, 0.60);
+      tl.fromTo("#cost-row-3", { x: -25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power2.out" }, 0.85);
+      tl.fromTo("#cost-row-4", { x: -25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power2.out" }, 1.10);
+      // Carimbo com elasticidade e camera shake aos 3.20s
+      tl.fromTo("#cost-stamp", { scale: 2.4, opacity: 0, rotate: -25 }, { scale: 1, opacity: 1, rotate: -3, duration: 0.45, ease: "elastic.out(1.2, 0.4)" }, 3.20);
+      tl.to("#camera", { x: -8, y: 6, duration: 0.04, repeat: 4, yoyo: true }, 3.25);
+      // Transição de Saída Cena 1
+      tl.to("#scene-1", { y: -80, scale: 0.94, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 4.90);
+
+      // SCENE 2: REPO OVERVIEW (5.1s - 15.6s)
+      tl.fromTo("#scene-2", { y: 80, scale: 0.9, opacity: 0, filter: "blur(8px)" }, { y: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, 5.15);
+      tl.fromTo("#stat-stars", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "elastic.out(1.2, 0.4)" }, 6.50);
+      tl.fromTo("#stat-forks", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 7.00);
+      tl.fromTo("#stat-free", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 7.30);
+      // Shockwave Radial Ring ao executar comando
+      tl.fromTo("#terminal-shockwave",
+        { scale: 0.2, opacity: 1, immediateRender: false },
+        { scale: 3.5, opacity: 0, duration: 0.65, ease: "power2.out" },
+        7.80
+      );
+      tl.to("#terminal-output", { opacity: 1, duration: 0.3, ease: "power2.out" }, 8.00);
+      // Transição de Saída Cena 2
+      tl.to("#scene-2", { x: -90, scale: 0.93, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 15.35);
+
+      // SCENE 3: TECH SPECS & BENCHMARK (15.6s - 27.5s)
+      tl.fromTo("#scene-3", { x: 90, scale: 0.93, opacity: 0, filter: "blur(8px)" }, { x: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, 15.65);
+      tl.fromTo("#bench-row-1", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 16.00);
+      tl.fromTo("#bench-row-2", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "elastic.out(1.2, 0.4)" }, 16.30);
+      tl.fromTo("#bench-row-3", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 16.60);
+      tl.fromTo("#api-card", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 17.00);
+      // Transição de Saída Cena 3
+      tl.to("#scene-3", { scale: 0.88, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 27.25);
+
+      // SCENE 4: LOCAL & CUSTO ZERO (27.5s - 34.4s)
+      tl.fromTo("#scene-4", { y: 70, scale: 0.9, opacity: 0, filter: "blur(8px)" }, { y: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, 27.55);
+      tl.fromTo("#priv-row-1", { x: -25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 27.80);
+      tl.fromTo("#priv-row-2", { x: -25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 28.10);
+      tl.fromTo("#priv-row-3", { x: -25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 28.40);
+      tl.fromTo("#priv-stamp", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "elastic.out(1.2, 0.4)" }, 28.80);
+      // Transição de Saída Cena 4
+      tl.to("#scene-4", { y: -60, scale: 0.94, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, 34.20);
+
+      // SCENE 5: CTA (34.4s - 38.0s)
+      tl.fromTo("#scene-5 .cta-sticker-top", { y: -80, scale: 0.5, rotate: -20, opacity: 0 }, { y: 0, scale: 1, rotate: -3, opacity: 1, duration: 0.4, ease: "back.out(2)" }, 34.45);
+      tl.fromTo("#scene-5 .cta-sticker-bottom", { y: -60, scale: 0.5, rotate: 20, opacity: 0 }, { y: 0, scale: 1, rotate: 2, opacity: 1, duration: 0.45, ease: "elastic.out(1.2, 0.4)" }, 34.60);
+      tl.fromTo("#scene-5 .emerald-card", { y: 50, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 34.75);
+      tl.fromTo("#btn-cta-pulse", { scale: 1 }, { scale: 1.05, duration: 0.35, repeat: 4, yoyo: true, ease: "sine.inOut" }, 35.20);
+
+      // Sincronização Fonética Oficial de Legendas
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">AINDA</span> <span class="sub-word">PAGA</span>`); }, null, 0.0);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">AINDA</span> <span class="sub-word">PAGA</span>`); }, null, 0.32);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">AINDA</span> <span class="sub-word active-badge">PAGA</span>`); }, null, 0.56);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">20 DÓLARES</span> <span class="sub-word">POR</span> <span class="sub-word">MÊS</span>`); }, null, 0.82);
+      tl.call(() => { setSubText(`<span class="sub-word">20 DÓLARES</span> <span class="sub-word active-badge">POR</span> <span class="sub-word">MÊS</span>`); }, null, 1.3);
+      tl.call(() => { setSubText(`<span class="sub-word">20 DÓLARES</span> <span class="sub-word">POR</span> <span class="sub-word active-badge">MÊS</span>`); }, null, 1.74);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PARA</span> <span class="sub-word">ENVIAR</span> <span class="sub-word">O</span>`); }, null, 2.0);
+      tl.call(() => { setSubText(`<span class="sub-word">PARA</span> <span class="sub-word active-badge">ENVIAR</span> <span class="sub-word">O</span>`); }, null, 2.22);
+      tl.call(() => { setSubText(`<span class="sub-word">PARA</span> <span class="sub-word">ENVIAR</span> <span class="sub-word active-badge">O</span>`); }, null, 2.46);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CÓDIGO</span> <span class="sub-word">DA</span> <span class="sub-word">SUA</span>`); }, null, 2.7);
+      tl.call(() => { setSubText(`<span class="sub-word">CÓDIGO</span> <span class="sub-word active-badge">DA</span> <span class="sub-word">SUA</span>`); }, null, 2.88);
+      tl.call(() => { setSubText(`<span class="sub-word">CÓDIGO</span> <span class="sub-word">DA</span> <span class="sub-word active-badge">SUA</span>`); }, null, 3.16);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">EMPRESA</span> <span class="sub-word">PARA</span> <span class="sub-word">NUVEM</span>`); }, null, 3.26);
+      tl.call(() => { setSubText(`<span class="sub-word">EMPRESA</span> <span class="sub-word active-badge">PARA</span> <span class="sub-word">NUVEM</span>`); }, null, 3.62);
+      tl.call(() => { setSubText(`<span class="sub-word">EMPRESA</span> <span class="sub-word">PARA</span> <span class="sub-word active-badge">NUVEM</span>`); }, null, 3.98);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DA</span> <span class="sub-word">OPENAI</span>`); }, null, 4.2);
+      tl.call(() => { setSubText(`<span class="sub-word">DA</span> <span class="sub-word active-badge">OPENAI</span>`); }, null, 4.4);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">OLLAMA</span> <span class="sub-word">TEM</span>`); }, null, 5.38);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">OLLAMA</span> <span class="sub-word">TEM</span>`); }, null, 5.56);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word">OLLAMA</span> <span class="sub-word active-badge">TEM</span>`); }, null, 5.72);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">MAIS</span> <span class="sub-word">DE</span> <span class="sub-word">120</span>`); }, null, 5.94);
+      tl.call(() => { setSubText(`<span class="sub-word">MAIS</span> <span class="sub-word active-badge">DE</span> <span class="sub-word">120</span>`); }, null, 6.2);
+      tl.call(() => { setSubText(`<span class="sub-word">MAIS</span> <span class="sub-word">DE</span> <span class="sub-word active-badge">120</span>`); }, null, 6.4);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">000</span> <span class="sub-word">ESTRELAS</span> <span class="sub-word">NO</span>`); }, null, 6.74);
+      tl.call(() => { setSubText(`<span class="sub-word">000</span> <span class="sub-word active-badge">ESTRELAS</span> <span class="sub-word">NO</span>`); }, null, 7.1);
+      tl.call(() => { setSubText(`<span class="sub-word">000</span> <span class="sub-word">ESTRELAS</span> <span class="sub-word active-badge">NO</span>`); }, null, 7.54);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">GITHUB</span> <span class="sub-word">E</span> <span class="sub-word">COLOCA</span>`); }, null, 7.68);
+      tl.call(() => { setSubText(`<span class="sub-word">GITHUB</span> <span class="sub-word active-badge">E</span> <span class="sub-word">COLOCA</span>`); }, null, 8.24);
+      tl.call(() => { setSubText(`<span class="sub-word">GITHUB</span> <span class="sub-word">E</span> <span class="sub-word active-badge">COLOCA</span>`); }, null, 8.7);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">MODELOS</span> <span class="sub-word">DE</span> <span class="sub-word">PONTA</span>`); }, null, 8.98);
+      tl.call(() => { setSubText(`<span class="sub-word">MODELOS</span> <span class="sub-word active-badge">DE</span> <span class="sub-word">PONTA</span>`); }, null, 9.44);
+      tl.call(() => { setSubText(`<span class="sub-word">MODELOS</span> <span class="sub-word">DE</span> <span class="sub-word active-badge">PONTA</span>`); }, null, 9.6);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">COMO</span> <span class="sub-word">DEEPSEEK</span> <span class="sub-word">R1</span>`); }, null, 9.92);
+      tl.call(() => { setSubText(`<span class="sub-word">COMO</span> <span class="sub-word active-badge">DEEPSEEK</span> <span class="sub-word">R1</span>`); }, null, 10.18);
+      tl.call(() => { setSubText(`<span class="sub-word">COMO</span> <span class="sub-word">DEEPSEEK</span> <span class="sub-word active-badge">R1</span>`); }, null, 10.72);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">OLLAMA</span> <span class="sub-word">3</span>`); }, null, 11.24);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">OLLAMA</span> <span class="sub-word">3</span>`); }, null, 11.54);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">OLLAMA</span> <span class="sub-word active-badge">3</span>`); }, null, 11.72);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">RODANDO</span> <span class="sub-word">DIRECT</span> <span class="sub-word">NA</span>`); }, null, 12.1);
+      tl.call(() => { setSubText(`<span class="sub-word">RODANDO</span> <span class="sub-word active-badge">DIRECT</span> <span class="sub-word">NA</span>`); }, null, 12.5);
+      tl.call(() => { setSubText(`<span class="sub-word">RODANDO</span> <span class="sub-word">DIRECT</span> <span class="sub-word active-badge">NA</span>`); }, null, 12.92);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SUA</span> <span class="sub-word">MÁQUINA</span> <span class="sub-word">COM</span>`); }, null, 13.12);
+      tl.call(() => { setSubText(`<span class="sub-word">SUA</span> <span class="sub-word active-badge">MÁQUINA</span> <span class="sub-word">COM</span>`); }, null, 13.3);
+      tl.call(() => { setSubText(`<span class="sub-word">SUA</span> <span class="sub-word">MÁQUINA</span> <span class="sub-word active-badge">COM</span>`); }, null, 13.68);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">ÚNICO</span> <span class="sub-word">COMANDO</span>`); }, null, 14.16);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">ÚNICO</span> <span class="sub-word">COMANDO</span>`); }, null, 14.32);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word">ÚNICO</span> <span class="sub-word active-badge">COMANDO</span>`); }, null, 14.54);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DE TERMINAL</span>`); }, null, 14.9);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ELE</span> <span class="sub-word">USA</span> <span class="sub-word">A</span>`); }, null, 15.8);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word active-badge">USA</span> <span class="sub-word">A</span>`); }, null, 16.04);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word">USA</span> <span class="sub-word active-badge">A</span>`); }, null, 16.28);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ACELERAÇÃO</span> <span class="sub-word">NATIVA</span> <span class="sub-word">DA</span>`); }, null, 16.5);
+      tl.call(() => { setSubText(`<span class="sub-word">ACELERAÇÃO</span> <span class="sub-word active-badge">NATIVA</span> <span class="sub-word">DA</span>`); }, null, 16.94);
+      tl.call(() => { setSubText(`<span class="sub-word">ACELERAÇÃO</span> <span class="sub-word">NATIVA</span> <span class="sub-word active-badge">DA</span>`); }, null, 17.28);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SUA</span> <span class="sub-word">GPU</span>`); }, null, 17.56);
+      tl.call(() => { setSubText(`<span class="sub-word">SUA</span> <span class="sub-word active-badge">GPU</span>`); }, null, 17.68);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ATINGE</span> <span class="sub-word">MAIS</span> <span class="sub-word">DE</span>`); }, null, 18.64);
+      tl.call(() => { setSubText(`<span class="sub-word">ATINGE</span> <span class="sub-word active-badge">MAIS</span> <span class="sub-word">DE</span>`); }, null, 18.92);
+      tl.call(() => { setSubText(`<span class="sub-word">ATINGE</span> <span class="sub-word">MAIS</span> <span class="sub-word active-badge">DE</span>`); }, null, 19.18);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">30</span> <span class="sub-word">TOKENS</span> <span class="sub-word">POR</span>`); }, null, 19.34);
+      tl.call(() => { setSubText(`<span class="sub-word">30</span> <span class="sub-word active-badge">TOKENS</span> <span class="sub-word">POR</span>`); }, null, 19.58);
+      tl.call(() => { setSubText(`<span class="sub-word">30</span> <span class="sub-word">TOKENS</span> <span class="sub-word active-badge">POR</span>`); }, null, 19.94);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEGUNDO</span>`); }, null, 20.26);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">FUNCIONA</span> <span class="sub-word">COMPLETAMENTE</span> <span class="sub-word">OFFLINE</span>`); }, null, 21.16);
+      tl.call(() => { setSubText(`<span class="sub-word">FUNCIONA</span> <span class="sub-word active-badge">COMPLETAMENTE</span> <span class="sub-word">OFFLINE</span>`); }, null, 21.46);
+      tl.call(() => { setSubText(`<span class="sub-word">FUNCIONA</span> <span class="sub-word">COMPLETAMENTE</span> <span class="sub-word active-badge">OFFLINE</span>`); }, null, 22.14);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">AINDA</span> <span class="sub-word">CRIA</span>`); }, null, 22.7);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">AINDA</span> <span class="sub-word">CRIA</span>`); }, null, 23.1);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">AINDA</span> <span class="sub-word active-badge">CRIA</span>`); }, null, 23.36);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">UMA</span> <span class="sub-word">API</span> <span class="sub-word">LOCAL</span>`); }, null, 23.62);
+      tl.call(() => { setSubText(`<span class="sub-word">UMA</span> <span class="sub-word active-badge">API</span> <span class="sub-word">LOCAL</span>`); }, null, 23.86);
+      tl.call(() => { setSubText(`<span class="sub-word">UMA</span> <span class="sub-word">API</span> <span class="sub-word active-badge">LOCAL</span>`); }, null, 24.06);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">COMPATÍVEL</span> <span class="sub-word">COM</span> <span class="sub-word">QUALQUER</span>`); }, null, 24.38);
+      tl.call(() => { setSubText(`<span class="sub-word">COMPATÍVEL</span> <span class="sub-word active-badge">COM</span> <span class="sub-word">QUALQUER</span>`); }, null, 25.18);
+      tl.call(() => { setSubText(`<span class="sub-word">COMPATÍVEL</span> <span class="sub-word">COM</span> <span class="sub-word active-badge">QUALQUER</span>`); }, null, 25.44);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">FERRAMENTA</span> <span class="sub-word">DE</span> <span class="sub-word">INTELIGÊNCIA</span>`); }, null, 25.72);
+      tl.call(() => { setSubText(`<span class="sub-word">FERRAMENTA</span> <span class="sub-word active-badge">DE</span> <span class="sub-word">INTELIGÊNCIA</span>`); }, null, 26.26);
+      tl.call(() => { setSubText(`<span class="sub-word">FERRAMENTA</span> <span class="sub-word">DE</span> <span class="sub-word active-badge">INTELIGÊNCIA</span>`); }, null, 26.6);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ARTIFICIAL</span> <span class="sub-word">ISSO</span> <span class="sub-word">SIGNIFICA</span>`); }, null, 26.98);
+      tl.call(() => { setSubText(`<span class="sub-word">ARTIFICIAL</span> <span class="sub-word active-badge">ISSO</span> <span class="sub-word">SIGNIFICA</span>`); }, null, 27.7);
+      tl.call(() => { setSubText(`<span class="sub-word">ARTIFICIAL</span> <span class="sub-word">ISSO</span> <span class="sub-word active-badge">SIGNIFICA</span>`); }, null, 28.28);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ZERO</span> <span class="sub-word">REAIS</span> <span class="sub-word">EM</span>`); }, null, 28.78);
+      tl.call(() => { setSubText(`<span class="sub-word">ZERO</span> <span class="sub-word active-badge">REAIS</span> <span class="sub-word">EM</span>`); }, null, 29.16);
+      tl.call(() => { setSubText(`<span class="sub-word">ZERO</span> <span class="sub-word">REAIS</span> <span class="sub-word active-badge">EM</span>`); }, null, 29.52);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">FATURAS</span> <span class="sub-word">NO</span> <span class="sub-word">FIM</span>`); }, null, 29.74);
+      tl.call(() => { setSubText(`<span class="sub-word">FATURAS</span> <span class="sub-word active-badge">NO</span> <span class="sub-word">FIM</span>`); }, null, 30.16);
+      tl.call(() => { setSubText(`<span class="sub-word">FATURAS</span> <span class="sub-word">NO</span> <span class="sub-word active-badge">FIM</span>`); }, null, 30.4);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DO</span> <span class="sub-word">MÊS</span> <span class="sub-word">E</span>`); }, null, 30.58);
+      tl.call(() => { setSubText(`<span class="sub-word">DO</span> <span class="sub-word active-badge">MÊS</span> <span class="sub-word">E</span>`); }, null, 30.78);
+      tl.call(() => { setSubText(`<span class="sub-word">DO</span> <span class="sub-word">MÊS</span> <span class="sub-word active-badge">E</span>`); }, null, 31.08);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TOTAL</span> <span class="sub-word">PRIVACIDADE</span> <span class="sub-word">PARA</span>`); }, null, 31.26);
+      tl.call(() => { setSubText(`<span class="sub-word">TOTAL</span> <span class="sub-word active-badge">PRIVACIDADE</span> <span class="sub-word">PARA</span>`); }, null, 31.58);
+      tl.call(() => { setSubText(`<span class="sub-word">TOTAL</span> <span class="sub-word">PRIVACIDADE</span> <span class="sub-word active-badge">PARA</span>`); }, null, 32.44);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">CÓDIGO</span> <span class="sub-word">DOS</span>`); }, null, 32.7);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">CÓDIGO</span> <span class="sub-word">DOS</span>`); }, null, 32.82);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word">CÓDIGO</span> <span class="sub-word active-badge">DOS</span>`); }, null, 33.1);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEUS</span> <span class="sub-word">PROJETOS</span>`); }, null, 33.36);
+      tl.call(() => { setSubText(`<span class="sub-word">SEUS</span> <span class="sub-word active-badge">PROJETOS</span>`); }, null, 33.56);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">COMENTE</span> <span class="sub-word">REPO</span> <span class="sub-word">PARA</span>`); }, null, 34.62);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTE</span> <span class="sub-word active-badge">REPO</span> <span class="sub-word">PARA</span>`); }, null, 34.94);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTE</span> <span class="sub-word">REPO</span> <span class="sub-word active-badge">PARA</span>`); }, null, 35.32);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">RECEBER</span> <span class="sub-word">O</span> <span class="sub-word">LINK</span>`); }, null, 35.54);
+      tl.call(() => { setSubText(`<span class="sub-word">RECEBER</span> <span class="sub-word active-badge">O</span> <span class="sub-word">LINK</span>`); }, null, 35.84);
+      tl.call(() => { setSubText(`<span class="sub-word">RECEBER</span> <span class="sub-word">O</span> <span class="sub-word active-badge">LINK</span>`); }, null, 36.04);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DIRECT</span> <span class="sub-word">NO</span> <span class="sub-word">SEU</span>`); }, null, 36.28);
+      tl.call(() => { setSubText(`<span class="sub-word">DIRECT</span> <span class="sub-word active-badge">NO</span> <span class="sub-word">SEU</span>`); }, null, 36.7);
+      tl.call(() => { setSubText(`<span class="sub-word">DIRECT</span> <span class="sub-word">NO</span> <span class="sub-word active-badge">SEU</span>`); }, null, 36.86);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DIRECT</span>`); }, null, 37.0);
+      tl.call(() => { setSubText(""); }, null, 5.05);
+      tl.call(() => { setSubText(""); }, null, 15.55);
+      tl.call(() => { setSubText(""); }, null, 27.45);
+      tl.call(() => { setSubText(""); }, null, 34.35);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

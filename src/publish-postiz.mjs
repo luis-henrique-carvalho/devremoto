@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { findNextAvailableSlot } from './slot-arbiter.mjs';
 
 export function loadDotEnv(envPath) {
   if (!envPath || !fs.existsSync(envPath)) return {};
@@ -22,12 +23,15 @@ export function loadDotEnv(envPath) {
 }
 
 export function nextMorningBrtIso(now = new Date()) {
-  // Schedule for 09:00 BRT (12:00 UTC) today if before 11:50 UTC, otherwise tomorrow
-  const candidate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 12, 0, 0));
-  if (candidate.getTime() <= now.getTime() + 10 * 60_000) {
-    candidate.setUTCDate(candidate.getUTCDate() + 1);
+  try {
+    return findNextAvailableSlot('vagas', now).scheduleIso;
+  } catch {
+    const candidate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 12, 0, 0));
+    if (candidate.getTime() <= now.getTime() + 10 * 60_000) {
+      candidate.setUTCDate(candidate.getUTCDate() + 1);
+    }
+    return candidate.toISOString();
   }
-  return candidate.toISOString();
 }
 
 export function buildPostizCreateArgs({

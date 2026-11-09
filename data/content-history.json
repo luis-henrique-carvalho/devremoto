@@ -14,7 +14,11 @@
       "format": "video",
       "headline": "3 Plataformas Secretas para Vagas na Gringa",
       "keyword": "LISTA",
-      "vfx": ["camera-orbit", "stamp-shake", "browser-mockup"],
+      "vfx": [
+        "camera-orbit",
+        "stamp-shake",
+        "browser-mockup"
+      ],
       "layout": "browser-mockup",
       "posted_at": "2026-11-08T19:09:44.000Z",
       "postizScheduleIso": "2026-11-09T18:00:00.000Z",
@@ -26,12 +30,46 @@
       "format": "video",
       "headline": "Seu Terminal Está Muito Lento: 3 Ferramentas em Rust",
       "keyword": "TERMINAL",
-      "vfx": ["scramble-text", "zoom-through", "shockwave", "chromatic-glitch", "terminal-tree"],
+      "vfx": [
+        "scramble-text",
+        "zoom-through",
+        "shockwave",
+        "chromatic-glitch",
+        "terminal-tree"
+      ],
       "layout": "terminal",
       "posted_at": "2026-11-08T21:44:23.000Z",
       "postizScheduleIso": "2026-11-10T18:00:00.000Z",
       "postId": "cmw8d15vb0009qj9p9bm7rl72",
       "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/08/4e528fe3c6b672e273c033898371b6e10.mp4"
+    },
+    {
+      "id": "git-disasters-v1",
+      "format": "carousel",
+      "headline": "4 Comandos Git Que Salvam Vidas",
+      "keyword": "GIT",
+      "posted_at": "2026-11-09T15:08:19.340Z",
+      "postizScheduleIso": "2026-11-09T21:30:00.000Z",
+      "postId": "cmw9ebnwu0009qj98ipohuyze",
+      "videoUrl": null
+    },
+    {
+      "id": "ollama-local-ai-v1",
+      "format": "video",
+      "headline": "Pare de Enviar seu Código pra Nuvem: Conheça o Ollama",
+      "keyword": "REPO",
+      "vfx": [
+        "kinetic-word-blur",
+        "whip-snap",
+        "shockwave-ring",
+        "camera-rig-3d",
+        "ambient-glow-pulse"
+      ],
+      "layout": "model-dashboard-and-terminal",
+      "posted_at": "2026-11-09T15:15:54.000Z",
+      "postizScheduleIso": "2026-11-09T16:30:00.000Z",
+      "postId": "cmw9elg15000aqj98t549topa",
+      "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/09/8cc1dff149058bc048b45f77e9aac101d.mp4"
     }
   ]
 }
