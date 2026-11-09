@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "historyId": "03546424-a7e6-41e5-b8e8-3e25f346013a",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "assets/background.jpeg": {
+      "hash": "056cc5ffda649bc6ca15568722d808e09fca72f0a9865e215b76101ee86e38e5",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/05/056cc5ffda649bc6ca15568722d808e09fca72f0a9865e215b76101ee86e38e5"
+    },
+    "assets/bgm.mp3": {
+      "hash": "76f80cdbf7b26211bd1c512320273f98d6450be7790c78ea2fc5de43da189bb3",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/76/76f80cdbf7b26211bd1c512320273f98d6450be7790c78ea2fc5de43da189bb3"
+    },
+    "assets/click.mp3": {
+      "hash": "075e17bdac5c13662a1c9530050e0046f81d4138e00eb3bf30427a7b4404103d",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/07/075e17bdac5c13662a1c9530050e0046f81d4138e00eb3bf30427a7b4404103d"
+    },
+    "assets/hyperframes-logo-white.svg": {
+      "hash": "f9f942c43b465616c3af2fb8b07daf1cc05a4776903bbb27beb2bb608060e6c7",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/f9/f9f942c43b465616c3af2fb8b07daf1cc05a4776903bbb27beb2bb608060e6c7"
+    },
+    "assets/impact.mp3": {
+      "hash": "634d5eda5eb7b501aca98393a64f3815eccf24157cd1d95df55aaec1b5000bd7",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/63/634d5eda5eb7b501aca98393a64f3815eccf24157cd1d95df55aaec1b5000bd7"
+    },
+    "assets/pop.mp3": {
+      "hash": "19ab7193f626ff57fdeef60b45543bac416fcbcec803cfb417abe4b271c1b352",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/19/19ab7193f626ff57fdeef60b45543bac416fcbcec803cfb417abe4b271c1b352"
+    },
+    "assets/riser.mp3": {
+      "hash": "d2f29d49f27dee7d3b25af22ffe5bebc39390cc5d5fb3b3e1c433499c77f3d1d",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/d2/d2f29d49f27dee7d3b25af22ffe5bebc39390cc5d5fb3b3e1c433499c77f3d1d"
+    },
+    "assets/whoosh.mp3": {
+      "hash": "c2efd9d902a59bf9ec5019035d7deadd17762136896b6e3cb6dd99ea50997a30",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/c2/c2efd9d902a59bf9ec5019035d7deadd17762136896b6e3cb6dd99ea50997a30"
+    },
+    "audio.mp3": {
+      "hash": "ae757ebdc9ca167aeab03e63e48110aa85381a608311c7d3190eb72528ad6d64",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/ae/ae757ebdc9ca167aeab03e63e48110aa85381a608311c7d3190eb72528ad6d64"
+    },
+    "audio.transcript.json": {
+      "hash": "ffe8697feef7a09c6ea3756c44bc3a18570cf6cce8946123c16cada5fc55dbdb",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/ff/ffe8697feef7a09c6ea3756c44bc3a18570cf6cce8946123c16cada5fc55dbdb"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "6d18005e71171d4d6f9badc1c852ea496a22276534f1e308d8cb3ed136335a00",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/6d/6d18005e71171d4d6f9badc1c852ea496a22276534f1e308d8cb3ed136335a00"
+    },
+    "package.json": {
+      "hash": "94f49a204945656c002342a0973485a8178aa17f3de3d457d76fbdaa9e65d588",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/94/94f49a204945656c002342a0973485a8178aa17f3de3d457d76fbdaa9e65d588"
+    },
+    "assets/sfx_ui.wav": {
+      "hash": "eef4bec75a5820c80196151eb1600a68166553afbd2a80f6c0f64fd18f1c82df",
+      "content": "/home/luis/.cache/hyperframes/history/03546424-a7e6-41e5-b8e8-3e25f346013a/blobs/ee/eef4bec75a5820c80196151eb1600a68166553afbd2a80f6c0f64fd18f1c82df"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "7f6f20f5-cb7d-4e48-a36f-427fe47ef8cc",
+      "completedAt": 1794182621701,
+      "output": "/home/luis/repositories/canais/devremoto/videos/browser-use-v1/output.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
+}

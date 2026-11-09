@@ -1,0 +1,26 @@
+[
+  {
+    "id": "crawl4ai-v1",
+    "repo": "unclecode/crawl4ai",
+    "name": "Crawl4AI",
+    "videoDir": "/home/luis/repositories/canais/devremoto/videos/trending-repo",
+    "videoPath": "/home/luis/repositories/canais/devremoto/videos/trending-repo/output.mp4",
+    "postId": "cmw8l1z5u0003qj98b71jtwbn",
+    "integrationId": "cmw6m87yh0001qjy4vy20eyss",
+    "scheduleIso": "2026-11-09T15:00:00.000Z",
+    "status": "scheduled",
+    "createdAt": "2026-11-09T01:03:00.000Z"
+  },
+  {
+    "id": "ollama-local-ai-v1",
+    "repo": "ollama/ollama",
+    "name": "Ollama",
+    "videoDir": "/home/luis/repositories/canais/devremoto/videos/ollama-local-ai",
+    "videoPath": "/home/luis/repositories/canais/devremoto/videos/ollama-local-ai/output.mp4",
+    "postId": "cmw9elg15000aqj98t549topa",
+    "integrationId": "cmw6m87yh0001qjy4vy20eyss",
+    "scheduleIso": "2026-11-09T16:30:00.000Z",
+    "status": "scheduled",
+    "createdAt": "2026-11-09T15:15:54.000Z"
+  }
+]

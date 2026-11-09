@@ -2,7 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { spawnSync, execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   parsePipelineJobs,
@@ -148,6 +148,7 @@ async function main() {
     throw new Error(`Not enough eligible unposted Brazilian remote roles in ${PIPELINE_PATH} (found ${edition?.jobs?.length || 0}). Run with --scan first.`);
   }
   edition.count = edition.jobs.length;
+  edition.date = edition.date || opts.dateSlug;
 
   const slidesDir = path.join(editionDir, 'slides');
   fs.mkdirSync(slidesDir, { recursive: true });
@@ -177,7 +178,31 @@ async function main() {
   if (fs.existsSync(webHubVagasDir)) {
     const webHubJsonPath = path.join(webHubVagasDir, `${opts.dateSlug}.json`);
     fs.writeFileSync(webHubJsonPath, `${JSON.stringify(edition, null, 2)}\n`, 'utf8');
-    process.stdout.write(`[devremoto-web] Synced edition to ${webHubJsonPath}\n`);
+
+    // Also update editions.json
+    const editionsPath = path.join(webHubVagasDir, 'editions.json');
+    let editions = [];
+    if (fs.existsSync(editionsPath)) {
+      try {
+        editions = JSON.parse(fs.readFileSync(editionsPath, 'utf8'));
+      } catch {}
+    }
+    const editionWithDate = { date: opts.dateSlug, ...edition };
+    editions = [editionWithDate, ...editions.filter((e) => e.date !== opts.dateSlug)];
+    editions.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    fs.writeFileSync(editionsPath, `${JSON.stringify(editions, null, 2)}\n`, 'utf8');
+    process.stdout.write(`[devremoto-web] Synced edition to ${webHubJsonPath} and editions.json\n`);
+
+    // Auto-commit and push to GitHub so Cloudflare automatically builds and deploys the new edition
+    try {
+      execSync('git add . && git commit -m "feat(vagas): publish edition ' + opts.dateSlug + '" && git push origin main', {
+        cwd: '/home/luis/repositories/devremoto-web',
+        stdio: 'pipe',
+      });
+      process.stdout.write(`[devremoto-web] Pushed edition ${opts.dateSlug} to GitHub (Cloudflare auto-deploy triggered)\n`);
+    } catch (gitErr) {
+      process.stdout.write(`[devremoto-web] Git push info: ${gitErr.message}\n`);
+    }
   }
 
   const replayScriptPath = writePostizReplayScript({
@@ -237,6 +262,10 @@ async function main() {
     replayScriptPath,
     postiz: postizResult,
   };
+
+  try {
+    execSync(`node "${path.join(ROOT_DIR, 'sync-dashboard.mjs')}"`, { stdio: 'ignore' });
+  } catch {}
 
   process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
 }

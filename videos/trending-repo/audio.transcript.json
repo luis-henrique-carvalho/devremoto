@@ -1,0 +1,650 @@
+[
+  {
+    "type": "WordBoundary",
+    "offset": 954580,
+    "duration": 2272910,
+    "text": "Pare",
+    "start_sec": 0.0955,
+    "end_sec": 0.3227
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 3340830,
+    "duration": 1022910,
+    "text": "de",
+    "start_sec": 0.3341,
+    "end_sec": 0.4364
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 4477080,
+    "duration": 3522910,
+    "text": "pagar",
+    "start_sec": 0.4477,
+    "end_sec": 0.8
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 8113750,
+    "duration": 1704580,
+    "text": "por",
+    "start_sec": 0.8114,
+    "end_sec": 0.9818
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 9931660,
+    "duration": 3295410,
+    "text": "APIs",
+    "start_sec": 0.9932,
+    "end_sec": 1.3227
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 13340830,
+    "duration": 3409160,
+    "text": "caras",
+    "start_sec": 1.3341,
+    "end_sec": 1.675
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 16863750,
+    "duration": 795410,
+    "text": "de",
+    "start_sec": 1.6864,
+    "end_sec": 1.7659
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 17772910,
+    "duration": 2840830,
+    "text": "web",
+    "start_sec": 1.7773,
+    "end_sec": 2.0614
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 20727080,
+    "duration": 4772910,
+    "text": "scraping",
+    "start_sec": 2.0727,
+    "end_sec": 2.55
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 25613750,
+    "duration": 1250000,
+    "text": "para",
+    "start_sec": 2.5614,
+    "end_sec": 2.6864
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 26977080,
+    "duration": 4659160,
+    "text": "alimentar",
+    "start_sec": 2.6977,
+    "end_sec": 3.1636
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 31750000,
+    "duration": 1704580,
+    "text": "seus",
+    "start_sec": 3.175,
+    "end_sec": 3.3455
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 33568330,
+    "duration": 4545410,
+    "text": "modelos",
+    "start_sec": 3.3568,
+    "end_sec": 3.8114
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 38227080,
+    "duration": 568330,
+    "text": "de",
+    "start_sec": 3.8227,
+    "end_sec": 3.8795
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 38909160,
+    "duration": 5681660,
+    "text": "inteligência",
+    "start_sec": 3.8909,
+    "end_sec": 4.4591
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 44704580,
+    "duration": 6022910,
+    "text": "artificial",
+    "start_sec": 4.4705,
+    "end_sec": 5.0727
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 58522910,
+    "duration": 1136250,
+    "text": "O",
+    "start_sec": 5.8523,
+    "end_sec": 5.9659
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 59772910,
+    "duration": 17727079,
+    "text": "Crawl4AI",
+    "start_sec": 5.9773,
+    "end_sec": 7.75
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 77613750,
+    "duration": 1363750,
+    "text": "tem",
+    "start_sec": 7.7614,
+    "end_sec": 7.8978
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 79090830,
+    "duration": 2500000,
+    "text": "mais",
+    "start_sec": 7.9091,
+    "end_sec": 8.1591
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 81704580,
+    "duration": 681660,
+    "text": "de",
+    "start_sec": 8.1705,
+    "end_sec": 8.2386
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 82500000,
+    "duration": 7272909,
+    "text": "87 mil",
+    "start_sec": 8.25,
+    "end_sec": 8.9773
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 89886250,
+    "duration": 4318330,
+    "text": "estrelas",
+    "start_sec": 8.9886,
+    "end_sec": 9.4205
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 94318330,
+    "duration": 681660,
+    "text": "no",
+    "start_sec": 9.4318,
+    "end_sec": 9.5
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 95113750,
+    "duration": 4772910,
+    "text": "GitHub",
+    "start_sec": 9.5114,
+    "end_sec": 9.9887
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 100000000,
+    "duration": 227079,
+    "text": "e",
+    "start_sec": 10.0,
+    "end_sec": 10.0227
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 100340830,
+    "duration": 340830,
+    "text": "é",
+    "start_sec": 10.0341,
+    "end_sec": 10.0682
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 100795410,
+    "duration": 681660,
+    "text": "um",
+    "start_sec": 10.0795,
+    "end_sec": 10.1477
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 101590830,
+    "duration": 3750000,
+    "text": "motor",
+    "start_sec": 10.1591,
+    "end_sec": 10.5341
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 105454580,
+    "duration": 795410,
+    "text": "de",
+    "start_sec": 10.5455,
+    "end_sec": 10.625
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 106363750,
+    "duration": 3863750,
+    "text": "extração",
+    "start_sec": 10.6364,
+    "end_sec": 11.0227
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 110340830,
+    "duration": 6136250,
+    "text": "gratuito",
+    "start_sec": 11.0341,
+    "end_sec": 11.6477
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 116590830,
+    "duration": 568330,
+    "text": "e",
+    "start_sec": 11.6591,
+    "end_sec": 11.7159
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 117272910,
+    "duration": 6477080,
+    "text": "ultrarrápido",
+    "start_sec": 11.7273,
+    "end_sec": 12.375
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 131590830,
+    "duration": 2386250,
+    "text": "Ele",
+    "start_sec": 13.1591,
+    "end_sec": 13.3977
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 134090830,
+    "duration": 2159160,
+    "text": "usa",
+    "start_sec": 13.4091,
+    "end_sec": 13.625
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 136363750,
+    "duration": 454580,
+    "text": "um",
+    "start_sec": 13.6364,
+    "end_sec": 13.6818
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 136931660,
+    "duration": 4886250,
+    "text": "navegador",
+    "start_sec": 13.6932,
+    "end_sec": 14.1818
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 141931660,
+    "duration": 3409160,
+    "text": "headless",
+    "start_sec": 14.1932,
+    "end_sec": 14.5341
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 145454580,
+    "duration": 1590830,
+    "text": "para",
+    "start_sec": 14.5455,
+    "end_sec": 14.7045
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 147159160,
+    "duration": 3750000,
+    "text": "raspar",
+    "start_sec": 14.7159,
+    "end_sec": 15.0909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 151022910,
+    "duration": 3409160,
+    "text": "qualquer",
+    "start_sec": 15.1023,
+    "end_sec": 15.4432
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 154545410,
+    "duration": 3977080,
+    "text": "site",
+    "start_sec": 15.4545,
+    "end_sec": 15.8522
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 160681660,
+    "duration": 2500000,
+    "text": "limpa",
+    "start_sec": 16.0682,
+    "end_sec": 16.3182
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 163295410,
+    "duration": 4431660,
+    "text": "scripts",
+    "start_sec": 16.3295,
+    "end_sec": 16.7727
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 167840830,
+    "duration": 3977080,
+    "text": "inúteis",
+    "start_sec": 16.7841,
+    "end_sec": 17.1818
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 171931660,
+    "duration": 909160,
+    "text": "e",
+    "start_sec": 17.1932,
+    "end_sec": 17.2841
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 172954580,
+    "duration": 5113750,
+    "text": "converte",
+    "start_sec": 17.2955,
+    "end_sec": 17.8068
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 178181660,
+    "duration": 2272910,
+    "text": "tudo",
+    "start_sec": 17.8182,
+    "end_sec": 18.0455
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 180568330,
+    "duration": 795410,
+    "text": "em",
+    "start_sec": 18.0568,
+    "end_sec": 18.1364
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 181477080,
+    "duration": 3977080,
+    "text": "Markdown",
+    "start_sec": 18.1477,
+    "end_sec": 18.5454
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 185568330,
+    "duration": 5227080,
+    "text": "estruturado",
+    "start_sec": 18.5568,
+    "end_sec": 19.0795
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 190909160,
+    "duration": 3295410,
+    "text": "pronto",
+    "start_sec": 19.0909,
+    "end_sec": 19.4205
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 194318330,
+    "duration": 1590830,
+    "text": "para",
+    "start_sec": 19.4318,
+    "end_sec": 19.5909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 196022910,
+    "duration": 2500000,
+    "text": "RAG",
+    "start_sec": 19.6023,
+    "end_sec": 19.8523
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 198636250,
+    "duration": 681660,
+    "text": "e",
+    "start_sec": 19.8636,
+    "end_sec": 19.9318
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 199431660,
+    "duration": 5681660,
+    "text": "agentes",
+    "start_sec": 19.9432,
+    "end_sec": 20.5113
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 212954580,
+    "duration": 3181660,
+    "text": "Roda",
+    "start_sec": 21.2955,
+    "end_sec": 21.6136
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 216250000,
+    "duration": 6704580,
+    "text": "100%",
+    "start_sec": 21.625,
+    "end_sec": 22.2955
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 223068330,
+    "duration": 3636250,
+    "text": "local",
+    "start_sec": 22.3068,
+    "end_sec": 22.6705
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 226818330,
+    "duration": 909160,
+    "text": "no",
+    "start_sec": 22.6818,
+    "end_sec": 22.7727
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 227840830,
+    "duration": 1477080,
+    "text": "seu",
+    "start_sec": 22.7841,
+    "end_sec": 22.9318
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 229431660,
+    "duration": 5681660,
+    "text": "computador",
+    "start_sec": 22.9432,
+    "end_sec": 23.5113
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 235227080,
+    "duration": 1931660,
+    "text": "sem",
+    "start_sec": 23.5227,
+    "end_sec": 23.7159
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 237272910,
+    "duration": 3295410,
+    "text": "mandar",
+    "start_sec": 23.7273,
+    "end_sec": 24.0568
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 240681660,
+    "duration": 3522910,
+    "text": "dados",
+    "start_sec": 24.0682,
+    "end_sec": 24.4205
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 244318330,
+    "duration": 1363750,
+    "text": "para",
+    "start_sec": 24.4318,
+    "end_sec": 24.5682
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 245795410,
+    "duration": 227079,
+    "text": "a",
+    "start_sec": 24.5795,
+    "end_sec": 24.6022
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 246136250,
+    "duration": 3409160,
+    "text": "nuvem",
+    "start_sec": 24.6136,
+    "end_sec": 24.9545
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 257386250,
+    "duration": 4431660,
+    "text": "Comente",
+    "start_sec": 25.7386,
+    "end_sec": 26.1818
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 261931660,
+    "duration": 2500000,
+    "text": "REPO",
+    "start_sec": 26.1932,
+    "end_sec": 26.4432
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 264545410,
+    "duration": 1590830,
+    "text": "aqui",
+    "start_sec": 26.4545,
+    "end_sec": 26.6136
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 266250000,
+    "duration": 4659160,
+    "text": "embaixo",
+    "start_sec": 26.625,
+    "end_sec": 27.0909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 271022910,
+    "duration": 1590830,
+    "text": "para",
+    "start_sec": 27.1023,
+    "end_sec": 27.2614
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 272727080,
+    "duration": 3977080,
+    "text": "receber",
+    "start_sec": 27.2727,
+    "end_sec": 27.6704
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 276818330,
+    "duration": 340830,
+    "text": "o",
+    "start_sec": 27.6818,
+    "end_sec": 27.7159
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 277272910,
+    "duration": 2954580,
+    "text": "link",
+    "start_sec": 27.7273,
+    "end_sec": 28.0227
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 280340830,
+    "duration": 4090830,
+    "text": "direto",
+    "start_sec": 28.0341,
+    "end_sec": 28.4432
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 284545410,
+    "duration": 909160,
+    "text": "no",
+    "start_sec": 28.4545,
+    "end_sec": 28.5455
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 285568330,
+    "duration": 1818330,
+    "text": "seu",
+    "start_sec": 28.5568,
+    "end_sec": 28.7387
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 287500000,
+    "duration": 5000000,
+    "text": "direct",
+    "start_sec": 28.75,
+    "end_sec": 29.25
+  }
+]

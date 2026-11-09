@@ -1,0 +1,213 @@
+{
+  "catalog": [
+    {
+      "id": "openreply-manychat-v1",
+      "repo": "diwenne/openreply",
+      "name": "OpenReply",
+      "stars": "18.5k",
+      "category": "Automação de Directs & Instagram",
+      "tag": "Trending GitHub · 100% Grátis",
+      "hookTitle": "Pare de Pagar o <span>ManyChat</span>",
+      "hookAlert": "ADEUS MENSALIDADE // R$ 800/MÊS",
+      "hookPrompt": "ManyChat: R$ 800/mês",
+      "hookComment": "# Cobrança por cada seguidor que entra na sua lista...",
+      "hookStamp": "ASSINATURA ABUSIVA 💸",
+      "repoTitle": "Conheça a <span>Alternativa Grátis</span>",
+      "repoInstall": "openreply.io/download",
+      "repoSub": "⚡ Automação de Directs oficial sem pagar mensalidade",
+      "repoMetricLabel": "Avaliação dos Usuários:",
+      "repoMetricValue": "18.5k ⭐ Recomendado",
+      "repoMetricSpeed": "100% Grátis",
+      "techTitle": "4 Superpoderes ➔ <span>No Automático</span>",
+      "techPill": "4 RECURSOS // ZERO MENSALIDADE",
+      "panelTitle": "Modo Automático Ativado",
+      "techCmd": "Status: Ativo 24 Horas",
+      "techRows": [
+        { "name": "⚡ Comentou no post, direct chega em 3 segundos", "badge": "[01/04]", "badgeClass": "git-new", "color": "var(--accent-bright)" },
+        { "name": "📱 Responde Stories e Directs no automático", "badge": "[02/04]", "badgeClass": "git-mod", "color": "#60A5FA" },
+        { "name": "🔒 Trava de Seguidor: só entrega para quem te segue", "badge": "[03/04]", "badgeClass": "git-new", "color": "var(--accent-gold)" },
+        { "name": "🚀 Mensagens e contatos ilimitados sem custo extra", "badge": "[04/04]", "badgeClass": "git-new", "color": "#34D399" }
+      ],
+      "localTitle": "Quer ver a <span>Mágica ao Vivo?</span>",
+      "localPill": "PROVA REAL AO VIVO",
+      "localCmd": "openreply: live stream",
+      "localSpecs": [
+        { "label": "Velocidade:", "val": "Menos de 3 segundos", "color": "#60A5FA" },
+        { "label": "Mensalidade:", "val": "R$ 0,00 (Zero cobranças)", "color": "var(--accent-bright)" },
+        { "label": "Segurança:", "val": "100% Oficial do Instagram", "color": "#FCD34D" }
+      ],
+      "ctaKeyword": "REPLY",
+      "ctaTitle": "Quer a Ferramenta e o <span>Passo a Passo?</span>",
+      "ctaItems": [
+        "⭐ Ferramenta 100% gratuita e aberta",
+        "⚡ Mensagens e contatos ilimitados",
+        "🚀 Envio imediato no seu Direct"
+      ],
+      "scriptVoice": "Pare de pagar oitocentos reais no ManyChat. Eles clonaram a ferramenta inteira de graça e você automatiza comentários e directs no Instagram sem gastar um centavo. O robô responde em 3 segundos, atende stories 24 horas e só entrega o link para quem segue você. Quer ver essa automação funcionando ao vivo? Comenta REPLY aqui embaixo que eu te mando a ferramenta no direct agora mesmo, sem você pagar nada.",
+      "subtitles": [
+        { "start": 0, "duration": 3.0, "html": "Pare de pagar <span>oitocentos reais</span> no ManyChat!" },
+        { "start": 3.0, "duration": 4.5, "html": "Eles clonaram a ferramenta inteira <span>de graça</span>!" },
+        { "start": 7.5, "duration": 6.5, "html": "Automatize comentários e directs <span>sem gastar nada</span>!" },
+        { "start": 14.0, "duration": 7.5, "html": "Responde em 3 segundos e <span>só entrega para seguidores</span>!" },
+        { "start": 21.5, "duration": 6.5, "html": "Comenta <span>REPLY</span> para receber a ferramenta no seu direct!" }
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "kokoro-voice-cloning-v1",
+      "repo": "hexgrad/kokoro",
+      "name": "Kokoro TTS",
+      "stars": "35.8k",
+      "category": "Inteligência Artificial de Voz",
+      "tag": "Trending GitHub · Open-Source",
+      "hookTitle": "Clonaram a <span>ElevenLabs</span>",
+      "hookAlert": "IA DE VOZ // 100% GRÁTIS",
+      "hookPrompt": "$ assinatura ElevenLabs: $30/mês",
+      "hookComment": "# Limite rígido de caracteres e cobrança em dólar...",
+      "hookStamp": "ASSINATURA CARA 💸",
+      "repoTitle": "Conheça o <span>Kokoro TTS</span>",
+      "repoInstall": "$ pip install kokoro",
+      "repoSub": "⚡ Um dev sozinho clonou a plataforma inteira",
+      "repoMetricLabel": "Repositório GitHub:",
+      "repoMetricValue": "35.8k ⭐ Stars",
+      "repoMetricSpeed": "100% Grátis",
+      "techTitle": "Superpoderes ➔ <span>Voz Neural</span>",
+      "techPill": "4 SUPERPODERES // ZERO CUSTO",
+      "techCmd": "$ kokoro --voice pt_br 'Fala natural'",
+      "techRows": [
+        { "name": "🎙 Clona qualquer voz e sotaque", "badge": "[01/04]", "badgeClass": "git-new", "color": "var(--accent-bright)" },
+        { "name": "🌍 Dubla vídeos em 147 idiomas", "badge": "[02/04]", "badgeClass": "git-mod", "color": "#60A5FA" },
+        { "name": "📖 Gera audiolivros inteiros sem limite", "badge": "[03/04]", "badgeClass": "git-new", "color": "var(--accent-gold)" },
+        { "name": "⚡ Roda 100% local no seu computador", "badge": "[04/04]", "badgeClass": "git-new", "color": "#34D399" }
+      ],
+      "localTitle": "Sabe essa <span>Narração?</span>",
+      "localPill": "PROVA VIVA AO VIVO",
+      "localCmd": "$ audio_player --now-playing",
+      "localSpecs": [
+        { "label": "Voz do Vídeo:", "val": "Gerada por esta ferramenta", "color": "#60A5FA" },
+        { "label": "Custo Real:", "val": "R$ 0,00 (Zero centavos)", "color": "var(--accent-bright)" },
+        { "label": "Você Percebeu?", "val": "Qualidade 100% humana", "color": "#FCD34D" }
+      ],
+      "ctaKeyword": "VOZ",
+      "ctaTitle": "Quer o Link e o <span>Guia de Instalação?</span>",
+      "ctaItems": [
+        "⭐ github.com/hexgrad/kokoro",
+        "⚡ 100% gratuito e sem mensalidade",
+        "🚀 Envio imediato no seu Direct"
+      ],
+      "scriptVoice": "Os caras simplesmente conseguiram clonar a ElevenLabs inteira de graça. Ou melhor: não foram os caras, foi um dev sozinho no canto do mundo. Roda direto no seu computador, sem mensalidade, sem limite de caracteres e sem pagar nada. E o que isso faz? Praticamente tudo: clona qualquer voz, dubla vídeos em centenas de idiomas e gera audiolivros completos. Agora vem a melhor parte: essa narração que você está ouvindo foi feita 100% com essa ferramenta. E você nem percebeu. Quer testar no seu computador? Comenta VOZ aqui embaixo que eu te envio o link no direct agora mesmo.",
+      "subtitles": [
+        { "start": 0, "duration": 4.5, "html": "Conseguiram clonar a <span>ElevenLabs inteira</span> de graça!" },
+        { "start": 4.5, "duration": 6.8, "html": "Roda direto no seu PC, <span>sem mensalidade</span> e sem limite de caracteres!" },
+        { "start": 11.3, "duration": 9.2, "html": "Clona vozes, <span>dubla em 147 idiomas</span> e gera audiolivros inteiros!" },
+        { "start": 20.5, "duration": 6.0, "html": "A <span>narração desse vídeo</span> foi feita com ela e você nem percebeu!" },
+        { "start": 26.5, "duration": 4.5, "html": "Comenta <span>VOZ</span> aqui embaixo para receber o link no seu direct!" }
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "birefnet-photoshop-v1",
+      "repo": "ZhengPeng7/BiRefNet",
+      "name": "BiRefNet",
+      "stars": "18.4k",
+      "category": "Design & Visão Computacional",
+      "tag": "Trending GitHub · Open-Source",
+      "hookTitle": "Adeus Assinatura<br /><span>Do Photoshop</span>",
+      "hookAlert": "DESIGN // IA VISUAL",
+      "hookPrompt": "$ assinatura Adobe: R$ 140/mês",
+      "hookComment": "# Cobrança mensal apenas para recortar fotos...",
+      "hookStamp": "MENSALIDADE ADOBE 💸",
+      "repoTitle": "Conheça o <span>BiRefNet</span>",
+      "repoInstall": "$ pip install rembg[birefnet]",
+      "repoSub": "⚡ Recorte de alta precisão 100% gratuito",
+      "repoMetricLabel": "Repositório GitHub:",
+      "repoMetricValue": "18.4k ⭐ Stars",
+      "repoMetricSpeed": "Alta Resolução",
+      "techTitle": "Recorte Cirúrgico ➔ <span>1 Segundo</span>",
+      "techPill": "4 SUPERPODERES // ZERO ADOBE",
+      "techCmd": "$ rembg i foto.jpg transparente.png",
+      "techRows": [
+        { "name": "✂ Recorta fios de cabelo individuais", "badge": "[01/04]", "badgeClass": "git-new", "color": "var(--accent-bright)" },
+        { "name": "🎬 Remove fundo de vídeos quadro a quadro", "badge": "[02/04]", "badgeClass": "git-mod", "color": "#60A5FA" },
+        { "name": "🔍 Suporta fotos em altíssima resolução 4K", "badge": "[03/04]", "badgeClass": "git-new", "color": "var(--accent-gold)" },
+        { "name": "💻 Roda no seu PC sem enviar fotos pra nuvem", "badge": "[04/04]", "badgeClass": "git-new", "color": "#34D399" }
+      ],
+      "localTitle": "Privacidade <span>E Economia</span>",
+      "localPill": "SUAS FOTOS SEGURAS",
+      "localCmd": "$ python remove_bg.py --all",
+      "localSpecs": [
+        { "label": "Qualidade:", "val": "Recorte perfeito de cabelo", "color": "#60A5FA" },
+        { "label": "Economia Anual:", "val": "+ R$ 1.600 economizados", "color": "var(--accent-bright)" },
+        { "label": "Privacidade:", "val": "100% Localhost", "color": "#FCD34D" }
+      ],
+      "ctaKeyword": "FOTO",
+      "ctaTitle": "Quer o Link e o <span>Guia de Instalação?</span>",
+      "ctaItems": [
+        "⭐ github.com/ZhengPeng7/BiRefNet",
+        "⚡ Substituto gratuito do Photoshop",
+        "🚀 Envio imediato no seu Direct"
+      ],
+      "scriptVoice": "Você pode cancelar a assinatura da Adobe agora mesmo. Uma equipe de pesquisadores liberou uma inteligência artificial gratuita que remove o fundo de qualquer foto ou vídeo em menos de um segundo. Ela é tão precisa que recorta até os fios soltos de cabelo sem deixar aquela borda borrada que outros apps deixam. Roda direto na sua máquina sem internet e sem mandar suas fotos pessoais para servidores de terceiros. Comente FOTO aqui embaixo que eu te envio o link direto no seu direct agora mesmo.",
+      "subtitles": [
+        { "start": 0, "duration": 4.2, "html": "Pode <span>cancelar a Adobe</span>: essa IA remove qualquer fundo de graça!" },
+        { "start": 4.2, "duration": 6.8, "html": "Recorte cirúrgico que separa até <span>fios de cabelo</span> em alta definição!" },
+        { "start": 11.0, "duration": 8.0, "html": "Funciona para fotos e <span>vídeos em 4K</span> sem mandar nada para a nuvem!" },
+        { "start": 19.0, "duration": 5.5, "html": "Economize mais de <span>R$ 1.600 por ano</span> com essa ferramenta!" },
+        { "start": 24.5, "duration": 4.5, "html": "Comente <span>FOTO</span> aqui embaixo para receber o link no direct!" }
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "browser-use-agent-v1",
+      "repo": "browser-use/browser-use",
+      "name": "Browser-Use",
+      "stars": "55.4k",
+      "category": "Agentes Autônomos & Automação",
+      "tag": "Trending GitHub · Open-Source",
+      "hookTitle": "O Robô Que Trabalha<br /><span>No Seu Lugar</span>",
+      "hookAlert": "AUTOMAÇÃO // AGENTE DE IA",
+      "hookPrompt": "$ 2 horas perdidas clicando no navegador",
+      "hookComment": "# Preencher formulários e pesquisar preços todo dia...",
+      "hookStamp": "TRABALHO CHATO ⏱",
+      "repoTitle": "Conheça o <span>Browser-Use</span>",
+      "repoInstall": "$ pip install browser-use",
+      "repoSub": "⚡ Um agente que controla o Chrome por você",
+      "repoMetricLabel": "Repositório GitHub:",
+      "repoMetricValue": "55.4k ⭐ Stars",
+      "repoMetricSpeed": "Autônomo",
+      "techTitle": "Você Pede ➔ <span>A IA Executa</span>",
+      "techPill": "4 SUPERPODERES // AUTO CHROME",
+      "techCmd": "$ python agent.py 'Ache o voo mais barato'",
+      "techRows": [
+        { "name": "🖱 Clica, digita e navega em qualquer site", "badge": "[01/04]", "badgeClass": "git-new", "color": "var(--accent-bright)" },
+        { "name": "📊 Coleta dados e preenche planilhas sozinho", "badge": "[02/04]", "badgeClass": "git-mod", "color": "#60A5FA" },
+        { "name": "🛡 Contorna popups, cookies e captchas", "badge": "[03/04]", "badgeClass": "git-new", "color": "var(--accent-gold)" },
+        { "name": "☕ Economiza 2 horas de rotina todo santo dia", "badge": "[04/04]", "badgeClass": "git-new", "color": "#34D399" }
+      ],
+      "localTitle": "Seu Próprio <span>Estagiário de IA</span>",
+      "localPill": "PRODUTIVIDADE MÁXIMA",
+      "localCmd": "$ browser-use --task 'Comprar produto'",
+      "localSpecs": [
+        { "label": "Navegador:", "val": "Controla Chrome e Edge nativos", "color": "#60A5FA" },
+        { "label": "Tempo Economizado:", "val": "+ 10 horas por semana", "color": "var(--accent-bright)" },
+        { "label": "Custo:", "val": "Código aberto gratuito", "color": "#FCD34D" }
+      ],
+      "ctaKeyword": "ROBO",
+      "ctaTitle": "Quer o Link e o <span>Guia de Instalação?</span>",
+      "ctaItems": [
+        "⭐ github.com/browser-use/browser-use",
+        "⚡ Agente que navega na web por você",
+        "🚀 Envio imediato no seu Direct"
+      ],
+      "scriptVoice": "A OpenAI cobra caro pelo agente deles, mas essa ferramenta gratuita entra no seu navegador e faz o trabalho chato por você. O Browser-Use tem mais de 50 mil estrelas no GitHub e é um agente de IA que enxerga a tela, pesquisa preços, preenche formulários e clica em botões sozinho enquanto você toma um café. Ele contorna popups, coleta informações da web e coloca tudo direto em planilhas sem você precisar tocar no mouse. Comente ROBO aqui embaixo que eu te envio o link oficial e o passo a passo no seu direct.",
+      "subtitles": [
+        { "start": 0, "duration": 4.5, "html": "Essa IA entra no seu navegador e faz o <span>trabalho chato por você</span>!" },
+        { "start": 4.5, "duration": 6.8, "html": "O <span>Browser-Use</span> tem 55 mil estrelas: clica, pesquisa e digita sozinho!" },
+        { "start": 11.3, "duration": 8.0, "html": "Compara preços, preenche formulários e <span>alimenta planilhas</span>!" },
+        { "start": 19.3, "duration": 5.2, "html": "Economize mais de <span>10 horas na sua semana</span> de trabalho!" },
+        { "start": 24.5, "duration": 4.5, "html": "Comente <span>ROBO</span> aqui embaixo para receber o guia no direct!" }
+      ],
+      "status": "ready"
+    }
+  ]
+}

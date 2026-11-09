@@ -190,8 +190,8 @@
   },
   "checks": {
     "latest": {
-      "revision": "a9bad42a-33ac-4b90-9cbe-5efa016ac1f4",
-      "id": "2248145b-ee1e-4e26-b451-db59903660b9"
+      "revision": "e6c01eb4-f5fd-48be-964b-7bac2d5c6223",
+      "id": "77ab68c9-de1a-4243-b117-1ab19ae63d2b"
     },
     "revisions": {
       "ab9f0eb6-a72c-4f2c-baad-ad3fa7bb61d0": [
@@ -311,6 +311,35 @@
           "attribution": "recorded-revision",
           "status": "cleaned",
           "cleanedAfterRender": "13c0f0d3-1536-42a9-86dd-eaa1e3069458"
+        }
+      ],
+      "e6c01eb4-f5fd-48be-964b-7bac2d5c6223": [
+        {
+          "id": "77ab68c9-de1a-4243-b117-1ab19ae63d2b",
+          "scope": "project",
+          "report": "/home/luis/repositories/canais/devremoto/videos/terminal-rust/.hyperframes/artifacts/checks/77ab68c9-de1a-4243-b117-1ab19ae63d2b.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 45000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1794181884766,
+          "contentHash": "7fe0c27ac72ecb5546336de5c886dab5585d1f3526a72f3a95dd6ba8b9b77781",
+          "revision": "e6c01eb4-f5fd-48be-964b-7bac2d5c6223",
+          "inputFingerprint": "1644a5f158c23ab1e3f3d9845b05fc30d75d5929e4af09f33c0ea85542a77664",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
         }
       ]
     },

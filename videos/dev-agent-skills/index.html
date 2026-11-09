@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Dev Agent Skill - Claude para Devs | DevRemoto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-canvas: #060807;
+        --panel-bg: rgba(14, 20, 17, 0.95);
+        --panel-border: rgba(52, 211, 153, 0.35);
+        
+        --accent-emerald: #10A37F;
+        --accent-bright: #34D399;
+        --accent-glow: rgba(52, 211, 153, 0.5);
+        --accent-crimson: #EF4444;
+        
+        --text-primary: #F9FAFB;
+        --text-secondary: #9CA3AF;
+        --font-sans: 'Inter', -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg-canvas);
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        width: 1080px;
+        height: 1920px;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 30%, #0c1411 0%, #060807 100%);
+      }
+
+      /* Subtle Grid Background */
+      .grid-plane {
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(to right, rgba(52, 211, 153, 0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(52, 211, 153, 0.08) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        opacity: 0.8;
+      }
+
+      .glow-orb-top {
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(16, 163, 127, 0.25) 0%, transparent 70%);
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Fixed Header Safe Zone (0 a 140px) */
+      .header-fixed {
+        position: absolute;
+        top: 60px;
+        left: 60px;
+        right: 60px;
+        height: 62px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+      }
+      .brand-badge {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(14, 20, 17, 0.9);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        border-radius: 999px;
+        padding: 10px 24px;
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-primary);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+      .brand-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent-bright);
+        box-shadow: 0 0 10px var(--accent-bright);
+      }
+      .tag-pill {
+        background: rgba(16, 163, 127, 0.15);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        border-radius: 999px;
+        padding: 10px 22px;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--accent-bright);
+      }
+
+      /* Stage Area (top: 220px, height: 1350px) */
+      .stage {
+        position: absolute;
+        top: 220px;
+        left: 60px;
+        right: 60px;
+        height: 1350px;
+        z-index: 10;
+      }
+
+      .scene-clip {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 36px;
+        padding: 20px 0;
+      }
+
+      /* Scene Titles */
+      .scene-title-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        text-align: center;
+      }
+      .command-pill {
+        background: #000000;
+        border: 1px solid rgba(52, 211, 153, 0.5);
+        border-radius: 999px;
+        padding: 10px 28px;
+        font-family: var(--font-mono);
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--accent-bright);
+        box-shadow: 0 4px 15px rgba(16, 163, 127, 0.2);
+      }
+      .hero-title {
+        font-size: 58px;
+        font-weight: 900;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        color: var(--text-primary);
+      }
+      .hero-title .highlight {
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Cards & Panels */
+      .emerald-card {
+        width: 960px;
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        border-radius: 28px;
+        padding: 40px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 163, 127, 0.15);
+        backdrop-filter: blur(20px);
+      }
+
+      /* Subtitle Pill Safe Zone (top: 1620px to 1750px) */
+      .subtitle-rail-wrapper {
+        position: absolute;
+        top: 1620px;
+        left: 60px;
+        right: 60px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 200;
+      }
+      .subtitle-pill {
+        background: rgba(10, 14, 12, 0.95);
+        border: 1.5px solid rgba(52, 211, 153, 0.6);
+        border-radius: 999px;
+        padding: 20px 48px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px rgba(52, 211, 153, 0.25);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        max-width: 960px;
+      }
+      .sub-word {
+        font-size: 38px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        color: #FFFFFF;
+      }
+      .sub-word.active-badge {
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        color: #060807;
+        padding: 4px 18px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.7);
+        transform: scale(1.06);
+      }
+
+      /* SCENE 1: CONNECTORS & TABLE */
+      .app-connector-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+      .app-squircle {
+        width: 140px;
+        height: 140px;
+        border-radius: 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-mono);
+        font-size: 20px;
+        font-weight: 700;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      }
+      .claude-box {
+        background: #FFFFFF;
+        color: #111827;
+      }
+      .term-box {
+        background: #0D1117;
+        color: #34D399;
+        border: 2px solid rgba(52, 211, 153, 0.4);
+      }
+      .connector-line {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .dashed-line {
+        width: 120px;
+        height: 3px;
+        background: repeating-linear-gradient(90deg, var(--accent-bright) 0px, var(--accent-bright) 10px, transparent 10px, transparent 18px);
+      }
+      .skill-pill-badge {
+        background: var(--accent-emerald);
+        color: #FFFFFF;
+        padding: 10px 24px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        font-weight: 800;
+        box-shadow: 0 0 20px rgba(16, 163, 127, 0.6);
+      }
+      .table-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .table-row:last-child { border-bottom: none; }
+      .row-title {
+        font-size: 32px;
+        font-weight: 700;
+      }
+      .badge-status {
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 700;
+        padding: 8px 22px;
+        border-radius: 999px;
+      }
+      .badge-manual {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text-secondary);
+      }
+      .badge-auto {
+        background: var(--accent-bright);
+        color: #060807;
+        box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+      }
+
+      /* SCENE 3: COUNTER */
+      .giant-counter {
+        font-family: var(--font-mono);
+        font-size: 190px;
+        font-weight: 900;
+        line-height: 1;
+        color: var(--accent-bright);
+        text-shadow: 0 0 40px rgba(52, 211, 153, 0.5);
+        margin: 30px 0;
+      }
+
+      /* SCENE 7: RADAR GRINGA */
+      .radar-search-bar {
+        background: #000000;
+        border: 2px solid var(--accent-bright);
+        border-radius: 999px;
+        padding: 18px 40px;
+        font-size: 30px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        box-shadow: 0 0 35px rgba(52, 211, 153, 0.35);
+      }
+      .job-card {
+        background: rgba(14, 20, 17, 0.98);
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        border-radius: 20px;
+        padding: 24px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 18px;
+      }
+      .job-salary-badge {
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        color: #060807;
+        font-family: var(--font-mono);
+        font-size: 26px;
+        font-weight: 900;
+        padding: 10px 24px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
+      }
+
+      /* SCENE 10: CTA */
+      .cta-sticker-top {
+        background: #000000;
+        border: 2px solid #FFFFFF;
+        color: #FFFFFF;
+        font-size: 46px;
+        font-weight: 900;
+        padding: 16px 50px;
+        border-radius: 24px;
+        transform: rotate(-3deg);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      }
+      .cta-sticker-bottom {
+        background: linear-gradient(135deg, #10A37F 0%, #34D399 100%);
+        color: #060807;
+        font-size: 58px;
+        font-weight: 900;
+        padding: 18px 60px;
+        border-radius: 24px;
+        transform: rotate(2deg);
+        margin-top: -15px;
+        box-shadow: 0 15px 40px rgba(52, 211, 153, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="clip" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="41.5">
+      <!-- Background Ambient Grid -->
+      <div class="grid-plane"></div>
+      <div class="glow-orb-top"></div>
+
+      <!-- Audio Tracks -->
+      <audio id="voice" src="audio.mp3" data-start="0" data-duration="41.5" data-volume="1.15"></audio>
+      <audio id="bgm" src="assets/bgm.mp3" data-start="0" data-duration="41.5" data-volume="0.10"></audio>
+      <audio id="sfx-whoosh" src="assets/whoosh.mp3" data-start="0" data-duration="2" data-volume="0.30"></audio>
+      <audio id="sfx-pop" src="assets/pop.mp3" data-start="3.7" data-duration="1.5" data-volume="0.35"></audio>
+      <audio id="sfx-impact" src="assets/impact.mp3" data-start="22.5" data-duration="2.5" data-volume="0.40"></audio>
+      <audio id="sfx-click" src="assets/click.mp3" data-start="38.1" data-duration="1.5" data-volume="0.35"></audio>
+
+      <!-- Fixed Header Safe Zone -->
+      <header class="header-fixed">
+        <div class="brand-badge">
+          <div class="brand-dot"></div>
+          <span>dev.remoto</span>
+        </div>
+        <div class="tag-pill">AI DEV SKILLS</div>
+      </header>
+
+      <!-- Central Stage with Discrete Clips per Scene -->
+      <main class="stage">
+
+        <!-- SCENE 1: HOOK (0.0s - 3.7s) -->
+        <section id="scene-1" class="scene-clip clip" data-start="0.0" data-duration="3.7">
+          <div class="scene-title-group">
+            <div class="app-connector-row">
+              <div class="app-squircle claude-box">
+                <span style="font-size: 44px;">✦</span>
+                <span style="font-size: 18px; font-weight: 900;">Claude</span>
+              </div>
+              <div class="connector-line">
+                <div class="dashed-line"></div>
+                <div class="skill-pill-badge">+ skill</div>
+                <div class="dashed-line"></div>
+              </div>
+              <div class="app-squircle term-box">
+                <span style="font-size: 40px;">&gt;_</span>
+                <span style="font-size: 18px; font-weight: 900;">Terminal</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="emerald-card">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px;">
+              <span style="color: var(--accent-bright); font-size: 32px;">▶</span>
+              <h2 style="font-size: 34px; font-weight: 800;">Seu projeto <span style="font-size: 24px; color: var(--text-secondary); font-weight: 500;">quem faz cada parte</span></h2>
+            </div>
+            <div class="table-row">
+              <span class="row-title">Suíte de Testes</span>
+              <span id="badge-s1-1" class="badge-status badge-auto">Auto</span>
+            </div>
+            <div class="table-row">
+              <span class="row-title">Refatoração de Código</span>
+              <span class="badge-status badge-manual">Manual</span>
+            </div>
+            <div class="table-row">
+              <span class="row-title">Code Review & PRs</span>
+              <span class="badge-status badge-manual">Manual</span>
+            </div>
+            <div class="table-row">
+              <span class="row-title">Caça de Bugs Críticos</span>
+              <span class="badge-status badge-manual">Manual</span>
+            </div>
+            <div class="table-row">
+              <span class="row-title">Radar de Vagas em Dólar</span>
+              <span class="badge-status badge-manual">Manual</span>
+            </div>
+            <div class="table-row">
+              <span class="row-title">Planejamento de Sprint</span>
+              <span class="badge-status badge-manual">Manual</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCENE 2: NAME & BREADTH (3.7s - 8.3s) -->
+        <section id="scene-2" class="scene-clip clip" data-start="3.7" data-duration="4.6">
+          <div class="scene-title-group">
+            <div class="command-pill">skills / dev-agent</div>
+            <h1 class="hero-title">Dev Agent <span class="highlight">Skill</span></h1>
+            <p style="font-size: 30px; color: var(--text-secondary);">12 skills do Claude pro seu setup</p>
+          </div>
+          <div class="emerald-card" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/test-runner</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/refactor</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/pr-review</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/debugger</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/arch-doc</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/linear-sync</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/docker-opt</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/sec-audit</div>
+            <div class="job-card" style="margin: 0; justify-content: center; font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--accent-bright);">/radar-gringa</div>
+          </div>
+        </section>
+
+        <!-- SCENE 3: TESTES COM COBERTURA (8.3s - 11.8s) -->
+        <section id="scene-3" class="scene-clip clip" data-start="8.3" data-duration="3.5">
+          <div class="scene-title-group">
+            <div class="command-pill">/test-runner</div>
+            <h1 class="hero-title">Escreve seus <span class="highlight">testes</span></h1>
+          </div>
+          <div class="giant-counter" id="counter-val">100%</div>
+          <div class="emerald-card" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="job-card" style="margin: 0; border-color: rgba(52, 211, 153, 0.4);">
+              <span style="font-family: var(--font-mono); font-size: 26px; color: #34D399;">✓ test_auth_jwt.py</span>
+              <span class="badge-status badge-auto">PASSED (14ms)</span>
+            </div>
+            <div class="job-card" style="margin: 0; border-color: rgba(52, 211, 153, 0.4);">
+              <span style="font-family: var(--font-mono); font-size: 26px; color: #34D399;">✓ test_worker_pool.py</span>
+              <span class="badge-status badge-auto">PASSED (28ms)</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCENE 4: REFACTOR & PR (11.8s - 15.0s) -->
+        <section id="scene-4" class="scene-clip clip" data-start="11.8" data-duration="3.2">
+          <div class="scene-title-group">
+            <div class="command-pill">/dev-refactor</div>
+            <h1 class="hero-title">Refatora código <span class="highlight">legado</span></h1>
+          </div>
+          <div class="emerald-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <span style="font-size: 32px; font-weight: 800;">Pull Request #142</span>
+              <span style="font-family: var(--font-mono); font-size: 24px; color: var(--accent-bright); background: rgba(52, 211, 153, 0.15); padding: 8px 18px; border-radius: 8px;">Open</span>
+            </div>
+            <div style="font-size: 28px; color: var(--text-primary); margin-bottom: 15px;">refactor: clean architecture & memory pooling</div>
+            <div style="display: flex; gap: 20px; font-family: var(--font-mono); font-size: 22px; color: var(--text-secondary);">
+              <span style="color: #34D399;">+142 lines</span>
+              <span style="color: #EF4444;">-389 lines</span>
+              <span>All 18 checks passed</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCENE 5: DEBUGGING INVISÍVEL (15.0s - 18.0s) -->
+        <section id="scene-5" class="scene-clip clip" data-start="15.0" data-duration="3.0">
+          <div class="scene-title-group">
+            <div class="command-pill">/dev-debug</div>
+            <h1 class="hero-title">Caça o bug <span class="highlight">invisível</span></h1>
+          </div>
+          <div class="emerald-card" style="background: #000000; border-color: rgba(239, 68, 68, 0.4);">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #EF4444;"></div>
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #F59E0B;"></div>
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #10B981;"></div>
+              <span style="font-family: var(--font-mono); font-size: 20px; color: var(--text-secondary); margin-left: 10px;">runtime_leak_detector.ts</span>
+            </div>
+            <pre style="font-family: var(--font-mono); font-size: 24px; line-height: 1.6; color: #EF4444;">[CRITICAL] High memory pressure detected in thread #3
+[TRACE] Coroutine loop never releases buffer buffer_pool[x]
+<span style="color: #34D399;">[AUTO-PATCH] Wrapped in WeakRef & cleaned on GC loop.
+[STATUS] Zero memory leaks. Latency dropped 45%.</span></pre>
+          </div>
+        </section>
+
+        <!-- SCENE 6: ARQUITETURA & SPRINT (18.0s - 22.5s) -->
+        <section id="scene-6" class="scene-clip clip" data-start="18.0" data-duration="4.5">
+          <div class="scene-title-group">
+            <div class="command-pill">/dev-sprint</div>
+            <h1 class="hero-title">Planeja a sua <span class="highlight">sprint</span></h1>
+          </div>
+          <div class="emerald-card" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+            <div style="background: rgba(255,255,255,0.04); border-radius: 16px; padding: 15px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 20px; color: var(--text-secondary);">SEG</div>
+              <div class="job-card" style="padding: 12px; margin-top: 10px; font-size: 16px; background: #000; border-color: var(--accent-emerald);">API Core</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border-radius: 16px; padding: 15px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 20px; color: var(--text-secondary);">TER</div>
+              <div class="job-card" style="padding: 12px; margin-top: 10px; font-size: 16px; background: #10A37F; color: #fff;">Auth Flow</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border-radius: 16px; padding: 15px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 20px; color: var(--text-secondary);">QUA</div>
+              <div class="job-card" style="padding: 12px; margin-top: 10px; font-size: 16px; background: #000; border-color: var(--accent-emerald);">Database</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border-radius: 16px; padding: 15px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 20px; color: var(--text-secondary);">QUI</div>
+              <div class="job-card" style="padding: 12px; margin-top: 10px; font-size: 16px; background: #10A37F; color: #fff;">Deploy CI</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border-radius: 16px; padding: 15px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 20px; color: var(--text-secondary);">SEX</div>
+              <div class="job-card" style="padding: 12px; margin-top: 10px; font-size: 16px; background: #34D399; color: #000; font-weight: 800;">Release</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCENE 7: RADAR GRINGA - O CLÍMAX (22.5s - 32.5s) -->
+        <section id="scene-7" class="scene-clip clip" data-start="22.5" data-duration="10.0">
+          <div class="scene-title-group">
+            <div class="radar-search-bar">
+              <span style="color: var(--accent-bright);">🔍</span>
+              <span>vagas remotas internacionais</span>
+            </div>
+            <p style="font-size: 24px; color: var(--text-secondary);">ordenado por: salário em dólar • 100% elegível LatAm</p>
+          </div>
+
+          <div class="emerald-card" style="border-color: var(--accent-bright); box-shadow: 0 0 60px rgba(52, 211, 153, 0.3);">
+            <div class="job-card">
+              <div>
+                <div style="font-size: 32px; font-weight: 800;">Staff AI Engineer</div>
+                <div style="font-size: 22px; color: var(--text-secondary);">SF Tech Corp • Remoto Global</div>
+              </div>
+              <div class="job-salary-badge">US$ 8.500/mês</div>
+            </div>
+            <div class="job-card">
+              <div>
+                <div style="font-size: 32px; font-weight: 800;">Senior Backend (Go / Python)</div>
+                <div style="font-size: 22px; color: var(--text-secondary);">New York Fintech • Contrato B2B</div>
+              </div>
+              <div class="job-salary-badge">US$ 7.200/mês</div>
+            </div>
+            <div class="job-card">
+              <div>
+                <div style="font-size: 32px; font-weight: 800;">Lead React / Next.js</div>
+                <div style="font-size: 22px; color: var(--text-secondary);">Austin SaaS • Horário Flexível</div>
+              </div>
+              <div class="job-salary-badge">US$ 6.500/mês</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCENE 8: HUMAN IN THE LOOP (32.5s - 35.1s) -->
+        <section id="scene-8" class="scene-clip clip" data-start="32.5" data-duration="2.6">
+          <div class="scene-title-group">
+            <h1 class="hero-title" style="font-size: 68px;">Nada vai pro ar<br><span class="highlight">sem você</span></h1>
+          </div>
+          <div style="display: flex; gap: 30px; align-items: center;">
+            <div class="emerald-card" style="width: 440px; text-align: center;">
+              <span style="font-size: 28px; color: var(--text-secondary);">ELA PROPÕE</span>
+              <div style="font-family: var(--font-mono); font-size: 32px; font-weight: 800; color: #34D399; margin-top: 15px;">PR Criado</div>
+            </div>
+            <span style="font-size: 44px; color: var(--accent-bright);">➔</span>
+            <div class="emerald-card" style="width: 440px; text-align: center; border-color: var(--accent-bright);">
+              <span style="font-size: 28px; color: var(--text-secondary);">VOCÊ CONTROLA</span>
+              <div style="font-family: var(--font-mono); font-size: 32px; font-weight: 800; color: #FFFFFF; margin-top: 15px;">Merge Aprovado</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCENE 9: INSTALAÇÃO (35.1s - 38.1s) -->
+        <section id="scene-9" class="scene-clip clip" data-start="35.1" data-duration="3.0">
+          <div class="scene-title-group">
+            <div class="command-pill">terminal + Claude</div>
+            <h1 class="hero-title">Pra <span class="highlight">instalar</span></h1>
+          </div>
+          <div class="emerald-card" style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="job-card" style="margin: 0;">
+              <div style="display: flex; align-items: center; gap: 20px;">
+                <span class="badge-status badge-auto">1</span>
+                <span style="font-size: 30px; font-weight: 700;">Abre o Claude</span>
+              </div>
+              <span style="color: var(--accent-bright); font-size: 30px;">✦</span>
+            </div>
+            <div class="job-card" style="margin: 0; border-color: var(--accent-bright);">
+              <div style="display: flex; align-items: center; gap: 20px;">
+                <span class="badge-status badge-auto">2</span>
+                <span style="font-size: 30px; font-weight: 700;">Cola o comando oficial</span>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: 22px; color: var(--accent-bright);">agy add dev-agent</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCENE 10: CTA (38.1s - 41.5s) -->
+        <section id="scene-10" class="scene-clip clip" data-start="38.1" data-duration="3.4">
+          <div class="scene-title-group" style="align-items: center;">
+            <div class="cta-sticker-top">💬 COMENTA</div>
+            <div class="cta-sticker-bottom">▶ DEV</div>
+          </div>
+
+          <div class="emerald-card" style="margin-top: 30px;">
+            <div class="job-card" style="margin: 0 0 20px 0; background: #000; border-color: rgba(52,211,153,0.5);">
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent-emerald); display: flex; align-items: center; justify-content: center; font-weight: 800;">DR</div>
+                <span style="font-size: 32px; font-weight: 700; color: #FFFFFF;">DEV ✓</span>
+              </div>
+              <span style="font-size: 32px; color: var(--accent-bright);">✈</span>
+            </div>
+
+            <div class="job-card" style="margin: 0; background: rgba(52, 211, 153, 0.08); border-color: var(--accent-bright);">
+              <div>
+                <div style="font-size: 22px; color: var(--accent-bright); font-family: var(--font-mono);">Nova mensagem • direct</div>
+                <div style="font-size: 28px; font-weight: 700; margin-top: 6px;">Aqui está o seu passo a passo + prompt</div>
+              </div>
+              <span style="font-size: 34px;">📩</span>
+            </div>
+
+            <div style="text-align: center; margin-top: 24px; font-family: var(--font-mono); font-size: 24px; color: var(--text-secondary);">
+              • @devremoto.br
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Dynamic Subtitle Rail Safe Zone -->
+      <footer class="subtitle-rail-wrapper">
+        <div class="subtitle-pill">
+          <span id="sub-word-1" class="sub-word">COM</span>
+          <span id="sub-word-2" class="sub-word active-badge">ESSA</span>
+          <span id="sub-word-3" class="sub-word">SKILL</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- GSAP Controller -->
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Subtitle helper
+      function setSub(w1, w2, w3, isW2Active = true) {
+        const el1 = document.getElementById('sub-word-1');
+        const el2 = document.getElementById('sub-word-2');
+        const el3 = document.getElementById('sub-word-3');
+        if (el1) el1.innerText = w1;
+        if (el2) el2.innerText = w2;
+        if (el3) el3.innerText = w3;
+        if (isW2Active) {
+          el2.className = 'sub-word active-badge';
+          el1.className = 'sub-word';
+          el3.className = 'sub-word';
+        } else {
+          el1.className = 'sub-word active-badge';
+          el2.className = 'sub-word';
+          el3.className = 'sub-word';
+        }
+      }
+
+      // Dynamic subtitle updates matching spoken audio
+      tl.call(() => { setSub("COM", "ESSA", "SKILL"); }, null, 0.0);
+      tl.call(() => { setSub("CLAUDE", "VIRA", "TECH LEAD"); }, null, 1.2);
+
+      tl.call(() => { setSub("DE", "GRAÇA", "CHAMA"); }, null, 3.7);
+      tl.call(() => { setSub("DEV", "AGENT", "SKILL"); }, null, 5.0);
+      tl.call(() => { setSub("SÃO", "12", "SKILLS"); }, null, 6.8);
+
+      tl.call(() => { setSub("SUÍTE", "DE", "TESTES"); }, null, 8.3);
+      tl.call(() => { setSub("COBERTURA", "TOTAL", "100%"); }, null, 10.2);
+
+      tl.call(() => { setSub("REFATORA", "CÓDIGO", "LEGADO"); }, null, 11.8);
+      tl.call(() => { setSub("CRIA", "O", "PR"); }, null, 13.5);
+
+      tl.call(() => { setSub("CAÇA", "O", "BUG"); }, null, 15.0);
+      tl.call(() => { setSub("ANTES", "DE", "PRODUÇÃO"); }, null, 16.5);
+
+      tl.call(() => { setSub("DOCUMENTA", "EM", "SEGUNDOS"); }, null, 18.0);
+      tl.call(() => { setSub("PLANEJA", "SUA", "SPRINT"); }, null, 20.4);
+
+      tl.call(() => { setSub("A MAIS", "ABSURDA", "GRINGA"); }, null, 22.5);
+      tl.call(() => { setSub("VAGAS", "EM", "DÓLAR"); }, null, 25.0);
+      tl.call(() => { setSub("ACEITAM", "BRASILEIROS", "LATAM"); }, null, 27.5);
+      tl.call(() => { setSub("ADAPTA", "SEU", "CURRÍCULO"); }, null, 30.0);
+
+      tl.call(() => { setSub("NADA", "SEM", "VOCÊ"); }, null, 32.5);
+      tl.call(() => { setSub("ELA PROPÕE", "VOCÊ", "MERGE"); }, null, 34.0);
+
+      tl.call(() => { setSub("PRA", "INSTALAR", "RÁPIDO"); }, null, 35.1);
+      tl.call(() => { setSub("COLA", "O", "COMANDO"); }, null, 36.8);
+
+      tl.call(() => { setSub("COMENTA", "DEV", "DIRECT"); }, null, 38.1);
+      tl.call(() => { setSub("PASSO", "A", "PASSO"); }, null, 40.0);
+
+      // Register timeline
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

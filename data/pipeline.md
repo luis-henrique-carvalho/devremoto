@@ -120,4 +120,13 @@ Paste job URLs below as `- [ ] {url}` then run `/career-ops pipeline`.
 - [ ] https://br.linkedin.com/jobs/view/golang-developer-remote-latin-america-at-bluelight-4486622653 | Bluelight | Golang Developer - Remote, Latin America | Manaus, AM | posted: 2026-11-08
 - [ ] https://br.linkedin.com/jobs/view/data-engineer-remote-latin-america-at-bluelight-4486643187 | Bluelight | Data Engineer - Remote, Latin America | Fortaleza, CE | posted: 2026-11-08
 
+- [ ] https://starian.gupy.io/job/eyJqb2JJZCI6MTI3Njk0NDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Starian | Pessoa Desenvolvedora Fullstack Java/React/Node.js Pl (Remoto) - 9446 | Remoto | posted: 2026-11-09
+
+- [ ] https://premiersoft.inhire.app/vagas/fa79b99b-ab73-4e4e-a8f0-1398008e5a22/desenvolvedor-fullstack-senior-or-remoto | Premiersoft | Desenvolvedor Fullstack Sênior | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://lwsa.inhire.app/bling/vagas/b904415f-d269-4c53-8bba-3bee66b8fdf1/bling-or-desenvolvedora-pleno-or-golang-or-remoto | LWSA | Desenvolvedor(a) Pleno / Golang | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://magazineluiza.inhire.app/magalucloud/vagas/9c378616-4ffa-43d2-a0c0-697773043322/desenvolvedora-sr-postgresql | Magalu Cloud | Desenvolvedor(a) Sênior - PostgreSQL | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://magazineluiza.inhire.app/magalucloud/vagas/2bb20e7b-1f07-49d3-a6b1-979fb7ae00f0/desenvolvedora-sr-fast-track-mensageria | Magalu Cloud | Desenvolvedor(a) Sênior - Fast Track Mensageria | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://github.com/backend-br/vagas/issues/12494 | GitHub Community | \[Remoto\] Desenvolvedor(a) Backend Pleno - White Label e Plataforma - Mimix AI | Brasil (Remoto) | posted: 2026-11-09
+- [ ] https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI4Mzc4OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Quality Digital | PESSOA DESENVOLVEDORA SÊNIOR (BACK-END) | Remoto | posted: 2026-11-09
+
 ## Processed
