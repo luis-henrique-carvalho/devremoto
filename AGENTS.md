@@ -49,6 +49,11 @@ Nosso objetivo é conectar desenvolvedores a vagas legítimas sem pegadinhas de 
    - SFX pontuais entre `0.30` e `0.40` (`whoosh`, `impact`, `pop`, `click`).
    - ⚠️ **Invariante de ID em Áudio**: Todo elemento `<audio>` de SFX ou narração **deve conter um id único**, caso contrário é descartado pelo motor de mixagem do HyperFrames.
    - Loudness final auditado entre **-15.0 e -16.0 LUFS** com True Peak máximo de **-1.0 dBFS** via `tools/short_qa.py`.
+   - ⚠️ **Invariante de Duração Acústica Real (Anti-Corte)**:
+     - **Medição Obrigatória com `ffprobe`**: A duração da voz NUNCA deve ser baseada apenas no último timestamp do transcript (`transcript[last].end_sec`), pois a locução real possui decaimento de fonemas e reverb de 0.5s a 0.8s adicionais no arquivo `audio.mp3`. Deve-se utilizar `ffprobe` para obter a duração exata do arquivo.
+     - **Proibição Estrita de Truncamento**: É terminantemente proibido subtrair tempo na tag de voz (ex: `duration - 0.5`). O `<audio id="voice">` deve receber rigorosamente `data-duration="${voiceDuration.toFixed(2)}"`.
+     - **Outro Buffer Obrigatório (+1.2s a 2.0s)**: A duração total da composição (`#root`) deve ser calculada como `Math.ceil(voiceDuration + 1.2)`. A cena de CTA final (`scene-5`) deve estender sua visibilidade até o último frame (`roundedDuration - sc.start`), permitindo a leitura da palavra-chave sem cortes abruptos. As legendas devem ser ocultadas logo após a fala (`lastWordEnd + 0.25s`).
+     - **Trilha BGM Longa**: Utilizar sempre ativos de música em loop com duração superior à composição (ex: `bgm_loop.mp3` de 90s+), evitando cortes prematuros aos 32s.
 5. **Diretrizes de Motion Design e VFX Cinematográfico (Anti-Vídeo Chapado)**:
    - **Câmera 3D com Perspectiva Contínua**: O container `.camera-viewport` deve ter `perspective: 1200px` com câmera em movimento contínuo (órbita sutil ou travelling).
    - **Transições com Causa (Transitions with a Cause)**: Proibido crossfade genérico entre telas. Toda cena deve possuir animação explícita de entrada E saída sincronizada. Use *Zoom Through* (a câmera mergulha no cursor do prompt para abrir o próximo cenário) ou *Whip Snap* direcional.
