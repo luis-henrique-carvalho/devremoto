@@ -129,4 +129,49 @@ Paste job URLs below as `- [ ] {url}` then run `/career-ops pipeline`.
 - [ ] https://github.com/backend-br/vagas/issues/12494 | GitHub Community | \[Remoto\] Desenvolvedor(a) Backend Pleno - White Label e Plataforma - Mimix AI | Brasil (Remoto) | posted: 2026-11-09
 - [ ] https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI4Mzc4OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Quality Digital | PESSOA DESENVOLVEDORA SÊNIOR (BACK-END) | Remoto | posted: 2026-11-09
 
+- [ ] https://www.playlist.com/careers/opportunities/4719996006?gh_jid=4719996006&utm_source=remotar | Playlist | Software Engineer III - Backend | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://www.playlist.com/careers/opportunities/4720330006?gh_jid=4720330006&utm_source=remotar | Playlist | Business Intelligence Analyst II - People Analyst | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://www.playlist.com/careers/opportunities/4717901006?gh_jid=4717901006&utm_source=remotar | Playlist | Software Engineer III / FullStack | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://www.playlist.com/careers/opportunities/4726097006?gh_jid=4726097006&utm_source=remotar | Playlist | Staff Software Engineer - Frontend | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://job-boards.greenhouse.io/canonical/jobs/4676649?utm_source=remotar | Canonical | Cloud Engineering Manager | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://job-boards.greenhouse.io/canonical/jobs/3880952?utm_source=remotar | Canonical | Staff Software Engineer for Identity Management (Go/Golang) | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://job-boards.greenhouse.io/canonical/jobs/2969042?utm_source=remotar | Canonical | Distributed Systems Testing Software Engineer, Python / Go | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://job-boards.greenhouse.io/canonical/jobs/3003389?utm_source=remotar | Canonical | Senior Software Engineer - MAAS | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://job-boards.greenhouse.io/ifoodcarreiras/jobs/8919249002?utm_source=remotar | iFood | Senior Software Engineer - Full Stack (Agent Max) | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://www.geekhunter.com/pt/locaweb/jobs/-lider-tecnico-de-seguranca-da-informacao--application-security--1?utm_source=remotar | Geekhunter | LWSA - Líder Técnico de Segurança da Informação (Application Security) | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://www.geekhunter.com/pt/mv-saude-digital/jobs/desenvolvedor-pleno-93?utm_source=remotar | Geekhunter | DESENVOLVEDOR PLENO | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://leega.gupy.io/job/eyJqb2JJZCI6MTI4NTIxNTQsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Leega Consultoria | Engenheiro de Dados e Plataforma de Agentes Sênior (GCP) | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://jobs.recrutei.com.br/crp-tech/vacancy/164984-analista-de-testes?utm_source=remotar | CRP Tech | Analista de Testes | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://jobs.lever.co/caliza-financial-technologies/2b242a88-7660-4e90-b3a9-cb5ade877270/apply?utm_source=remotar | Caliza | Senior Software Engineer, Back End, Accounting & Treasury | São Paulo, SP (Remoto) | posted: 2026-11-09
+- [ ] https://jobs.lever.co/caliza-financial-technologies/e0519b77-10e5-4918-8c8d-521641fb3d76/apply?utm_source=remotar | Caliza | Senior Software Engineer, Front End, Dashboard | Brasil (100% Remoto) | posted: 2026-11-09
+- [ ] https://jobs.lever.co/caliza-financial-technologies/53b6d4ad-a957-45a2-a5dc-ef7503de2dbb/apply?utm_source=remotar | Caliza | Senior Software Engineer, DevOps | São Paulo, SP (Remoto) | posted: 2026-11-09
+- [ ] https://programathor.com.br/jobs/33879-tech-lead-senior | Karol Pralon | Tech Lead SeniorNOVA | Brasil (Remoto) | posted: 2026-11-10
+- [ ] https://cresolcarreiras.gupy.io/job/eyJqb2JJZCI6MTI4NTU2NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Cresol Oficial | Desenvolvedor de Sistemas/ Backend - Java / Pix e Open Finance / Cresol CSC (Remoto) | Remoto | posted: 2026-11-09
+- [ ] https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4NjAwNDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | VENHA SER #SANGUELARANJA 🧡🚀 | Desenvolvedor Fullstack Senior | Remoto | posted: 2026-11-09
+- [ ] https://ambev.gupy.io/job/eyJqb2JJZCI6MTI4NjAwMjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Ambev | \[Vaga Afirmativa PCD\] Desenvolvedor Pleno | Remoto | posted: 2026-11-09
+- [ ] https://aurum.gupy.io/job/eyJqb2JJZCI6MTI4NTkwNzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Aurum | Pessoa Desenvolvedora Full Stack Pleno / Remoto | Remoto | posted: 2026-11-09
+- [ ] https://montreal.gupy.io/job/eyJqb2JJZCI6MTI4NTkwNTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Montreal / Tecnologia e Inovação | Desenvolvedor Java | Remoto | posted: 2026-11-09
+- [ ] https://globalhitss.gupy.io/job/eyJqb2JJZCI6MTA4ODI3NTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Hitss Brasil | 20606-Analista Desenvolvedor SR | Remoto | posted: 2026-11-09
+- [ ] https://ioasys.gupy.io/job/eyJqb2JJZCI6MTI4NTczMTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | ioasys | Pessoa Desenvolvedora Python com foco em IA | Remoto | posted: 2026-11-09
+- [ ] https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4NTUxNDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | Stefanini Group | Desenvolvedor Full Stack Pleno / Java e Angular | Remoto | posted: 2026-11-09
+- [ ] https://daniel-ip.gupy.io/job/eyJqb2JJZCI6MTI4MzY5OTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal | DANIEL | Analista de Sistemas (Desenvolvedor Java) Júnior | Remoto | posted: 2026-11-04
+- [ ] https://br.linkedin.com/jobs/view/fullstack-software-engineer-remote-at-joblet-ai-4487912139 | Joblet-AI | Fullstack Software Engineer (Remote) | Brasil | posted: 2026-11-09
+- [ ] https://br.linkedin.com/jobs/view/qa-test-automation-mid-remote-at-ai-r-4489144864 | AI/R | QA Test Automation / Mid (Remote) | Brasil | posted: 2026-11-09
+
+- [ ] https://jobs.workable.com/view/1uV1DLoXLwp5mj2pb49vum/remote-ai-engineer-in-brazil-at-awesome-motive?utm_source=remotar | Awesome Motive | AI Engineer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://jobs.workable.com/view/t5oQVnjqh3DdycyfFrzZHh/remote-qa-team-lead%2C-customer-experience-in-brazil-at-hyprwork?utm_source=remotar | Hyprwork | QA Team Lead, Customer Experience | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://careers.epam.com/en/vacancy/senior-data-analyst-bltqy9cbdi98i4hykjs_en?utm_source=remotar | EPAM | Senior Data Analyst | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://careers.epam.com/en/vacancy/senior-devops-engineer-bltablrtcwi1m98lf5b_en?utm_source=remotar | EPAM | Senior DevOps Engineer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://careers.epam.com/en/vacancy/senior-data-engineer-bltxrfgkh4x6d5v595f_en?utm_source=remotar | EPAM | Senior Data Engineer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://careers.epam.com/en/vacancy/senior-frontend-developer-bltkpa1t7lwaw4ljy8s_en?utm_source=remotar | EPAM | Senior Frontend Developer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://careers.epam.com/en/vacancy/senior-python-developer-bltb4hsy3cq7dcnayaq_en?utm_source=remotar | EPAM | Senior Python Developer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://careers.epam.com/en/vacancy/senior-javascript-full-stack-developer-bltmhibcm0h1djji2id_en?utm_source=remotar | EPAM | Senior JavaScript Full-Stack Developer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://careers.epam.com/en/vacancy/senior-full-stack-net-developer-bltm9eqskpph70hc28i_en?utm_source=remotar | EPAM | Senior Full-Stack .NET Developer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://aurum.gupy.io/job/eyJqb2JJZCI6MTI4NTkwNzEsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Aurum Software | Pessoa Desenvolvedora Full Stack Pleno | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://softexpert.gupy.io/job/eyJqb2JJZCI6MTI4NTc3MzIsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | SoftExpert | Tech Lead - PQM | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://compass.gupy.io/job/eyJqb2JJZCI6MTI4NTgxNjgsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Compass.UOL | Java Back-End Developer | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://compass.gupy.io/job/eyJqb2JJZCI6MTI4NTk5NTUsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Compass.UOL | Java Developer / Mid (Remote) | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://softplan.gupy.io/job/eyJqb2JJZCI6MTI4NDEwODQsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Softplan + Starian | Pessoa Administradora de Banco de Dados Sr | Brasil (100% Remoto) | posted: 2026-11-10
+- [ ] https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4NjAwNDYsInNvdXJjZSI6InJlbW90YXIifQ==?jobBoardSource=remotar | Grupo FCamara | Desenvolvedor Fullstack Senior | Brasil (100% Remoto) | posted: 2026-11-10
+
 ## Processed

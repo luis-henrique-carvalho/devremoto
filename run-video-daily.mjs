@@ -130,22 +130,27 @@ function buildHyperFramesHtml(item, duration, transcript = []) {
 }
 
 function buildInstagramCaption(item) {
+  if (item.caption) {
+    return item.caption.trim();
+  }
+
   const keyword = item.ctaKeyword || 'REPLY';
-  const name = item.name || 'OpenReply';
+  const name = item.name || 'Ferramenta Open-Source';
+  
+  const featuresText = Array.isArray(item.techRows) && item.techRows.length > 0
+    ? item.techRows.map((r, i) => `${i + 1}. ${r.name.replace(/^[^\w\s]+/, '').trim()}`).join('\n')
+    : `1. 100% Gratuito e sem mensalidades\n2. Roda direto no seu computador\n3. Código aberto com milhares de estrelas no GitHub\n4. Sem limites de uso`;
 
   return `Comente ${keyword} aqui embaixo para receber o acesso gratuito e o tutorial direto no seu Direct.
 
-O ${name} substitui ferramentas caras de automação que cobram mensalidades pesadas em dólar por cada seguidor.
+O ${name} substitui ferramentas proprietárias caras que cobram mensalidades pesadas em dólar.
 
-Principais recursos no seu Instagram:
-1. Responde comentários em 3 segundos no piloto automático
-2. Envia links e catálogos direto no Direct de quem comentou
-3. Trava de seguidor: entrega o material só para quem te segue
-4. Contatos e mensagens ilimitadas sem pagar nenhuma mensalidade
+Principais recursos:
+${featuresText}
 
-Comente ${keyword} que o robô já te responde no Direct em segundos.
+Comente ${keyword} que o robô já te responde no Direct em segundos com o link oficial.
 
-#marketingdigital #redessociais #automacao #produtividade #instagramdicas`;
+#tecnologia #inteligenciaartificial #opensource #produtividade #devremoto`;
 }
 
 async function main() {

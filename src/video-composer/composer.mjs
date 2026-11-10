@@ -44,8 +44,10 @@ export function calculateSentenceTimings(scriptVoice, transcript, sceneCount = 5
 
   const totalDur = transcript[transcript.length - 1].end_sec;
 
-  // Separa por pontuação mantendo a integridade semântica
-  let raw = (scriptVoice || '').split(/(?<=[.?!])\s+/).map(s => s.trim()).filter(Boolean);
+  // Permite divisão explícita por blocos de parágrafos (\n\n) ou por pontuação
+  let raw = (scriptVoice || '').includes('\n\n')
+    ? (scriptVoice || '').split(/\n\n+/).map(s => s.trim().replace(/\n+/g, ' ')).filter(Boolean)
+    : (scriptVoice || '').split(/(?<=[.?!])\s+/).map(s => s.trim()).filter(Boolean);
 
   let groups = [];
   if (raw.length === sceneCount) {

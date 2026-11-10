@@ -24,42 +24,49 @@
       "id": "ai-voice-cloning-v1",
       "format": "carousel",
       "pillar": "superpowers",
-      "headline": "4 IAs de Voz Gratuitas para Substituir a ElevenLabs",
-      "kicker": "inteligência artificial // voz e áudio",
-      "stake": "Pare de gastar mensalidades em dólar para gerar vozes e narrações. Estas 4 ferramentas de código aberto rodam no seu PC com qualidade humana e zero limites.",
+      "headline": "4 IAs de Voz Gratuitas",
+      "kicker": "inteligência artificial // áudio",
+      "stake": "Pare de pagar mensalidade em dólar. Estas 4 ferramentas de código aberto rodam no seu PC com som natural e zero limites.",
       "keyword": "VOZ",
-      "caption": "Você ainda paga 20 dólares por mês para gerar voz com inteligência artificial?\n\nExistem alternativas de código aberto impressionantes que você pode rodar direto no seu computador sem pagar mensalidade e sem limites de caracteres.\n\nArraste para o lado para ver 4 opções gratuitas para clonar voz, dublar vídeos e gerar audiolivros inteiros.\n\nComente \"VOZ\" aqui nos comentários que te envio no direct os links oficiais de cada uma!",
+      "caption": "Você ainda paga 20 dólares por mês para gerar voz com inteligência artificial?\n\nExistem ferramentas de código aberto impressionantes que você pode rodar no seu computador sem pagar mensalidade e sem limites de caracteres.\n\nArraste para o lado e salve este post com 4 opções gratuitas para clonar voz, dublar vídeos e gerar audiolivros inteiros.\n\nComente \"VOZ\" aqui nos comentários que te envio no direct os links oficiais de cada uma agora mesmo!\n\n#devremoto #inteligenciaartificial #produtividade #trabalhoremoto #tecnologia #opensource",
       "items": [
         {
           "name": "Kokoro-82M",
           "tag": "Voz Neural · 100% Gratuito",
-          "desc": "Modelo levíssimo que gera áudio com entonação humana natural em português e inglês em menos de 1 segundo sem precisar de placa de vídeo cara.",
+          "desc": "Modelo levíssimo que gera áudio humano em português e inglês em menos de 1 segundo sem precisar de GPU potente.",
           "install": "pip install kokoro",
-          "example": "$ kokoro 'Seu texto' --voice pt_br"
+          "example": "$ kokoro \"Texto aqui\" --voice pt_br",
+          "recapCmd": "pip install kokoro"
         },
         {
           "name": "F5-TTS",
           "tag": "Clonagem com 5s de Áudio",
-          "desc": "Basta enviar um áudio de 5 segundos de qualquer pessoa para clonar a voz com precisão assustadora, preservando o sotaque e o timbre.",
+          "desc": "Basta enviar um áudio de 5 segundos para clonar qualquer voz com precisão assustadora, preservando o sotaque e o timbre.",
           "install": "git clone github.com/SWivid/F5-TTS",
-          "example": "$ f5-tts --ref audio.wav --text 'Nova fala'"
+          "example": "$ f5-tts --ref audio.wav --text \"Nova fala\"",
+          "recapCmd": "git clone SWivid/F5-TTS"
         },
         {
           "name": "AllTalk TTS",
           "tag": "Interface Web Completa",
-          "desc": "Painel visual no navegador que conecta múltiplos motores de voz. Permite gerar audiolivros inteiros, dublar vídeos e exportar em MP3 com 1 clique.",
+          "desc": "Painel visual no navegador para conectar múltiplos motores de voz, gerar audiolivros, dublar vídeos e exportar em MP3.",
           "install": "git clone github.com/erew123/alltalk_tts",
-          "example": "Acesse localhost:7851 no navegador"
+          "example": "Acesse localhost:7851 no seu navegador",
+          "recapCmd": "alltalk_tts (Web UI)"
         },
         {
           "name": "WhisperX",
           "tag": "Transcrição e Legendas",
-          "desc": "Transcreve qualquer reunião, podcast ou vídeo do YouTube com pontuação perfeita e timestamps palavra por palavra para legendas automáticas.",
+          "desc": "Transcreve qualquer reunião, podcast ou vídeo com pontuação perfeita e timestamps palavra por palavra para legendas automáticas.",
           "install": "pip install whisperx",
-          "example": "$ whisperx audio.mp3 --align"
+          "example": "$ whisperx audio.mp3 --align",
+          "recapCmd": "pip install whisperx"
         }
       ],
-      "status": "pending"
+      "status": "posted",
+      "recapDesc": "Tire um print deste slide para consultar os comandos quando precisar configurar suas vozes de IA.",
+      "ctaHeadline": "Quer os links e guias completos?",
+      "ctaBubbleHtml": "Comente <strong style=\"color: #34D399;\">VOZ</strong> abaixo que te mando a lista com todos os repositórios oficiais e atalhos de configuração direto no seu direct!"
     },
     {
       "id": "free-ai-tools-alternatives-v1",

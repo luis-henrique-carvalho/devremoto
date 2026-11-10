@@ -159,6 +159,7 @@ function collectData() {
 
   // 3. Vídeos Curtos (Reels / HyperFrames 9:16)
   const videoHistory = readJsonSafe(path.join(DATA_DIR, 'video-history.json'), []);
+  const videoCatalog = readJsonSafe(path.join(DATA_DIR, 'video-repo-catalog.json'), { catalog: [] }).catalog || [];
   const contentHistory = readJsonSafe(path.join(DATA_DIR, 'content-history.json'), { history: [] }).history || [];
 
   for (const v of videoHistory) {
@@ -168,10 +169,11 @@ function collectData() {
     const transcriptPath = path.join(videoDir, 'audio.transcript.json');
     const htmlPath = path.join(videoDir, 'index.html');
 
-    // Cross-reference with content-history to get keyword / headline
+    // Cross-reference with video-repo-catalog and content-history to get keyword / headline
+    const catItem = videoCatalog.find(c => c.id === v.id) || {};
     const matched = contentHistory.find(c => c.id === v.id || c.postId === v.postId) || {};
-    const headline = matched.headline || `${v.name || v.id} (Vídeo HyperFrames)`;
-    const keyword = matched.keyword || 'REPO';
+    const headline = catItem.name && catItem.category ? `${catItem.name}: ${catItem.category}` : (matched.headline || `${v.name || v.id} (Vídeo HyperFrames)`);
+    const keyword = v.ctaKeyword || catItem.ctaKeyword || matched.keyword || 'REPO';
 
     const createdAt = v.createdAt || matched.posted_at || new Date().toISOString();
     const dateSlug = createdAt.slice(0, 10);

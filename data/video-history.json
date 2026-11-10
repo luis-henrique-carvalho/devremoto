@@ -22,5 +22,17 @@
     "scheduleIso": "2026-11-09T16:30:00.000Z",
     "status": "scheduled",
     "createdAt": "2026-11-09T15:15:54.000Z"
+  },
+  {
+    "id": "kokoro-voice-cloning-v1",
+    "repo": "hexgrad/kokoro",
+    "name": "Kokoro TTS",
+    "videoDir": "/home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1",
+    "videoPath": "/home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1/output.mp4",
+    "postId": "cmwatvjub0003qj9o7gyldz7a",
+    "integrationId": "cmw6m87yh0001qjy4vy20eyss",
+    "scheduleIso": "2026-11-11T16:30:00.000Z",
+    "status": "scheduled",
+    "createdAt": "2026-11-10T15:11:27.603Z"
   }
 ]

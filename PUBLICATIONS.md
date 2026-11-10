@@ -1,7 +1,7 @@
 # 📊 Central de Operações & Ledger de Publicações — DevRemoto
 
 > **Documento gerado automaticamente.** Mapeia rigorosamente cada conteúdo produzido pelas automações, sua origem, arquivos gerados no disco e status no Postiz.
-> Última sincronização: **09/11/2026, 17:43:22 (Horário de Brasília)**
+> Última sincronização: **10/11/2026, 12:12:44 (Horário de Brasília)**
 
 ## 1. Grade Editorial & Próximos Slots Livres (Sistema Anti-Colisão)
 
@@ -9,21 +9,95 @@ Para evitar colisão de posts e canibalização pelo algoritmo do Instagram, as 
 
 | Tipo de Conteúdo | Horário Padrão (BRT) | Próximo Slot Vago Alocado | Invariante Anti-Canibalização |
 | :--- | :--- | :--- | :--- |
-| 💼 **Carrossel de Vagas** | 09:00 BRT | **2026-11-11 às 09:00 BRT** | Intervalo mín. 4h de outros posts |
-| 🎬 **Vídeo Reels (HyperFrames)** | 13:30 BRT | **2026-11-11 às 13:30 BRT** | Máximo 1 vídeo/dia no canal |
-| 🛠️ **Carrossel Técnico / Dicas** | 18:30 BRT | **2026-11-11 às 18:30 BRT** | Fila sequencial garantida |
+| 💼 **Carrossel de Vagas** | 09:00 BRT | **2026-11-12 às 09:00 BRT** | Intervalo mín. 4h de outros posts |
+| 🎬 **Vídeo Reels (HyperFrames)** | 13:30 BRT | **2026-11-12 às 13:30 BRT** | Máximo 1 vídeo/dia no canal |
+| 🛠️ **Carrossel Técnico / Dicas** | 18:30 BRT | **2026-11-12 às 18:30 BRT** | Fila sequencial garantida |
 
 ### 🟡 Fila Ativa Agendada no Postiz (Aguardando Publicação)
 
 | Data/Hora (BRT) | ID do Post | Título / Conteúdo Resumido |
 | :--- | :--- | :--- |
-| **09/11/2026, 18:30:00** | `cmw9ebnwu0009qj98ipohuyze` | Todo dev já viveu aquele frio na barriga de rodar um comando erra... |
-| **10/11/2026, 09:00:00** | `cmw9c34cn0007qj98kq07kv85` | Magalu Cloud, LWSA, Askable e mais 5 empresas estão com vagas 100... |
 | **10/11/2026, 15:00:00** | `cmw8d15vb0009qj9p9bm7rl72` | 3 ferramentas modernas em Rust que vão deixar seu terminal 10x ma... |
+| **11/11/2026, 09:00:00** | `cmwarhv3k0002qj9oqp1266cj` | iFood, Magalu Cloud, Canonical e mais 5 empresas estão com vagas ... |
+| **11/11/2026, 13:30:00** | `cmwatvjub0003qj9o7gyldz7a` | Comente VOZ aqui embaixo para receber o link do repositório e o t... |
+| **11/11/2026, 18:30:00** | `cmwaqdysa0000qj9omzbjktli` | Você ainda paga 20 dólares por mês para gerar voz com inteligênci... |
 
 --- 
 
 ## 2. Histórico Consolidado de Produções Recentes
+
+### 🛠️ [2026-11-10] 4 IAs de Voz Gratuitas
+
+- **Automação de Origem:** `devremoto-content-carousel (12:00 BRT)`
+- **Formato:** Carrossel Técnico & Ferramentas
+- **Gatilho de Direct (OpenReply):** `VOZ`
+- **Status no Postiz:** **Agendado no Postiz** (11/11/2026, 18:30:00)
+- **Post ID Postiz:** `cmwaqdysa0000qj9omzbjktli`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/output/2026-11-10-content`](file:///home/luis/repositories/canais/devremoto/output/2026-11-10-content)
+
+#### 📁 Arquivos Gerados:
+- **Slides PNG (1080×1350):** 7 slides gerados em [`slides/`](file:///home/luis/repositories/canais/devremoto/output/2026-11-10-content/slides)
+- **Texto da Legenda:** [caption.txt](file:///home/luis/repositories/canais/devremoto/output/2026-11-10-content/caption.txt)
+
+**Resumo da Legenda:**
+> Você ainda paga 20 dólares por mês para gerar voz com inteligência artificial?  Existem ferramentas de código aberto impressionantes que você pode rodar no seu computador sem pagar mensalidade e sem limites de caracteres.  Arraste para o lado e salve este post com 4 opções gratui...
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 🎬 [2026-11-10] Kokoro TTS: Inteligência Artificial de Voz
+
+- **Automação de Origem:** `devremoto-video-reels (12:00 BRT)`
+- **Formato:** Vídeo Vertical 9:16 (Reels/TikTok)
+- **Gatilho de Direct (OpenReply):** `VOZ`
+- **Status no Postiz:** **Agendado no Postiz** (11/11/2026, 13:30:00)
+- **Post ID Postiz:** `cmwatvjub0003qj9o7gyldz7a`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1`](file:///home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1)
+
+#### 📁 Arquivos Gerados:
+- **Vídeo MP4 Renderizado:** [output_final.mp4](file:///home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1/output.mp4)
+- **Áudio Neural Kokoro:** [audio.mp3](file:///home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1/audio.mp3)
+- **Timestamps Fonéticos:** [audio.transcript.json](file:///home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1/audio.transcript.json)
+- **Composição HTML/GSAP:** [index.html](file:///home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1/index.html)
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 💼 [2026-11-10] Radar de Vagas 100% Remotas (2026-11-10)
+
+- **Automação de Origem:** `instagram-devremoto-br (11:00 BRT)`
+- **Formato:** Carrossel de Vagas Diárias
+- **Gatilho de Direct (OpenReply):** `REMOTO`
+- **Status no Postiz:** **Agendado no Postiz** (11/11/2026, 09:00:00)
+- **Post ID Postiz:** `cmwarhv3k0002qj9oqp1266cj`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/output/2026-11-10`](file:///home/luis/repositories/canais/devremoto/output/2026-11-10)
+
+#### 📁 Arquivos Gerados:
+- **Slides PNG (1080×1350):** 7 slides gerados em [`slides/`](file:///home/luis/repositories/canais/devremoto/output/2026-11-10/slides)
+- **Texto da Legenda:** [caption.txt](file:///home/luis/repositories/canais/devremoto/output/2026-11-10/caption.txt)
+- **Página de Links Bio:** [links.html](file:///home/luis/repositories/canais/devremoto/output/2026-11-10/links.html)
+
+**Resumo da Legenda:**
+> iFood, Magalu Cloud, Canonical e mais 5 empresas estão com vagas 100% remotas abertas hoje para trabalhar de qualquer estado do Brasil.  Todas passaram pelo nosso filtro anti-híbrido: nada de vaga anunciada como remota que pede 2 ou 3 dias presenciais no escritório.  Destaques do...
+
+**Vagas Selecionadas:**
+- iFood: Senior Software Engineer · Full Stack (Agent Max) (A combinar)
+- Magalu Cloud: Desenvolvedor(a) Sênior · Mensageria (A combinar)
+- Canonical: Staff Software Engineer · Golang (A combinar)
+- EPAM: Senior Frontend Developer (A combinar)
+- *(+ 4 outras vagas na edição)*
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
 
 ### 💼 [2026-11-09] Radar de Vagas 100% Remotas (2026-11-09)
 

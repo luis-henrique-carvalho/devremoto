@@ -70,6 +70,16 @@
       "postizScheduleIso": "2026-11-09T16:30:00.000Z",
       "postId": "cmw9elg15000aqj98t549topa",
       "videoUrl": "https://postiz.luis-carvalho.online/uploads/2026/11/09/8cc1dff149058bc048b45f77e9aac101d.mp4"
+    },
+    {
+      "id": "ai-voice-cloning-v1",
+      "format": "carousel",
+      "headline": "4 IAs de Voz Gratuitas",
+      "keyword": "VOZ",
+      "posted_at": "2026-11-10T13:33:48.311Z",
+      "postizScheduleIso": "2026-11-11T21:30:00.000Z",
+      "postId": "cmwaqdysa0000qj9omzbjktli",
+      "videoUrl": null
     }
   ]
 }
