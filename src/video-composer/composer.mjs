@@ -118,8 +118,8 @@ export function calculateSentenceTimings(scriptVoice, transcript, sceneCount = 5
 /**
  * Constrói a lista normalizada de cenas baseada no item do catálogo e no transcript de áudio
  */
-export function buildStoryboard(item, duration, transcript = []) {
-  const roundedDuration = Math.ceil(duration);
+export function buildStoryboard(item, duration, transcript = [], totalVideoDuration = null) {
+  const roundedDuration = totalVideoDuration || Math.ceil(duration + 1.5);
   const timeSlots = calculateSentenceTimings(item.scriptVoice, transcript, 5);
 
   // Se o item já tiver scenes customizadas
@@ -128,11 +128,16 @@ export function buildStoryboard(item, duration, transcript = []) {
     const count = rawScenes.length;
     const slots = calculateSentenceTimings(item.scriptVoice, transcript, count);
 
-    return rawScenes.map((sc, i) => ({
-      ...sc,
-      start: slots[i].start,
-      duration: slots[i].duration
-    }));
+    return rawScenes.map((sc, i) => {
+      const isLast = i === count - 1;
+      const start = slots[i].start;
+      const dur = isLast ? Number((roundedDuration - start).toFixed(2)) : slots[i].duration;
+      return {
+        ...sc,
+        start,
+        duration: dur
+      };
+    });
   }
 
   // Fallback inteligente para itens legados do catálogo:
@@ -275,12 +280,12 @@ export function buildStoryboard(item, duration, transcript = []) {
     });
   }
 
-  // Cena 5: Fechamento com CTA Interativo
+  // Cena 5: Fechamento com CTA Interativo (estende até o final do vídeo para margem de leitura)
   scenes.push({
     id: 'cta',
     type: 'interactive-cta',
     start: timeSlots[4].start,
-    duration: timeSlots[4].duration,
+    duration: Number((roundedDuration - timeSlots[4].start).toFixed(2)),
     ctaKeyword: item.ctaKeyword || 'REPLY',
     repo: item.repo,
     directPreview: 'Ferramenta Gratuita + Passo a Passo'
@@ -293,9 +298,12 @@ export function buildStoryboard(item, duration, transcript = []) {
  * Compila o HTML completo determinístico do HyperFrames
  */
 export function compileVideoHtml(item, duration, transcript = []) {
-  const roundedDuration = Math.ceil(duration);
+  // duration é a duração real do arquivo de áudio da voz (ex: 38.42s)
+  // Adiciona um respiro de 1.2s a 2.0s no final para a CTA ser lida e o áudio nunca cortar
+  const voiceDuration = Number(duration.toFixed(2));
+  const roundedDuration = Math.ceil(voiceDuration + 1.2);
   const soundDirector = new SoundDirector();
-  const storyboard = buildStoryboard(item, duration, transcript);
+  const storyboard = buildStoryboard(item, voiceDuration, transcript, roundedDuration);
 
   const sceneHtmls = [];
   const sceneStyles = [];
@@ -348,8 +356,13 @@ export function compileVideoHtml(item, duration, transcript = []) {
     }
 
     // Limpa legendas nas transições de cena
-    storyboard.forEach(sc => {
-      subCalls.push(`      tl.call(() => { setSubText(""); }, null, ${Number((sc.start + sc.duration - 0.1).toFixed(2))});`);
+    storyboard.forEach((sc, idx) => {
+      if (idx < storyboard.length - 1) {
+        subCalls.push(`      tl.call(() => { setSubText(""); }, null, ${Number((sc.start + sc.duration - 0.1).toFixed(2))});`);
+      } else {
+        const lastWordEnd = transcript.length ? transcript[transcript.length - 1].end_sec : sc.start + 5;
+        subCalls.push(`      tl.call(() => { setSubText(""); }, null, ${Number((lastWordEnd + 0.25).toFixed(2))});`);
+      }
     });
   }
 
@@ -380,8 +393,8 @@ ${sceneStyles.join('\n')}
       <div class="glow-orb-top"></div>
 
       <!-- Áudio Principal da Voz e Trilha BGM -->
-      <audio id="voice" src="audio.mp3" data-start="0" data-duration="${(duration - 0.5).toFixed(2)}" data-volume="1.15"></audio>
-      <audio id="bgm" src="assets/bgm.mp3" data-start="0" data-duration="${roundedDuration}.0" data-volume="0.09"></audio>
+      <audio id="voice" src="audio.mp3" data-start="0" data-duration="${voiceDuration.toFixed(2)}" data-volume="1.15"></audio>
+      <audio id="bgm" src="assets/bgm_loop.mp3" data-start="0" data-duration="${roundedDuration}.0" data-volume="0.08"></audio>
       
       <!-- SFX Sincronizados 1:1 com os Eventos Visuais -->
 ${sfxTags}

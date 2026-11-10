@@ -726,13 +726,13 @@
     </style>
   </head>
   <body>
-    <div id="root" class="clip" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="38.0">
+    <div id="root" class="clip" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="40.0">
       <div class="grid-plane"></div>
       <div class="glow-orb-top"></div>
 
       <!-- Áudio Principal da Voz e Trilha BGM -->
-      <audio id="voice" src="audio.mp3" data-start="0" data-duration="37.14" data-volume="1.15"></audio>
-      <audio id="bgm" src="assets/bgm.mp3" data-start="0" data-duration="38.0" data-volume="0.09"></audio>
+      <audio id="voice" src="audio.mp3" data-start="0" data-duration="38.42" data-volume="1.15"></audio>
+      <audio id="bgm" src="assets/bgm_loop.mp3" data-start="0" data-duration="40.0" data-volume="0.08"></audio>
       
       <!-- SFX Sincronizados 1:1 com os Eventos Visuais -->
       <audio id="sfx-whoosh-1" src="assets/whoosh.mp3" data-start="0.05" data-duration="0.57" data-volume="0.28"></audio>
@@ -1073,7 +1073,7 @@
     </section>
   
 
-    <section id="scene-5" class="scene-clip clip" data-start="31.15" data-duration="6.49">
+    <section id="scene-5" class="scene-clip clip" data-start="31.15" data-duration="8.85">
       <div class="scene-title-group" style="align-items: center;">
         <div class="cta-sticker-top">💬 COMENTA</div>
         <div class="cta-sticker-bottom">▶ VOZ</div>
@@ -1218,7 +1218,7 @@
     }, null, 32.85);
 
     tl.fromTo("#scene-5 .emerald-card", { y: 50, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 33.15);
-    tl.fromTo("#scene-5 .cta-sticker-bottom", { scale: 1 }, { scale: 1.05, duration: 0.4, repeat: 4, yoyo: true, ease: "sine.inOut" }, 33.65);
+    tl.fromTo("#scene-5 .cta-sticker-bottom", { scale: 1 }, { scale: 1.05, duration: 0.4, repeat: 12, yoyo: true, ease: "sine.inOut" }, 33.65);
   
 
       // Legendas Sincronizadas
@@ -1325,7 +1325,7 @@
       tl.call(() => { setSubText(""); }, null, 14.35);
       tl.call(() => { setSubText(""); }, null, 23.01);
       tl.call(() => { setSubText(""); }, null, 31.05);
-      tl.call(() => { setSubText(""); }, null, 37.54);
+      tl.call(() => { setSubText(""); }, null, 37.89);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

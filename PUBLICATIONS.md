@@ -1,7 +1,7 @@
 # 📊 Central de Operações & Ledger de Publicações — DevRemoto
 
 > **Documento gerado automaticamente.** Mapeia rigorosamente cada conteúdo produzido pelas automações, sua origem, arquivos gerados no disco e status no Postiz.
-> Última sincronização: **10/11/2026, 12:12:44 (Horário de Brasília)**
+> Última sincronização: **10/11/2026, 17:01:00 (Horário de Brasília)**
 
 ## 1. Grade Editorial & Próximos Slots Livres (Sistema Anti-Colisão)
 
@@ -17,9 +17,8 @@ Para evitar colisão de posts e canibalização pelo algoritmo do Instagram, as 
 
 | Data/Hora (BRT) | ID do Post | Título / Conteúdo Resumido |
 | :--- | :--- | :--- |
-| **10/11/2026, 15:00:00** | `cmw8d15vb0009qj9p9bm7rl72` | 3 ferramentas modernas em Rust que vão deixar seu terminal 10x ma... |
 | **11/11/2026, 09:00:00** | `cmwarhv3k0002qj9oqp1266cj` | iFood, Magalu Cloud, Canonical e mais 5 empresas estão com vagas ... |
-| **11/11/2026, 13:30:00** | `cmwatvjub0003qj9o7gyldz7a` | Comente VOZ aqui embaixo para receber o link do repositório e o t... |
+| **11/11/2026, 13:30:00** | `cmwb47mc30004qj9oa2p0m91w` | Comente VOZ aqui embaixo para receber o link do repositório e o t... |
 | **11/11/2026, 18:30:00** | `cmwaqdysa0000qj9omzbjktli` | Você ainda paga 20 dólares por mês para gerar voz com inteligênci... |
 
 --- 
@@ -54,7 +53,7 @@ Para evitar colisão de posts e canibalização pelo algoritmo do Instagram, as 
 - **Formato:** Vídeo Vertical 9:16 (Reels/TikTok)
 - **Gatilho de Direct (OpenReply):** `VOZ`
 - **Status no Postiz:** **Agendado no Postiz** (11/11/2026, 13:30:00)
-- **Post ID Postiz:** `cmwatvjub0003qj9o7gyldz7a`
+- **Post ID Postiz:** `cmwb47mc30004qj9oa2p0m91w`
 - **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1`](file:///home/luis/repositories/canais/devremoto/videos/kokoro-voice-cloning-v1)
 
 #### 📁 Arquivos Gerados:

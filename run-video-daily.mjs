@@ -56,6 +56,23 @@ function writeJson(filePath, data) {
 }
 
 /**
+ * Obtém a duração exata do arquivo de áudio com ffprobe
+ */
+function getAudioFileDuration(audioPath, fallback = 30.0) {
+  try {
+    const res = spawnSync('ffprobe', [
+      '-i', audioPath,
+      '-show_entries', 'format=duration',
+      '-v', 'quiet',
+      '-of', 'csv=p=0'
+    ], { encoding: 'utf8' });
+    const val = parseFloat(res.stdout?.trim());
+    if (!isNaN(val) && val > 0) return Number(val.toFixed(2));
+  } catch {}
+  return fallback;
+}
+
+/**
  * Retorna o próximo horário das 12:00 BRT (15:00 UTC) para agendamento.
  */
 function getNextNoonBrtIso(now = new Date()) {
@@ -116,8 +133,9 @@ asyncio.run(main())
     throw new Error(`Falha ao gerar áudio com edge-tts: ${res.stderr || res.stdout}`);
   }
   const transcript = readJsonOr(transcriptPath, []);
-  const duration = transcript.length ? transcript[transcript.length - 1].end_sec : 30.0;
-  console.log(`[Audio] Concluído! Duração: ${duration.toFixed(2)}s`);
+  const fileDur = getAudioFileDuration(audioPath);
+  const duration = fileDur || (transcript.length ? transcript[transcript.length - 1].end_sec + 0.8 : 30.0);
+  console.log(`[Audio] Concluído! Duração real: ${duration.toFixed(2)}s`);
   return { audioPath, transcriptPath, duration };
 }
 
@@ -212,9 +230,8 @@ async function main() {
     fs.writeFileSync(scriptTrackPath, (target.scriptVoice || '').trim(), 'utf8');
   } else {
     const transcript = readJsonOr(transcriptPath, []);
-    if (transcript.length) {
-      audioDuration = transcript[transcript.length - 1].end_sec;
-    }
+    const fileDur = getAudioFileDuration(audioPath);
+    audioDuration = fileDur || (transcript.length ? transcript[transcript.length - 1].end_sec + 0.8 : 30.0);
     console.log(`[Audio] Áudio já existente (${audioDuration.toFixed(2)}s).`);
   }
 

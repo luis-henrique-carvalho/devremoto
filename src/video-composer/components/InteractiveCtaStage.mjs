@@ -74,7 +74,7 @@ export function renderInteractiveCtaStage(scene, sceneIdx) {
     }, null, ${clickSendTime});
 
     tl.fromTo("#scene-${sceneIdx} .emerald-card", { y: 50, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, ${cardDropTime});
-    tl.fromTo("#scene-${sceneIdx} .cta-sticker-bottom", { scale: 1 }, { scale: 1.05, duration: 0.4, repeat: 4, yoyo: true, ease: "sine.inOut" }, ${cardDropTime + 0.5});
+    tl.fromTo("#scene-${sceneIdx} .cta-sticker-bottom", { scale: 1 }, { scale: 1.05, duration: 0.4, repeat: 12, yoyo: true, ease: "sine.inOut" }, ${cardDropTime + 0.5});
   `;
 
   return {
