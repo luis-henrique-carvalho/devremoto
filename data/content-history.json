@@ -80,6 +80,26 @@
       "postizScheduleIso": "2026-11-11T21:30:00.000Z",
       "postId": "cmwaqdysa0000qj9omzbjktli",
       "videoUrl": null
+    },
+    {
+      "id": "free-ai-tools-alternatives-v1",
+      "format": "carousel",
+      "headline": "4 IAs Que Parecem Ilegais",
+      "keyword": "SUPER",
+      "posted_at": "2026-11-11T13:33:34.297Z",
+      "postizScheduleIso": "2026-11-12T21:30:00.000Z",
+      "postId": "cmwc5timy0005qj9oftsnpic8",
+      "videoUrl": null
+    },
+    {
+      "id": "offline-ai-superpowers-v1",
+      "format": "carousel",
+      "headline": "ChatGPT Grátis e Offline no PC",
+      "keyword": "CHAT",
+      "posted_at": "2026-11-12T13:33:59.508Z",
+      "postizScheduleIso": "2026-11-13T21:30:00.000Z",
+      "postId": "cmwdl9wrc0009qj9olenjva49",
+      "videoUrl": null
     }
   ]
 }

@@ -18,6 +18,8 @@ import { fileURLToPath } from 'node:url';
 import { loadDotEnv, publishVideoToPostiz } from './src/publish-postiz.mjs';
 import { findNextAvailableSlot } from './src/slot-arbiter.mjs';
 import { compileVideoHtml } from './src/video-composer/composer.mjs';
+import { ensureVideoCatalogReplenished } from './src/discover-video-trends.mjs';
+import { generateProjectVisualAssets } from './src/capture-project-visuals.mjs';
 
 const ROOT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(ROOT_DIR, 'data');
@@ -35,7 +37,10 @@ function parseCliArgs(argv) {
   return {
     dryRun: argv.includes('--dry-run'),
     forceAudio: argv.includes('--force-audio'),
+    replenishOnly: argv.includes('--replenish'),
     repoId: getVal('--repo', ''),
+    slotType: getVal('--slot', 'video'),
+    count: Math.max(1, parseInt(getVal('--count', '1'), 10) || 1),
     publishMode: getVal('--publish-mode', 'schedule'),
     targetDate: getVal('--date', ''),
   };
@@ -73,12 +78,12 @@ function getAudioFileDuration(audioPath, fallback = 30.0) {
 }
 
 /**
- * Retorna o próximo horário das 12:00 BRT (15:00 UTC) para agendamento.
+ * Retorna o próximo horário disponível para vídeo (09:30, 13:30 ou 18:30 BRT) sem colisão.
  */
-function getNextNoonBrtIso(now = new Date()) {
+function getNextVideoSlotIso(slotType = 'video', now = new Date()) {
   try {
-    const slot = findNextAvailableSlot('video', now);
-    console.log(`[SlotArbiter] Próximo slot de vídeo alocado: ${slot.slotBrt} (${slot.scheduleIso})`);
+    const slot = findNextAvailableSlot(slotType, now);
+    console.log(`[SlotArbiter] Próximo slot de vídeo alocado (${slotType}): ${slot.slotBrt} (${slot.scheduleIso})`);
     return slot.scheduleIso;
   } catch (err) {
     console.warn('[SlotArbiter] Fallback para cálculo local:', err.message);
@@ -105,7 +110,7 @@ async def main():
     audio_path = ${JSON.stringify(audioPath)}
     json_path = ${JSON.stringify(transcriptPath)}
     
-    comm = edge_tts.Communicate(text, voice="pt-BR-AntonioNeural", rate="+10%", boundary="WordBoundary")
+    comm = edge_tts.Communicate(text, voice="pt-BR-AntonioNeural", rate="+15%", boundary="WordBoundary")
     words = []
     with open(audio_path, "wb") as f:
         async for chunk in comm.stream():
@@ -156,31 +161,27 @@ function buildInstagramCaption(item) {
   const name = item.name || 'Ferramenta Open-Source';
   
   const featuresText = Array.isArray(item.techRows) && item.techRows.length > 0
-    ? item.techRows.map((r, i) => `${i + 1}. ${r.name.replace(/^[^\w\s]+/, '').trim()}`).join('\n')
-    : `1. 100% Gratuito e sem mensalidades\n2. Roda direto no seu computador\n3. Código aberto com milhares de estrelas no GitHub\n4. Sem limites de uso`;
+    ? item.techRows.map((r, i) => `${i + 1}. ${r.name.replace(/^[^\w\s]+/, '').trim()} (${r.detail || ''})`).join('\n')
+    : `1. 100% Gratuito e sem mensalidades\n2. Roda direto no seu navegador ou PC\n3. Código aberto com milhares de estrelas\n4. Sem limites escondidos`;
 
-  return `Comente ${keyword} aqui embaixo para receber o acesso gratuito e o tutorial direto no seu Direct.
+  return `Comente ${keyword} aqui embaixo que eu te envio o Kit Completo no seu Direct agora mesmo 👇
 
-O ${name} substitui ferramentas proprietárias caras que cobram mensalidades pesadas em dólar.
+O ${name} entrega gratuitamente o que plataformas caras cobram centenas de reais por mês.
 
-Principais recursos:
+O que essa ferramenta faz na prática:
 ${featuresText}
 
-Comente ${keyword} que o robô já te responde no Direct em segundos com o link oficial.
+📦 O que você recebe no Direct ao comentar ${keyword}:
+1️⃣ Link oficial direto para acessar de graça
+2️⃣ Passo a passo de configuração em 2 minutos
+3️⃣ Checklist anti-erro + prompts prontos para copiar e colar
 
-#tecnologia #inteligenciaartificial #opensource #produtividade #devremoto`;
+⚠️ Importante: Siga @devremoto.br antes de comentar ${keyword} para o Instagram liberar a entrega automática na sua DM!
+
+#tecnologia #inteligenciaartificial #ferramentasia #produtividade #devremoto`;
 }
 
-async function main() {
-  const args = parseCliArgs(process.argv.slice(2));
-  console.log(`\n======================================================`);
-  console.log(`🚀 DevRemoto: Pipeline Diário de Vídeo Viral (Reels)`);
-  console.log(`======================================================\n`);
-
-  const env = loadDotEnv(ENV_PATH);
-  const catalogData = readJsonOr(CATALOG_PATH, { catalog: [] });
-  const history = readJsonOr(HISTORY_PATH, []);
-
+async function runSingleVideo(args, env, catalogData, history, slotPreference = 'video') {
   // Seleciona repositório alvo
   let target = null;
   if (args.repoId) {
@@ -196,8 +197,10 @@ async function main() {
     }
   }
 
+  console.log(`\n------------------------------------------------------`);
   console.log(`[Seleção] Repositório: ${target.name} (${target.repo})`);
-  console.log(`[Seleção] Categoria: ${target.category} | Stars: ${target.stars}`);
+  console.log(`[Seleção] Categoria: ${target.category} | Stars: ${target.stars} | Gatilho: ${target.ctaKeyword}`);
+  console.log(`------------------------------------------------------`);
 
   // Configura pasta de renderização
   const videoDir = path.join(VIDEOS_DIR, target.id);
@@ -214,6 +217,9 @@ async function main() {
       }
     }
   }
+
+  // Gera automaticamente as 6 telas visuais de alta definição da notícia/projeto/funcionalidades
+  await generateProjectVisualAssets(target, assetsDir);
 
   // Gera áudio e transcript
   const audioPath = path.join(videoDir, 'audio.mp3');
@@ -276,12 +282,12 @@ async function main() {
   // Publicação / Agendamento no Postiz
   if (args.dryRun) {
     console.log(`\n[Dry-Run] Modo teste ativo. Postiz não acionado.`);
-    return;
+    return { target, outputMp4, scheduled: false };
   }
 
-  const scheduleIso = args.targetDate || getNextNoonBrtIso();
+  const scheduleIso = args.targetDate || getNextVideoSlotIso(slotPreference);
   const caption = buildInstagramCaption(target);
-  console.log(`\n[Postiz] Agendando publicação para: ${scheduleIso} (12:00 BRT)`);
+  console.log(`\n[Postiz] Agendando publicação para: ${scheduleIso}`);
   console.log(`[Postiz] Canal: dev.remoto (${env.POSTIZ_INSTAGRAM_ID})`);
 
   const pubResult = publishVideoToPostiz({
@@ -321,11 +327,39 @@ async function main() {
   });
   writeJson(HISTORY_PATH, history);
 
+  return { target, outputMp4, scheduleIso, postId: pubResult.response?.[0]?.postId || null, scheduled: true };
+}
+
+async function main() {
+  const args = parseCliArgs(process.argv.slice(2));
+  console.log(`\n======================================================`);
+  console.log(`🚀 DevRemoto: Pipeline 3x Vídeos Virais por Dia (Reels)`);
+  console.log(`======================================================\n`);
+
+  // Reabastece automaticamente com pautas virais amplas se o catálogo estiver baixo
+  ensureVideoCatalogReplenished(4);
+  if (args.replenishOnly) {
+    console.log(`[Replenish] Catálogo verificado e atualizado com sucesso.`);
+    return;
+  }
+
+  const env = loadDotEnv(ENV_PATH);
+  const catalogData = readJsonOr(CATALOG_PATH, { catalog: [] });
+  const history = readJsonOr(HISTORY_PATH, []);
+
+  const slotSequence = ['video_morning', 'video', 'video_evening'];
+  const totalToRun = args.repoId ? 1 : args.count;
+
+  for (let i = 0; i < totalToRun; i++) {
+    const slotPref = totalToRun > 1 ? slotSequence[i % slotSequence.length] : args.slotType;
+    await runSingleVideo(args, env, catalogData, history, slotPref);
+  }
+
   try {
     execSync(`node "${path.join(ROOT_DIR, 'sync-dashboard.mjs')}"`, { stdio: 'ignore' });
   } catch {}
 
-  console.log(`\n[Sucesso] Pipeline concluído com sucesso!\n`);
+  console.log(`\n[Sucesso] Pipeline concluído (${totalToRun} vídeo(s) processado(s))!\n`);
 }
 
 main().catch((err) => {

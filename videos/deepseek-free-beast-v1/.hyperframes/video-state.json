@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "historyId": "b926c288-11ea-44bd-90dd-c368db4cd0af",
+  "currentRevision": "f9f72e33-32a7-4448-bb0e-cd261ddc95ea",
+  "pendingChanges": false,
+  "files": {
+    "assets/background.jpeg": {
+      "hash": "056cc5ffda649bc6ca15568722d808e09fca72f0a9865e215b76101ee86e38e5",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/05/056cc5ffda649bc6ca15568722d808e09fca72f0a9865e215b76101ee86e38e5"
+    },
+    "assets/bgm.mp3": {
+      "hash": "76f80cdbf7b26211bd1c512320273f98d6450be7790c78ea2fc5de43da189bb3",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/76/76f80cdbf7b26211bd1c512320273f98d6450be7790c78ea2fc5de43da189bb3"
+    },
+    "assets/click.mp3": {
+      "hash": "075e17bdac5c13662a1c9530050e0046f81d4138e00eb3bf30427a7b4404103d",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/07/075e17bdac5c13662a1c9530050e0046f81d4138e00eb3bf30427a7b4404103d"
+    },
+    "assets/hyperframes-logo-white.svg": {
+      "hash": "f9f942c43b465616c3af2fb8b07daf1cc05a4776903bbb27beb2bb608060e6c7",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/f9/f9f942c43b465616c3af2fb8b07daf1cc05a4776903bbb27beb2bb608060e6c7"
+    },
+    "assets/impact.mp3": {
+      "hash": "634d5eda5eb7b501aca98393a64f3815eccf24157cd1d95df55aaec1b5000bd7",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/63/634d5eda5eb7b501aca98393a64f3815eccf24157cd1d95df55aaec1b5000bd7"
+    },
+    "assets/pop.mp3": {
+      "hash": "19ab7193f626ff57fdeef60b45543bac416fcbcec803cfb417abe4b271c1b352",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/19/19ab7193f626ff57fdeef60b45543bac416fcbcec803cfb417abe4b271c1b352"
+    },
+    "assets/real-demo.png": {
+      "hash": "8ee625ac75bc8efcb66a0673483d113de28344c2b19d13f4a04ce98612748b30",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/8e/8ee625ac75bc8efcb66a0673483d113de28344c2b19d13f4a04ce98612748b30"
+    },
+    "assets/real-desktop.png": {
+      "hash": "5d584faddee3cf2db837a59f3cac23642ced30a303141831ace700160c10db1c",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/5d/5d584faddee3cf2db837a59f3cac23642ced30a303141831ace700160c10db1c"
+    },
+    "assets/real-mobile.png": {
+      "hash": "ff06d5ba2ec10f04c5ef920db41fd158a950abc9c5c429ef18162d1f765aeeea",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/ff/ff06d5ba2ec10f04c5ef920db41fd158a950abc9c5c429ef18162d1f765aeeea"
+    },
+    "assets/real-repo.png": {
+      "hash": "ac5344fb28fcbc254bd18101c19bff2e4f982c192ee6a240bf2b00c526cddb4d",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/ac/ac5344fb28fcbc254bd18101c19bff2e4f982c192ee6a240bf2b00c526cddb4d"
+    },
+    "assets/riser.mp3": {
+      "hash": "d2f29d49f27dee7d3b25af22ffe5bebc39390cc5d5fb3b3e1c433499c77f3d1d",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/d2/d2f29d49f27dee7d3b25af22ffe5bebc39390cc5d5fb3b3e1c433499c77f3d1d"
+    },
+    "assets/whoosh.mp3": {
+      "hash": "c2efd9d902a59bf9ec5019035d7deadd17762136896b6e3cb6dd99ea50997a30",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/c2/c2efd9d902a59bf9ec5019035d7deadd17762136896b6e3cb6dd99ea50997a30"
+    },
+    "audio.mp3": {
+      "hash": "6db5f222d8b6088b374ce8ae531dccad835f0918488fde7580b8390674931920",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/6d/6db5f222d8b6088b374ce8ae531dccad835f0918488fde7580b8390674931920"
+    },
+    "audio.transcript.json": {
+      "hash": "8f8001709250c43c1c343be21c6a355b2a839ae469f24689a6b1feebe74d82af",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/8f/8f8001709250c43c1c343be21c6a355b2a839ae469f24689a6b1feebe74d82af"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "e54cec2524849be898e2fa479a8259a874981dde32123f7665e9be1c9592beb8",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/e5/e54cec2524849be898e2fa479a8259a874981dde32123f7665e9be1c9592beb8"
+    },
+    "package.json": {
+      "hash": "49ed9c8e790941d122ac442b4a537218a5c1b397ce7c32bf49e61901bd83f1a7",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/49/49ed9c8e790941d122ac442b4a537218a5c1b397ce7c32bf49e61901bd83f1a7"
+    },
+    "script.txt": {
+      "hash": "31814eeba78f9bc2cf6a9170a2041487aebf61b03ef9a9dc276d9d620931a04b",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/31/31814eeba78f9bc2cf6a9170a2041487aebf61b03ef9a9dc276d9d620931a04b"
+    },
+    "assets/bgm_loop.mp3": {
+      "hash": "d1538f1616ad6c22fbf727ab96cb139fe3d1b55b6a7ba6210dd26e03ae442c32",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/d1/d1538f1616ad6c22fbf727ab96cb139fe3d1b55b6a7ba6210dd26e03ae442c32"
+    },
+    "assets/sfx_ui.wav": {
+      "hash": "eef4bec75a5820c80196151eb1600a68166553afbd2a80f6c0f64fd18f1c82df",
+      "content": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/ee/eef4bec75a5820c80196151eb1600a68166553afbd2a80f6c0f64fd18f1c82df"
+    }
+  },
+  "revisions": {
+    "f9f72e33-32a7-4448-bb0e-cd261ddc95ea": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794517847610,
+      "endedAt": 1794517847611,
+      "files": {
+        "index.html": {
+          "before": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/10/103a7fffc53bd8a722bd256f8d56d1542b1bca418766dc086b52d1ccc1c62a40",
+          "after": "/home/luis/.cache/hyperframes/history/b926c288-11ea-44bd-90dd-c368db4cd0af/blobs/e5/e54cec2524849be898e2fa479a8259a874981dde32123f7665e9be1c9592beb8"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "f9f72e33-32a7-4448-bb0e-cd261ddc95ea",
+      "id": "02958635-17f3-49c4-84cf-1d4c18990a64"
+    },
+    "revisions": {
+      "f9f72e33-32a7-4448-bb0e-cd261ddc95ea": [
+        {
+          "id": "02958635-17f3-49c4-84cf-1d4c18990a64",
+          "scope": "project",
+          "report": "/home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1/.hyperframes/artifacts/checks/02958635-17f3-49c4-84cf-1d4c18990a64.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 45000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1794517854958,
+          "contentHash": "6434301da75a55e75751d2fef9ac6487cf90732a52031b3f0752ce1afa91b7bd",
+          "revision": "f9f72e33-32a7-4448-bb0e-cd261ddc95ea",
+          "inputFingerprint": "86c35668d301bf1d6ab970434a882adfb56ae23a661564e9255184dc457a7ad5",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "42584205-6410-4b25-a1ae-068b9c3fb19e",
+      "completedAt": 1794517915009,
+      "output": "/home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1/output.mp4",
+      "status": "completed",
+      "revision": "f9f72e33-32a7-4448-bb0e-cd261ddc95ea"
+    },
+    "retainedRevisions": [
+      "f9f72e33-32a7-4448-bb0e-cd261ddc95ea"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

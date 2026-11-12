@@ -1,69 +1,66 @@
 /**
- * HookDavidGoliath — Cena de Choque (Assinatura Cara vs Open-Source)
+ * HookDavidGoliath — Cena 1: Hook de Choque Visual + Preview Real da Notícia/Projeto
+ *
+ * IMPORTANTE: Frame 0.0s já nasce 100% visível com a imagem visual do projeto (`assets/screen-hook.png`)
+ * + comparativo David vs Golias para prender a atenção imediatamente no feed.
  */
 
 export function renderHookDavidGoliath(scene, sceneIdx) {
-  const comp = scene.competitor || { name: "Plataforma Paga", price: "$100/mês", limit: "Cobrança Recorrente" };
-  const stamp = scene.stamp || "ASSINATURA CARA 💸";
+  const compName = scene.competitor?.name || "Assinatura Tradicional";
+  const compPrice = scene.competitor?.price || "R$ 200/mês";
+  const compLimit = scene.competitor?.limit || "Com limites e mensalidade";
+  const stampText = scene.stamp || "100% GRATUITO ⚡";
 
   const html = `
     <section id="scene-${sceneIdx}" class="scene-clip clip" data-start="${scene.start}" data-duration="${scene.duration}">
-      <div class="scene-title-group">
-        <div class="command-pill" data-layout-ignore>⚠ ${scene.alert || 'ALERTA // ZERO MENSALIDADE'}</div>
+      <div class="scene-title-group" id="hook-header-${sceneIdx}">
+        <div class="alert-pill" data-layout-ignore>🔥 ${scene.alert || 'DESCOBERTA TECH // 100% GRÁTIS'}</div>
         <h1 class="hero-title">${scene.title}</h1>
-        <p style="font-size: 26px; color: var(--text-secondary);">${scene.subtitle || ''}</p>
+        <p style="font-size: 26px; color: var(--text-secondary); max-width: 900px; line-height: 1.3;">${scene.subtitle}</p>
       </div>
 
-      <div class="emerald-card" style="border-color: rgba(239, 68, 68, 0.45);">
-        <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 28px; padding-bottom: 18px; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);" data-layout-ignore>
-          <span><span style="color: #EF4444;">$</span> ${comp.name}: ${comp.price}</span>
-          <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>Assinatura Cara</span>
-        </div>
-        <div id="cost-row-2" class="table-row">
-          <span class="row-title">Cobrança por Seguidor</span>
-          <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>${comp.limit || 'Paga a mais se crescer'}</span>
-        </div>
-        <div id="cost-row-3" class="table-row">
-          <span class="row-title">Limite de Mensagens</span>
-          <span class="badge-status" style="background: rgba(239, 68, 68, 0.18); color: #EF4444;" data-layout-ignore>Bloqueia no limite</span>
-        </div>
-        <div id="cost-row-4" class="table-row">
-          <span class="row-title">Alternativa Aberta</span>
-          <span class="badge-status" style="background: rgba(52, 211, 153, 0.2); color: var(--accent-bright);" data-layout-ignore>100% Grátis e Ilimitado</span>
-        </div>
+      <!-- Preview Visual da Notícia / Projeto em Ação (screen-hook.png) -->
+      <div id="hook-visual-frame-${sceneIdx}" style="width: 960px; height: 360px; border-radius: 22px; overflow: hidden; border: 2px solid rgba(52, 211, 153, 0.45); box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 35px rgba(16, 163, 127, 0.25); position: relative; background: #070B09;">
+        <img id="hook-visual-img-${sceneIdx}" src="assets/screen-hook.png" alt="Preview do Projeto" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
       </div>
 
-      <div id="cost-stamp" style="background: #000000; border: 2px solid #EF4444; color: #EF4444; font-family: var(--font-mono); font-size: 28px; font-weight: 900; padding: 12px 36px; border-radius: 18px; transform: rotate(-2deg); box-shadow: 0 10px 30px rgba(0,0,0,0.8);" data-layout-ignore>
-        ${stamp}
+      <div class="emerald-card" id="hook-card-${sceneIdx}" style="position: relative; padding: 24px 32px; gap: 14px;">
+        <div id="price-row-${sceneIdx}-1" class="table-row" style="border-color: rgba(239, 68, 68, 0.45); background: rgba(239, 68, 68, 0.10); padding: 16px 24px;">
+          <span class="row-title" style="color: #FCA5A5; font-size: 25px;">❌ ${compName}</span>
+          <span class="badge badge-danger" style="font-size: 23px;">${compPrice}</span>
+        </div>
+        <div id="price-row-${sceneIdx}-2" class="table-row" style="border-color: rgba(52, 211, 153, 0.65); background: rgba(16, 163, 127, 0.22); box-shadow: 0 0 30px rgba(16, 163, 127, 0.25); padding: 16px 24px;">
+          <span class="row-title" style="color: #FFFFFF; font-size: 26px;">✅ Alternativa Aberta (${compLimit})</span>
+          <span class="badge" style="background: var(--accent-bright); color: #060807; font-weight: 900; font-size: 23px;">R$ 0,00 (Grátis)</span>
+        </div>
+
+        <div id="stamp-${sceneIdx}" class="stamp-discard" data-layout-ignore style="border-color: var(--accent-bright); color: #060807; background: var(--accent-bright); box-shadow: 0 12px 35px rgba(52, 211, 153, 0.5); font-size: 26px; padding: 10px 28px; bottom: -22px;">${stampText}</div>
       </div>
     </section>
   `;
 
-  // Retorna HTML, CSS adicional e os tweens GSAP sincronizados dinamicamente
-  const row2Time = (scene.start + (scene.duration * 0.22)).toFixed(2);
-  const row3Time = (scene.start + (scene.duration * 0.42)).toFixed(2);
-  const row4Time = (scene.start + (scene.duration * 0.62)).toFixed(2);
-  const stampTime = Number((scene.start + (scene.duration * 0.78)).toFixed(2));
-  const exitTime = Number((scene.start + scene.duration - 0.35).toFixed(2));
+  const row2Time = Number((scene.start + 0.45).toFixed(2));
+  const stampTime = Number((scene.start + 0.95).toFixed(2));
+  const exitTime = Number((scene.start + scene.duration - 0.28).toFixed(2));
 
   const gsapScript = `
-    // Cena ${sceneIdx}: Hook David vs Goliath
-    tl.fromTo("#scene-${sceneIdx} .command-pill", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, ${scene.start + 0.05});
-    tl.fromTo("#scene-${sceneIdx} .hero-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, ${scene.start + 0.15});
-    tl.fromTo("#scene-${sceneIdx} .emerald-card", { y: 35, rotateX: 10, opacity: 0 }, { y: 0, rotateX: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, ${scene.start + 0.25});
-    tl.fromTo("#cost-row-2", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, ${row2Time});
-    tl.fromTo("#cost-row-3", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, ${row3Time});
-    tl.fromTo("#cost-row-4", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, ${row4Time});
-    tl.fromTo("#cost-stamp", { scale: 2.4, opacity: 0, rotate: -25 }, { scale: 1, opacity: 1, rotate: -2, duration: 0.45, ease: "elastic.out(1.2, 0.4)" }, ${stampTime});
-    tl.to("#scene-${sceneIdx}", { y: -80, scale: 0.94, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, ${exitTime});
+    // Cena ${sceneIdx}: Hook David vs Golias + Visual Screen
+    tl.fromTo("#hook-header-${sceneIdx}", { scale: 0.94, y: -15 }, { scale: 1, y: 0, duration: 0.32, ease: "back.out(1.8)" }, ${scene.start});
+    tl.fromTo("#hook-visual-frame-${sceneIdx}", { scale: 0.95, y: 20 }, { scale: 1, y: 0, duration: 0.38, ease: "back.out(1.5)" }, ${scene.start});
+    tl.fromTo("#hook-visual-img-${sceneIdx}", { scale: 1.0 }, { scale: 1.06, duration: ${Math.max(1.5, scene.duration - 0.3).toFixed(2)}, ease: "sine.inOut" }, ${scene.start});
+    tl.fromTo("#price-row-${sceneIdx}-1", { x: -35, scale: 0.96 }, { x: 0, scale: 1, duration: 0.28, ease: "back.out(1.6)" }, ${scene.start});
+    tl.fromTo("#price-row-${sceneIdx}-2", { x: 45, opacity: 0, scale: 0.90 }, { x: 0, opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, ${row2Time});
+    tl.fromTo("#stamp-${sceneIdx}", { scale: 2.2, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: -3, duration: 0.32, ease: "back.out(2.2)" }, ${stampTime});
+    tl.to("#scene-${sceneIdx}", { x: -120, scale: 0.92, opacity: 0, duration: 0.28, ease: "power3.in" }, ${exitTime});
   `;
 
   return {
     html,
     gsapScript,
     sfxCues: [
-      { type: 'whoosh', time: scene.start + 0.05 },
-      { type: 'impact', time: stampTime + 0.05, volume: 0.42 }, // Impacto exatamente na queda do carimbo
+      { type: 'whoosh', time: scene.start },
+      { type: 'pop', time: row2Time, volume: 0.30 },
+      { type: 'impact', time: stampTime + 0.04, volume: 0.38 },
       { type: 'whoosh', time: exitTime }
     ]
   };

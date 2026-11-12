@@ -266,24 +266,45 @@ export function publishVideoToPostiz({
     };
   }
 
-  // Upload video file
-  console.log(`[Postiz] Fazendo upload do vídeo: ${path.basename(videoPath)}...`);
-  const upRes = spawnFn(postizBin, ['upload', videoPath], { encoding: 'utf8', env: childEnv, timeout: 120_000 });
-  if (upRes.status !== 0) {
-    return {
-      published: false,
-      reason: 'upload_failed',
-      message: `Failed uploading ${path.basename(videoPath)}: ${(upRes.stderr || upRes.stdout || '').trim()}`,
-    };
+  // Upload video file (com cache para evitar re-upload em retentativas)
+  const uploadCachePath = path.join(path.dirname(videoPath), '.postiz-upload.json');
+  let mediaPath = null;
+  const videoStat = fs.existsSync(videoPath) ? fs.statSync(videoPath) : null;
+  if (fs.existsSync(uploadCachePath) && videoStat) {
+    try {
+      const cached = JSON.parse(fs.readFileSync(uploadCachePath, 'utf8'));
+      if (cached.size === videoStat.size && cached.path) {
+        mediaPath = cached.path;
+        console.log(`[Postiz] Reutilizando upload em cache do vídeo: ${mediaPath}`);
+      }
+    } catch {}
   }
 
-  const upJson = parseJsonFromStdout(upRes.stdout);
-  if (!upJson?.path) {
-    return {
-      published: false,
-      reason: 'upload_parse_failed',
-      message: `Postiz upload did not return a .path for ${path.basename(videoPath)}.`,
-    };
+  if (!mediaPath) {
+    console.log(`[Postiz] Fazendo upload do vídeo: ${path.basename(videoPath)}...`);
+    const upRes = spawnFn(postizBin, ['upload', videoPath], { encoding: 'utf8', env: childEnv, timeout: 120_000 });
+    if (upRes.status !== 0) {
+      return {
+        published: false,
+        reason: 'upload_failed',
+        message: `Failed uploading ${path.basename(videoPath)}: ${(upRes.stderr || upRes.stdout || '').trim()}`,
+      };
+    }
+
+    const upJson = parseJsonFromStdout(upRes.stdout);
+    if (!upJson?.path) {
+      return {
+        published: false,
+        reason: 'upload_parse_failed',
+        message: `Postiz upload did not return a .path for ${path.basename(videoPath)}.`,
+      };
+    }
+    mediaPath = upJson.path;
+    if (videoStat) {
+      try {
+        fs.writeFileSync(uploadCachePath, JSON.stringify({ path: mediaPath, size: videoStat.size }), 'utf8');
+      } catch {}
+    }
   }
 
   const normalizedMode = mode === 'schedule' ? 'schedule' : 'draft';
@@ -298,13 +319,27 @@ export function publishVideoToPostiz({
     '--settings',
     JSON.stringify({ post_type: 'post' }),
     '-m',
-    upJson.path,
+    mediaPath,
     '-i',
     resolvedIgId,
   ];
 
   console.log(`[Postiz] Criando post de vídeo (${normalizedMode})...`);
-  const createRes = spawnFn(postizBin, createArgs, { encoding: 'utf8', env: childEnv, timeout: 45_000 });
+  let createRes = null;
+  const maxRetries = 4;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    createRes = spawnFn(postizBin, createArgs, { encoding: 'utf8', env: childEnv, timeout: 45_000 });
+    if (createRes.status === 0) break;
+    const errText = (createRes.stderr || createRes.stdout || '').trim();
+    if ((errText.includes('429') || errText.includes('ThrottlerException')) && attempt < maxRetries) {
+      const waitSec = 35 + attempt * 10;
+      console.warn(`[Postiz] Throttler 429 detectado. Aguardando ${waitSec}s para liberar a janela do Throttler (tentativa ${attempt}/${maxRetries})...`);
+      spawnSync('sleep', [String(waitSec)]);
+      continue;
+    }
+    break;
+  }
+
   if (createRes.status !== 0) {
     return {
       published: false,
@@ -318,7 +353,7 @@ export function publishVideoToPostiz({
     mode: normalizedMode,
     integrationId: resolvedIgId,
     scheduleIso,
-    videoUrl: upJson.path,
+    videoUrl: mediaPath,
     response: parseJsonFromStdout(createRes.stdout) || (createRes.stdout || '').trim(),
   };
 }

@@ -1,0 +1,746 @@
+[
+  {
+    "type": "WordBoundary",
+    "offset": 954580,
+    "duration": 2727080,
+    "text": "Pode",
+    "start_sec": 0.0955,
+    "end_sec": 0.3682
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 3795410,
+    "duration": 5000000,
+    "text": "cancelar",
+    "start_sec": 0.3795,
+    "end_sec": 0.8795
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 8909160,
+    "duration": 1250000,
+    "text": "sua",
+    "start_sec": 0.8909,
+    "end_sec": 1.0159
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 10272910,
+    "duration": 4886250,
+    "text": "assinatura",
+    "start_sec": 1.0273,
+    "end_sec": 1.5159
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 15272910,
+    "duration": 681660,
+    "text": "da",
+    "start_sec": 1.5273,
+    "end_sec": 1.5955
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 16068330,
+    "duration": 2840830,
+    "text": "Adobe",
+    "start_sec": 1.6068,
+    "end_sec": 1.8909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 19022910,
+    "duration": 3977080,
+    "text": "agora",
+    "start_sec": 1.9023,
+    "end_sec": 2.3
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 30795410,
+    "duration": 7500000,
+    "text": "Pesquisadores",
+    "start_sec": 3.0795,
+    "end_sec": 3.8295
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 38409160,
+    "duration": 4772910,
+    "text": "clonaram",
+    "start_sec": 3.8409,
+    "end_sec": 4.3182
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 43295410,
+    "duration": 227079,
+    "text": "a",
+    "start_sec": 4.3295,
+    "end_sec": 4.3522
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 43636250,
+    "duration": 11022910,
+    "text": "IA",
+    "start_sec": 4.3636,
+    "end_sec": 5.4659
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 54772910,
+    "duration": 681660,
+    "text": "do",
+    "start_sec": 5.4773,
+    "end_sec": 5.5455
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 55568330,
+    "duration": 6477080,
+    "text": "Photoshop",
+    "start_sec": 5.5568,
+    "end_sec": 6.2045
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 62159160,
+    "duration": 227079,
+    "text": "e",
+    "start_sec": 6.2159,
+    "end_sec": 6.2386
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 62500000,
+    "duration": 4545410,
+    "text": "liberaram",
+    "start_sec": 6.25,
+    "end_sec": 6.7045
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 67159160,
+    "duration": 909160,
+    "text": "de",
+    "start_sec": 6.7159,
+    "end_sec": 6.8068
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 68181660,
+    "duration": 4204580,
+    "text": "graça",
+    "start_sec": 6.8182,
+    "end_sec": 7.2386
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 80227080,
+    "duration": 3295410,
+    "text": "Roda",
+    "start_sec": 8.0227,
+    "end_sec": 8.3522
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 83636250,
+    "duration": 909160,
+    "text": "no",
+    "start_sec": 8.3636,
+    "end_sec": 8.4545
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 84659160,
+    "duration": 1590830,
+    "text": "seu",
+    "start_sec": 8.4659,
+    "end_sec": 8.625
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 86363750,
+    "duration": 3181660,
+    "text": "PC",
+    "start_sec": 8.6364,
+    "end_sec": 8.9545
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 89659160,
+    "duration": 2159160,
+    "text": "sem",
+    "start_sec": 8.9659,
+    "end_sec": 9.1818
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 91931660,
+    "duration": 6590830,
+    "text": "mensalidade",
+    "start_sec": 9.1932,
+    "end_sec": 9.8522
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 98636250,
+    "duration": 227079,
+    "text": "e",
+    "start_sec": 9.8636,
+    "end_sec": 9.8863
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 98977080,
+    "duration": 1931660,
+    "text": "sem",
+    "start_sec": 9.8977,
+    "end_sec": 10.0909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 101022910,
+    "duration": 5454580,
+    "text": "limites",
+    "start_sec": 10.1023,
+    "end_sec": 10.6477
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 114318330,
+    "duration": 1250000,
+    "text": "E",
+    "start_sec": 11.4318,
+    "end_sec": 11.5568
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 115681660,
+    "duration": 568330,
+    "text": "o",
+    "start_sec": 11.5682,
+    "end_sec": 11.625
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 116363750,
+    "duration": 1250000,
+    "text": "que",
+    "start_sec": 11.6364,
+    "end_sec": 11.7614
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 117727080,
+    "duration": 1931660,
+    "text": "ela",
+    "start_sec": 11.7727,
+    "end_sec": 11.9659
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 119772910,
+    "duration": 3863750,
+    "text": "faz",
+    "start_sec": 11.9773,
+    "end_sec": 12.3637
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 131477080,
+    "duration": 4204580,
+    "text": "Primeiro",
+    "start_sec": 13.1477,
+    "end_sec": 13.5682
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 138181660,
+    "duration": 4545410,
+    "text": "recorta",
+    "start_sec": 13.8182,
+    "end_sec": 14.2727
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 142840830,
+    "duration": 2727080,
+    "text": "fios",
+    "start_sec": 14.2841,
+    "end_sec": 14.5568
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 145681660,
+    "duration": 909160,
+    "text": "de",
+    "start_sec": 14.5682,
+    "end_sec": 14.6591
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 146704580,
+    "duration": 3636250,
+    "text": "cabelo",
+    "start_sec": 14.6705,
+    "end_sec": 15.0341
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 150454580,
+    "duration": 1704580,
+    "text": "sem",
+    "start_sec": 15.0455,
+    "end_sec": 15.2159
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 152272910,
+    "duration": 3636250,
+    "text": "borrar",
+    "start_sec": 15.2273,
+    "end_sec": 15.5909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 163750000,
+    "duration": 5568330,
+    "text": "Segundo",
+    "start_sec": 16.375,
+    "end_sec": 16.9318
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 171818330,
+    "duration": 4204580,
+    "text": "remove",
+    "start_sec": 17.1818,
+    "end_sec": 17.6023
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 176136250,
+    "duration": 340830,
+    "text": "o",
+    "start_sec": 17.6136,
+    "end_sec": 17.6477
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 176590830,
+    "duration": 3181660,
+    "text": "fundo",
+    "start_sec": 17.6591,
+    "end_sec": 17.9772
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 179886250,
+    "duration": 909160,
+    "text": "de",
+    "start_sec": 17.9886,
+    "end_sec": 18.0795
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 180909160,
+    "duration": 2840830,
+    "text": "vídeos",
+    "start_sec": 18.0909,
+    "end_sec": 18.375
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 183863750,
+    "duration": 6363750,
+    "text": "inteiros",
+    "start_sec": 18.3864,
+    "end_sec": 19.0228
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 198068330,
+    "duration": 4886250,
+    "text": "Terceiro",
+    "start_sec": 19.8068,
+    "end_sec": 20.2955
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 205681660,
+    "duration": 4772910,
+    "text": "suporta",
+    "start_sec": 20.5682,
+    "end_sec": 21.0455
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 210568330,
+    "duration": 3409160,
+    "text": "fotos",
+    "start_sec": 21.0568,
+    "end_sec": 21.3977
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 214090830,
+    "duration": 1818330,
+    "text": "em",
+    "start_sec": 21.4091,
+    "end_sec": 21.5909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 216022910,
+    "duration": 6022500,
+    "text": "4K",
+    "start_sec": 21.6023,
+    "end_sec": 22.2045
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 229886250,
+    "duration": 1022910,
+    "text": "E",
+    "start_sec": 22.9886,
+    "end_sec": 23.0909
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 231022910,
+    "duration": 3977080,
+    "text": "quarto",
+    "start_sec": 23.1023,
+    "end_sec": 23.5
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 236931660,
+    "duration": 2954580,
+    "text": "roda",
+    "start_sec": 23.6932,
+    "end_sec": 23.9886
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 240000000,
+    "duration": 2272910,
+    "text": "cem",
+    "start_sec": 24.0,
+    "end_sec": 24.2273
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 242386250,
+    "duration": 1477080,
+    "text": "por",
+    "start_sec": 24.2386,
+    "end_sec": 24.3863
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 243977080,
+    "duration": 2613750,
+    "text": "cento",
+    "start_sec": 24.3977,
+    "end_sec": 24.6591
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 246704580,
+    "duration": 5000000,
+    "text": "offline",
+    "start_sec": 24.6705,
+    "end_sec": 25.1705
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 251818330,
+    "duration": 1931660,
+    "text": "sem",
+    "start_sec": 25.1818,
+    "end_sec": 25.375
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 253863750,
+    "duration": 3636250,
+    "text": "enviar",
+    "start_sec": 25.3864,
+    "end_sec": 25.75
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 257613750,
+    "duration": 3181660,
+    "text": "nada",
+    "start_sec": 25.7614,
+    "end_sec": 26.0795
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 260909160,
+    "duration": 1590830,
+    "text": "pra",
+    "start_sec": 26.0909,
+    "end_sec": 26.25
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 262613750,
+    "duration": 3522910,
+    "text": "nuvem",
+    "start_sec": 26.2614,
+    "end_sec": 26.6137
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 273977080,
+    "duration": 2727080,
+    "text": "Essa",
+    "start_sec": 27.3977,
+    "end_sec": 27.6704
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 276818330,
+    "duration": 3863750,
+    "text": "imagem",
+    "start_sec": 27.6818,
+    "end_sec": 28.0682
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 280795410,
+    "duration": 6136250,
+    "text": "recortada",
+    "start_sec": 28.0795,
+    "end_sec": 28.6932
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 287045410,
+    "duration": 681660,
+    "text": "que",
+    "start_sec": 28.7045,
+    "end_sec": 28.7727
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 287840830,
+    "duration": 4545410,
+    "text": "apareceu",
+    "start_sec": 28.7841,
+    "end_sec": 29.2386
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 292500000,
+    "duration": 1136250,
+    "text": "no",
+    "start_sec": 29.25,
+    "end_sec": 29.3636
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 293750000,
+    "duration": 2727080,
+    "text": "vídeo",
+    "start_sec": 29.375,
+    "end_sec": 29.6477
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 296590830,
+    "duration": 1363750,
+    "text": "foi",
+    "start_sec": 29.6591,
+    "end_sec": 29.7955
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 298068330,
+    "duration": 2613750,
+    "text": "feita",
+    "start_sec": 29.8068,
+    "end_sec": 30.0682
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 300795410,
+    "duration": 568330,
+    "text": "em",
+    "start_sec": 30.0795,
+    "end_sec": 30.1364
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 301477080,
+    "duration": 795410,
+    "text": "um",
+    "start_sec": 30.1477,
+    "end_sec": 30.2272
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 302386250,
+    "duration": 4659160,
+    "text": "segundo",
+    "start_sec": 30.2386,
+    "end_sec": 30.7045
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 307159160,
+    "duration": 1363750,
+    "text": "por",
+    "start_sec": 30.7159,
+    "end_sec": 30.8523
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 308636250,
+    "duration": 2840830,
+    "text": "ela",
+    "start_sec": 30.8636,
+    "end_sec": 31.1477
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 319318330,
+    "duration": 3181660,
+    "text": "Você",
+    "start_sec": 31.9318,
+    "end_sec": 32.25
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 322613750,
+    "duration": 2500000,
+    "text": "nem",
+    "start_sec": 32.2614,
+    "end_sec": 32.5114
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 325227080,
+    "duration": 5568330,
+    "text": "percebeu",
+    "start_sec": 32.5227,
+    "end_sec": 33.0795
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 338636250,
+    "duration": 4204580,
+    "text": "Comente",
+    "start_sec": 33.8636,
+    "end_sec": 34.2841
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 342954580,
+    "duration": 2727080,
+    "text": "FOTO",
+    "start_sec": 34.2955,
+    "end_sec": 34.5682
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 345795410,
+    "duration": 1704580,
+    "text": "aqui",
+    "start_sec": 34.5795,
+    "end_sec": 34.75
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 347613750,
+    "duration": 4772910,
+    "text": "embaixo",
+    "start_sec": 34.7614,
+    "end_sec": 35.2387
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 352500000,
+    "duration": 568330,
+    "text": "que",
+    "start_sec": 35.25,
+    "end_sec": 35.3068
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 353181660,
+    "duration": 681660,
+    "text": "eu",
+    "start_sec": 35.3182,
+    "end_sec": 35.3863
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 353977080,
+    "duration": 795410,
+    "text": "te",
+    "start_sec": 35.3977,
+    "end_sec": 35.4772
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 354886250,
+    "duration": 3295410,
+    "text": "envio",
+    "start_sec": 35.4886,
+    "end_sec": 35.8182
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 358295410,
+    "duration": 227079,
+    "text": "o",
+    "start_sec": 35.8295,
+    "end_sec": 35.8522
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 358636250,
+    "duration": 2954580,
+    "text": "link",
+    "start_sec": 35.8636,
+    "end_sec": 36.1591
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 361704580,
+    "duration": 795410,
+    "text": "no",
+    "start_sec": 36.1705,
+    "end_sec": 36.25
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 362613750,
+    "duration": 3750000,
+    "text": "direct",
+    "start_sec": 36.2614,
+    "end_sec": 36.6364
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 366477080,
+    "duration": 2840830,
+    "text": "agora",
+    "start_sec": 36.6477,
+    "end_sec": 36.9318
+  },
+  {
+    "type": "WordBoundary",
+    "offset": 369431660,
+    "duration": 3750000,
+    "text": "mesmo",
+    "start_sec": 36.9432,
+    "end_sec": 37.3182
+  }
+]

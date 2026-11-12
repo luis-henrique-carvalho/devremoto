@@ -1,7 +1,7 @@
 # 📊 Central de Operações & Ledger de Publicações — DevRemoto
 
 > **Documento gerado automaticamente.** Mapeia rigorosamente cada conteúdo produzido pelas automações, sua origem, arquivos gerados no disco e status no Postiz.
-> Última sincronização: **10/11/2026, 17:01:00 (Horário de Brasília)**
+> Última sincronização: **12/11/2026, 17:44:07 (Horário de Brasília)**
 
 ## 1. Grade Editorial & Próximos Slots Livres (Sistema Anti-Colisão)
 
@@ -9,21 +9,232 @@ Para evitar colisão de posts e canibalização pelo algoritmo do Instagram, as 
 
 | Tipo de Conteúdo | Horário Padrão (BRT) | Próximo Slot Vago Alocado | Invariante Anti-Canibalização |
 | :--- | :--- | :--- | :--- |
-| 💼 **Carrossel de Vagas** | 09:00 BRT | **2026-11-12 às 09:00 BRT** | Intervalo mín. 4h de outros posts |
-| 🎬 **Vídeo Reels (HyperFrames)** | 13:30 BRT | **2026-11-12 às 13:30 BRT** | Máximo 1 vídeo/dia no canal |
-| 🛠️ **Carrossel Técnico / Dicas** | 18:30 BRT | **2026-11-12 às 18:30 BRT** | Fila sequencial garantida |
+| 💼 **Carrossel de Vagas** | 09:00 BRT | **2026-11-15 às 09:00 BRT** | Intervalo mín. 4h de outros posts |
+| 🎬 **Vídeo Reels (HyperFrames)** | 13:30 BRT | **2026-11-14 às 13:30 BRT** | Máximo 1 vídeo/dia no canal |
+| 🛠️ **Carrossel Técnico / Dicas** | 18:30 BRT | **2026-11-14 às 18:30 BRT** | Fila sequencial garantida |
 
 ### 🟡 Fila Ativa Agendada no Postiz (Aguardando Publicação)
 
 | Data/Hora (BRT) | ID do Post | Título / Conteúdo Resumido |
 | :--- | :--- | :--- |
-| **11/11/2026, 09:00:00** | `cmwarhv3k0002qj9oqp1266cj` | iFood, Magalu Cloud, Canonical e mais 5 empresas estão com vagas ... |
-| **11/11/2026, 13:30:00** | `cmwb47mc30004qj9oa2p0m91w` | Comente VOZ aqui embaixo para receber o link do repositório e o t... |
-| **11/11/2026, 18:30:00** | `cmwaqdysa0000qj9omzbjktli` | Você ainda paga 20 dólares por mês para gerar voz com inteligênci... |
+| **12/11/2026, 18:30:00** | `cmwc5timy0005qj9oftsnpic8` | Você ainda paga assinaturas caras de software sem conhecer essas ... |
+| **13/11/2026, 09:00:00** | `cmwdmdgb6000aqj9o61zhauhl` | Grupo Boticário, Stefanini, Housecall Pro e mais 5 empresas estão... |
+| **13/11/2026, 13:30:00** | `cmwdpqfkn000cqj9oxyytlmw0` | Comente IA aqui embaixo que eu te envio o Kit Completo no seu Dir... |
+| **13/11/2026, 18:30:00** | `cmwdl9wrc0009qj9olenjva49` | Você sabia que dá para rodar modelos de inteligência artificial d... |
+| **14/11/2026, 09:30:00** | `cmwe0m854000rpq92xypkjzpa` | Comente AGENTE aqui embaixo que eu te envio o Kit Completo no seu... |
 
 --- 
 
 ## 2. Histórico Consolidado de Produções Recentes
+
+### 🎬 [2026-11-12] Pack 3 Agentes: 3 Skills que Fazem o Trabalho de uma Agência
+
+- **Automação de Origem:** `devremoto-video-reels (12:00 BRT)`
+- **Formato:** Vídeo Vertical 9:16 (Reels/TikTok)
+- **Gatilho de Direct (OpenReply):** `AGENTE`
+- **Status no Postiz:** **Agendado no Postiz** (14/11/2026, 09:30:00)
+- **Post ID Postiz:** `cmwe0m854000rpq92xypkjzpa`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/videos/agency-3-skills-pack-v1`](file:///home/luis/repositories/canais/devremoto/videos/agency-3-skills-pack-v1)
+
+#### 📁 Arquivos Gerados:
+- **Vídeo MP4 Renderizado:** [output_final.mp4](file:///home/luis/repositories/canais/devremoto/videos/agency-3-skills-pack-v1/output.mp4)
+- **Áudio Neural Kokoro:** [audio.mp3](file:///home/luis/repositories/canais/devremoto/videos/agency-3-skills-pack-v1/audio.mp3)
+- **Timestamps Fonéticos:** [audio.transcript.json](file:///home/luis/repositories/canais/devremoto/videos/agency-3-skills-pack-v1/audio.transcript.json)
+- **Composição HTML/GSAP:** [index.html](file:///home/luis/repositories/canais/devremoto/videos/agency-3-skills-pack-v1/index.html)
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 🛠️ [2026-11-12] ChatGPT Grátis e Offline no PC
+
+- **Automação de Origem:** `devremoto-content-carousel (12:00 BRT)`
+- **Formato:** Carrossel Técnico & Ferramentas
+- **Gatilho de Direct (OpenReply):** `CHAT`
+- **Status no Postiz:** **Agendado no Postiz** (13/11/2026, 18:30:00)
+- **Post ID Postiz:** `cmwdl9wrc0009qj9olenjva49`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/output/2026-11-12-content`](file:///home/luis/repositories/canais/devremoto/output/2026-11-12-content)
+
+#### 📁 Arquivos Gerados:
+- **Slides PNG (1080×1350):** 7 slides gerados em [`slides/`](file:///home/luis/repositories/canais/devremoto/output/2026-11-12-content/slides)
+- **Texto da Legenda:** [caption.txt](file:///home/luis/repositories/canais/devremoto/output/2026-11-12-content/caption.txt)
+
+**Resumo da Legenda:**
+> Você sabia que dá para rodar modelos de inteligência artificial de ponta no seu próprio computador sem pagar assinatura e sem depender de conexão com a internet?  Ferramentas como Ollama e Jan colocam modelos como DeepSeek e Llama direto na sua máquina. Seus dados nunca saem do s...
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 🎬 [2026-11-12] DeepSeek Free: IA Aberta que Bate Modelos Pagos
+
+- **Automação de Origem:** `devremoto-video-reels (12:00 BRT)`
+- **Formato:** Vídeo Vertical 9:16 (Reels/TikTok)
+- **Gatilho de Direct (OpenReply):** `IA`
+- **Status no Postiz:** **Agendado no Postiz** (13/11/2026, 13:30:00)
+- **Post ID Postiz:** `cmwdpqfkn000cqj9oxyytlmw0`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1`](file:///home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1)
+
+#### 📁 Arquivos Gerados:
+- **Vídeo MP4 Renderizado:** [output_final.mp4](file:///home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1/output.mp4)
+- **Áudio Neural Kokoro:** [audio.mp3](file:///home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1/audio.mp3)
+- **Timestamps Fonéticos:** [audio.transcript.json](file:///home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1/audio.transcript.json)
+- **Composição HTML/GSAP:** [index.html](file:///home/luis/repositories/canais/devremoto/videos/deepseek-free-beast-v1/index.html)
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 💼 [2026-11-12] Radar de Vagas 100% Remotas (2026-11-12)
+
+- **Automação de Origem:** `instagram-devremoto-br (11:00 BRT)`
+- **Formato:** Carrossel de Vagas Diárias
+- **Gatilho de Direct (OpenReply):** `REMOTO`
+- **Status no Postiz:** **Agendado no Postiz** (13/11/2026, 09:00:00)
+- **Post ID Postiz:** `cmwdmdgb6000aqj9o61zhauhl`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/output/2026-11-12`](file:///home/luis/repositories/canais/devremoto/output/2026-11-12)
+
+#### 📁 Arquivos Gerados:
+- **Slides PNG (1080×1350):** 7 slides gerados em [`slides/`](file:///home/luis/repositories/canais/devremoto/output/2026-11-12/slides)
+- **Texto da Legenda:** [caption.txt](file:///home/luis/repositories/canais/devremoto/output/2026-11-12/caption.txt)
+- **Página de Links Bio:** [links.html](file:///home/luis/repositories/canais/devremoto/output/2026-11-12/links.html)
+
+**Resumo da Legenda:**
+> Grupo Boticário, Stefanini, Housecall Pro e mais 5 empresas estão com vagas 100% remotas abertas hoje para trabalhar de qualquer estado do Brasil.  Todas passaram pelo nosso filtro anti-híbrido: nada de vaga anunciada como remota que pede 2 ou 3 dias presenciais no escritório.  D...
+
+**Vagas Selecionadas:**
+- Grupo Boticário: DevOps Analyst II (A combinar)
+- Stefanini Group: Analista Desenvolvedor Pleno (Cibersegurança) (A combinar)
+- Playlist: Staff Software Engineer (Front-End) (A combinar)
+- Housecall Pro: Senior Android Software Engineer (A combinar)
+- *(+ 4 outras vagas na edição)*
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 🛠️ [2026-11-11] 4 IAs Que Parecem Ilegais
+
+- **Automação de Origem:** `devremoto-content-carousel (12:00 BRT)`
+- **Formato:** Carrossel Técnico & Ferramentas
+- **Gatilho de Direct (OpenReply):** `SUPER`
+- **Status no Postiz:** **Agendado no Postiz** (12/11/2026, 18:30:00)
+- **Post ID Postiz:** `cmwc5timy0005qj9oftsnpic8`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/output/2026-11-11-content`](file:///home/luis/repositories/canais/devremoto/output/2026-11-11-content)
+
+#### 📁 Arquivos Gerados:
+- **Slides PNG (1080×1350):** 7 slides gerados em [`slides/`](file:///home/luis/repositories/canais/devremoto/output/2026-11-11-content/slides)
+- **Texto da Legenda:** [caption.txt](file:///home/luis/repositories/canais/devremoto/output/2026-11-11-content/caption.txt)
+
+**Resumo da Legenda:**
+> Você ainda paga assinaturas caras de software sem conhecer essas alternativas gratuitas?  A maioria das pessoas nem imagina que utilitários de inteligência artificial de nível profissional estão disponíveis de código aberto, sem mensalidade e sem limites abusivos.  Neste carrosse...
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 🎬 [2026-11-11] BiRefNet: Design & Visão Computacional
+
+- **Automação de Origem:** `devremoto-video-reels (12:00 BRT)`
+- **Formato:** Vídeo Vertical 9:16 (Reels/TikTok)
+- **Gatilho de Direct (OpenReply):** `FOTO`
+- **Status no Postiz:** **Agendado no Postiz** (12/11/2026, 13:30:00)
+- **Post ID Postiz:** `cmwc99s2j0008qj9o8mv4qpdv`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/videos/birefnet-photoshop-v1`](file:///home/luis/repositories/canais/devremoto/videos/birefnet-photoshop-v1)
+
+#### 📁 Arquivos Gerados:
+- **Vídeo MP4 Renderizado:** [output_final.mp4](file:///home/luis/repositories/canais/devremoto/videos/birefnet-photoshop-v1/output.mp4)
+- **Áudio Neural Kokoro:** [audio.mp3](file:///home/luis/repositories/canais/devremoto/videos/birefnet-photoshop-v1/audio.mp3)
+- **Timestamps Fonéticos:** [audio.transcript.json](file:///home/luis/repositories/canais/devremoto/videos/birefnet-photoshop-v1/audio.transcript.json)
+- **Composição HTML/GSAP:** [index.html](file:///home/luis/repositories/canais/devremoto/videos/birefnet-photoshop-v1/index.html)
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 💼 [2026-11-11] Radar de Vagas 100% Remotas (2026-11-11)
+
+- **Automação de Origem:** `instagram-devremoto-br (11:00 BRT)`
+- **Formato:** Carrossel de Vagas Diárias
+- **Gatilho de Direct (OpenReply):** `REMOTO`
+- **Status no Postiz:** **Agendado no Postiz** (12/11/2026, 09:00:00)
+- **Post ID Postiz:** `cmwc6yw9u0006qj9oxu7h3dst`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/output/2026-11-11`](file:///home/luis/repositories/canais/devremoto/output/2026-11-11)
+
+#### 📁 Arquivos Gerados:
+- **Slides PNG (1080×1350):** 7 slides gerados em [`slides/`](file:///home/luis/repositories/canais/devremoto/output/2026-11-11/slides)
+- **Texto da Legenda:** [caption.txt](file:///home/luis/repositories/canais/devremoto/output/2026-11-11/caption.txt)
+- **Página de Links Bio:** [links.html](file:///home/luis/repositories/canais/devremoto/output/2026-11-11/links.html)
+
+**Resumo da Legenda:**
+> Contabilizei, LWSA, FCamara e mais 5 empresas estão com vagas 100% remotas abertas hoje para trabalhar de qualquer estado do Brasil.  Todas passaram pelo nosso filtro anti-híbrido: nada de vaga anunciada como remota que pede 2 ou 3 dias presenciais no escritório.  Destaques do ra...
+
+**Vagas Selecionadas:**
+- FCamara: Desenvolvedor(a) Full Stack Sênior (A combinar)
+- Caliza: Senior Front-End Engineer (A combinar)
+- Contabilizei: Desenvolvedor(a) Back-End Pleno (A combinar)
+- Extreme Digital Solutions: Desenvolvedor Full Stack Java Pleno (A combinar)
+- *(+ 4 outras vagas na edição)*
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 🎬 [2026-11-12] Career-Ops AI: Caçador Inteligente de Vagas Remotas
+
+- **Automação de Origem:** `devremoto-video-reels (Render Local / Teste)`
+- **Formato:** Vídeo Vertical 9:16 (Reels/TikTok)
+- **Gatilho de Direct (OpenReply):** `VAGA`
+- **Status no Postiz:** **Renderizado (Pronto)** (Não agendado (Teste Local))
+- **Post ID Postiz:** `N/A (Local)`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/videos/career-ops-740-jobs-v1`](file:///home/luis/repositories/canais/devremoto/videos/career-ops-740-jobs-v1)
+
+#### 📁 Arquivos Gerados:
+- **Vídeo MP4 Renderizado:** [output_final.mp4](file:///home/luis/repositories/canais/devremoto/videos/career-ops-740-jobs-v1/output.mp4)
+- **Áudio Neural Kokoro:** [audio.mp3](file:///home/luis/repositories/canais/devremoto/videos/career-ops-740-jobs-v1/audio.mp3)
+- **Timestamps Fonéticos:** [audio.transcript.json](file:///home/luis/repositories/canais/devremoto/videos/career-ops-740-jobs-v1/audio.transcript.json)
+- **Composição HTML/GSAP:** [index.html](file:///home/luis/repositories/canais/devremoto/videos/career-ops-740-jobs-v1/index.html)
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
+
+### 🎬 [2026-11-12] WorldCam Globe: Câmeras & Voos do Planeta ao Vivo
+
+- **Automação de Origem:** `devremoto-video-reels (Render Local / Teste)`
+- **Formato:** Vídeo Vertical 9:16 (Reels/TikTok)
+- **Gatilho de Direct (OpenReply):** `MAPA`
+- **Status no Postiz:** **Renderizado (Pronto)** (Não agendado (Teste Local))
+- **Post ID Postiz:** `N/A (Local)`
+- **Pasta de Saída:** [`/home/luis/repositories/canais/devremoto/videos/world-live-cams-v1`](file:///home/luis/repositories/canais/devremoto/videos/world-live-cams-v1)
+
+#### 📁 Arquivos Gerados:
+- **Vídeo MP4 Renderizado:** [output_final.mp4](file:///home/luis/repositories/canais/devremoto/videos/world-live-cams-v1/output.mp4)
+- **Áudio Neural Kokoro:** [audio.mp3](file:///home/luis/repositories/canais/devremoto/videos/world-live-cams-v1/audio.mp3)
+- **Timestamps Fonéticos:** [audio.transcript.json](file:///home/luis/repositories/canais/devremoto/videos/world-live-cams-v1/audio.transcript.json)
+- **Composição HTML/GSAP:** [index.html](file:///home/luis/repositories/canais/devremoto/videos/world-live-cams-v1/index.html)
+
+> 💡 **Anotações de Feedback / Melhoria Contínua:**
+> - *Engajamento:* (preencher após auditoria no Postiz/Insights)
+> - *Qualidade visual / copy:* Aprovado dentro dos padrões Anti-Slop.
+
+---
 
 ### 🛠️ [2026-11-10] 4 IAs de Voz Gratuitas
 

@@ -1,0 +1,9 @@
+Alguém acabou de criar um caçador de vagas de emprego com inteligência artificial que analisou setecentas e quarenta vagas, selecionou apenas sessenta e oito e rendeu doze entrevistas.
+
+Ele se chama Career-Ops, é totalmente gratuito e já passou de setenta e cinco mil estrelas no GitHub.
+
+Primeiro, você entrega seu currículo real e sua meta de salário, e ele dá uma nota de zero a cinco para cada vaga aberta. Segundo, se a vaga tira menos de quatro, ele manda você pular para não perder tempo. Terceiro, para as melhores vagas, ele monta um currículo sob medida e rascunha as mensagens para os recrutadores. E quarto, você revisa tudo antes de enviar.
+
+É a diferença entre atirar no escuro e aplicar apenas onde você tem chance real.
+
+Comenta VAGA aqui embaixo que eu te mando o link oficial, o guia de configuração e dez prompts de currículo no seu direct. E já segue o DevRemoto.

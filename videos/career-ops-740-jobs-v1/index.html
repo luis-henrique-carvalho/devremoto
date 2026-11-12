@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Career-Ops AI: Caçador Inteligente de Vagas Remotas - DevRemoto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+
+    :root {
+      --bg-canvas: #060807;
+      --accent-emerald: #10A37F;
+      --accent-bright: #34D399;
+      --accent-crimson: #EF4444;
+      --text-primary: #FFFFFF;
+      --text-secondary: #9CA3AF;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: var(--bg-canvas);
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #root {
+      width: 1080px;
+      height: 1920px;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 28%, #0f221b 0%, #060807 72%);
+    }
+
+    /* Moving 3D Cyber Perspective Grid */
+    .cyber-grid-plane {
+      position: absolute;
+      bottom: -220px;
+      left: -50%;
+      width: 200%;
+      height: 900px;
+      background-image:
+        linear-gradient(rgba(52, 211, 153, 0.18) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.18) 2px, transparent 2px);
+      background-size: 80px 80px;
+      transform: perspective(600px) rotateX(74deg);
+      mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 80%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glow-orb-top {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.24) 0%, transparent 70%);
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Fixed Header Safe Zone */
+    .header-fixed {
+      position: absolute;
+      top: 72px;
+      left: 60px;
+      right: 60px;
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(10, 15, 13, 0.9);
+      border: 1.5px solid rgba(52, 211, 153, 0.45);
+      padding: 12px 26px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .brand-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 12px var(--accent-bright);
+    }
+    .tag-pill {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent-bright);
+      background: rgba(16, 24, 20, 0.9);
+      border: 1.5px solid rgba(52, 211, 153, 0.4);
+      padding: 12px 24px;
+      border-radius: 999px;
+    }
+
+    /* 3D Camera Rig */
+    .camera-viewport {
+      position: absolute;
+      inset: 0;
+      perspective: 1200px;
+      perspective-origin: 50% 46%;
+      overflow: hidden;
+      z-index: 10;
+    }
+    .camera-rig {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    /* Main Stage (top: 175px to 1640px = 1465px de palco central) */
+    .stage {
+      position: absolute;
+      top: 175px;
+      left: 60px;
+      right: 60px;
+      height: 1465px;
+      transform-style: preserve-3d;
+    }
+
+    .scene-clip {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 12px;
+      gap: 28px;
+      transform-style: preserve-3d;
+    }
+
+    .scene-clip.scene-center {
+      justify-content: center;
+      padding-top: 0;
+    }
+
+    .scene-title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      max-width: 940px;
+    }
+
+    .kicker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 16, 14, 0.92);
+      border: 2px solid var(--accent-bright);
+      padding: 10px 28px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .display-title {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -2.5px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+
+    /* macOS Window & Real Screenshot Frame */
+    .mac-window {
+      width: 940px;
+      background: rgba(10, 15, 13, 0.96);
+      border: 2.5px solid var(--accent-bright);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 50px rgba(52, 211, 153, 0.22);
+    }
+    .mac-bar {
+      background: #111815;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .mac-dots {
+      display: flex;
+      gap: 10px;
+    }
+    .mac-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
+    .mac-url {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: #9CA3AF;
+    }
+    .mac-header-row {
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14, 22, 18, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .app-avatar-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 900;
+    }
+    .gold-star-pill {
+      background: rgba(16, 163, 127, 0.25);
+      border: 1.5px solid #34D399;
+      color: #34D399;
+      font-family: var(--font-mono);
+      font-size: 30px;
+      font-weight: 900;
+      padding: 10px 24px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.35);
+    }
+
+    .screenshot-viewport {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 2px solid rgba(52, 211, 153, 0.35);
+      background: #0d1117;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .screenshot-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #0d1117;
+      display: block;
+    }
+
+    /* 3 Vertical Pillars (Beat 3) */
+    .pillars-grid {
+      width: 940px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .pillar-card {
+      background: rgba(12, 19, 16, 0.95);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 26px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+    }
+    .pillar-icon-box {
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+    }
+    .pillar-num {
+      font-family: var(--font-sans);
+      font-size: 64px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .pillar-lbl {
+      font-size: 28px;
+      font-weight: 800;
+      color: #D1D5DB;
+      line-height: 1.2;
+    }
+
+    /* 4-Node Interactive Tree (Beat 4) */
+    .tree-stage {
+      width: 940px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tree-hub {
+      width: 130px;
+      height: 130px;
+      border-radius: 32px;
+      background: #0D1512;
+      border: 3px solid var(--accent-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .tree-nodes-grid {
+      width: 940px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .tree-node-card {
+      background: rgba(12, 19, 16, 0.96);
+      border: 2px solid rgba(255, 255, 255, 0.16);
+      border-radius: 24px;
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+    .tree-node-icon {
+      font-size: 44px;
+    }
+    .tree-node-title {
+      font-size: 30px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.25;
+    }
+
+    /* Official Subtitle Rail Safe Zone */
+    .subtitle-rail-wrapper {
+      position: absolute;
+      top: 1650px;
+      left: 60px;
+      right: 60px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      pointer-events: none;
+    }
+    .subtitle-pill {
+      background: rgba(8, 12, 10, 0.96);
+      border: 2px solid rgba(52, 211, 153, 0.65);
+      padding: 16px 42px;
+      border-radius: 999px;
+      font-family: var(--font-sans);
+      font-size: 34px;
+      font-weight: 900;
+      color: #FFFFFF;
+      text-align: center;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9), 0 0 30px rgba(16, 163, 127, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sub-word {
+      color: #E5E7EB;
+      padding: 4px 10px;
+      border-radius: 10px;
+    }
+    .sub-word.active-badge {
+      background: var(--accent-bright);
+      color: #060807;
+      font-weight: 900;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
+    }
+  
+    </style>
+  </head>
+  <body>
+    <div id="root" class="clip" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="51.0">
+      <div id="grid-plane" class="cyber-grid-plane"></div>
+      <div class="glow-orb-top"></div>
+
+      <!-- Áudio Principal da Voz e Trilha BGM -->
+      <audio id="voice" src="audio.mp3" data-start="0" data-duration="49.75" data-volume="1.15"></audio>
+      <audio id="bgm" src="assets/bgm_loop.mp3" data-start="0" data-duration="51.0" data-volume="0.08"></audio>
+
+      <!-- SFX Sincronizados -->
+      <audio id="sfx-whoosh-1" src="assets/whoosh.mp3" data-start="0.00" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-2" src="assets/pop.mp3" data-start="5.37" data-duration="0.72" data-volume="0.32"></audio>
+      <audio id="sfx-impact-3" src="assets/impact.mp3" data-start="7.73" data-duration="2.11" data-volume="0.40"></audio>
+      <audio id="sfx-whoosh-4" src="assets/whoosh.mp3" data-start="9.80" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-5" src="assets/pop.mp3" data-start="10.00" data-duration="0.72" data-volume="0.35"></audio>
+      <audio id="sfx-click-6" src="assets/click.mp3" data-start="10.40" data-duration="0.36" data-volume="0.25"></audio>
+      <audio id="sfx-click-7" src="assets/click.mp3" data-start="11.00" data-duration="0.36" data-volume="0.25"></audio>
+      <audio id="sfx-whoosh-8" src="assets/whoosh.mp3" data-start="15.14" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-9" src="assets/pop.mp3" data-start="15.44" data-duration="0.72" data-volume="0.32"></audio>
+      <audio id="sfx-pop-10" src="assets/pop.mp3" data-start="15.74" data-duration="0.72" data-volume="0.30"></audio>
+      <audio id="sfx-whoosh-11" src="assets/whoosh.mp3" data-start="21.82" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-impact-12" src="assets/impact.mp3" data-start="22.62" data-duration="2.11" data-volume="0.42"></audio>
+      <audio id="sfx-whoosh-13" src="assets/whoosh.mp3" data-start="26.90" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-14" src="assets/pop.mp3" data-start="27.05" data-duration="0.72" data-volume="0.32"></audio>
+      <audio id="sfx-whoosh-15" src="assets/whoosh.mp3" data-start="33.50" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-click-16" src="assets/click.mp3" data-start="34.30" data-duration="0.36" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-17" src="assets/whoosh.mp3" data-start="36.88" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-impact-18" src="assets/impact.mp3" data-start="37.68" data-duration="2.11" data-volume="0.38"></audio>
+      <audio id="sfx-whoosh-19" src="assets/whoosh.mp3" data-start="41.16" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-impact-20" src="assets/impact.mp3" data-start="41.31" data-duration="2.11" data-volume="0.38"></audio>
+      <audio id="sfx-click-21" src="assets/click.mp3" data-start="42.26" data-duration="0.36" data-volume="0.30"></audio>
+
+      <header class="header-fixed" data-layout-ignore="true">
+        <div class="brand-badge" data-layout-ignore="true">
+          <div class="brand-dot"></div>
+          <span data-layout-ignore="true">dev.remoto</span>
+        </div>
+        <div class="tag-pill" data-layout-ignore="true">CARREIRA & IA // 75 MIL ESTRELAS</div>
+      </header>
+
+      <div class="camera-viewport">
+        <div id="camera" class="camera-rig" data-layout-allow-overflow="true">
+          <main class="stage">
+
+      <section id="scene-1" class="scene-clip clip" data-start="0" data-duration="9.8">
+        <div class="scene-title-group" id="title-grp-1">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">CAÇADOR DE VAGAS COM IA</div>
+          <h1 class="display-title">DE 740 VAGAS PARA 12 ENTREVISTAS</h1>
+        </div>
+
+        <div style="width:960px;display:flex;flex-direction:column;gap:20px;position:relative;">
+          <!-- Laser Scan Beam -->
+          <div id="laser-scan-1" style="position:absolute;top:0;left:0;right:0;height:4px;background:#34D399;box-shadow:0 0 20px #34D399;z-index:10;pointer-events:none;opacity:0.8;"></div>
+
+          <!-- Card 1: 740 Vagas -->
+          <div id="funnel-740" style="background:rgba(12,19,16,0.96);border:2px solid rgba(255,255,255,0.18);border-radius:24px;padding:28px 34px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span style="font-size:44px;">🔍</span>
+              <div>
+                <div style="font-size:32px;font-weight:900;color:#FFFFFF;">Vagas Remotas Analisadas</div>
+                <div style="font-size:24px;color:#9CA3AF;font-weight:600;">Varredura completa no Brasil e Exterior</div>
+              </div>
+            </div>
+            <div id="num-740" style="font-family:var(--font-mono);font-size:48px;font-weight:900;color:#34D399;">740</div>
+          </div>
+
+          <!-- Card 2: 68 Aprovadas -->
+          <div id="funnel-68" style="background:rgba(14,26,21,0.96);border:2px solid #10A37F;border-radius:24px;padding:28px 34px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 0 35px rgba(16,163,127,0.25);">
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span style="font-size:44px;">🎯</span>
+              <div>
+                <div style="font-size:32px;font-weight:900;color:#FFFFFF;">Apenas Vagas Nota 4+</div>
+                <div style="font-size:26px;color:#34D399;font-weight:600;">Vagas furadas descartadas automaticamente</div>
+              </div>
+            </div>
+            <div id="num-68" style="font-family:var(--font-mono);font-size:48px;font-weight:900;color:#34D399;">68</div>
+          </div>
+
+          <!-- Card 3: 12 Entrevistas -->
+          <div id="funnel-12" style="background:linear-gradient(135deg, rgba(16,45,35,0.98) 0%, rgba(8,20,16,0.98) 100%);border:3px solid #34D399;border-radius:24px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 0 45px rgba(52,211,153,0.35);">
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span style="font-size:48px;">🎉</span>
+              <div>
+                <div style="font-size:34px;font-weight:900;color:#FFFFFF;">Entrevistas Conquistadas</div>
+                <div style="font-size:24px;color:#34D399;font-weight:700;">Alta conversão com recrutadores reais</div>
+              </div>
+            </div>
+            <div id="num-12" style="font-family:var(--font-mono);font-size:56px;font-weight:900;color:#FFFFFF;">12</div>
+          </div>
+
+          <!-- Conversion Rate Banner -->
+          <div style="background:rgba(12,20,16,0.95);border:1.5px solid rgba(52,211,153,0.35);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:4px;">
+            <span style="font-size:24px;font-weight:800;color:#FFFFFF;">🎯 Taxa de Conversão em Entrevistas:</span>
+            <span style="font-family:var(--font-mono);font-size:26px;font-weight:900;color:#34D399;">17.6% (12/68)</span>
+          </div>
+        </div>
+      </section>
+    
+
+      <section id="scene-2" class="scene-clip clip" data-start="9.8" data-duration="5.34">
+        <div class="scene-title-group" id="title-grp-2">
+          <div class="kicker-pill" style="color:#34D399;border-color:rgba(52,211,153,0.5);">CÓDIGO ABERTO // 100% GRATUITO</div>
+          <h1 class="display-title">CONHEÇA O CAREER-OPS AI</h1>
+        </div>
+
+        <div id="mac-win-2" class="mac-window" style="width:960px;border-color:#34D399;position:relative;">
+          <div class="mac-bar">
+            <div class="mac-dots">
+              <span class="mac-dot" style="background:#EF4444;"></span>
+              <span class="mac-dot" style="background:#10A37F;"></span>
+              <span class="mac-dot" style="background:#34D399;"></span>
+            </div>
+            <div class="mac-url">🔒 github.com/career-ops-hq/career-ops</div>
+          </div>
+          <div class="mac-header-row">
+            <div style="display:flex;align-items:center;gap:18px;">
+              <div id="co-logo" class="app-avatar-badge" style="background:#34D399;color:#060807;">CO</div>
+              <div>
+                <div style="font-size:36px;font-weight:900;color:#FFFFFF;line-height:1.1;">career-ops</div>
+                <div style="font-size:24px;color:#9CA3AF;font-weight:600;">The open-source AI job search agent</div>
+              </div>
+            </div>
+            <div id="gold-stars" class="gold-star-pill">★ 75.4k Stars</div>
+          </div>
+          <div style="padding:18px 22px;background:#0d1117;display:flex;flex-direction:column;gap:14px;">
+            <!-- Real Dashboard Preview Image - HERO 720PX -->
+            <div style="height:720px;background:#070b09;border:1.5px solid rgba(52,211,153,0.35);border-radius:18px;overflow:hidden;position:relative;">
+              <img id="co-dash-img" src="assets/career-dashboard.png" alt="Career-Ops Dashboard" style="width:100%;height:100%;object-fit:cover;object-position:top center;" />
+              <div style="position:absolute;top:14px;right:16px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:10px;padding:6px 14px;font-family:var(--font-mono);font-size:20px;color:#34D399;">
+                ● DASHBOARD OFICIAL DO PROJETO
+              </div>
+            </div>
+            <!-- Terminal com digitação ativa -->
+            <div style="background:#070b09;border:1.5px solid rgba(52,211,153,0.4);border-radius:16px;padding:16px 22px;font-family:var(--font-mono);font-size:26px;color:#34D399;display:flex;align-items:center;gap:8px;">
+              <span>&gt; career-ops scan</span>
+              <span id="term-typing" style="color:#FFFFFF;font-weight:800;"></span>
+              <span class="cursor-blink" style="color:#34D399;">█</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:1.5px solid rgba(52,211,153,0.35);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.7);">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:30px;">⚡</span>
+            <span style="font-size:24px;font-weight:800;color:#FFFFFF;">Código Aberto no GitHub • Roda no seu PC</span>
+          </div>
+          <span style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">SEM MENSALIDADE</span>
+        </div>
+      </section>
+    
+
+      <section id="scene-3" class="scene-clip clip" data-start="15.14" data-duration="6.68">
+        <div class="scene-title-group" id="title-grp-3">
+          <div class="kicker-pill" style="color:#34D399;border-color:rgba(52,211,153,0.5);">PASSO 01 // AVALIAÇÃO DE 0 A 5</div>
+          <h1 class="display-title">ANALISA CADA VAGA ABERTA</h1>
+        </div>
+
+        <div id="job-card-approved" style="width:960px;background:rgba(12,20,16,0.96);border:2.5px solid #34D399;border-radius:28px;padding:22px 24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 50px rgba(52,211,153,0.35);">
+          <!-- Dashboard real da varredura - HERO 620PX -->
+          <div style="height:620px;background:#070b09;border:1.5px solid rgba(52,211,153,0.35);border-radius:20px;overflow:hidden;position:relative;">
+            <img id="co-scan-real" src="assets/career-dashboard.png" alt="Career-Ops Scan" style="width:100%;height:100%;object-fit:cover;object-position:top left;" />
+            <!-- Floating HUD Overlays -->
+            <div style="position:absolute;top:16px;left:16px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:10px;padding:6px 16px;font-family:var(--font-mono);font-size:22px;color:#34D399;">
+              ● 740 VAGAS REMOTAS ANALISADAS
+            </div>
+            <div style="position:absolute;top:16px;right:16px;background:rgba(8,14,12,0.92);border:2px solid #34D399;border-radius:14px;padding:8px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.85);">
+              <span style="font-size:22px;color:#9CA3AF;font-weight:700;">NOTA:</span>
+              <span id="score-val" style="font-family:var(--font-mono);font-size:38px;font-weight:900;color:#34D399;">4.8 / 5.0 ⭐</span>
+            </div>
+            <div style="position:absolute;bottom:16px;left:16px;right:16px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:14px;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:28px;font-weight:900;color:#FFFFFF;">Senior Fullstack Engineer (US$ 5,500/mês)</div>
+                <div style="font-size:22px;color:#34D399;font-weight:700;">Match com seu Perfil: React • TypeScript • Node • AWS</div>
+              </div>
+              <div id="badge-approved" style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:22px;font-weight:900;padding:6px 16px;border-radius:10px;">APROVADA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:1.5px solid rgba(52,211,153,0.35);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.7);">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:30px;">🔍</span>
+            <span style="font-size:24px;font-weight:800;color:#FFFFFF;">Analisa Requisitos Reais e Salário sem Pegadinhas</span>
+          </div>
+          <span style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">MATCH 98%</span>
+        </div>
+      </section>
+    
+
+      <section id="scene-4" class="scene-clip clip" data-start="21.82" data-duration="5.08">
+        <div class="scene-title-group" id="title-grp-4">
+          <div class="kicker-pill" style="color:#EF4444;border-color:#EF4444;">PASSO 02 // FILTRO ANTI-FURADA</div>
+          <h1 class="display-title">DESCARTA VAGAS RUINS NA HORA</h1>
+        </div>
+
+        <div id="job-card-discarded" style="width:960px;background:rgba(28,12,14,0.96);border:2.5px solid #EF4444;border-radius:28px;padding:36px 40px;display:flex;flex-direction:column;gap:22px;position:relative;overflow:hidden;box-shadow:0 0 45px rgba(239,68,68,0.3);">
+          <!-- Carimbo Gigante "PULAR VAGA" -->
+          <div id="stamp-skip" data-layout-allow-overlap="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%) rotate(-12deg);border:6px solid #EF4444;background:rgba(239,68,68,0.92);color:#FFFFFF;padding:16px 36px;border-radius:18px;font-family:var(--font-sans);font-size:46px;font-weight:900;letter-spacing:2px;box-shadow:0 10px 40px rgba(0,0,0,0.9);z-index:20;display:none;">
+            🚫 PULAR VAGA
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:36px;font-weight:900;color:#FFFFFF;">Dev Fullstack "Híbrido 4x"</div>
+              <div style="font-size:26px;color:#F87171;font-weight:700;">Híbrido disfarçado // Salário a Combinar</div>
+            </div>
+            <div style="background:#EF4444;color:#FFFFFF;font-family:var(--font-mono);font-size:28px;font-weight:900;padding:8px 20px;border-radius:12px;">Descartada</div>
+          </div>
+
+          <div style="height:1px;background:rgba(255,255,255,0.12);"></div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:26px;color:#9CA3AF;font-weight:600;">Motivo do Descarte:</div>
+              <div style="font-size:30px;font-weight:800;color:#FCA5A5;margin-top:4px;">Exigências abusivas e salário abaixo do mercado</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:24px;color:#EF4444;font-weight:700;">NOTA DA IA</div>
+              <div style="font-family:var(--font-mono);font-size:56px;font-weight:900;color:#EF4444;">1.8 <span style="font-size:32px;">/ 5.0 ❌</span></div>
+            </div>
+          </div>
+
+          <div style="background:rgba(239,68,68,0.18);border:1px solid #EF4444;border-radius:16px;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:14px;">
+            <span style="font-size:32px;">🛑</span>
+            <span style="font-size:28px;font-weight:900;color:#FCA5A5;text-transform:uppercase;">VOCÊ NÃO PERDE SEU TEMPO</span>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(28,12,14,0.95);border:1.5px solid rgba(239,68,68,0.4);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.7);">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:30px;">🛑</span>
+            <span style="font-size:24px;font-weight:800;color:#FCA5A5;">Elimina Vagas Híbridas Disfarçadas de Remotas</span>
+          </div>
+          <span style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#EF4444;">ZERO RLS</span>
+        </div>
+      </section>
+    
+
+      <section id="scene-5" class="scene-clip clip" data-start="26.9" data-duration="6.6">
+        <div class="scene-title-group" id="title-grp-5">
+          <div class="kicker-pill" style="color:#34D399;border-color:rgba(52,211,153,0.5);">PASSO 03 // ADAPTAÇÃO & OUTREACH</div>
+          <h1 class="display-title">CURRÍCULO SOB MEDIDA EM PDF</h1>
+        </div>
+
+        <div style="width:960px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <!-- Card Currículo -->
+          <div id="card-pdf" style="background:rgba(12,20,18,0.96);border:2.5px solid #34D399;border-radius:26px;padding:34px 28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 0 35px rgba(52,211,153,0.25);">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span style="font-size:48px;">📄</span>
+              <div>
+                <div style="font-size:30px;font-weight:900;color:#FFFFFF;">Currículo Adaptado</div>
+                <div style="font-size:24px;color:#34D399;font-weight:700;">Formatado em PDF</div>
+              </div>
+            </div>
+            <div style="font-size:26px;color:#E5E7EB;line-height:1.45;display:flex;flex-direction:column;gap:8px;">
+              <div>✓ 98% Match ATS</div>
+              <div>✓ Destaca skills reais</div>
+              <div>✓ Sem mentiras de robô</div>
+            </div>
+          </div>
+
+          <!-- Card Mensagem Recrutador -->
+          <div id="card-msg" style="background:rgba(10,18,14,0.96);border:2.5px solid #10A37F;border-radius:26px;padding:34px 28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 0 35px rgba(16,163,127,0.25);">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span style="font-size:48px;">💬</span>
+              <div>
+                <div style="font-size:30px;font-weight:900;color:#FFFFFF;">Mensagem ao RH</div>
+                <div style="font-size:24px;color:#34D399;font-weight:700;">Texto Personalizado</div>
+              </div>
+            </div>
+            <div style="font-size:26px;color:#E5E7EB;line-height:1.45;display:flex;flex-direction:column;gap:8px;">
+              <div>✓ Abordagem direta</div>
+              <div>✓ Conecta skills à vaga</div>
+              <div>✓ Pronta para o LinkedIn</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:1.5px solid rgba(52,211,153,0.35);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.7);">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:30px;">📄</span>
+            <span style="font-size:24px;font-weight:800;color:#FFFFFF;">Pronto para Enviar na Gupy, LinkedIn e Workana</span>
+          </div>
+          <span style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">FORMATO PDF</span>
+        </div>
+      </section>
+    
+
+      <section id="scene-6" class="scene-clip clip" data-start="33.5" data-duration="3.38">
+        <div class="scene-title-group" id="title-grp-6">
+          <div class="kicker-pill" style="color:#34D399;border-color:rgba(52,211,153,0.5);">PASSO 04 // CONTROLE TOTAL</div>
+          <h1 class="display-title">VOCÊ REVISA E APROVA TUDO</h1>
+        </div>
+
+        <div style="width:960px;background:rgba(12,19,16,0.96);border:2.5px solid #34D399;border-radius:28px;padding:38px 42px;display:flex;flex-direction:column;gap:24px;box-shadow:0 0 50px rgba(52,211,153,0.3);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:18px;">
+              <span style="font-size:52px;">🛡️</span>
+              <div>
+                <div style="font-size:34px;font-weight:900;color:#FFFFFF;">Nenhum envio no escuro</div>
+                <div style="font-size:26px;color:#9CA3AF;font-weight:600;">Controle humano garantido antes do clique</div>
+              </div>
+            </div>
+            <!-- Physical Toggle Switch -->
+            <div id="toggle-track" style="width:100px;height:54px;background:#34D399;border-radius:999px;padding:5px;display:flex;align-items:center;box-shadow:0 0 25px rgba(52,211,153,0.6);">
+              <div id="toggle-knob" style="width:44px;height:44px;background:#060807;border-radius:50%;transform:translateX(46px);"></div>
+            </div>
+          </div>
+
+          <!-- Pulsing Approval Button -->
+          <div id="btn-approve" style="background:#34D399;color:#060807;font-size:34px;font-weight:900;padding:22px;border-radius:20px;text-align:center;box-shadow:0 0 40px rgba(52,211,153,0.5);letter-spacing:1px;">
+            ✅ APROVAR E ENVIAR CANDIDATURA
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:1.5px solid rgba(52,211,153,0.35);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.7);">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:30px;">🛡️</span>
+            <span style="font-size:24px;font-weight:800;color:#FFFFFF;">Nenhum robô se candidata sem sua autorização prévia</span>
+          </div>
+          <span style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">100% HUMANO</span>
+        </div>
+      </section>
+    
+
+      <section id="scene-7" class="scene-clip clip" data-start="36.88" data-duration="4.28">
+        <div class="scene-title-group" id="title-grp-7">
+          <div class="kicker-pill" style="color:#34D399;border-color:rgba(52,211,153,0.5);">RESULTADO COMPROVADO</div>
+          <h1 class="display-title">ATIRAR NO ESCURO VS CAREER-OPS</h1>
+        </div>
+
+        <div style="width:960px;display:flex;flex-direction:column;gap:18px;">
+          <!-- Card Escuro -->
+          <div id="card-clash-red" style="background:rgba(28,12,14,0.96);border:2px solid #EF4444;border-radius:24px;padding:28px 34px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-family:var(--font-mono);font-size:24px;color:#F87171;font-weight:800;">❌ ATIRAR NO ESCURO (MANUAL)</div>
+              <div style="font-size:32px;font-weight:900;color:#FFFFFF;margin-top:4px;">500 currículos enviados sem critério</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:42px;font-weight:900;color:#EF4444;">0 Respostas</div>
+          </div>
+
+          <!-- Card Career-Ops -->
+          <div id="card-clash-green" style="background:linear-gradient(135deg, rgba(16,45,35,0.98) 0%, rgba(8,20,16,0.98) 100%);border:3px solid #34D399;border-radius:24px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 0 50px rgba(52,211,153,0.4);">
+            <div>
+              <div style="font-family:var(--font-mono);font-size:24px;color:#34D399;font-weight:800;">✅ COM CAREER-OPS AI</div>
+              <div style="font-size:34px;font-weight:900;color:#FFFFFF;margin-top:4px;">68 candidaturas altamente qualificadas</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:52px;font-weight:900;color:#34D399;">12 Entrevistas</div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:1.5px solid rgba(52,211,153,0.35);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,0.7);">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:30px;">🚀</span>
+            <span style="font-size:24px;font-weight:800;color:#FFFFFF;">Mais entrevistas reais com menos esforço e zero frustração</span>
+          </div>
+          <span style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">RESULTADO REAL</span>
+        </div>
+      </section>
+    
+
+      <section id="scene-8" class="scene-clip scene-center clip" data-start="41.16" data-duration="9.84" style="gap:20px;">
+        <div class="scene-title-group" style="gap:6px;">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">COMENTA AQUI EMBAIXO</div>
+          <h1 id="hero-vaga-cta" style="font-size:120px;font-weight:900;color:#34D399;letter-spacing:-3px;line-height:1;text-shadow:0 0 50px rgba(52,211,153,0.75);">
+            VAGA
+          </h1>
+        </div>
+
+        <!-- Simulated Typing Input Bar -->
+        <div style="width:920px;background:#0C1310;border:2.5px solid #34D399;border-radius:999px;padding:18px 34px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <span style="font-family:var(--font-mono);font-size:36px;font-weight:900;color:#FFFFFF;display:flex;align-items:center;gap:6px;">
+            💬 <span id="vaga-input-text"></span><span class="cursor-blink" style="color:#34D399;">|</span>
+          </span>
+          <span id="btn-publish" style="background:#34D399;color:#060807;font-size:30px;font-weight:900;padding:10px 28px;border-radius:999px;">Publicar ↑</span>
+        </div>
+
+        <div style="width:920px;background:rgba(12,18,15,0.96);border:1.5px solid rgba(255,255,255,0.18);border-radius:26px;padding:24px 32px;display:flex;flex-direction:column;gap:12px;">
+          <div style="font-family:var(--font-mono);font-size:28px;font-weight:800;color:#34D399;">📦 O QUE EU TE ENVIO NO DIRECT:</div>
+          <div style="font-size:28px;font-weight:700;color:#F3F4F6;">1️⃣ Link Oficial do Career-Ops (GitHub)</div>
+          <div style="font-size:28px;font-weight:700;color:#F3F4F6;">2️⃣ Guia de Configuração da Nota de 1 a 5</div>
+          <div style="font-size:28px;font-weight:700;color:#F3F4F6;">3️⃣ 10 Prompts Prontos para Adaptar seu Currículo</div>
+        </div>
+
+        <div id="follow-card-cta" style="width:920px;background:linear-gradient(135deg, rgba(16,163,127,0.25) 0%, rgba(10,16,14,0.98) 100%);border:2px solid #34D399;border-radius:26px;padding:22px 32px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:20px;">
+            <div style="width:70px;height:70px;border-radius:50%;background:#34D399;color:#060807;font-family:var(--font-mono);font-size:32px;font-weight:900;display:flex;align-items:center;justify-content:center;">DR</div>
+            <div>
+              <div style="font-size:34px;font-weight:900;color:#FFFFFF;">@devremoto.br</div>
+              <div style="font-size:28px;color:#D1D5DB;font-weight:600;">Me segue para receber no Direct!</div>
+            </div>
+          </div>
+          <div id="follow-pill-cta" style="background:#34D399;color:#060807;font-size:30px;font-weight:900;padding:14px 30px;border-radius:999px;">Seguindo ✓</div>
+        </div>
+      </section>
+    
+          </main>
+        </div>
+      </div>
+
+      <!-- Dynamic Subtitles -->
+      <footer class="subtitle-rail-wrapper">
+        <div id="sub-pill" class="subtitle-pill">
+          <span id="sub-content">
+            <span class="sub-word active-badge">CAREER-OPS AI</span>
+          </span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      function setSubText(html) {
+        const el = document.getElementById('sub-content');
+        if (el) el.innerHTML = html;
+      }
+
+      // Grid 3D em movimento contínuo + Câmera 3D Cinematográfica em Travelling Contínuo
+      tl.to("#grid-plane", { backgroundPosition: "0px 2400px", duration: 51, ease: "none" }, 0);
+      tl.fromTo("#camera", { z: 45, y: 15 }, { z: -15, y: -10, duration: 6, repeat: Math.ceil(51 / 6), yoyo: true, ease: "sine.inOut" }, 0.0);
+      tl.fromTo("#camera", { rotateY: -1.6, rotateX: 1.2 }, { rotateY: 1.6, rotateX: -1.2, duration: 5, repeat: Math.ceil(51 / 5), yoyo: true, ease: "sine.inOut" }, 0.0);
+
+      // Beats Cinematográficos
+
+      tl.fromTo("#scene-1", { scale: 0.88, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "power4.out" }, 0.0);
+      tl.fromTo("#title-grp-1", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 0.1);
+      tl.fromTo("#laser-scan-1", { y: 0 }, { y: 360, duration: 2.2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 0.3);
+      tl.fromTo("#funnel-740", { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.38, ease: "back.out(1.4)" }, 0.3);
+      tl.fromTo("#funnel-68", { x: -80, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)" }, 5.37);
+      tl.fromTo("#funnel-12", { scale: 1.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 7.73);
+      tl.fromTo("#camera", { y: -10, rotateZ: -0.6 }, { y: 0, rotateZ: 0, duration: 0.25, ease: "elastic.out(1, 0.4)" }, 7.73);
+      tl.to("#scene-1", { scale: 1.8, opacity: 0, duration: 0.28, ease: "power3.in" }, 9.520000000000001);
+    
+
+      tl.fromTo("#scene-2", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.42, ease: "back.out(1.5)" }, 9.8);
+      tl.fromTo("#gold-stars", { scale: 0.5, rotate: -20 }, { scale: 1, rotate: 0, duration: 0.4, ease: "back.out(2)" }, 10);
+      tl.fromTo("#co-dash-img", { scale: 1.0 }, { scale: 1.08, duration: 5.34, ease: "sine.inOut" }, 9.8);
+      tl.call(() => {
+        const el = document.getElementById("term-typing");
+        if (el) el.textContent = "--remote";
+      }, null, 10.4);
+      tl.call(() => {
+        const el = document.getElementById("term-typing");
+        if (el) el.textContent = "--remote --brazil";
+      }, null, 11);
+      tl.call(() => {
+        const el = document.getElementById("term-typing");
+        if (el) el.textContent = "--remote --brazil --latam [READY]";
+      }, null, 11.8);
+      tl.to("#scene-2", { x: -350, opacity: 0, duration: 0.26, ease: "power3.in" }, 14.88);
+    
+
+      tl.fromTo("#scene-3", { x: 350, opacity: 0 }, { x: 0, opacity: 1, duration: 0.38, ease: "power4.out" }, 15.14);
+      tl.fromTo("#co-scan-real", { scale: 1.0 }, { scale: 1.08, duration: 6.68, ease: "sine.inOut" }, 15.14);
+      tl.fromTo("#score-val", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 15.440000000000001);
+      tl.fromTo("#badge-approved", { scale: 0.9, y: 20, opacity: 0 }, { scale: 1, y: 0, opacity: 1, duration: 0.35, ease: "back.out(1.6)" }, 15.74);
+      tl.to("#scene-3", { y: -200, scale: 0.9, opacity: 0, duration: 0.24, ease: "power3.in" }, 21.580000000000002);
+    
+
+      tl.fromTo("#scene-4", { y: -200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "back.out(1.4)" }, 21.82);
+      tl.call(() => {
+        const st = document.getElementById("stamp-skip");
+        if (st) st.style.display = "block";
+      }, null, 22.62);
+      tl.fromTo("#stamp-skip", { scale: 2.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(1.8)" }, 22.62);
+      tl.fromTo("#camera", { y: -14, rotateZ: 0.8 }, { y: 0, rotateZ: 0, duration: 0.24, ease: "elastic.out(1, 0.4)" }, 22.62);
+      tl.to("#scene-4", { y: 220, opacity: 0, duration: 0.24, ease: "power3.in" }, 26.66);
+    
+
+      tl.fromTo("#scene-5", { opacity: 0 }, { opacity: 1, duration: 0.1 }, 26.9);
+      tl.fromTo("#card-pdf", { x: -180, opacity: 0 }, { x: 0, opacity: 1, duration: 0.38, ease: "back.out(1.5)" }, 26.9);
+      tl.fromTo("#card-msg", { x: 180, opacity: 0 }, { x: 0, opacity: 1, duration: 0.38, ease: "back.out(1.5)" }, 27.049999999999997);
+      tl.to("#scene-5", { scale: 0.85, opacity: 0, duration: 0.22, ease: "power3.in" }, 33.28);
+    
+
+      tl.fromTo("#scene-6", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.5)" }, 33.5);
+      tl.fromTo("#btn-approve", { scale: 1 }, { scale: 0.96, duration: 0.14, yoyo: true, repeat: 1, ease: "power2.inOut" }, 34.3);
+      tl.to("#scene-6", { x: -300, opacity: 0, duration: 0.24, ease: "power3.in" }, 36.64);
+    
+
+      tl.fromTo("#scene-7", { x: 300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.36, ease: "power4.out" }, 36.88);
+      tl.to("#card-clash-red", { opacity: 0.5, scale: 0.96, duration: 0.4 }, 37.68);
+      tl.fromTo("#card-clash-green", { scale: 0.95 }, { scale: 1.04, duration: 0.4, ease: "back.out(1.8)" }, 37.68);
+      tl.to("#scene-7", { y: -180, opacity: 0, duration: 0.24, ease: "power3.in" }, 40.92);
+    
+
+      tl.fromTo("#scene-8", { y: 150, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "back.out(1.5)" }, 41.16);
+      tl.fromTo("#hero-vaga-cta", { scale: 0.6 }, { scale: 1, duration: 0.45, ease: "elastic.out(1, 0.5)" }, 41.26);
+      tl.call(() => {
+        const el = document.getElementById("vaga-input-text");
+        if (el) el.textContent = "V";
+      }, null, 41.559999999999995);
+      tl.call(() => {
+        const el = document.getElementById("vaga-input-text");
+        if (el) el.textContent = "VA";
+      }, null, 41.709999999999994);
+      tl.call(() => {
+        const el = document.getElementById("vaga-input-text");
+        if (el) el.textContent = "VAG";
+      }, null, 41.86);
+      tl.call(() => {
+        const el = document.getElementById("vaga-input-text");
+        if (el) el.textContent = "VAGA";
+      }, null, 42.01);
+      tl.fromTo("#btn-publish", { scale: 1 }, { scale: 0.92, duration: 0.12, yoyo: true, repeat: 1 }, 42.26);
+      tl.to("#follow-pill-cta", { scale: 1.08, duration: 0.6, repeat: 8, yoyo: true, ease: "sine.inOut" }, 42.36);
+    
+
+      // Legendas Sincronizadas
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ALGUÉM</span> <span class="sub-word">ACABOU</span> <span class="sub-word">DE</span>`); }, null, 0.09);
+      tl.call(() => { setSubText(`<span class="sub-word">ALGUÉM</span> <span class="sub-word active-badge">ACABOU</span> <span class="sub-word">DE</span>`); }, null, 0.44);
+      tl.call(() => { setSubText(`<span class="sub-word">ALGUÉM</span> <span class="sub-word">ACABOU</span> <span class="sub-word active-badge">DE</span>`); }, null, 0.81);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CRIAR</span> <span class="sub-word">UM</span> <span class="sub-word">CAÇADOR</span>`); }, null, 0.91);
+      tl.call(() => { setSubText(`<span class="sub-word">CRIAR</span> <span class="sub-word active-badge">UM</span> <span class="sub-word">CAÇADOR</span>`); }, null, 1.16);
+      tl.call(() => { setSubText(`<span class="sub-word">CRIAR</span> <span class="sub-word">UM</span> <span class="sub-word active-badge">CAÇADOR</span>`); }, null, 1.23);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DE</span> <span class="sub-word">VAGAS</span> <span class="sub-word">DE</span>`); }, null, 1.66);
+      tl.call(() => { setSubText(`<span class="sub-word">DE</span> <span class="sub-word active-badge">VAGAS</span> <span class="sub-word">DE</span>`); }, null, 1.76);
+      tl.call(() => { setSubText(`<span class="sub-word">DE</span> <span class="sub-word">VAGAS</span> <span class="sub-word active-badge">DE</span>`); }, null, 2.08);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">EMPREGO</span> <span class="sub-word">COM</span> <span class="sub-word">INTELIGÊNCIA</span>`); }, null, 2.15);
+      tl.call(() => { setSubText(`<span class="sub-word">EMPREGO</span> <span class="sub-word active-badge">COM</span> <span class="sub-word">INTELIGÊNCIA</span>`); }, null, 2.53);
+      tl.call(() => { setSubText(`<span class="sub-word">EMPREGO</span> <span class="sub-word">COM</span> <span class="sub-word active-badge">INTELIGÊNCIA</span>`); }, null, 2.64);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ARTIFICIAL</span> <span class="sub-word">QUE</span> <span class="sub-word">ANALISOU</span>`); }, null, 3.17);
+      tl.call(() => { setSubText(`<span class="sub-word">ARTIFICIAL</span> <span class="sub-word active-badge">QUE</span> <span class="sub-word">ANALISOU</span>`); }, null, 3.69);
+      tl.call(() => { setSubText(`<span class="sub-word">ARTIFICIAL</span> <span class="sub-word">QUE</span> <span class="sub-word active-badge">ANALISOU</span>`); }, null, 3.77);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SETECENTAS</span> <span class="sub-word">E</span> <span class="sub-word">QUARENTA</span>`); }, null, 4.17);
+      tl.call(() => { setSubText(`<span class="sub-word">SETECENTAS</span> <span class="sub-word active-badge">E</span> <span class="sub-word">QUARENTA</span>`); }, null, 4.72);
+      tl.call(() => { setSubText(`<span class="sub-word">SETECENTAS</span> <span class="sub-word">E</span> <span class="sub-word active-badge">QUARENTA</span>`); }, null, 4.82);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VAGAS</span> <span class="sub-word">SELECIONOU</span> <span class="sub-word">APENAS</span>`); }, null, 5.18);
+      tl.call(() => { setSubText(`<span class="sub-word">VAGAS</span> <span class="sub-word active-badge">SELECIONOU</span> <span class="sub-word">APENAS</span>`); }, null, 5.8);
+      tl.call(() => { setSubText(`<span class="sub-word">VAGAS</span> <span class="sub-word">SELECIONOU</span> <span class="sub-word active-badge">APENAS</span>`); }, null, 6.28);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SESSENTA</span> <span class="sub-word">E</span> <span class="sub-word">OITO</span>`); }, null, 6.66);
+      tl.call(() => { setSubText(`<span class="sub-word">SESSENTA</span> <span class="sub-word active-badge">E</span> <span class="sub-word">OITO</span>`); }, null, 7.03);
+      tl.call(() => { setSubText(`<span class="sub-word">SESSENTA</span> <span class="sub-word">E</span> <span class="sub-word active-badge">OITO</span>`); }, null, 7.06);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">RENDEU</span> <span class="sub-word">DOZE</span>`); }, null, 7.34);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">RENDEU</span> <span class="sub-word">DOZE</span>`); }, null, 7.4);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">RENDEU</span> <span class="sub-word active-badge">DOZE</span>`); }, null, 7.73);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ENTREVISTAS</span>`); }, null, 8.04);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ELE</span> <span class="sub-word">SE</span> <span class="sub-word">CHAMA</span>`); }, null, 9.48);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word active-badge">SE</span> <span class="sub-word">CHAMA</span>`); }, null, 9.7);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word">SE</span> <span class="sub-word active-badge">CHAMA</span>`); }, null, 9.8);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CAREER-OPS</span> <span class="sub-word">É</span> <span class="sub-word">TOTALMENTE</span>`); }, null, 10.09);
+      tl.call(() => { setSubText(`<span class="sub-word">CAREER-OPS</span> <span class="sub-word active-badge">É</span> <span class="sub-word">TOTALMENTE</span>`); }, null, 10.83);
+      tl.call(() => { setSubText(`<span class="sub-word">CAREER-OPS</span> <span class="sub-word">É</span> <span class="sub-word active-badge">TOTALMENTE</span>`); }, null, 10.9);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">GRATUITO</span> <span class="sub-word">E</span> <span class="sub-word">JÁ</span>`); }, null, 11.39);
+      tl.call(() => { setSubText(`<span class="sub-word">GRATUITO</span> <span class="sub-word active-badge">E</span> <span class="sub-word">JÁ</span>`); }, null, 11.89);
+      tl.call(() => { setSubText(`<span class="sub-word">GRATUITO</span> <span class="sub-word">E</span> <span class="sub-word active-badge">JÁ</span>`); }, null, 11.92);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PASSOU</span> <span class="sub-word">DE</span> <span class="sub-word">SETENTA</span>`); }, null, 12.07);
+      tl.call(() => { setSubText(`<span class="sub-word">PASSOU</span> <span class="sub-word active-badge">DE</span> <span class="sub-word">SETENTA</span>`); }, null, 12.41);
+      tl.call(() => { setSubText(`<span class="sub-word">PASSOU</span> <span class="sub-word">DE</span> <span class="sub-word active-badge">SETENTA</span>`); }, null, 12.51);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">CINCO</span> <span class="sub-word">MIL</span>`); }, null, 12.89);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">CINCO</span> <span class="sub-word">MIL</span>`); }, null, 12.93);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">CINCO</span> <span class="sub-word active-badge">MIL</span>`); }, null, 13.21);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ESTRELAS</span> <span class="sub-word">NO</span> <span class="sub-word">GITHUB</span>`); }, null, 13.35);
+      tl.call(() => { setSubText(`<span class="sub-word">ESTRELAS</span> <span class="sub-word active-badge">NO</span> <span class="sub-word">GITHUB</span>`); }, null, 13.77);
+      tl.call(() => { setSubText(`<span class="sub-word">ESTRELAS</span> <span class="sub-word">NO</span> <span class="sub-word active-badge">GITHUB</span>`); }, null, 13.87);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PRIMEIRO</span>`); }, null, 15.14);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">ENTREGA</span> <span class="sub-word">SEU</span>`); }, null, 15.8);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">ENTREGA</span> <span class="sub-word">SEU</span>`); }, null, 16.03);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">ENTREGA</span> <span class="sub-word active-badge">SEU</span>`); }, null, 16.41);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CURRÍCULO</span> <span class="sub-word">REAL</span> <span class="sub-word">E</span>`); }, null, 16.54);
+      tl.call(() => { setSubText(`<span class="sub-word">CURRÍCULO</span> <span class="sub-word active-badge">REAL</span> <span class="sub-word">E</span>`); }, null, 16.93);
+      tl.call(() => { setSubText(`<span class="sub-word">CURRÍCULO</span> <span class="sub-word">REAL</span> <span class="sub-word active-badge">E</span>`); }, null, 17.24);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SUA</span> <span class="sub-word">META</span> <span class="sub-word">DE</span>`); }, null, 17.28);
+      tl.call(() => { setSubText(`<span class="sub-word">SUA</span> <span class="sub-word active-badge">META</span> <span class="sub-word">DE</span>`); }, null, 17.48);
+      tl.call(() => { setSubText(`<span class="sub-word">SUA</span> <span class="sub-word">META</span> <span class="sub-word active-badge">DE</span>`); }, null, 17.76);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SALÁRIO</span>`); }, null, 17.85);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">ELE</span> <span class="sub-word">DÁ</span>`); }, null, 18.53);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">ELE</span> <span class="sub-word">DÁ</span>`); }, null, 18.61);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">ELE</span> <span class="sub-word active-badge">DÁ</span>`); }, null, 18.74);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">UMA</span> <span class="sub-word">NOTA</span> <span class="sub-word">DE</span>`); }, null, 18.85);
+      tl.call(() => { setSubText(`<span class="sub-word">UMA</span> <span class="sub-word active-badge">NOTA</span> <span class="sub-word">DE</span>`); }, null, 18.99);
+      tl.call(() => { setSubText(`<span class="sub-word">UMA</span> <span class="sub-word">NOTA</span> <span class="sub-word active-badge">DE</span>`); }, null, 19.29);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ZERO</span> <span class="sub-word">A</span> <span class="sub-word">CINCO</span>`); }, null, 19.39);
+      tl.call(() => { setSubText(`<span class="sub-word">ZERO</span> <span class="sub-word active-badge">A</span> <span class="sub-word">CINCO</span>`); }, null, 19.64);
+      tl.call(() => { setSubText(`<span class="sub-word">ZERO</span> <span class="sub-word">A</span> <span class="sub-word active-badge">CINCO</span>`); }, null, 19.68);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PARA</span> <span class="sub-word">CADA</span> <span class="sub-word">VAGA</span>`); }, null, 20.02);
+      tl.call(() => { setSubText(`<span class="sub-word">PARA</span> <span class="sub-word active-badge">CADA</span> <span class="sub-word">VAGA</span>`); }, null, 20.22);
+      tl.call(() => { setSubText(`<span class="sub-word">PARA</span> <span class="sub-word">CADA</span> <span class="sub-word active-badge">VAGA</span>`); }, null, 20.43);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ABERTA</span>`); }, null, 20.64);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEGUNDO</span>`); }, null, 21.82);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SE</span> <span class="sub-word">A</span> <span class="sub-word">VAGA</span>`); }, null, 22.55);
+      tl.call(() => { setSubText(`<span class="sub-word">SE</span> <span class="sub-word active-badge">A</span> <span class="sub-word">VAGA</span>`); }, null, 22.67);
+      tl.call(() => { setSubText(`<span class="sub-word">SE</span> <span class="sub-word">A</span> <span class="sub-word active-badge">VAGA</span>`); }, null, 22.76);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TIRA</span> <span class="sub-word">MENOS</span> <span class="sub-word">DE</span>`); }, null, 23.02);
+      tl.call(() => { setSubText(`<span class="sub-word">TIRA</span> <span class="sub-word active-badge">MENOS</span> <span class="sub-word">DE</span>`); }, null, 23.23);
+      tl.call(() => { setSubText(`<span class="sub-word">TIRA</span> <span class="sub-word">MENOS</span> <span class="sub-word active-badge">DE</span>`); }, null, 23.49);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">QUATRO</span> <span class="sub-word">ELE</span> <span class="sub-word">MANDA</span>`); }, null, 23.59);
+      tl.call(() => { setSubText(`<span class="sub-word">QUATRO</span> <span class="sub-word active-badge">ELE</span> <span class="sub-word">MANDA</span>`); }, null, 24.16);
+      tl.call(() => { setSubText(`<span class="sub-word">QUATRO</span> <span class="sub-word">ELE</span> <span class="sub-word active-badge">MANDA</span>`); }, null, 24.28);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">PULAR</span> <span class="sub-word">PARA</span>`); }, null, 24.59);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">PULAR</span> <span class="sub-word">PARA</span>`); }, null, 24.82);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">PULAR</span> <span class="sub-word active-badge">PARA</span>`); }, null, 25.16);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">NÃO</span> <span class="sub-word">PERDER</span> <span class="sub-word">TEMPO</span>`); }, null, 25.34);
+      tl.call(() => { setSubText(`<span class="sub-word">NÃO</span> <span class="sub-word active-badge">PERDER</span> <span class="sub-word">TEMPO</span>`); }, null, 25.5);
+      tl.call(() => { setSubText(`<span class="sub-word">NÃO</span> <span class="sub-word">PERDER</span> <span class="sub-word active-badge">TEMPO</span>`); }, null, 25.82);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TERCEIRO</span>`); }, null, 26.9);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PARA</span> <span class="sub-word">AS</span> <span class="sub-word">MELHORES</span>`); }, null, 27.61);
+      tl.call(() => { setSubText(`<span class="sub-word">PARA</span> <span class="sub-word active-badge">AS</span> <span class="sub-word">MELHORES</span>`); }, null, 27.77);
+      tl.call(() => { setSubText(`<span class="sub-word">PARA</span> <span class="sub-word">AS</span> <span class="sub-word active-badge">MELHORES</span>`); }, null, 27.87);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VAGAS</span>`); }, null, 28.27);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ELE</span> <span class="sub-word">MONTA</span> <span class="sub-word">UM</span>`); }, null, 28.91);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word active-badge">MONTA</span> <span class="sub-word">UM</span>`); }, null, 29.05);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word">MONTA</span> <span class="sub-word active-badge">UM</span>`); }, null, 29.36);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CURRÍCULO</span> <span class="sub-word">SOB</span> <span class="sub-word">MEDIDA</span>`); }, null, 29.45);
+      tl.call(() => { setSubText(`<span class="sub-word">CURRÍCULO</span> <span class="sub-word active-badge">SOB</span> <span class="sub-word">MEDIDA</span>`); }, null, 29.88);
+      tl.call(() => { setSubText(`<span class="sub-word">CURRÍCULO</span> <span class="sub-word">SOB</span> <span class="sub-word active-badge">MEDIDA</span>`); }, null, 30.13);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">RASCUNHA</span> <span class="sub-word">AS</span>`); }, null, 30.48);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">RASCUNHA</span> <span class="sub-word">AS</span>`); }, null, 30.53);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">RASCUNHA</span> <span class="sub-word active-badge">AS</span>`); }, null, 31.01);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">MENSAGENS</span> <span class="sub-word">PARA</span> <span class="sub-word">OS</span>`); }, null, 31.1);
+      tl.call(() => { setSubText(`<span class="sub-word">MENSAGENS</span> <span class="sub-word active-badge">PARA</span> <span class="sub-word">OS</span>`); }, null, 31.67);
+      tl.call(() => { setSubText(`<span class="sub-word">MENSAGENS</span> <span class="sub-word">PARA</span> <span class="sub-word active-badge">OS</span>`); }, null, 31.82);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">RECRUTADORES</span>`); }, null, 31.88);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">QUARTO</span>`); }, null, 33.38);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">QUARTO</span>`); }, null, 33.5);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">REVISA</span> <span class="sub-word">TUDO</span>`); }, null, 34.14);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">REVISA</span> <span class="sub-word">TUDO</span>`); }, null, 34.38);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">REVISA</span> <span class="sub-word active-badge">TUDO</span>`); }, null, 34.79);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ANTES</span> <span class="sub-word">DE</span> <span class="sub-word">ENVIAR</span>`); }, null, 35.16);
+      tl.call(() => { setSubText(`<span class="sub-word">ANTES</span> <span class="sub-word active-badge">DE</span> <span class="sub-word">ENVIAR</span>`); }, null, 35.47);
+      tl.call(() => { setSubText(`<span class="sub-word">ANTES</span> <span class="sub-word">DE</span> <span class="sub-word active-badge">ENVIAR</span>`); }, null, 35.55);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">É</span> <span class="sub-word">A</span> <span class="sub-word">DIFERENÇA</span>`); }, null, 36.67);
+      tl.call(() => { setSubText(`<span class="sub-word">É</span> <span class="sub-word active-badge">A</span> <span class="sub-word">DIFERENÇA</span>`); }, null, 36.8);
+      tl.call(() => { setSubText(`<span class="sub-word">É</span> <span class="sub-word">A</span> <span class="sub-word active-badge">DIFERENÇA</span>`); }, null, 36.88);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ENTRE</span> <span class="sub-word">ATIRAR</span> <span class="sub-word">NO</span>`); }, null, 37.42);
+      tl.call(() => { setSubText(`<span class="sub-word">ENTRE</span> <span class="sub-word active-badge">ATIRAR</span> <span class="sub-word">NO</span>`); }, null, 37.58);
+      tl.call(() => { setSubText(`<span class="sub-word">ENTRE</span> <span class="sub-word">ATIRAR</span> <span class="sub-word active-badge">NO</span>`); }, null, 37.91);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ESCURO</span> <span class="sub-word">E</span> <span class="sub-word">APLICAR</span>`); }, null, 37.99);
+      tl.call(() => { setSubText(`<span class="sub-word">ESCURO</span> <span class="sub-word active-badge">E</span> <span class="sub-word">APLICAR</span>`); }, null, 38.35);
+      tl.call(() => { setSubText(`<span class="sub-word">ESCURO</span> <span class="sub-word">E</span> <span class="sub-word active-badge">APLICAR</span>`); }, null, 38.38);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">APENAS</span> <span class="sub-word">ONDE</span> <span class="sub-word">VOCÊ</span>`); }, null, 38.73);
+      tl.call(() => { setSubText(`<span class="sub-word">APENAS</span> <span class="sub-word active-badge">ONDE</span> <span class="sub-word">VOCÊ</span>`); }, null, 39.05);
+      tl.call(() => { setSubText(`<span class="sub-word">APENAS</span> <span class="sub-word">ONDE</span> <span class="sub-word active-badge">VOCÊ</span>`); }, null, 39.35);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TEM</span> <span class="sub-word">CHANCE</span> <span class="sub-word">REAL.</span>`); }, null, 39.58);
+      tl.call(() => { setSubText(`<span class="sub-word">TEM</span> <span class="sub-word active-badge">CHANCE</span> <span class="sub-word">REAL.</span>`); }, null, 39.74);
+      tl.call(() => { setSubText(`<span class="sub-word">TEM</span> <span class="sub-word">CHANCE</span> <span class="sub-word active-badge">REAL.</span>`); }, null, 40.09);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">COMENTA</span> <span class="sub-word">VAGA</span> <span class="sub-word">AQUI</span>`); }, null, 41.16);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTA</span> <span class="sub-word active-badge">VAGA</span> <span class="sub-word">AQUI</span>`); }, null, 41.61);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTA</span> <span class="sub-word">VAGA</span> <span class="sub-word active-badge">AQUI</span>`); }, null, 41.84);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">EMBAIXO</span> <span class="sub-word">QUE</span> <span class="sub-word">EU</span>`); }, null, 41.99);
+      tl.call(() => { setSubText(`<span class="sub-word">EMBAIXO</span> <span class="sub-word active-badge">QUE</span> <span class="sub-word">EU</span>`); }, null, 42.45);
+      tl.call(() => { setSubText(`<span class="sub-word">EMBAIXO</span> <span class="sub-word">QUE</span> <span class="sub-word active-badge">EU</span>`); }, null, 42.52);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TE</span> <span class="sub-word">MANDO</span> <span class="sub-word">O</span>`); }, null, 42.6);
+      tl.call(() => { setSubText(`<span class="sub-word">TE</span> <span class="sub-word active-badge">MANDO</span> <span class="sub-word">O</span>`); }, null, 42.71);
+      tl.call(() => { setSubText(`<span class="sub-word">TE</span> <span class="sub-word">MANDO</span> <span class="sub-word active-badge">O</span>`); }, null, 42.96);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">LINK</span> <span class="sub-word">OFICIAL</span>`); }, null, 42.98);
+      tl.call(() => { setSubText(`<span class="sub-word">LINK</span> <span class="sub-word active-badge">OFICIAL</span>`); }, null, 43.23);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">GUIA</span> <span class="sub-word">DE</span>`); }, null, 43.93);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">GUIA</span> <span class="sub-word">DE</span>`); }, null, 44.02);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word">GUIA</span> <span class="sub-word active-badge">DE</span>`); }, null, 44.25);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CONFIGURAÇÃO</span> <span class="sub-word">E</span> <span class="sub-word">DEZ</span>`); }, null, 44.34);
+      tl.call(() => { setSubText(`<span class="sub-word">CONFIGURAÇÃO</span> <span class="sub-word active-badge">E</span> <span class="sub-word">DEZ</span>`); }, null, 45.03);
+      tl.call(() => { setSubText(`<span class="sub-word">CONFIGURAÇÃO</span> <span class="sub-word">E</span> <span class="sub-word active-badge">DEZ</span>`); }, null, 45.08);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PROMPTS</span> <span class="sub-word">DE</span> <span class="sub-word">CURRÍCULO</span>`); }, null, 45.33);
+      tl.call(() => { setSubText(`<span class="sub-word">PROMPTS</span> <span class="sub-word active-badge">DE</span> <span class="sub-word">CURRÍCULO</span>`); }, null, 45.71);
+      tl.call(() => { setSubText(`<span class="sub-word">PROMPTS</span> <span class="sub-word">DE</span> <span class="sub-word active-badge">CURRÍCULO</span>`); }, null, 45.8);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">NO</span> <span class="sub-word">SEU</span> <span class="sub-word">DIRECT</span>`); }, null, 46.2);
+      tl.call(() => { setSubText(`<span class="sub-word">NO</span> <span class="sub-word active-badge">SEU</span> <span class="sub-word">DIRECT</span>`); }, null, 46.3);
+      tl.call(() => { setSubText(`<span class="sub-word">NO</span> <span class="sub-word">SEU</span> <span class="sub-word active-badge">DIRECT</span>`); }, null, 46.48);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">JÁ</span> <span class="sub-word">SEGUE</span>`); }, null, 47.72);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">JÁ</span> <span class="sub-word">SEGUE</span>`); }, null, 47.78);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">JÁ</span> <span class="sub-word active-badge">SEGUE</span>`); }, null, 47.93);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">DEVREMOTO</span>`); }, null, 48.28);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">DEVREMOTO</span>`); }, null, 48.34);
+      tl.call(() => { setSubText(""); }, null, 49.25);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

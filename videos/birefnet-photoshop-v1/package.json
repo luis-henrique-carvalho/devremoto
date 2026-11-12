@@ -1,0 +1,9 @@
+{
+  "name": "birefnet-photoshop-v1",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "check": "npx --yes hyperframes@0.9.20 check",
+    "render": "npx --yes hyperframes@0.9.20 render --output output.mp4"
+  }
+}

@@ -8,8 +8,6 @@ export function renderBaseStyles() {
       --bg-canvas: #060807;
       --accent-emerald: #10A37F;
       --accent-bright: #34D399;
-      --accent-cyan: #38BDF8;
-      --accent-gold: #FCD34D;
       --accent-crimson: #EF4444;
       --text-primary: #F9FAFB;
       --text-secondary: #9CA3AF;
@@ -251,8 +249,8 @@ export function renderBaseStyles() {
       box-shadow: 0 0 25px rgba(52, 211, 153, 0.25);
     }
     .flow-step.success-flow {
-      border-color: #60A5FA;
-      background: rgba(59, 130, 246, 0.12);
+      border-color: var(--accent-emerald);
+      background: rgba(16, 163, 127, 0.16);
     }
     .flow-icon {
       font-size: 32px;

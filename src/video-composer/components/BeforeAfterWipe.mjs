@@ -88,11 +88,55 @@ export function renderBeforeAfterWipe(scene, sceneIdx) {
       justify-content: center;
     }
     .before-side {
-      background: rgba(20, 20, 20, 0.8);
+      background: radial-gradient(circle at center, rgba(60, 50, 40, 0.5) 0%, rgba(15, 18, 16, 0.95) 75%);
       border-right: 1px solid rgba(255, 255, 255, 0.08);
     }
     .after-side {
-      background: radial-gradient(circle at center, rgba(16, 163, 127, 0.15) 0%, rgba(6, 8, 7, 0.9) 70%);
+      background-color: #080D0B;
+      background-image: 
+        linear-gradient(45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%), 
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.04) 75%), 
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.04) 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0px;
+    }
+    .subject-placeholder {
+      width: 240px;
+      height: 340px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .silhouette-head {
+      width: 120px;
+      height: 140px;
+      border-radius: 50% 50% 45% 45%;
+      background: #2D3A35;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .silhouette-body {
+      width: 220px;
+      height: 180px;
+      border-radius: 100px 100px 0 0;
+      background: #1E2925;
+    }
+    .before-side .subject-placeholder {
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+    }
+    .after-side .silhouette-head {
+      background: #14352B;
+      border: 2px solid var(--accent-bright);
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.4);
+    }
+    .after-side .silhouette-body {
+      background: #0D241D;
+      border: 2px solid var(--accent-bright);
+      border-bottom: none;
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.4);
     }
     .side-badge {
       position: absolute;

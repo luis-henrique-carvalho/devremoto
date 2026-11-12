@@ -10,9 +10,9 @@ export function renderLivePipelineFlow(scene, sceneIdx) {
   ];
 
   const specs = scene.specs || [
-    { label: "Velocidade:", val: "Menos de 3 segundos", color: "#60A5FA" },
+    { label: "Velocidade:", val: "Menos de 3 segundos", color: "var(--accent-bright)" },
     { label: "Mensalidade:", val: "R$ 0,00 (Zero cobranças)", color: "var(--accent-bright)" },
-    { label: "Segurança:", val: "100% Oficial do Instagram", color: "#FCD34D" }
+    { label: "Segurança:", val: "100% Oficial do Instagram", color: "var(--accent-emerald)" }
   ];
 
   const stepsHtml = steps.map((s, i) => `

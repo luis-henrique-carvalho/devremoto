@@ -52,36 +52,9 @@ export function renderBrowserWindowShowcase(scene, sceneIdx) {
             </div>
           </div>
 
-          <!-- Golden Laurels Award Banner -->
-          <div class="laurel-award-wrapper">
-            <svg class="laurel-branch left" width="60" height="75" viewBox="0 0 64 84" fill="#E5A93C">
-              <path d="M52 78 C40 60, 28 36, 32 6" stroke="#E5A93C" stroke-width="4" stroke-linecap="round" fill="none"/>
-              <path d="M42 66 C32 61, 22 65, 25 74 C34 77, 43 70, 42 66 Z"/>
-              <path d="M37 52 C26 47, 18 52, 21 61 C29 63, 38 56, 37 52 Z"/>
-              <path d="M34 38 C23 34, 16 40, 19 48 C26 50, 35 43, 34 38 Z"/>
-              <path d="M33 24 C24 20, 18 26, 22 33 C28 35, 34 29, 33 24 Z"/>
-              <path d="M35 10 C28 6, 23 11, 26 17 C31 19, 36 14, 35 10 Z"/>
-            </svg>
-
-            <div class="laurel-pill-box">
-              <div class="laurel-number">1</div>
-              <div class="laurel-text-block">
-                <div class="laurel-sub">GITHUB TRENDING</div>
-                <div class="laurel-title">#1 Repository Of The Day</div>
-              </div>
-              <svg class="sparkle-star" width="26" height="26" viewBox="0 0 24 24" fill="#FFFFFF">
-                <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/>
-              </svg>
-            </div>
-
-            <svg class="laurel-branch right" width="60" height="75" viewBox="0 0 64 84" fill="#E5A93C">
-              <path d="M52 78 C40 60, 28 36, 32 6" stroke="#E5A93C" stroke-width="4" stroke-linecap="round" fill="none"/>
-              <path d="M42 66 C32 61, 22 65, 25 74 C34 77, 43 70, 42 66 Z"/>
-              <path d="M37 52 C26 47, 18 52, 21 61 C29 63, 38 56, 37 52 Z"/>
-              <path d="M34 38 C23 34, 16 40, 19 48 C26 50, 35 43, 34 38 Z"/>
-              <path d="M33 24 C24 20, 18 26, 22 33 C28 35, 34 29, 33 24 Z"/>
-              <path d="M35 10 C28 6, 23 11, 26 17 C31 19, 36 14, 35 10 Z"/>
-            </svg>
+          <!-- Live Visual Screenshot of the Project / GitHub Interface -->
+          <div style="width: 100%; height: 340px; border-radius: 16px; overflow: hidden; border: 1.5px solid rgba(52, 211, 153, 0.4); position: relative; background: #070B09; box-shadow: 0 12px 30px rgba(0,0,0,0.7);">
+            <img id="showcase-img-${sceneIdx}" src="assets/screen-showcase.png" alt="${name}" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
           </div>
 
           <div class="window-hero-text">
@@ -109,30 +82,28 @@ export function renderBrowserWindowShowcase(scene, sceneIdx) {
     </section>
   `;
 
-  const laurelTime = scene.start + 0.5;
-  const sparkleTime = scene.start + 0.8;
-  const copyPulseTime = scene.start + 2.0;
+  const laurelTime = scene.start + 0.35;
+  const copyPulseTime = scene.start + 1.6;
   const exitTime = scene.start + scene.duration - 0.35;
 
   const gsapScript = `
-    // Cena ${sceneIdx}: Browser Window Showcase
-    tl.fromTo("#scene-${sceneIdx}", { y: 80, scale: 0.9, opacity: 0, filter: "blur(8px)" }, { y: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, ${scene.start});
-    tl.fromTo(".browser-window", { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, ${scene.start + 0.15});
-    tl.fromTo(".laurel-award-wrapper", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "elastic.out(1.2, 0.5)" }, ${laurelTime});
-    tl.fromTo(".sparkle-star", { scale: 0, rotate: -45 }, { scale: 1.2, rotate: 15, duration: 0.4, ease: "back.out(2)" }, ${sparkleTime});
-    tl.fromTo(".copy-btn", { scale: 0.8 }, { scale: 1.05, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut" }, ${copyPulseTime});
+    // Cena ${sceneIdx}: Browser Window Showcase + Project Visual Image
+    tl.fromTo("#scene-${sceneIdx}", { y: 60, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.4)" }, ${scene.start});
+    tl.fromTo("#scene-${sceneIdx} .browser-window", { scale: 0.94, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.5)" }, ${scene.start + 0.10});
+    tl.fromTo("#showcase-img-${sceneIdx}", { scale: 1.0 }, { scale: 1.06, duration: ${Math.max(1.5, scene.duration - 0.3).toFixed(2)}, ease: "sine.inOut" }, ${scene.start});
+    tl.fromTo("#scene-${sceneIdx} .copy-btn", { scale: 0.85 }, { scale: 1.06, duration: 0.32, yoyo: true, repeat: 5, ease: "sine.inOut" }, ${copyPulseTime});
 
     // Equalizer sincronizado
-    tl.to(".eq-bar", {
-      scaleY: 1.5,
-      duration: 0.35,
-      repeat: 14,
+    tl.to("#scene-${sceneIdx} .eq-bar", {
+      scaleY: 1.6,
+      duration: 0.30,
+      repeat: 18,
       yoyo: true,
       ease: "sine.inOut",
-      stagger: { each: 0.03, from: "center", repeat: 14, yoyo: true }
+      stagger: { each: 0.03, from: "center", repeat: 18, yoyo: true }
     }, ${scene.start});
 
-    tl.to("#scene-${sceneIdx}", { x: -90, scale: 0.93, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in" }, ${exitTime});
+    tl.to("#scene-${sceneIdx}", { x: -110, scale: 0.92, opacity: 0, duration: 0.28, ease: "power3.in" }, ${exitTime});
   `;
 
   const styles = `
@@ -294,7 +265,7 @@ export function renderBrowserWindowShowcase(scene, sceneIdx) {
       position: absolute;
       top: -12px;
       right: -12px;
-      filter: drop-shadow(0 0 8px #FCD34D);
+      filter: drop-shadow(0 0 8px #34D399);
     }
     .window-hero-text .window-title {
       font-size: 36px;

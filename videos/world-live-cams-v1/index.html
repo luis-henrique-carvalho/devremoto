@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>WorldCam Globe: Câmeras & Voos do Planeta ao Vivo - DevRemoto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+
+    :root {
+      --bg-canvas: #060807;
+      --accent-emerald: #10A37F;
+      --accent-bright: #34D399;
+      --accent-crimson: #EF4444;
+      --text-primary: #FFFFFF;
+      --text-secondary: #9CA3AF;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: var(--bg-canvas);
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #root {
+      width: 1080px;
+      height: 1920px;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 28%, #0f221b 0%, #060807 72%);
+    }
+
+    /* Moving 3D Cyber Perspective Grid */
+    .cyber-grid-plane {
+      position: absolute;
+      bottom: -220px;
+      left: -50%;
+      width: 200%;
+      height: 900px;
+      background-image:
+        linear-gradient(rgba(52, 211, 153, 0.18) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.18) 2px, transparent 2px);
+      background-size: 80px 80px;
+      transform: perspective(600px) rotateX(74deg);
+      mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 80%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glow-orb-top {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.24) 0%, transparent 70%);
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Fixed Header Safe Zone */
+    .header-fixed {
+      position: absolute;
+      top: 72px;
+      left: 60px;
+      right: 60px;
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(10, 15, 13, 0.9);
+      border: 1.5px solid rgba(52, 211, 153, 0.45);
+      padding: 12px 26px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .brand-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 12px var(--accent-bright);
+    }
+    .tag-pill {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent-bright);
+      background: rgba(16, 24, 20, 0.9);
+      border: 1.5px solid rgba(52, 211, 153, 0.4);
+      padding: 12px 24px;
+      border-radius: 999px;
+    }
+
+    /* 3D Camera Rig */
+    .camera-viewport {
+      position: absolute;
+      inset: 0;
+      perspective: 1200px;
+      perspective-origin: 50% 46%;
+      overflow: hidden;
+      z-index: 10;
+    }
+    .camera-rig {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    /* Main Stage (top: 175px to 1640px = 1465px de palco central) */
+    .stage {
+      position: absolute;
+      top: 175px;
+      left: 60px;
+      right: 60px;
+      height: 1465px;
+      transform-style: preserve-3d;
+    }
+
+    .scene-clip {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 12px;
+      gap: 28px;
+      transform-style: preserve-3d;
+    }
+
+    .scene-clip.scene-center {
+      justify-content: center;
+      padding-top: 0;
+    }
+
+    .scene-title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      max-width: 940px;
+    }
+
+    .kicker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 16, 14, 0.92);
+      border: 2px solid var(--accent-bright);
+      padding: 10px 28px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .display-title {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -2.5px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+
+    /* macOS Window & Real Screenshot Frame */
+    .mac-window {
+      width: 940px;
+      background: rgba(10, 15, 13, 0.96);
+      border: 2.5px solid var(--accent-bright);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 50px rgba(52, 211, 153, 0.22);
+    }
+    .mac-bar {
+      background: #111815;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .mac-dots {
+      display: flex;
+      gap: 10px;
+    }
+    .mac-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
+    .mac-url {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: #9CA3AF;
+    }
+    .mac-header-row {
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14, 22, 18, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .app-avatar-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 900;
+    }
+    .gold-star-pill {
+      background: rgba(16, 163, 127, 0.25);
+      border: 1.5px solid #34D399;
+      color: #34D399;
+      font-family: var(--font-mono);
+      font-size: 30px;
+      font-weight: 900;
+      padding: 10px 24px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.35);
+    }
+
+    .screenshot-viewport {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 2px solid rgba(52, 211, 153, 0.35);
+      background: #0d1117;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .screenshot-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #0d1117;
+      display: block;
+    }
+
+    /* 3 Vertical Pillars (Beat 3) */
+    .pillars-grid {
+      width: 940px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .pillar-card {
+      background: rgba(12, 19, 16, 0.95);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 26px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+    }
+    .pillar-icon-box {
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+    }
+    .pillar-num {
+      font-family: var(--font-sans);
+      font-size: 64px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .pillar-lbl {
+      font-size: 28px;
+      font-weight: 800;
+      color: #D1D5DB;
+      line-height: 1.2;
+    }
+
+    /* 4-Node Interactive Tree (Beat 4) */
+    .tree-stage {
+      width: 940px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tree-hub {
+      width: 130px;
+      height: 130px;
+      border-radius: 32px;
+      background: #0D1512;
+      border: 3px solid var(--accent-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .tree-nodes-grid {
+      width: 940px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .tree-node-card {
+      background: rgba(12, 19, 16, 0.96);
+      border: 2px solid rgba(255, 255, 255, 0.16);
+      border-radius: 24px;
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+    .tree-node-icon {
+      font-size: 44px;
+    }
+    .tree-node-title {
+      font-size: 30px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.25;
+    }
+
+    /* Official Subtitle Rail Safe Zone */
+    .subtitle-rail-wrapper {
+      position: absolute;
+      top: 1650px;
+      left: 60px;
+      right: 60px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      pointer-events: none;
+    }
+    .subtitle-pill {
+      background: rgba(8, 12, 10, 0.96);
+      border: 2px solid rgba(52, 211, 153, 0.65);
+      padding: 16px 42px;
+      border-radius: 999px;
+      font-family: var(--font-sans);
+      font-size: 34px;
+      font-weight: 900;
+      color: #FFFFFF;
+      text-align: center;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9), 0 0 30px rgba(16, 163, 127, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sub-word {
+      color: #E5E7EB;
+      padding: 4px 10px;
+      border-radius: 10px;
+    }
+    .sub-word.active-badge {
+      background: var(--accent-bright);
+      color: #060807;
+      font-weight: 900;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
+    }
+  
+    </style>
+  </head>
+  <body>
+    <div id="root" class="clip" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="50.0">
+      <div id="grid-plane" class="cyber-grid-plane"></div>
+      <div class="glow-orb-top"></div>
+
+      <!-- Áudio Principal da Voz e Trilha BGM -->
+      <audio id="voice" src="audio.mp3" data-start="0" data-duration="48.72" data-volume="1.15"></audio>
+      <audio id="bgm" src="assets/bgm_loop.mp3" data-start="0" data-duration="50.0" data-volume="0.08"></audio>
+
+      <!-- SFX Sincronizados -->
+      <audio id="sfx-whoosh-1" src="assets/whoosh.mp3" data-start="0.00" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-2" src="assets/pop.mp3" data-start="0.35" data-duration="0.72" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-3" src="assets/whoosh.mp3" data-start="10.51" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-click-4" src="assets/click.mp3" data-start="11.46" data-duration="0.36" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-5" src="assets/whoosh.mp3" data-start="16.55" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-6" src="assets/pop.mp3" data-start="16.85" data-duration="0.72" data-volume="0.30"></audio>
+      <audio id="sfx-whoosh-7" src="assets/whoosh.mp3" data-start="20.80" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-8" src="assets/pop.mp3" data-start="21.10" data-duration="0.72" data-volume="0.30"></audio>
+      <audio id="sfx-whoosh-9" src="assets/whoosh.mp3" data-start="24.04" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-10" src="assets/pop.mp3" data-start="24.34" data-duration="0.72" data-volume="0.30"></audio>
+      <audio id="sfx-whoosh-11" src="assets/whoosh.mp3" data-start="27.38" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-12" src="assets/pop.mp3" data-start="27.68" data-duration="0.72" data-volume="0.30"></audio>
+      <audio id="sfx-whoosh-13" src="assets/whoosh.mp3" data-start="31.62" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-pop-14" src="assets/pop.mp3" data-start="31.82" data-duration="0.72" data-volume="0.32"></audio>
+      <audio id="sfx-whoosh-15" src="assets/whoosh.mp3" data-start="39.17" data-duration="0.57" data-volume="0.28"></audio>
+      <audio id="sfx-impact-16" src="assets/impact.mp3" data-start="39.32" data-duration="2.11" data-volume="0.38"></audio>
+      <audio id="sfx-click-17" src="assets/click.mp3" data-start="40.27" data-duration="0.36" data-volume="0.30"></audio>
+
+      <header class="header-fixed" data-layout-ignore="true">
+        <div class="brand-badge" data-layout-ignore="true">
+          <div class="brand-dot"></div>
+          <span data-layout-ignore="true">dev.remoto</span>
+        </div>
+        <div class="tag-pill" data-layout-ignore="true">CURIOSIDADE TECH // 100% GRÁTIS</div>
+      </header>
+
+      <div class="camera-viewport">
+        <div id="camera" class="camera-rig" data-layout-allow-overflow="true">
+          <main class="stage">
+
+      <section id="scene-1" class="scene-clip clip" data-start="0" data-duration="10.51">
+        <div class="scene-title-group" id="title-grp-1">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">DESCOBERTA DA WEB // AO VIVO</div>
+          <h1 class="display-title">TODAS AS CÂMERAS DO PLANETA NUM SÓ MAPA</h1>
+        </div>
+
+        <div id="mac-win-globe" class="mac-window" style="width:960px;border-color:#34D399;position:relative;">
+          <div class="mac-bar">
+            <div class="mac-dots">
+              <span class="mac-dot" style="background:#EF4444;"></span>
+              <span class="mac-dot" style="background:#10A37F;"></span>
+              <span class="mac-dot" style="background:#34D399;"></span>
+            </div>
+            <div class="mac-url">🔒 worldcam-globe.live</div>
+          </div>
+          <div style="background:#070b09;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span id="rec-dot" style="width:18px;height:18px;border-radius:50%;background:#EF4444;box-shadow:0 0 16px #EF4444;display:inline-block;"></span>
+              <span style="font-size:28px;font-weight:900;color:#FFFFFF;">200.000 CÂMERAS TRANSMITINDO AGORA</span>
+            </div>
+            <span style="background:rgba(16,163,127,0.2);color:#34D399;border:1px solid #34D399;font-family:var(--font-mono);font-size:22px;font-weight:800;padding:6px 16px;border-radius:10px;">100% Grátis</span>
+          </div>
+          <!-- Live Preview Window - HERO 720PX -->
+          <div style="height:720px;background:#070b09;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:0 0 16px 16px;">
+            <img id="globe-live-img" src="assets/globe-hero.png" alt="WorldCam" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;bottom:20px;left:24px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:12px;padding:10px 20px;font-family:var(--font-mono);font-size:24px;color:#FFFFFF;">
+              🔴 Tóquio - Shibuya Crossing [AO VIVO 4K]
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div id="globe-sub-chip" style="width:960px;background:rgba(12,20,16,0.95);border:2px solid rgba(52,211,153,0.35);border-radius:20px;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:40px;">🌍</span>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#FFFFFF;">200.000 Câmeras Públicas no Globo 3D</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Direto no navegador sem instalar extensões</div>
+            </div>
+          </div>
+          <div style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:22px;font-weight:900;padding:8px 16px;border-radius:10px;">SEM CADASTRO</div>
+        </div>
+      </section>
+    
+
+      <section id="scene-2" class="scene-clip clip" data-start="10.51" data-duration="6.04">
+        <div class="scene-title-group" id="title-grp-2">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">DIRETO NO NAVEGADOR</div>
+          <h1 class="display-title">GIRE O PLANETA E CLIQUE ONDE QUISER</h1>
+        </div>
+
+        <div style="width:960px;display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative;">
+          <!-- Simulated Cursor Pointer -->
+          <div id="virtual-cursor" style="position:absolute;top:30px;left:40px;font-size:52px;filter:drop-shadow(0 0 15px #34D399);z-index:30;">
+            👆
+          </div>
+
+          <!-- Cidade 1 (Tóquio) -->
+          <div id="city-tokyo" style="background:rgba(12,20,18,0.96);border:2.5px solid #34D399;border-radius:22px;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 0 40px rgba(52,211,153,0.35);">
+            <div>
+              <div style="font-size:30px;font-weight:900;color:#FFFFFF;">🇯🇵 Tóquio</div>
+              <div style="font-size:22px;color:#34D399;font-weight:700;">Shibuya & Shinjuku</div>
+            </div>
+            <span style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:20px;font-weight:900;padding:6px 12px;border-radius:8px;">AO VIVO</span>
+          </div>
+
+          <!-- Cidade 2 -->
+          <div id="city-ny" style="background:rgba(12,20,18,0.96);border:2px solid rgba(255,255,255,0.16);border-radius:22px;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:30px;font-weight:900;color:#FFFFFF;">🇺🇸 Nova York</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Times Square</div>
+            </div>
+            <span style="background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:var(--font-mono);font-size:20px;font-weight:800;padding:6px 12px;border-radius:8px;">AO VIVO</span>
+          </div>
+
+          <!-- Cidade 3 -->
+          <div id="city-london" style="background:rgba(12,20,18,0.96);border:2px solid rgba(255,255,255,0.16);border-radius:22px;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:30px;font-weight:900;color:#FFFFFF;">🇬🇧 Londres</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Tower Bridge</div>
+            </div>
+            <span style="background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:var(--font-mono);font-size:20px;font-weight:800;padding:6px 12px;border-radius:8px;">AO VIVO</span>
+          </div>
+
+          <!-- Cidade 4 -->
+          <div id="city-sp" style="background:rgba(12,20,18,0.96);border:2px solid rgba(255,255,255,0.16);border-radius:22px;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:30px;font-weight:900;color:#FFFFFF;">🇧🇷 São Paulo</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Av. Paulista</div>
+            </div>
+            <span style="background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:var(--font-mono);font-size:20px;font-weight:800;padding:6px 12px;border-radius:8px;">AO VIVO</span>
+          </div>
+        </div>
+
+        <!-- Live Preview Tokyo Zoom Below Cities -->
+        <div id="nav-preview-card" style="width:960px;background:#070b09;border:2.5px solid #34D399;border-radius:24px;height:560px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.9);">
+          <img id="nav-preview-img" src="assets/globe-cities.png" alt="Tokyo Zoom" style="width:100%;height:100%;object-fit:cover;object-position:center;" />
+          <div style="position:absolute;bottom:16px;left:20px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:10px;padding:8px 18px;font-family:var(--font-mono);font-size:22px;color:#34D399;">
+            🎯 ZOOM AUTOMÁTICO • TÓQUIO 60 FPS
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:2px solid rgba(52,211,153,0.35);border-radius:20px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:36px;">⚡</span>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#FFFFFF;">Mais de 1.200 Cidades Mapeadas</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Transmissões em 4K sem buffering e sem anúncios</div>
+            </div>
+          </div>
+          <div style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:22px;font-weight:900;padding:8px 16px;border-radius:10px;">ZERO LATÊNCIA</div>
+        </div>
+      </section>
+    
+
+      <section id="scene-3" class="scene-clip clip" data-start="16.55" data-duration="4.25">
+        <div class="scene-title-group" id="title-grp-3">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">CAMADA 01 // CÂMERAS DE RUA</div>
+          <h1 class="display-title">+200.000 CÂMERAS PÚBLICAS AO VIVO</h1>
+        </div>
+
+        <div style="width:960px;background:rgba(12,20,16,0.96);border:2.5px solid #34D399;border-radius:28px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 50px rgba(52,211,153,0.35);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:44px;">📹</span>
+              <div>
+                <div style="font-size:32px;font-weight:900;color:#FFFFFF;">Feed #84.219 • Tóquio, Japão</div>
+                <div style="font-size:24px;color:#34D399;font-weight:700;">Cruzamento de Shibuya • 60 FPS 4K</div>
+              </div>
+            </div>
+            <div style="background:#EF4444;color:#FFFFFF;font-family:var(--font-mono);font-size:24px;font-weight:900;padding:8px 18px;border-radius:12px;">● AO VIVO</div>
+          </div>
+          <!-- Imagem Real do README: Cidades e Câmeras do Globo 3D - HERO 720PX -->
+          <div style="background:#070b09;border:1.5px solid rgba(52,211,153,0.35);border-radius:18px;height:720px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+            <img id="globe-cities-img" src="assets/globe-cities.png" alt="Camera Feed" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;bottom:16px;left:20px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:10px;padding:8px 18px;font-family:var(--font-mono);font-size:22px;color:#34D399;">
+              ● SHIBUYA CROSSING • 35°39'N 139°42'E
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:2px solid rgba(52,211,153,0.35);border-radius:20px;padding:20px 30px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:36px;">📹</span>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#FFFFFF;">Cruzamentos & Avenidas de 128 Países</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Transmissões abertas em 4K e 60 quadros por segundo</div>
+            </div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">24H AO VIVO</div>
+        </div>
+      </section>
+    
+
+      <section id="scene-4" class="scene-clip clip" data-start="20.8" data-duration="3.24">
+        <div class="scene-title-group" id="title-grp-4">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">CAMADA 02 // TRÁFEGO AÉREO</div>
+          <h1 class="display-title">TODOS OS AVIÕES EM VOO NO RADAR</h1>
+        </div>
+
+        <div style="width:960px;background:rgba(12,20,16,0.96);border:2.5px solid #34D399;border-radius:28px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 50px rgba(52,211,153,0.35);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span id="plane-icon" style="font-size:44px;display:inline-block;">✈️</span>
+              <div>
+                <div style="font-size:32px;font-weight:900;color:#FFFFFF;">Voo LA8090 • Boeing 787-9</div>
+                <div style="font-size:24px;color:#34D399;font-weight:700;">São Paulo (GRU) ➔ Londres (LHR)</div>
+              </div>
+            </div>
+            <div style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:24px;font-weight:900;padding:8px 18px;border-radius:12px;">38.000 pés</div>
+          </div>
+          <!-- Imagem Real do README: Rotas Aéreas no Globo 3D - HERO 720PX -->
+          <div style="background:#070b09;border:1.5px solid rgba(52,211,153,0.35);border-radius:18px;height:720px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+            <img id="globe-flights-img" src="assets/globe-flights.png" alt="Airline Routes" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;bottom:16px;left:20px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:10px;padding:8px 18px;font-family:var(--font-mono);font-size:22px;color:#34D399;">
+              ✈️ ROTAS AÉREAS ADS-B • 915 KM/H
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:2px solid rgba(52,211,153,0.35);border-radius:20px;padding:20px 30px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:36px;">✈️</span>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#FFFFFF;">Radares ADS-B Comerciais e Privados</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Altitude, velocidade e rota de qualquer voo ativo</div>
+            </div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">915 KM/H</div>
+        </div>
+      </section>
+    
+
+      <section id="scene-5" class="scene-clip clip" data-start="24.04" data-duration="3.34">
+        <div class="scene-title-group" id="title-grp-5">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">CAMADA 03 // RADAR MARÍTIMO</div>
+          <h1 class="display-title">NAVIOS CARGUEIROS E PORTOS</h1>
+        </div>
+
+        <div style="width:960px;background:rgba(12,20,16,0.96);border:2.5px solid #34D399;border-radius:28px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 50px rgba(52,211,153,0.35);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:44px;">🚢</span>
+              <div>
+                <div style="font-size:32px;font-weight:900;color:#FFFFFF;">Navio Cargueiro Ever Given</div>
+                <div style="font-size:24px;color:#34D399;font-weight:700;">Porto de Santos • Rumo ao Panamá</div>
+              </div>
+            </div>
+            <div style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:24px;font-weight:900;padding:8px 18px;border-radius:12px;">400m Comp.</div>
+          </div>
+          <!-- Imagem Real do README: Rotas Oceânicas e Cabos Submarinos no Globo 3D - HERO 720PX -->
+          <div style="background:#070b09;border:1.5px solid rgba(52,211,153,0.35);border-radius:18px;height:720px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+            <img id="globe-ships-img" src="assets/globe-ships.png" alt="Maritime Routes" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;bottom:16px;left:20px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:10px;padding:8px 18px;font-family:var(--font-mono);font-size:22px;color:#34D399;">
+              🚢 ROTAS OCEÂNICAS & CABOS SUBMARINOS
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:2px solid rgba(52,211,153,0.35);border-radius:20px;padding:20px 30px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:36px;">🚢</span>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#FFFFFF;">Mais de 80.000 Cargueiros e Petroleiros</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Portos internacionais, canais e cabos submarinos</div>
+            </div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">ROTA NAVAL</div>
+        </div>
+      </section>
+    
+
+      <section id="scene-6" class="scene-clip clip" data-start="27.38" data-duration="4.24">
+        <div class="scene-title-group" id="title-grp-6">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">CAMADA 04 // RASTREAMENTO ORBITAL</div>
+          <h1 class="display-title">SATÉLITES EM ÓRBITA NO CÉU</h1>
+        </div>
+
+        <div style="width:960px;background:rgba(12,20,16,0.96);border:2.5px solid #34D399;border-radius:28px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 50px rgba(52,211,153,0.35);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span id="sat-icon" style="font-size:44px;display:inline-block;">🛰️</span>
+              <div>
+                <div style="font-size:32px;font-weight:900;color:#FFFFFF;">Estação Espacial Internacional (ISS)</div>
+                <div style="font-size:24px;color:#34D399;font-weight:700;">Órbita Terrestre Baixa // Satélites Starlink</div>
+              </div>
+            </div>
+            <div style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:24px;font-weight:900;padding:8px 18px;border-radius:12px;">418 km Alt.</div>
+          </div>
+          <!-- Imagem Real do README: Satélites em Órbita no Globo 3D - HERO 720PX -->
+          <div style="background:#070b09;border:1.5px solid rgba(52,211,153,0.35);border-radius:18px;height:720px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+            <img id="globe-sat-img" src="assets/globe-satellites.png" alt="Orbital Satellites" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;bottom:16px;left:20px;background:rgba(8,14,12,0.92);border:1.5px solid #34D399;border-radius:10px;padding:8px 18px;font-family:var(--font-mono);font-size:22px;color:#34D399;">
+              🛰️ ISS & CONSTELAÇÃO STARLINK • 27.600 KM/H
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Benefit Chip -->
+        <div style="width:960px;background:rgba(12,20,16,0.95);border:2px solid rgba(52,211,153,0.35);border-radius:20px;padding:20px 30px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:36px;">🛰️</span>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#FFFFFF;">Estação Espacial ISS & Starlink</div>
+              <div style="font-size:22px;color:#9CA3AF;font-weight:600;">Órbita baixa e trajetória tridimensional em tempo real</div>
+            </div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:22px;font-weight:900;color:#34D399;">418 KM ALT</div>
+        </div>
+      </section>
+    
+
+      <section id="scene-7" class="scene-clip clip" data-start="31.62" data-duration="7.55">
+        <div class="scene-title-group" id="title-grp-7">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">SINAIS PÚBLICOS UNIFICADOS</div>
+          <h1 class="display-title">CARREGA TUDO EM 1 SEGUNDO</h1>
+        </div>
+
+        <div style="width:960px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div id="quad-1" style="background:#070b09;border:2.5px solid #34D399;border-radius:22px;overflow:hidden;position:relative;height:370px;box-shadow:0 0 25px rgba(52,211,153,0.25);">
+            <img src="assets/globe-cities.png" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 65%);"></div>
+            <div style="position:absolute;bottom:18px;left:18px;color:#34D399;font-weight:900;font-size:28px;">📹 Câmeras de Rua</div>
+          </div>
+          <div id="quad-2" style="background:#070b09;border:2.5px solid #10A37F;border-radius:22px;overflow:hidden;position:relative;height:370px;box-shadow:0 0 25px rgba(16,163,127,0.25);">
+            <img src="assets/globe-flights.png" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 65%);"></div>
+            <div style="position:absolute;bottom:18px;left:18px;color:#34D399;font-weight:900;font-size:28px;">✈️ Tráfego Aéreo</div>
+          </div>
+          <div id="quad-3" style="background:#070b09;border:2.5px solid #10A37F;border-radius:22px;overflow:hidden;position:relative;height:370px;box-shadow:0 0 25px rgba(16,163,127,0.25);">
+            <img src="assets/globe-ships.png" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 65%);"></div>
+            <div style="position:absolute;bottom:18px;left:18px;color:#34D399;font-weight:900;font-size:28px;">🚢 Rotas Marítimas</div>
+          </div>
+          <div id="quad-4" style="background:#070b09;border:2.5px solid #34D399;border-radius:22px;overflow:hidden;position:relative;height:370px;box-shadow:0 0 25px rgba(52,211,153,0.25);">
+            <img src="assets/globe-satellites.png" style="width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 65%);"></div>
+            <div style="position:absolute;bottom:18px;left:18px;color:#34D399;font-weight:900;font-size:28px;">🛰️ Satélites em Órbita</div>
+          </div>
+        </div>
+
+        <div id="lat-badge" style="width:960px;background:linear-gradient(135deg, rgba(16,45,35,0.98) 0%, rgba(8,20,16,0.98) 100%);border:2.5px solid #34D399;border-radius:24px;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 0 40px rgba(52,211,153,0.35);">
+          <div>
+            <div style="font-size:32px;font-weight:900;color:#FFFFFF;">⚡ Latência: 0.4s • Direto no Navegador</div>
+            <div style="font-size:22px;color:#9CA3AF;font-weight:600;margin-top:4px;">Sem cadastro, sem servidores intermediários</div>
+          </div>
+          <div style="background:#34D399;color:#060807;font-family:var(--font-mono);font-size:30px;font-weight:900;padding:12px 26px;border-radius:14px;">R$ 0,00</div>
+        </div>
+      </section>
+    
+
+      <section id="scene-8" class="scene-clip scene-center clip" data-start="39.17" data-duration="10.83" style="gap:20px;">
+        <div class="scene-title-group" style="gap:6px;">
+          <div class="kicker-pill" style="color:#34D399;border-color:#34D399;">COMENTA AQUI EMBAIXO</div>
+          <h1 id="hero-mapa-cta" style="font-size:120px;font-weight:900;color:#34D399;letter-spacing:-3px;line-height:1;text-shadow:0 0 50px rgba(52,211,153,0.75);">
+            MAPA
+          </h1>
+        </div>
+
+        <div style="width:920px;background:#0C1310;border:2.5px solid #34D399;border-radius:999px;padding:18px 34px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 15px 40px rgba(0,0,0,0.85);">
+          <span style="font-family:var(--font-mono);font-size:36px;font-weight:900;color:#FFFFFF;display:flex;align-items:center;gap:6px;">
+            💬 <span id="mapa-input-text"></span><span class="cursor-blink" style="color:#34D399;">|</span>
+          </span>
+          <span id="btn-pub-mapa" style="background:#34D399;color:#060807;font-size:30px;font-weight:900;padding:10px 28px;border-radius:999px;">Publicar ↑</span>
+        </div>
+
+        <div style="width:920px;background:rgba(12,18,15,0.96);border:1.5px solid rgba(255,255,255,0.18);border-radius:26px;padding:24px 32px;display:flex;flex-direction:column;gap:12px;">
+          <div style="font-family:var(--font-mono);font-size:28px;font-weight:800;color:#34D399;">📦 O QUE EU TE ENVIO NO DIRECT:</div>
+          <div style="font-size:28px;font-weight:700;color:#F3F4F6;">1️⃣ Endereço Oficial do Mapa 3D no Navegador</div>
+          <div style="font-size:28px;font-weight:700;color:#F3F4F6;">2️⃣ Lista das 50 Melhores Câmeras Ao Vivo no Mundo</div>
+          <div style="font-size:28px;font-weight:700;color:#F3F4F6;">3️⃣ Guia das 4 Camadas (Ruas, Voos, Navios e Satélites)</div>
+        </div>
+
+        <div id="follow-card-mapa" style="width:920px;background:linear-gradient(135deg, rgba(16,163,127,0.25) 0%, rgba(10,16,14,0.98) 100%);border:2px solid #34D399;border-radius:26px;padding:22px 32px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:20px;">
+            <div style="width:70px;height:70px;border-radius:50%;background:#34D399;color:#060807;font-family:var(--font-mono);font-size:32px;font-weight:900;display:flex;align-items:center;justify-content:center;">DR</div>
+            <div>
+              <div style="font-size:34px;font-weight:900;color:#FFFFFF;">@devremoto.br</div>
+              <div style="font-size:28px;color:#D1D5DB;font-weight:600;">Me segue para descobrir segredos da internet!</div>
+            </div>
+          </div>
+          <div id="follow-pill-mapa" style="background:#34D399;color:#060807;font-size:30px;font-weight:900;padding:14px 30px;border-radius:999px;">Seguindo ✓</div>
+        </div>
+      </section>
+    
+          </main>
+        </div>
+      </div>
+
+      <!-- Dynamic Subtitles -->
+      <footer class="subtitle-rail-wrapper">
+        <div id="sub-pill" class="subtitle-pill">
+          <span id="sub-content">
+            <span class="sub-word active-badge">WORLDCAM GLOBE</span>
+          </span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      function setSubText(html) {
+        const el = document.getElementById('sub-content');
+        if (el) el.innerHTML = html;
+      }
+
+      // Grid 3D em movimento contínuo + Câmera 3D Cinematográfica em Travelling Contínuo
+      tl.to("#grid-plane", { backgroundPosition: "0px 2400px", duration: 50, ease: "none" }, 0);
+      tl.fromTo("#camera", { z: 45, y: 15 }, { z: -15, y: -10, duration: 6, repeat: Math.ceil(50 / 6), yoyo: true, ease: "sine.inOut" }, 0.0);
+      tl.fromTo("#camera", { rotateY: -1.6, rotateX: 1.2 }, { rotateY: 1.6, rotateX: -1.2, duration: 5, repeat: Math.ceil(50 / 5), yoyo: true, ease: "sine.inOut" }, 0.0);
+
+      // Beats Cinematográficos
+
+      tl.fromTo("#scene-1", { scale: 0.88, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "power4.out" }, 0.0);
+      tl.to("#rec-dot", { opacity: 0.2, duration: 0.5, repeat: 10, yoyo: true, ease: "steps(1)" }, 0.2);
+      tl.fromTo("#globe-live-img", { scale: 1.0 }, { scale: 1.08, duration: 10.51, ease: "sine.inOut" }, 0.0);
+      tl.to("#scene-1", { scale: 1.7, opacity: 0, duration: 0.26, ease: "power3.in" }, 10.25);
+    
+
+      tl.fromTo("#scene-2", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 10.51);
+      tl.fromTo("#virtual-cursor", { x: 400, y: 150, opacity: 0 }, { x: 260, y: 25, opacity: 1, duration: 0.6, ease: "power3.out" }, 10.81);
+      tl.to("#virtual-cursor", { scale: 0.8, duration: 0.12, yoyo: true, repeat: 1 }, 11.459999999999999);
+      tl.fromTo("#city-tokyo", { scale: 1 }, { scale: 1.06, duration: 0.2, yoyo: true, repeat: 1, ease: "back.out(2)" }, 11.459999999999999);
+      tl.fromTo("#nav-preview-img", { scale: 1.0 }, { scale: 1.12, duration: 6.04, ease: "sine.inOut" }, 10.51);
+      tl.to("#scene-2", { x: -320, opacity: 0, duration: 0.24, ease: "power3.in" }, 16.310000000000002);
+    
+
+      tl.fromTo("#scene-3", { x: 320, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power4.out" }, 16.55);
+      tl.fromTo("#globe-cities-img", { scale: 1.0 }, { scale: 1.08, duration: 4.25, ease: "sine.inOut" }, 16.55);
+      tl.to("#scene-3", { y: -160, opacity: 0, duration: 0.22, ease: "power3.in" }, 20.580000000000002);
+    
+
+      tl.fromTo("#scene-4", { y: 160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power4.out" }, 20.8);
+      tl.fromTo("#globe-flights-img", { scale: 1.0 }, { scale: 1.08, duration: 3.24, ease: "sine.inOut" }, 20.8);
+      tl.fromTo("#plane-icon", { x: -20 }, { x: 20, duration: 3.24, ease: "sine.inOut" }, 20.8);
+      tl.to("#scene-4", { x: -300, opacity: 0, duration: 0.22, ease: "power3.in" }, 23.82);
+    
+
+      tl.fromTo("#scene-5", { x: 300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power4.out" }, 24.04);
+      tl.fromTo("#globe-ships-img", { scale: 1.0 }, { scale: 1.08, duration: 3.34, ease: "sine.inOut" }, 24.04);
+      tl.to("#scene-5", { y: -160, opacity: 0, duration: 0.22, ease: "power3.in" }, 27.16);
+    
+
+      tl.fromTo("#scene-6", { y: 160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power4.out" }, 27.38);
+      tl.fromTo("#globe-sat-img", { scale: 1.0 }, { scale: 1.08, duration: 4.24, ease: "sine.inOut" }, 27.38);
+      tl.fromTo("#sat-icon", { rotate: -15, scale: 0.9 }, { rotate: 15, scale: 1.1, duration: 4.24, ease: "sine.inOut" }, 27.38);
+      tl.to("#scene-6", { scale: 0.85, opacity: 0, duration: 0.22, ease: "power3.in" }, 31.4);
+    
+
+      tl.fromTo("#scene-7", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.38, ease: "back.out(1.5)" }, 31.62);
+      tl.fromTo("#quad-1, #quad-2, #quad-3, #quad-4", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.1, duration: 0.3, ease: "back.out(1.6)" }, 31.720000000000002);
+      tl.to("#scene-7", { y: -160, opacity: 0, duration: 0.24, ease: "power3.in" }, 38.93);
+    
+
+      tl.fromTo("#scene-8", { y: 150, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "back.out(1.5)" }, 39.17);
+      tl.fromTo("#hero-mapa-cta", { scale: 0.6 }, { scale: 1, duration: 0.45, ease: "elastic.out(1, 0.5)" }, 39.27);
+      tl.call(() => {
+        const el = document.getElementById("mapa-input-text");
+        if (el) el.textContent = "M";
+      }, null, 39.57);
+      tl.call(() => {
+        const el = document.getElementById("mapa-input-text");
+        if (el) el.textContent = "MA";
+      }, null, 39.72);
+      tl.call(() => {
+        const el = document.getElementById("mapa-input-text");
+        if (el) el.textContent = "MAP";
+      }, null, 39.870000000000005);
+      tl.call(() => {
+        const el = document.getElementById("mapa-input-text");
+        if (el) el.textContent = "MAPA";
+      }, null, 40.02);
+      tl.fromTo("#btn-pub-mapa", { scale: 1 }, { scale: 0.92, duration: 0.12, yoyo: true, repeat: 1 }, 40.27);
+      tl.to("#follow-pill-mapa", { scale: 1.08, duration: 0.6, repeat: 8, yoyo: true, ease: "sine.inOut" }, 40.370000000000005);
+    
+
+      // Legendas Sincronizadas
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ALGUÉM</span> <span class="sub-word">ACABOU</span> <span class="sub-word">DE</span>`); }, null, 0.09);
+      tl.call(() => { setSubText(`<span class="sub-word">ALGUÉM</span> <span class="sub-word active-badge">ACABOU</span> <span class="sub-word">DE</span>`); }, null, 0.45);
+      tl.call(() => { setSubText(`<span class="sub-word">ALGUÉM</span> <span class="sub-word">ACABOU</span> <span class="sub-word active-badge">DE</span>`); }, null, 0.81);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">COLOCAR</span> <span class="sub-word">TODAS</span> <span class="sub-word">AS</span>`); }, null, 0.89);
+      tl.call(() => { setSubText(`<span class="sub-word">COLOCAR</span> <span class="sub-word active-badge">TODAS</span> <span class="sub-word">AS</span>`); }, null, 1.3);
+      tl.call(() => { setSubText(`<span class="sub-word">COLOCAR</span> <span class="sub-word">TODAS</span> <span class="sub-word active-badge">AS</span>`); }, null, 1.58);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CÂMERAS</span> <span class="sub-word">AO</span> <span class="sub-word">VIVO</span>`); }, null, 1.75);
+      tl.call(() => { setSubText(`<span class="sub-word">CÂMERAS</span> <span class="sub-word active-badge">AO</span> <span class="sub-word">VIVO</span>`); }, null, 2.08);
+      tl.call(() => { setSubText(`<span class="sub-word">CÂMERAS</span> <span class="sub-word">AO</span> <span class="sub-word active-badge">VIVO</span>`); }, null, 2.27);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DO</span> <span class="sub-word">PLANETA</span> <span class="sub-word">NUM</span>`); }, null, 2.51);
+      tl.call(() => { setSubText(`<span class="sub-word">DO</span> <span class="sub-word active-badge">PLANETA</span> <span class="sub-word">NUM</span>`); }, null, 2.59);
+      tl.call(() => { setSubText(`<span class="sub-word">DO</span> <span class="sub-word">PLANETA</span> <span class="sub-word active-badge">NUM</span>`); }, null, 3.03);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SITE</span> <span class="sub-word">SÓ</span>`); }, null, 3.18);
+      tl.call(() => { setSubText(`<span class="sub-word">SITE</span> <span class="sub-word active-badge">SÓ</span>`); }, null, 3.55);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">ENTRA</span> <span class="sub-word">EM</span>`); }, null, 4.54);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">ENTRA</span> <span class="sub-word">EM</span>`); }, null, 4.93);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">ENTRA</span> <span class="sub-word active-badge">EM</span>`); }, null, 5.21);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">QUALQUER</span> <span class="sub-word">CIDADE</span> <span class="sub-word">DO</span>`); }, null, 5.28);
+      tl.call(() => { setSubText(`<span class="sub-word">QUALQUER</span> <span class="sub-word active-badge">CIDADE</span> <span class="sub-word">DO</span>`); }, null, 5.61);
+      tl.call(() => { setSubText(`<span class="sub-word">QUALQUER</span> <span class="sub-word">CIDADE</span> <span class="sub-word active-badge">DO</span>`); }, null, 6.01);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">MUNDO</span> <span class="sub-word">E</span> <span class="sub-word">ASSISTE</span>`); }, null, 6.11);
+      tl.call(() => { setSubText(`<span class="sub-word">MUNDO</span> <span class="sub-word active-badge">E</span> <span class="sub-word">ASSISTE</span>`); }, null, 6.49);
+      tl.call(() => { setSubText(`<span class="sub-word">MUNDO</span> <span class="sub-word">E</span> <span class="sub-word active-badge">ASSISTE</span>`); }, null, 6.57);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ÀS</span> <span class="sub-word">RUAS</span> <span class="sub-word">DE</span>`); }, null, 6.97);
+      tl.call(() => { setSubText(`<span class="sub-word">ÀS</span> <span class="sub-word active-badge">RUAS</span> <span class="sub-word">DE</span>`); }, null, 7.05);
+      tl.call(() => { setSubText(`<span class="sub-word">ÀS</span> <span class="sub-word">RUAS</span> <span class="sub-word active-badge">DE</span>`); }, null, 7.29);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VERDADE</span> <span class="sub-word">AO</span> <span class="sub-word">VIVO</span>`); }, null, 7.37);
+      tl.call(() => { setSubText(`<span class="sub-word">VERDADE</span> <span class="sub-word active-badge">AO</span> <span class="sub-word">VIVO</span>`); }, null, 7.82);
+      tl.call(() => { setSubText(`<span class="sub-word">VERDADE</span> <span class="sub-word">AO</span> <span class="sub-word active-badge">VIVO</span>`); }, null, 7.9);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DIRETO</span> <span class="sub-word">NO</span> <span class="sub-word">NAVEGADOR</span>`); }, null, 8.14);
+      tl.call(() => { setSubText(`<span class="sub-word">DIRETO</span> <span class="sub-word active-badge">NO</span> <span class="sub-word">NAVEGADOR</span>`); }, null, 8.53);
+      tl.call(() => { setSubText(`<span class="sub-word">DIRETO</span> <span class="sub-word">NO</span> <span class="sub-word active-badge">NAVEGADOR</span>`); }, null, 8.61);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">É</span> <span class="sub-word">SÓ</span> <span class="sub-word">ABRIR</span>`); }, null, 9.86);
+      tl.call(() => { setSubText(`<span class="sub-word">É</span> <span class="sub-word active-badge">SÓ</span> <span class="sub-word">ABRIR</span>`); }, null, 9.98);
+      tl.call(() => { setSubText(`<span class="sub-word">É</span> <span class="sub-word">SÓ</span> <span class="sub-word active-badge">ABRIR</span>`); }, null, 10.21);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">MAPA</span>`); }, null, 10.46);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">MAPA</span>`); }, null, 10.51);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">GIRAR</span> <span class="sub-word">O</span> <span class="sub-word">PLANETA</span>`); }, null, 11.11);
+      tl.call(() => { setSubText(`<span class="sub-word">GIRAR</span> <span class="sub-word active-badge">O</span> <span class="sub-word">PLANETA</span>`); }, null, 11.36);
+      tl.call(() => { setSubText(`<span class="sub-word">GIRAR</span> <span class="sub-word">O</span> <span class="sub-word active-badge">PLANETA</span>`); }, null, 11.41);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">CLICAR</span> <span class="sub-word">ONDE</span>`); }, null, 11.78);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">CLICAR</span> <span class="sub-word">ONDE</span>`); }, null, 11.82);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">CLICAR</span> <span class="sub-word active-badge">ONDE</span>`); }, null, 12.18);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">QUISER</span> <span class="sub-word">IR.</span>`); }, null, 12.34);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">QUISER</span> <span class="sub-word">IR.</span>`); }, null, 12.6);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">QUISER</span> <span class="sub-word active-badge">IR.</span>`); }, null, 12.9);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEM</span> <span class="sub-word">INSTALAR</span> <span class="sub-word">NADA</span>`); }, null, 13.8);
+      tl.call(() => { setSubText(`<span class="sub-word">SEM</span> <span class="sub-word active-badge">INSTALAR</span> <span class="sub-word">NADA</span>`); }, null, 14.09);
+      tl.call(() => { setSubText(`<span class="sub-word">SEM</span> <span class="sub-word">INSTALAR</span> <span class="sub-word active-badge">NADA</span>`); }, null, 14.47);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">SEM</span> <span class="sub-word">PAGAR</span>`); }, null, 14.75);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">SEM</span> <span class="sub-word">PAGAR</span>`); }, null, 14.79);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">SEM</span> <span class="sub-word active-badge">PAGAR</span>`); }, null, 14.96);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">UM</span> <span class="sub-word">CENTAVO</span>`); }, null, 15.24);
+      tl.call(() => { setSubText(`<span class="sub-word">UM</span> <span class="sub-word active-badge">CENTAVO</span>`); }, null, 15.3);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">PRIMEIRO</span>`); }, null, 16.55);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VOCÊ</span> <span class="sub-word">ACESSA</span> <span class="sub-word">MAIS</span>`); }, null, 17.22);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word active-badge">ACESSA</span> <span class="sub-word">MAIS</span>`); }, null, 17.46);
+      tl.call(() => { setSubText(`<span class="sub-word">VOCÊ</span> <span class="sub-word">ACESSA</span> <span class="sub-word active-badge">MAIS</span>`); }, null, 17.84);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DE</span> <span class="sub-word">DUZENTAS</span> <span class="sub-word">MIL</span>`); }, null, 18.04);
+      tl.call(() => { setSubText(`<span class="sub-word">DE</span> <span class="sub-word active-badge">DUZENTAS</span> <span class="sub-word">MIL</span>`); }, null, 18.12);
+      tl.call(() => { setSubText(`<span class="sub-word">DE</span> <span class="sub-word">DUZENTAS</span> <span class="sub-word active-badge">MIL</span>`); }, null, 18.62);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CÂMERAS</span> <span class="sub-word">PÚBLICAS</span> <span class="sub-word">DE</span>`); }, null, 18.8);
+      tl.call(() => { setSubText(`<span class="sub-word">CÂMERAS</span> <span class="sub-word active-badge">PÚBLICAS</span> <span class="sub-word">DE</span>`); }, null, 19.21);
+      tl.call(() => { setSubText(`<span class="sub-word">CÂMERAS</span> <span class="sub-word">PÚBLICAS</span> <span class="sub-word active-badge">DE</span>`); }, null, 19.62);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">RUA</span>`); }, null, 19.72);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEGUNDO</span> <span class="sub-word">ACOMPANHA</span> <span class="sub-word">CADA</span>`); }, null, 20.8);
+      tl.call(() => { setSubText(`<span class="sub-word">SEGUNDO</span> <span class="sub-word active-badge">ACOMPANHA</span> <span class="sub-word">CADA</span>`); }, null, 21.52);
+      tl.call(() => { setSubText(`<span class="sub-word">SEGUNDO</span> <span class="sub-word">ACOMPANHA</span> <span class="sub-word active-badge">CADA</span>`); }, null, 22.1);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">AVIÃO</span> <span class="sub-word">VOANDO</span> <span class="sub-word">AGORA</span>`); }, null, 22.34);
+      tl.call(() => { setSubText(`<span class="sub-word">AVIÃO</span> <span class="sub-word active-badge">VOANDO</span> <span class="sub-word">AGORA</span>`); }, null, 22.64);
+      tl.call(() => { setSubText(`<span class="sub-word">AVIÃO</span> <span class="sub-word">VOANDO</span> <span class="sub-word active-badge">AGORA</span>`); }, null, 22.93);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TERCEIRO</span>`); }, null, 24.04);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">VÊ</span> <span class="sub-word">TODOS</span> <span class="sub-word">OS</span>`); }, null, 24.79);
+      tl.call(() => { setSubText(`<span class="sub-word">VÊ</span> <span class="sub-word active-badge">TODOS</span> <span class="sub-word">OS</span>`); }, null, 24.95);
+      tl.call(() => { setSubText(`<span class="sub-word">VÊ</span> <span class="sub-word">TODOS</span> <span class="sub-word active-badge">OS</span>`); }, null, 25.28);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">NAVIOS</span> <span class="sub-word">NOS</span> <span class="sub-word">PORTOS</span>`); }, null, 25.42);
+      tl.call(() => { setSubText(`<span class="sub-word">NAVIOS</span> <span class="sub-word active-badge">NOS</span> <span class="sub-word">PORTOS</span>`); }, null, 25.84);
+      tl.call(() => { setSubText(`<span class="sub-word">NAVIOS</span> <span class="sub-word">NOS</span> <span class="sub-word active-badge">PORTOS</span>`); }, null, 26);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">QUARTO</span>`); }, null, 27.26);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">QUARTO</span>`); }, null, 27.38);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">RASTREIA</span> <span class="sub-word">ATÉ</span> <span class="sub-word">OS</span>`); }, null, 28.02);
+      tl.call(() => { setSubText(`<span class="sub-word">RASTREIA</span> <span class="sub-word active-badge">ATÉ</span> <span class="sub-word">OS</span>`); }, null, 28.46);
+      tl.call(() => { setSubText(`<span class="sub-word">RASTREIA</span> <span class="sub-word">ATÉ</span> <span class="sub-word active-badge">OS</span>`); }, null, 28.63);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SATÉLITES</span> <span class="sub-word">PASSANDO</span> <span class="sub-word">SOBRE</span>`); }, null, 28.73);
+      tl.call(() => { setSubText(`<span class="sub-word">SATÉLITES</span> <span class="sub-word active-badge">PASSANDO</span> <span class="sub-word">SOBRE</span>`); }, null, 29.24);
+      tl.call(() => { setSubText(`<span class="sub-word">SATÉLITES</span> <span class="sub-word">PASSANDO</span> <span class="sub-word active-badge">SOBRE</span>`); }, null, 29.65);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">A</span> <span class="sub-word">SUA</span> <span class="sub-word">CABEÇA</span>`); }, null, 29.88);
+      tl.call(() => { setSubText(`<span class="sub-word">A</span> <span class="sub-word active-badge">SUA</span> <span class="sub-word">CABEÇA</span>`); }, null, 29.92);
+      tl.call(() => { setSubText(`<span class="sub-word">A</span> <span class="sub-word">SUA</span> <span class="sub-word active-badge">CABEÇA</span>`); }, null, 30.18);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ELE</span> <span class="sub-word">JUNTA</span> <span class="sub-word">OS</span>`); }, null, 31.4);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word active-badge">JUNTA</span> <span class="sub-word">OS</span>`); }, null, 31.62);
+      tl.call(() => { setSubText(`<span class="sub-word">ELE</span> <span class="sub-word">JUNTA</span> <span class="sub-word active-badge">OS</span>`); }, null, 31.92);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SINAIS</span> <span class="sub-word">PÚBLICOS</span> <span class="sub-word">DO</span>`); }, null, 31.99);
+      tl.call(() => { setSubText(`<span class="sub-word">SINAIS</span> <span class="sub-word active-badge">PÚBLICOS</span> <span class="sub-word">DO</span>`); }, null, 32.27);
+      tl.call(() => { setSubText(`<span class="sub-word">SINAIS</span> <span class="sub-word">PÚBLICOS</span> <span class="sub-word active-badge">DO</span>`); }, null, 32.71);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">MUNDO</span> <span class="sub-word">INTEIRO</span> <span class="sub-word">EM</span>`); }, null, 32.8);
+      tl.call(() => { setSubText(`<span class="sub-word">MUNDO</span> <span class="sub-word active-badge">INTEIRO</span> <span class="sub-word">EM</span>`); }, null, 33.07);
+      tl.call(() => { setSubText(`<span class="sub-word">MUNDO</span> <span class="sub-word">INTEIRO</span> <span class="sub-word active-badge">EM</span>`); }, null, 33.39);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TEMPO</span> <span class="sub-word">REAL</span> <span class="sub-word">E</span>`); }, null, 33.5);
+      tl.call(() => { setSubText(`<span class="sub-word">TEMPO</span> <span class="sub-word active-badge">REAL</span> <span class="sub-word">E</span>`); }, null, 33.78);
+      tl.call(() => { setSubText(`<span class="sub-word">TEMPO</span> <span class="sub-word">REAL</span> <span class="sub-word active-badge">E</span>`); }, null, 34.13);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">CARREGA</span> <span class="sub-word">A</span> <span class="sub-word">CIDADE</span>`); }, null, 34.18);
+      tl.call(() => { setSubText(`<span class="sub-word">CARREGA</span> <span class="sub-word active-badge">A</span> <span class="sub-word">CIDADE</span>`); }, null, 34.57);
+      tl.call(() => { setSubText(`<span class="sub-word">CARREGA</span> <span class="sub-word">A</span> <span class="sub-word active-badge">CIDADE</span>`); }, null, 34.6);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ESCOLHIDA</span> <span class="sub-word">NA</span> <span class="sub-word">SUA</span>`); }, null, 34.96);
+      tl.call(() => { setSubText(`<span class="sub-word">ESCOLHIDA</span> <span class="sub-word active-badge">NA</span> <span class="sub-word">SUA</span>`); }, null, 35.42);
+      tl.call(() => { setSubText(`<span class="sub-word">ESCOLHIDA</span> <span class="sub-word">NA</span> <span class="sub-word active-badge">SUA</span>`); }, null, 35.52);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">FRENTE</span> <span class="sub-word">EM</span> <span class="sub-word">UM</span>`); }, null, 35.74);
+      tl.call(() => { setSubText(`<span class="sub-word">FRENTE</span> <span class="sub-word active-badge">EM</span> <span class="sub-word">UM</span>`); }, null, 36.08);
+      tl.call(() => { setSubText(`<span class="sub-word">FRENTE</span> <span class="sub-word">EM</span> <span class="sub-word active-badge">UM</span>`); }, null, 36.14);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEGUNDO</span>`); }, null, 36.24);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">QUER</span> <span class="sub-word">EXPLORAR</span> <span class="sub-word">AGORA</span>`); }, null, 37.45);
+      tl.call(() => { setSubText(`<span class="sub-word">QUER</span> <span class="sub-word active-badge">EXPLORAR</span> <span class="sub-word">AGORA</span>`); }, null, 37.62);
+      tl.call(() => { setSubText(`<span class="sub-word">QUER</span> <span class="sub-word">EXPLORAR</span> <span class="sub-word active-badge">AGORA</span>`); }, null, 38.01);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">COMENTA</span> <span class="sub-word">MAPA</span> <span class="sub-word">AQUI</span>`); }, null, 39.17);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTA</span> <span class="sub-word active-badge">MAPA</span> <span class="sub-word">AQUI</span>`); }, null, 39.61);
+      tl.call(() => { setSubText(`<span class="sub-word">COMENTA</span> <span class="sub-word">MAPA</span> <span class="sub-word active-badge">AQUI</span>`); }, null, 39.87);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">EMBAIXO</span> <span class="sub-word">QUE</span> <span class="sub-word">EU</span>`); }, null, 40.03);
+      tl.call(() => { setSubText(`<span class="sub-word">EMBAIXO</span> <span class="sub-word active-badge">QUE</span> <span class="sub-word">EU</span>`); }, null, 40.48);
+      tl.call(() => { setSubText(`<span class="sub-word">EMBAIXO</span> <span class="sub-word">QUE</span> <span class="sub-word active-badge">EU</span>`); }, null, 40.54);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">TE</span> <span class="sub-word">MANDO</span> <span class="sub-word">O</span>`); }, null, 40.62);
+      tl.call(() => { setSubText(`<span class="sub-word">TE</span> <span class="sub-word active-badge">MANDO</span> <span class="sub-word">O</span>`); }, null, 40.73);
+      tl.call(() => { setSubText(`<span class="sub-word">TE</span> <span class="sub-word">MANDO</span> <span class="sub-word active-badge">O</span>`); }, null, 40.99);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">ENDEREÇO</span> <span class="sub-word">OFICIAL</span> <span class="sub-word">E</span>`); }, null, 41.02);
+      tl.call(() => { setSubText(`<span class="sub-word">ENDEREÇO</span> <span class="sub-word active-badge">OFICIAL</span> <span class="sub-word">E</span>`); }, null, 41.4);
+      tl.call(() => { setSubText(`<span class="sub-word">ENDEREÇO</span> <span class="sub-word">OFICIAL</span> <span class="sub-word active-badge">E</span>`); }, null, 41.9);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">O</span> <span class="sub-word">GUIA</span> <span class="sub-word">COMPLETO</span>`); }, null, 41.99);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word active-badge">GUIA</span> <span class="sub-word">COMPLETO</span>`); }, null, 42.04);
+      tl.call(() => { setSubText(`<span class="sub-word">O</span> <span class="sub-word">GUIA</span> <span class="sub-word active-badge">COMPLETO</span>`); }, null, 42.26);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">NO</span> <span class="sub-word">SEU</span> <span class="sub-word">DIRECT</span>`); }, null, 42.75);
+      tl.call(() => { setSubText(`<span class="sub-word">NO</span> <span class="sub-word active-badge">SEU</span> <span class="sub-word">DIRECT</span>`); }, null, 42.85);
+      tl.call(() => { setSubText(`<span class="sub-word">NO</span> <span class="sub-word">SEU</span> <span class="sub-word active-badge">DIRECT</span>`); }, null, 43.03);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">E</span> <span class="sub-word">JÁ</span> <span class="sub-word">ME</span>`); }, null, 44.27);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word active-badge">JÁ</span> <span class="sub-word">ME</span>`); }, null, 44.35);
+      tl.call(() => { setSubText(`<span class="sub-word">E</span> <span class="sub-word">JÁ</span> <span class="sub-word active-badge">ME</span>`); }, null, 44.51);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">SEGUE</span> <span class="sub-word">PARA</span> <span class="sub-word">DESCOBRIR</span>`); }, null, 44.62);
+      tl.call(() => { setSubText(`<span class="sub-word">SEGUE</span> <span class="sub-word active-badge">PARA</span> <span class="sub-word">DESCOBRIR</span>`); }, null, 44.92);
+      tl.call(() => { setSubText(`<span class="sub-word">SEGUE</span> <span class="sub-word">PARA</span> <span class="sub-word active-badge">DESCOBRIR</span>`); }, null, 45.1);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">OS</span> <span class="sub-word">MELHORES</span> <span class="sub-word">SEGREDOS</span>`); }, null, 45.57);
+      tl.call(() => { setSubText(`<span class="sub-word">OS</span> <span class="sub-word active-badge">MELHORES</span> <span class="sub-word">SEGREDOS</span>`); }, null, 45.65);
+      tl.call(() => { setSubText(`<span class="sub-word">OS</span> <span class="sub-word">MELHORES</span> <span class="sub-word active-badge">SEGREDOS</span>`); }, null, 46.03);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">DA</span> <span class="sub-word">INTERNET</span> <span class="sub-word">TODOS</span>`); }, null, 46.48);
+      tl.call(() => { setSubText(`<span class="sub-word">DA</span> <span class="sub-word active-badge">INTERNET</span> <span class="sub-word">TODOS</span>`); }, null, 46.57);
+      tl.call(() => { setSubText(`<span class="sub-word">DA</span> <span class="sub-word">INTERNET</span> <span class="sub-word active-badge">TODOS</span>`); }, null, 47.1);
+      tl.call(() => { setSubText(`<span class="sub-word active-badge">OS</span> <span class="sub-word">DIAS</span>`); }, null, 47.39);
+      tl.call(() => { setSubText(`<span class="sub-word">OS</span> <span class="sub-word active-badge">DIAS</span>`); }, null, 47.57);
+      tl.call(() => { setSubText(""); }, null, 48.21);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

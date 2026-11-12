@@ -29,9 +29,17 @@ export const DEVREMOTO_INTEGRATION_ID = 'cmw6m87yh0001qjy4vy20eyss';
 
 export const SLOT_HOURS_UTC = {
   vagas: { hourUtc: 12, minuteUtc: 0, labelBrt: '09:00 BRT', name: 'Carrossel de Vagas' },
-  video: { hourUtc: 16, minuteUtc: 30, labelBrt: '13:30 BRT', name: 'Vídeo Reels HyperFrames' },
-  content: { hourUtc: 21, minuteUtc: 30, labelBrt: '18:30 BRT', name: 'Carrossel Técnico & Dicas' },
+  video_morning: { hourUtc: 12, minuteUtc: 30, labelBrt: '09:30 BRT', name: 'Vídeo 1 (Manhã): Notícias & Curiosidades IA' },
+  video: { hourUtc: 16, minuteUtc: 30, labelBrt: '13:30 BRT', name: 'Vídeo 2 (Tarde): Superpoder & Hack Prático' },
+  video_evening: { hourUtc: 21, minuteUtc: 30, labelBrt: '18:30 BRT', name: 'Vídeo 3 (Noite): Pack 3 Ferramentas & Carreira' },
+  content: { hourUtc: 21, minuteUtc: 30, labelBrt: '18:30 BRT', name: 'Vídeo 3 / Conteúdo Noturno' },
 };
+
+export const DAILY_VIDEO_SLOTS = [
+  SLOT_HOURS_UTC.video_morning,
+  SLOT_HOURS_UTC.video,
+  SLOT_HOURS_UTC.video_evening,
+];
 
 export function loadDotEnv(envPath = ENV_PATH) {
   const env = {};
@@ -82,9 +90,11 @@ export function fetchPostizPosts(envOverrides = {}) {
  * @returns {{ scheduleIso: string, slotBrt: string, dateSlug: string, isNextDay: boolean }}
  */
 export function findNextAvailableSlot(contentType = 'video', referenceDate = new Date(), options = {}) {
-  const slotConfig = SLOT_HOURS_UTC[contentType] || SLOT_HOURS_UTC.video;
+  const candidateConfigs = contentType === 'video'
+    ? DAILY_VIDEO_SLOTS
+    : [SLOT_HOURS_UTC[contentType] || SLOT_HOURS_UTC.video];
   const targetIntegrationId = options.integrationId || DEVREMOTO_INTEGRATION_ID;
-  const minSpacingHours = options.minSpacingHours ?? 4; // mínimo de 4h entre posts do mesmo canal
+  const minSpacingHours = options.minSpacingHours ?? 3.5; // permite 3 vídeos/dia (09:30 -> 13:30 -> 18:30 BRT)
   const minAdvanceMinutes = options.minAdvanceMinutes ?? 30; // não agendar com menos de 30min de antecedência
 
   const allPosts = fetchPostizPosts(options.envOverrides);
@@ -95,62 +105,60 @@ export function findNextAvailableSlot(contentType = 'video', referenceDate = new
   const now = referenceDate;
   let testDate = new Date(now.getTime());
 
-  // Tenta até 14 dias futuros
+  // Tenta até 14 dias futuros, testando todos os slots diários em ordem cronológica
   for (let dayOffset = 0; dayOffset < 14; dayOffset++) {
-    const candidate = new Date(Date.UTC(
-      testDate.getUTCFullYear(),
-      testDate.getUTCMonth(),
-      testDate.getUTCDate(),
-      slotConfig.hourUtc,
-      slotConfig.minuteUtc,
-      0,
-      0
-    ));
+    for (const slotConfig of candidateConfigs) {
+      const candidate = new Date(Date.UTC(
+        testDate.getUTCFullYear(),
+        testDate.getUTCMonth(),
+        testDate.getUTCDate(),
+        slotConfig.hourUtc,
+        slotConfig.minuteUtc,
+        0,
+        0
+      ));
 
-    // Se o horário já passou hoje ou está dentro da margem de antecedência mínima
-    if (candidate.getTime() <= now.getTime() + minAdvanceMinutes * 60_000) {
-      testDate.setUTCDate(testDate.getUTCDate() + 1);
-      continue;
-    }
+      // Se o horário já passou hoje ou está dentro da margem de antecedência mínima
+      if (candidate.getTime() <= now.getTime() + minAdvanceMinutes * 60_000) {
+        continue;
+      }
 
-    // Verificar colisão intra-canal (DevRemoto)
-    let hasIntraCollision = false;
-    let intraCollisionReason = '';
+      // Verificar colisão intra-canal (DevRemoto)
+      let hasIntraCollision = false;
 
-    for (const post of activePosts) {
-      if (!post.publishDate) continue;
-      const postDate = new Date(post.publishDate);
-      const isSameChannel = post.integrationId === targetIntegrationId || post.integration?.id === targetIntegrationId;
+      for (const post of activePosts) {
+        if (!post.publishDate) continue;
+        const postDate = new Date(post.publishDate);
+        const isSameChannel = post.integrationId === targetIntegrationId || post.integration?.id === targetIntegrationId;
 
-      if (isSameChannel) {
-        const diffMs = Math.abs(candidate.getTime() - postDate.getTime());
-        const diffHours = diffMs / (1000 * 60 * 60);
+        if (isSameChannel) {
+          const diffMs = Math.abs(candidate.getTime() - postDate.getTime());
+          const diffHours = diffMs / (1000 * 60 * 60);
 
-        if (diffHours < minSpacingHours) {
-          hasIntraCollision = true;
-          intraCollisionReason = `Conflito intra-canal: já existe post agendado (${post.id}) em ${postDate.toISOString()} (espaçamento: ${diffHours.toFixed(1)}h < ${minSpacingHours}h)`;
-          break;
-        }
-      } else {
-        // Verificar colisão inter-canais (exato mesmo horário de outro canal)
-        const diffMinutes = Math.abs(candidate.getTime() - postDate.getTime()) / (1000 * 60);
-        if (diffMinutes < 15) {
-          hasIntraCollision = true;
-          intraCollisionReason = `Conflito inter-canais: canal "${post.integration?.name || post.integrationId}" tem post em ${postDate.toISOString()} (${diffMinutes.toFixed(0)}m de diferença)`;
-          break;
+          if (diffHours < minSpacingHours) {
+            hasIntraCollision = true;
+            break;
+          }
+        } else {
+          // Verificar colisão inter-canais (exato mesmo horário de outro canal)
+          const diffMinutes = Math.abs(candidate.getTime() - postDate.getTime()) / (1000 * 60);
+          if (diffMinutes < 15) {
+            hasIntraCollision = true;
+            break;
+          }
         }
       }
-    }
 
-    if (!hasIntraCollision) {
-      const dateSlug = candidate.toISOString().slice(0, 10);
-      return {
-        scheduleIso: candidate.toISOString(),
-        slotBrt: `${dateSlug} às ${slotConfig.labelBrt}`,
-        dateSlug,
-        slotName: slotConfig.name,
-        isNextDay: dayOffset > 0,
-      };
+      if (!hasIntraCollision) {
+        const dateSlug = candidate.toISOString().slice(0, 10);
+        return {
+          scheduleIso: candidate.toISOString(),
+          slotBrt: `${dateSlug} às ${slotConfig.labelBrt}`,
+          dateSlug,
+          slotName: slotConfig.name,
+          isNextDay: dayOffset > 0,
+        };
+      }
     }
 
     // Avança para o próximo dia
@@ -163,7 +171,7 @@ export function findNextAvailableSlot(contentType = 'video', referenceDate = new
     scheduleIso: fallback.toISOString(),
     slotBrt: fallback.toISOString(),
     dateSlug: fallback.toISOString().slice(0, 10),
-    slotName: slotConfig.name,
+    slotName: candidateConfigs[0]?.name || 'Vídeo Reels',
     isNextDay: true,
   };
 }
@@ -188,8 +196,8 @@ export function printScheduleMap() {
     console.log(`  • ${brt} | ${stateIcon} | ID: ${p.id} | "${textSnippet}..."`);
   }
 
-  console.log('\n🔮 Próximos Slots Livres Recomendados:');
-  for (const type of ['vagas', 'video', 'content']) {
+  console.log('\n🔮 Próximos Slots Livres Recomendados (3 Vídeos/Dia):');
+  for (const type of ['video_morning', 'video', 'video_evening']) {
     const next = findNextAvailableSlot(type);
     console.log(`  - [${type.toUpperCase()}] -> ${next.slotBrt} (${next.scheduleIso})`);
   }

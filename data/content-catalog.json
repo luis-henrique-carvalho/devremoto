@@ -72,52 +72,100 @@
       "id": "free-ai-tools-alternatives-v1",
       "format": "carousel",
       "pillar": "superpowers",
-      "headline": "4 IAs Secretas Que Parecem Ilegais de Tão Úteis",
+      "headline": "4 IAs Que Parecem Ilegais",
       "kicker": "utilidades digitais // produtividade",
-      "stake": "A maioria das pessoas gasta centenas de reais em assinaturas de softwares pagos. Estas ferramentas abertas fazem o mesmo trabalho de graça.",
+      "stake": "A maioria das pessoas gasta centenas de reais em softwares caros. Estas ferramentas abertas fazem o mesmo trabalho de graça.",
       "keyword": "SUPER",
-      "caption": "4 ferramentas de inteligência artificial que vão mudar seu dia a dia.\n\nAntes de pagar assinaturas caras de software, confira estas opções de código aberto que você pode usar de graça no seu computador.\n\nArraste para o lado e salve este post para consultar quando precisar!\n\nComente \"SUPER\" nos comentários para receber a lista completa de links no direct.",
+      "caption": "Você ainda paga assinaturas caras de software sem conhecer essas alternativas gratuitas?\n\nA maioria das pessoas nem imagina que utilitários de inteligência artificial de nível profissional estão disponíveis de código aberto, sem mensalidade e sem limites abusivos.\n\nNeste carrossel, separamos 4 ferramentas que parecem mágica para o seu dia a dia:\n\n1. BiRefNet: recorte perfeito de fotos e vídeos sem Photoshop\n2. Browser-Use: IA que navega e preenche formulários no navegador por você\n3. Docling: extração cirúrgica de dados de PDFs travados\n4. LocalSend: envie qualquer arquivo entre PC e celular pelo Wi-Fi local\n\nArraste para o lado e salve este post para consultar quando for usar cada uma.\n\nComente SUPER nos comentários que te envio a lista com todos os links direto no direct!\n\n#devremoto #inteligenciaartificial #produtividade #tecnologia #trabalhoremoto",
       "items": [
         {
-          "name": "BiRefNet (Rembg)",
-          "tag": "Substituto do Photoshop",
-          "desc": "Remove o fundo de qualquer foto ou vídeo em alta definição com recorte cirúrgico de cabelos e transparências em menos de 2 segundos.",
+          "name": "BiRefNet",
+          "tag": "Recorte Mágico · 100% Grátis",
+          "desc": "Remove o fundo de fotos e vídeos em alta definição com recorte cirúrgico de cabelos e transparências em 2 segundos.",
           "install": "pip install rembg",
-          "example": "$ rembg i foto.jpg sem_fundo.png"
+          "example": "$ rembg i foto.jpg sem_fundo.png",
+          "recapCmd": "pip install rembg"
         },
         {
           "name": "Browser-Use",
           "tag": "Robô que Navega por Você",
-          "desc": "Um agente de IA que entra no Chrome, pesquisa preços, preenche formulários e clica em botões sozinho enquanto você toma um café.",
+          "desc": "Agente autônomo que abre o navegador, pesquisa dados, preenche formulários e clica em botões enquanto você toma café.",
           "install": "pip install browser-use",
-          "example": "$ python agent.py 'Pesquise voos baratos'"
+          "example": "$ python agent.py 'Pesquise voos baratos'",
+          "recapCmd": "pip install browser-use"
         },
         {
           "name": "Docling",
           "tag": "Extrator Inteligente de PDFs",
-          "desc": "Transforma PDFs bloqueados, tabelas complexas e contratos digitalizados em texto limpo e tabelas de Excel prontas para uso.",
+          "desc": "Converte PDFs travados, tabelas complexas e relatórios digitalizados em texto limpo e planilhas prontas para usar.",
           "install": "pip install docling",
-          "example": "$ docling contrato.pdf --to md"
+          "example": "$ docling contrato.pdf --to md",
+          "recapCmd": "pip install docling"
         },
         {
           "name": "LocalSend",
-          "tag": "AirDrop Universal",
-          "desc": "Transfira arquivos, fotos e vídeos gigantes entre Windows, Mac, Android e iPhone pela rede Wi-Fi local sem limites e sem nuvem.",
+          "tag": "AirDrop para Qualquer Aparelho",
+          "desc": "Transfira arquivos e vídeos gigantes entre Windows, Mac, Android e iPhone pelo Wi-Fi local sem limites nem nuvem.",
           "install": "Baixe em localsend.org",
-          "example": "Conecte seus aparelhos no mesmo Wi-Fi"
+          "example": "Conecte no mesmo Wi-Fi e envie",
+          "recapCmd": "localsend.org (Wi-Fi)"
         }
       ],
-      "status": "pending"
+      "status": "posted",
+      "terminalTitle": "super-tools.sh",
+      "terminalComment": "# 4 utilitários gratuitos para turbinar seu dia:",
+      "recapDesc": "Tire um print deste slide para consultar os comandos quando precisar usar essas ferramentas no seu dia a dia.",
+      "ctaHeadline": "Quer os links e comandos completos?",
+      "ctaBubbleHtml": "Comente <strong style=\"color: #34D399;\">SUPER</strong> abaixo que te mando a lista com todos os repositórios oficiais e atalhos de configuração direto no seu direct!"
     },
     {
       "id": "offline-ai-superpowers-v1",
       "format": "carousel",
       "pillar": "superpowers",
-      "headline": "Como Ter um \"ChatGPT\" no PC Que Funciona Sem Internet",
+      "headline": "ChatGPT Grátis e Offline no PC",
       "kicker": "ia local // privacidade total",
-      "stake": "Você não precisa mandar seus dados e arquivos confidenciais para servidores nos Estados Unidos. Estes modelos avançados rodam no seu computador offline.",
+      "stake": "Não envie seus dados para a nuvem. Rode modelos avançados no seu computador sem gastar nada e sem internet.",
       "keyword": "CHAT",
-      "status": "pending"
+      "terminalTitle": "local-ai-setup.sh",
+      "terminalComment": "# 4 ferramentas para rodar IA no PC:",
+      "recapDesc": "Tire um print para salvar a lista e instalar sua própria IA gratuita e offline no computador.",
+      "ctaHeadline": "Quer o Passo a Passo Completo?",
+      "ctaBubbleHtml": "Comente <strong style=\"color: #34D399;\">CHAT</strong> aqui embaixo que te envio o tutorial com links de download e modelos recomendados no seu direct!",
+      "items": [
+        {
+          "name": "Ollama",
+          "tag": "Motor de IA Local",
+          "desc": "Baixe e rode modelos como DeepSeek e Llama 3 no seu PC com um clique. Zero mensalidade e privacidade total.",
+          "install": "curl -fsSL https://ollama.com/install.sh | sh",
+          "example": "$ ollama run deepseek-r1",
+          "recapCmd": "ollama run deepseek-r1"
+        },
+        {
+          "name": "Open-WebUI",
+          "tag": "Interface do ChatGPT",
+          "desc": "Visual premium idêntico ao ChatGPT para conversar com modelos locais, anexar arquivos e salvar históricos no navegador.",
+          "install": "docker run -d -p 3000:8080 open-webui",
+          "example": "Abra localhost:3000 no navegador",
+          "recapCmd": "docker run open-webui"
+        },
+        {
+          "name": "AnythingLLM",
+          "tag": "Converse com Documentos",
+          "desc": "Arraste PDFs, planilhas e contratos para o app e faça perguntas em português para encontrar dados em segundos.",
+          "install": "Baixe em useanything.com",
+          "example": "Arraste seus arquivos e converse",
+          "recapCmd": "anythingllm docs"
+        },
+        {
+          "name": "Jan.ai",
+          "tag": "App Desktop 100% Offline",
+          "desc": "Aplicativo nativo para Windows e Mac com loja de modelos pronta. Sem terminal, sem código e sem complicação.",
+          "install": "Baixe em jan.ai",
+          "example": "Escolha o modelo e converse",
+          "recapCmd": "jan.ai desktop"
+        }
+      ],
+      "status": "posted"
     },
     {
       "id": "remote-productivity-hacks-v1",
@@ -127,6 +175,166 @@
       "kicker": "trabalho remoto // produtividade",
       "stake": "Quem trabalha de casa pela internet não pode perder tempo com tarefas repetitivas. Estes 4 atalhos aumentam seu rendimento imediatamente.",
       "keyword": "PRODUTIVIDADE",
+      "status": "pending"
+    },
+    {
+      "id": "free-ai-video-tools-v1",
+      "format": "carousel",
+      "pillar": "superpowers",
+      "headline": "4 IAs Gratuitas para Criar Vídeos Sem Pagar Runway",
+      "kicker": "inteligência artificial // vídeo e animação",
+      "stake": "Não pague assinaturas de R$ 200 para gerar e animar vídeos em alta definição. Estas 4 ferramentas abertas criam vídeos cinematográficos de graça.",
+      "keyword": "VIDEO",
+      "items": [
+        {
+          "name": "Wan 2.1",
+          "tag": "Modelo Aberto Mais Potente do Mundo",
+          "desc": "Gera vídeos ultra-realistas em alta definição a partir de textos ou fotos de referência sem pagar mensalidade.",
+          "install": "git clone github.com/Wan-Video/Wan2.1",
+          "example": "$ python generate.py --prompt \"Cena cinematográfica\""
+        },
+        {
+          "name": "CogVideoX",
+          "tag": "Vídeos Ultra Fluidos em Alta Taxa",
+          "desc": "Cria movimentos naturais de câmera e expressões faciais sem deformação e sem marca d água abusiva.",
+          "install": "pip install diffusers torch",
+          "example": "$ python run_cogvideox.py"
+        },
+        {
+          "name": "LivePortrait",
+          "tag": "Anima Qualquer Foto Estática",
+          "desc": "Envie uma foto de qualquer pessoa e um vídeo seu para transferir expressões e sincronizar lábios na hora.",
+          "install": "git clone github.com/KwaiVGI/LivePortrait",
+          "example": "$ python inference.py --src foto.jpg --drv video.mp4"
+        },
+        {
+          "name": "Handbrake",
+          "tag": "Comprime Vídeos Sem Perder Qualidade",
+          "desc": "Reduz arquivos pesados de 2GB para menos de 50MB sem perder nitidez para envio rápido em qualquer aplicativo.",
+          "install": "Baixe em handbrake.fr",
+          "example": "Arraste o vídeo e escolha o perfil Web Fast"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "secret-document-pdf-tools-v1",
+      "format": "carousel",
+      "pillar": "superpowers",
+      "headline": "4 Ferramentas Secretas para Destravar Qualquer PDF",
+      "kicker": "produtividade // arquivos e documentos",
+      "stake": "Cancele a assinatura do Adobe Acrobat. Estas 4 ferramentas gratuitas removem senhas, editam, convertem e assinam qualquer documento.",
+      "keyword": "PDF",
+      "items": [
+        {
+          "name": "Stirling-PDF",
+          "tag": "A Suíte Completa de PDF 100% Grátis",
+          "desc": "Divide, junta, assina, remove senhas, reorganiza páginas e converte documentos direto no seu navegador.",
+          "install": "docker run -d -p 8080:8080 stirlingpdf",
+          "example": "Acesse localhost:8080 no seu navegador"
+        },
+        {
+          "name": "Marker",
+          "tag": "Converte PDF para Markdown e Word",
+          "desc": "Extrai texto de PDFs bloqueados, tabelas complexas e livros inteiros formatados perfeitamente em segundos.",
+          "install": "pip install marker-pdf",
+          "example": "$ marker_single arquivo.pdf saida/"
+        },
+        {
+          "name": "Documenso",
+          "tag": "Assinatura Digital Sem Mensalidade",
+          "desc": "Alternativa aberta ao DocuSign. Assine e envie contratos ilimitados com validade jurídica sem custos extras.",
+          "install": "Acesse documenso.com",
+          "example": "Envie o contrato e colete assinaturas"
+        },
+        {
+          "name": "OCRmyPDF",
+          "tag": "Torne Qualquer Scan Pesquisável",
+          "desc": "Adiciona camada de texto pesquisável em documentos escaneados e fotos para encontrar palavras com Ctrl+F.",
+          "install": "pip install ocrmypdf",
+          "example": "$ ocrmypdf documento_scan.pdf saida.pdf"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "free-ai-image-design-v1",
+      "format": "carousel",
+      "pillar": "superpowers",
+      "headline": "4 IAs Gratuitas Que Substituem o Midjourney",
+      "kicker": "design // inteligência artificial",
+      "stake": "Não gaste dinheiro em planos caros de geração de imagens. Estas ferramentas abertas criam fotos hiper-realistas direto no seu computador.",
+      "keyword": "FOTO",
+      "items": [
+        {
+          "name": "FLUX.1",
+          "tag": "O Gerador Mais Preciso da Atualidade",
+          "desc": "Cria mãos anatômicas perfeitas, textos nítidos em português e iluminação realista sem artefatos estranhos.",
+          "install": "pip install diffusers",
+          "example": "$ python flux_gen.py --prompt \"Foto profissional\""
+        },
+        {
+          "name": "Fooocus",
+          "tag": "Interface Idêntica ao Midjourney",
+          "desc": "Abra no navegador e gere imagens com poucos cliques. Sem necessidade de configurações difíceis ou comandos complexos.",
+          "install": "git clone github.com/lllyasviel/Fooocus",
+          "example": "$ python run.py (abra localhost:7865)"
+        },
+        {
+          "name": "BiRefNet",
+          "tag": "Recorte de Fundo Cirúrgico",
+          "desc": "Remove o fundo de fotos de produtos e pessoas em alta resolução preservando fios de cabelo e transparências.",
+          "install": "pip install rembg",
+          "example": "$ rembg i foto.png sem_fundo.png"
+        },
+        {
+          "name": "Upscayl",
+          "tag": "Aumente a Resolução em 4x com IA",
+          "desc": "Transforma imagens pequenas e embaçadas em arquivos ultra nítidos de alta definição usando inteligência artificial offline.",
+          "install": "Baixe em upscayl.org",
+          "example": "Arraste a foto e clique em Upscale"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "stealth-remote-work-tools-v1",
+      "format": "carousel",
+      "pillar": "superpowers",
+      "headline": "4 Utilitários Secretos para Quem Trabalha Remoto",
+      "kicker": "trabalho remoto // rotina diária",
+      "stake": "Pequenos utilitários que parecem ilegais de tão úteis para quem ganha a vida pelo computador e quer poupar horas todos os dias.",
+      "keyword": "ATALHO",
+      "items": [
+        {
+          "name": "LocalSend",
+          "tag": "AirDrop Universal e Sem Fio",
+          "desc": "Transfira fotos, vídeos e pastas pesadas entre Windows, Mac, Linux, Android e iPhone sem internet e sem nuvem.",
+          "install": "Baixe em localsend.org",
+          "example": "Envie arquivos direto na rede Wi-Fi local"
+        },
+        {
+          "name": "Espanso",
+          "tag": "Expansor de Texto Automático",
+          "desc": "Digite atalhos como \":chave\" ou \":email\" e veja parágrafos inteiros ou respostas de suporte aparecerem na hora.",
+          "install": "Baixe em espanso.org",
+          "example": "Configure atalhos no arquivo base.yml"
+        },
+        {
+          "name": "RustDesk",
+          "tag": "Acesso Remoto 100% Gratuito",
+          "desc": "Acesse o computador de trabalho ou ajude clientes à distância sem pagar pelo TeamViewer nem sofrer bloqueios.",
+          "install": "Baixe em rustdesk.com",
+          "example": "Conecte usando o ID e senha de segurança"
+        },
+        {
+          "name": "BleachBit",
+          "tag": "Limpeza Profunda do Sistema",
+          "desc": "Libera dezenas de gigabytes de arquivos temporários, caches e rastros escondidos que deixam seu computador lento.",
+          "install": "Baixe em bleachbit.org",
+          "example": "Execute a limpeza profunda com 1 clique"
+        }
+      ],
       "status": "pending"
     }
   ]

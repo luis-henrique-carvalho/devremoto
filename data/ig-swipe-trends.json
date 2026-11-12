@@ -1,0 +1,134 @@
+{
+  "updatedAt": "2026-11-12T15:45:00.000Z",
+  "referenceAccounts": [
+    {
+      "handle": "fabianocarvalhojr",
+      "name": "Fabiano Carvalho Jr",
+      "niche": "Tech, IA & Utilitários Práticos",
+      "followerScale": "450k+",
+      "typicalMedianViews": "80k",
+      "bestOutliers": [
+        {
+          "views": "1.2M",
+          "multiple": "15x",
+          "topic": "Como limpar a TV Android e deixar rápida pelo Wi-Fi",
+          "formula": "hack_utility",
+          "hookSpoken": "Se a sua Smart TV tá travando, não chama técnico antes de fazer isso.",
+          "hookOnScreen": "DESTRAVE SUA SMART TV EM 30 SEGUNDOS",
+          "ctaKeyword": "TV"
+        },
+        {
+          "views": "850k",
+          "multiple": "10.6x",
+          "topic": "Todas as câmeras públicas do mundo num só mapa 3D",
+          "formula": "interactive_globe",
+          "hookSpoken": "Alguém acabou de colocar todas as câmeras do planeta num mapa interativo.",
+          "hookOnScreen": "O MAPA QUE MOSTRA TUDO AO VIVO",
+          "ctaKeyword": "MAPA"
+        },
+        {
+          "views": "720k",
+          "multiple": "9x",
+          "topic": "Marca d'água oculta no copiar e colar do ChatGPT",
+          "formula": "secret_exposed",
+          "hookSpoken": "Quando você copia do ChatGPT, uma marca invisível vai junto sem você saber.",
+          "hookOnScreen": "A MARCA INVISÍVEL DO CHATGPT",
+          "ctaKeyword": "TEXTO"
+        },
+        {
+          "views": "640k",
+          "multiple": "8x",
+          "topic": "Cancele o Photoshop: IA gratuita que recorta cabelo fio a fio",
+          "formula": "david_vs_goliath",
+          "hookSpoken": "Os caras simplesmente lançaram um clone gratuito que humilha o Photoshop.",
+          "hookOnScreen": "CANCELE SUA ASSINATURA DA ADOBE",
+          "ctaKeyword": "FOTO"
+        }
+      ]
+    },
+    {
+      "handle": "gab.gouvea",
+      "name": "Gabriel Gouvea",
+      "niche": "Produtividade com IA & Automação",
+      "followerScale": "280k+",
+      "typicalMedianViews": "45k",
+      "bestOutliers": [
+        {
+          "views": "490k",
+          "multiple": "10.8x",
+          "topic": "3 Agentes que fazem o trabalho de uma agência inteira",
+          "formula": "pack_three",
+          "hookSpoken": "Essas 3 ferramentas gratuitas fazem o trabalho de uma agência inteira, e a última é de longe a minha preferida.",
+          "hookOnScreen": "3 AGENTES QUE VALEM UMA EQUIPE",
+          "ctaKeyword": "AGENTE"
+        }
+      ]
+    }
+  ],
+  "provenFormulas": {
+    "david_vs_goliath": {
+      "name": "David vs Golias (Clone Gratuito vs Assinatura Cara)",
+      "idealPillar": "afternoon_hack",
+      "structure": [
+        "Hook de Choque: Cancele sua assinatura abusiva em dólar agora",
+        "Contraste: Empresa bilionária vs Projeto de código aberto gratuito",
+        "Apresentação: 4 superpoderes que rodam no seu PC sem pagar nada",
+        "Demonstração visual do resultado lado a lado",
+        "CTA direto para receber o link no inbox"
+      ],
+      "hookTemplates": [
+        "Cancele sua assinatura da {PAGO} agora mesmo.",
+        "Os caras simplesmente clonaram a {PAGO} de graça e roda no seu PC.",
+        "Você ainda tá pagando {VALOR} por mês na {PAGO}?"
+      ]
+    },
+    "interactive_discovery": {
+      "name": "Descoberta Interativa (Mapa, 3D ou Painel Global)",
+      "idealPillar": "morning_news",
+      "structure": [
+        "Hook de Choque: Alguém acabou de colocar {RECURSO_GIGANTE} num site só",
+        "Acesso Zero Fricção: Direto no navegador sem cadastro e sem instalar nada",
+        "Varredura das 4 camadas ao vivo em tempo real",
+        "Demonstração de zoom ou clique em qualquer cidade",
+        "CTA direto com palavra curta para receber o endereço oficial"
+      ],
+      "hookTemplates": [
+        "Alguém acabou de colocar todas as {COISAS} do planeta num site só.",
+        "Esse site secreto deveria ser proibido de tão impressionante.",
+        "Você consegue ver qualquer {LOCAL} do mundo ao vivo direto no navegador."
+      ]
+    },
+    "hack_utility": {
+      "name": "Hack Prático do Dia a Dia (Resolva em 30 Segundos)",
+      "idealPillar": "afternoon_hack",
+      "structure": [
+        "Hook de Choque: Se seu {DISPOSITIVO} tá travando, não gasta dinheiro antes de ver isso",
+        "Diagnóstico Rápido: O motivo pelo qual fica lento com o tempo",
+        "Passo a Passo Visual: 3 cliques simples sem precisar ser técnico",
+        "Resultado Imediato: Antes vs Depois com fluidez máxima",
+        "CTA: Comente {PALAVRA} para receber o passo a passo completo"
+      ],
+      "hookTemplates": [
+        "Se a sua {DISPOSITIVO} tá travando, não chama técnico antes de fazer isso.",
+        "Pouca gente sabe, mas esse comando simples destrava sua {DISPOSITIVO}.",
+        "Como dobrar a velocidade do seu {DISPOSITIVO} em 30 segundos pelo Wi-Fi."
+      ]
+    },
+    "pack_three": {
+      "name": "Pack de 3 Ferramentas ('A última é a minha preferida')",
+      "idealPillar": "evening_pack",
+      "structure": [
+        "Hook de Retenção: Essas 3 ferramentas fazem o trabalho de uma equipe inteira, e a última é a minha preferida",
+        "Ferramenta 1: Rápida e surpreendente",
+        "Ferramenta 2: Utilitário do dia a dia",
+        "Ferramenta 3 (O Clímax): A mais poderosa que justifica o vídeo todo",
+        "CTA: Comente {PALAVRA} para receber a lista oficial com os links"
+      ],
+      "hookTemplates": [
+        "Essas 3 ferramentas gratuitas fazem o trabalho de uma equipe inteira. E a última é de longe a minha preferida.",
+        "Se você quer ganhar tempo ou renda extra, essas 3 ferramentas de IA mudam o jogo.",
+        "3 sites gratuitos que parecem mentira de tão úteis. Salva esse vídeo antes que tirem do ar."
+      ]
+    }
+  }
+}
